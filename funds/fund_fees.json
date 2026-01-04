@@ -1,7 +1,58 @@
 {
-  "NH-Amundi 필승 코리아 증권투자신탁[주식] Cla  C-P2e(퇴직연금)": {
+  "NH-Amundi 필승 코리아 증권투자신탁(주식) Cla  C-P2e(퇴직연금)": {
     "totalFee": "0.6670",
     "frontFee": "0.000",
-    "redemptionFee": "없음"
+    "redemptionFee": "없음",
+    "source": "과학기술인공제회 퇴직연금 포털",
+    "updatedAt": "2026-01-02"
+  },
+  "삼성글로벌반도체증권자투자신탁UH(주식)_Cpe(퇴직)": {
+    "totalFee": "1.1900",
+    "frontFee": "0.000",
+    "redemptionFee": "없음",
+    "source": "과학기술인공제회 퇴직연금 포털",
+    "updatedAt": "2026-01-02"
+  },
+  "삼성미국S&P500인덱스증권자투자신탁UH(주식) Cpe(퇴직)": {
+    "totalFee": "0.6900",
+    "frontFee": "0.000",
+    "redemptionFee": "없음",
+    "source": "과학기술인공제회 퇴직연금 포털",
+    "updatedAt": "2026-01-02"
+  },
+  "미래에셋코어테크증권자투자신탁(주식) 종류C-P2E": {
+    "totalFee": "1.0750",
+    "frontFee": "0.000",
+    "redemptionFee": "없음",
+    "source": "과학기술인공제회 퇴직연금 포털",
+    "updatedAt": "2026-01-02"
+  },
+  "삼성글로벌휴머노이드로봇증권자투자신탁UH(주식)_Cpe(퇴직연금)": {
+    "totalFee": "1.2900",
+    "frontFee": "0.000",
+    "redemptionFee": "없음",
+    "source": "과학기술인공제회 퇴직연금 포털",
+    "updatedAt": "2026-01-02"
+  },
+  "미래에셋퇴직연금배당커버드콜액티브증권자투자신탁1호(주식혼합) 종류C-P2e": {
+    "totalFee": "0.6200",
+    "frontFee": "0.000",
+    "redemptionFee": "없음",
+    "source": "과학기술인공제회 퇴직연금 포털",
+    "updatedAt": "2026-01-02"
+  },
+  "키움더드림단기채증권투자신탁(채권) Cla C-P2e(퇴직연금)": {
+    "totalFee": "0.1750",
+    "frontFee": "0.000",
+    "redemptionFee": "없음",
+    "source": "과학기술인공제회 퇴직연금 포털",
+    "updatedAt": "2026-01-02"
+  },
+  "한국투자크레딧포커스ESG증권자투자신탁1호(채권) 종류C-Re": {
+    "totalFee": "0.2910",
+    "frontFee": "0.000",
+    "redemptionFee": "없음",
+    "source": "과학기술인공제회 퇴직연금 포털",
+    "updatedAt": "2026-01-02"
   }
 }
