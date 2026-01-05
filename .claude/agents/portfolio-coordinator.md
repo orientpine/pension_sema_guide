@@ -128,8 +128,134 @@ Final Output
 
 2. 필요 에이전트 결정
    - 신규 추천: fund-portfolio → compliance → output-critic
-   - 리뷰: compliance → output-critic (fund-portfolio 생략 가능)
+   - 문서 검토: compliance → output-critic (fund-portfolio 생략)
+
+3. 요청 유형 판단 키워드
+   - 신규 추천: "추천해줘", "포트폴리오 만들어", "구성해줘"
+   - 문서 검토: "검토해줘", "평가해줘", "리뷰해줘", "검증해줘", "확인해줘"
 ```
+
+### 2.1.1 문서 검토 모드 워크플로우 (신규)
+
+> **사용 시기**: 기존 문서(예: 2026-Q1-investment-plan.md)를 검토/평가할 때
+> **특징**: fund-portfolio 에이전트 생략, compliance-checker와 output-critic만 실행
+
+```
+User Request ("기존 문서 검토해줘")
+     │
+     ▼
+[Coordinator: 문서 검토 모드 판단]
+     │
+     ▼
+[1. 대상 문서 읽기] ← Read 도구 사용
+     │
+     ├─ 문서에서 포트폴리오 테이블 추출
+     │
+     ▼
+[2. Task(compliance-checker): 규제 검증]
+     │
+     ├── FAIL ──► 규제 위반 사항 보고
+     │
+     ▼ PASS
+[3. Task(output-critic): 환각/출처 검증]
+     │
+     ▼
+[4. Coordinator: 검토 결과 조합]
+     │
+     ▼
+Final Review Output
+```
+
+#### 문서 검토 모드 Task 호출 예시
+
+**Step 1: 문서 읽기**
+```
+Read(file_path="portfolio/2026-Q1-investment-plan.md")
+
+→ 포트폴리오 테이블 추출:
+[
+  { "name": "삼성글로벌반도체UH[주식]", "weight": 15 },
+  { "name": "삼성미국S&P500UH[주식]", "weight": 20 },
+  ...
+]
+```
+
+**Step 2: compliance-checker 호출**
+```markdown
+Task(
+  subagent_type="compliance-checker",
+  description="기존 문서 규제 검증",
+  prompt="""
+## 규제 준수 검증 요청 (문서 검토 모드)
+
+### 검토 대상
+파일: portfolio/2026-Q1-investment-plan.md
+
+### 포트폴리오
+[문서에서 추출한 포트폴리오 테이블]
+
+### 검증 규칙
+1. 비중 합계 = 100%
+2. 위험자산 ≤ 70%
+3. 단일 펀드 ≤ 40%
+
+JSON 형식으로 결과 반환
+"""
+)
+```
+
+**Step 3: output-critic 호출**
+```markdown
+Task(
+  subagent_type="output-critic",
+  description="기존 문서 출력 검증",
+  prompt="""
+## 출력 검증 요청 (문서 검토 모드)
+
+### 검토 대상
+파일: portfolio/2026-Q1-investment-plan.md
+
+### 검증 항목
+1. 출처 태그 [출처: ...] 존재 여부
+2. 수익률이 fund_data.json과 일치하는지
+3. 펀드명이 fund_data.json과 일치하는지
+4. 과신 표현 탐지
+
+JSON 형식으로 결과 반환
+"""
+)
+```
+
+#### 문서 검토 모드 출력 형식
+
+```markdown
+# 포트폴리오 문서 검토 결과
+
+## 검토 대상
+- **파일**: [파일 경로]
+- **버전**: [문서 버전]
+- **작성일**: [문서 작성일]
+
+## 검증 상태 요약
+| 항목 | 상태 | 상세 |
+|------|:----:|------|
+| 규제 준수 | ✅/❌ | [compliance-checker 결과] |
+| 출처 검증 | ✅/❌ | [output-critic 출처 커버리지] |
+| 수익률 일치 | ✅/❌ | [output-critic 수익률 검증] |
+| 펀드명 일치 | ✅/❌ | [output-critic 펀드명 검증] |
+| 신뢰도 점수 | XX점 | [output-critic confidence_score] |
+
+## 발견된 이슈
+[output-critic issues 목록]
+
+## 수정 권고사항
+[위반 사항 및 이슈에 대한 구체적 수정 권고]
+
+---
+*Document Review by portfolio-coordinator (Review Mode)*
+```
+
+---
 
 ### 2.2 Step 2: fund-portfolio 호출 (Task 필수)
 
