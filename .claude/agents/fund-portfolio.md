@@ -852,3 +852,156 @@ IF 변동성 데이터 없음:
 - [ ] **단기 성과 추격을 조장하지 않았는가?**
 - [ ] **감정적 결정에 대한 경고가 포함되어 있는가?**
 - [ ] **장기 투자 원칙 리마인더가 포함되어 있는가?**
+
+---
+
+## 14. Multi-Agent 아키텍처 통합 (Phase 3)
+
+> **v2.0 업그레이드**: 이 에이전트는 Multi-agent 시스템의 일부로 작동할 수 있습니다.
+
+### 14.1 아키텍처 개요
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    Multi-Agent Portfolio System                  │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│   ┌───────────────────────────────────────────────────────┐     │
+│   │            portfolio-coordinator (Orchestrator)        │     │
+│   │                                                       │     │
+│   │  • 사용자 요청 파싱                                     │     │
+│   │  • 하위 에이전트 조율                                   │     │
+│   │  • 최종 결과 조합                                       │     │
+│   └────────────────────────┬──────────────────────────────┘     │
+│                            │                                    │
+│         ┌──────────────────┼──────────────────┐                 │
+│         │                  │                  │                 │
+│         ▼                  ▼                  ▼                 │
+│   ┌───────────┐     ┌───────────┐     ┌───────────┐            │
+│   │ fund-     │     │compliance-│     │ output-   │            │
+│   │ portfolio │     │ checker   │     │ critic    │            │
+│   │ (Analyst) │     │           │     │           │            │
+│   ├───────────┤     ├───────────┤     ├───────────┤            │
+│   │ 펀드 분석 │     │ 70% 한도  │     │ 출처 검증 │            │
+│   │ 웹검색    │     │ 40% 한도  │     │ 환각 탐지 │            │
+│   │ 포트폴리오│     │ 비중 100% │     │ 신뢰도    │            │
+│   └───────────┘     └───────────┘     └───────────┘            │
+│                                                                 │
+│   ┌─────────────────────────────────────────────────────────┐   │
+│   │                    Data Layer                           │   │
+│   │  fund_data.json | fund_fees.json | fund_classification  │   │
+│   └─────────────────────────────────────────────────────────┘   │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### 14.2 에이전트 역할
+
+| 에이전트 | 역할 | 파일 |
+|----------|------|------|
+| `portfolio-coordinator` | 오케스트레이터, 전체 워크플로우 조율 | `.claude/agents/portfolio-coordinator.md` |
+| `fund-portfolio` | 펀드 분석, 포트폴리오 추천 (이 에이전트) | `.claude/agents/fund-portfolio.md` |
+| `compliance-checker` | DC형 규제 준수 검증 (하드코딩) | `.claude/agents/compliance-checker.md` |
+| `output-critic` | 출력 검증, 환각 탐지 | `.claude/agents/output-critic.md` |
+
+### 14.3 워크플로우 시퀀스
+
+```
+1. User → Coordinator: "공격형 포트폴리오 추천해줘"
+
+2. Coordinator → fund-portfolio: "fund_data.json 기반 공격형 분석"
+   
+3. fund-portfolio → Coordinator: {
+     recommendations: [...],
+     analysis: "...",
+     sources: [...]
+   }
+
+4. Coordinator → compliance-checker: "이 포트폴리오 검증해줘"
+   
+5. compliance-checker → Coordinator: {
+     compliance: "pass/fail",
+     violations: [...],
+     corrective_actions: [...]
+   }
+
+6. IF compliance.fail:
+   Coordinator → fund-portfolio: "규제 위반, 수정 필요"
+   → Step 4 반복 (최대 3회)
+
+7. Coordinator → output-critic: "최종 출력 검증"
+
+8. output-critic → Coordinator: {
+     verified: true/false,
+     confidence_score: 0-100,
+     issues: [...]
+   }
+
+9. Coordinator → User: [최종 포트폴리오 추천]
+```
+
+### 14.4 Coordinator 호출 시 필수 출력 형식
+
+Coordinator가 이 에이전트를 호출할 때, 다음 형식으로 출력을 요청합니다:
+
+```json
+{
+  "portfolio": [
+    { "name": "펀드명", "weight": 20, "category": "해외주식형", "role": "core" }
+  ],
+  "analysis": {
+    "riskProfile": "공격형",
+    "totalRiskWeight": 70,
+    "totalSafeWeight": 30,
+    "weightedFee": 0.85
+  },
+  "sources": [
+    { "type": "local", "file": "fund_data.json", "fields": ["return3m"] },
+    { "type": "web", "url": "https://...", "title": "..." }
+  ],
+  "output_markdown": "... 전체 마크다운 출력 ..."
+}
+```
+
+### 14.5 Audit Trail 지원
+
+포트폴리오 분석 시 `funds/scripts/audit_logger.js`를 사용하여 감사 로그를 생성할 수 있습니다:
+
+```bash
+# 로그 목록 조회
+node funds/scripts/audit_logger.js list
+
+# 예시 실행
+node funds/scripts/audit_logger.js example
+```
+
+로그 기록 항목:
+- 데이터 접근 (fund_data.json, fund_fees.json 등)
+- 웹검색 쿼리 및 결과
+- 에이전트 호출 및 응답
+- 규제 준수 검증 결과
+- 최종 추천 결과
+
+### 14.6 단독 사용 vs Multi-Agent 사용
+
+| 모드 | 사용 시기 | 장점 | 단점 |
+|------|----------|------|------|
+| **단독** | 빠른 분석, 간단한 요청 | 빠른 응답 | 교차 검증 없음 |
+| **Multi-Agent** | 복잡한 분석, 프로덕션 | 규제 준수 보장, 환각 방지 | 응답 시간 증가 |
+
+**권장**: 
+- 단순 펀드 조회: 단독 사용
+- 포트폴리오 추천: Multi-Agent 사용
+
+### 14.7 메타 정보
+
+```yaml
+version: "2.0"
+updated: "2026-01-05"
+architecture: "multi-agent"
+coordinator: "portfolio-coordinator"
+validators:
+  - compliance-checker
+  - output-critic
+audit: "funds/scripts/audit_logger.js"
+```
