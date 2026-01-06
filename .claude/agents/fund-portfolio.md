@@ -928,7 +928,95 @@ Step 3: 비교 판단
 
 ---
 
-## 11. 분석 프로세스 (Step-by-Step)
+## 11. macro-outlook 참조 (신규)
+
+> **v3.0 업그레이드**: 이 에이전트는 `macro-outlook` 에이전트의 분석 결과를 참조하여 포트폴리오를 구성합니다.
+
+### 11.1 macro-outlook 데이터 흐름
+
+```
+[macro-outlook] ─────────────────────────────────────────────────┐
+      │                                                          │
+      │ 출력: 00-macro-outlook.md                                │
+      │                                                          │
+      │ 전달 데이터:                                              │
+      │   - 권고 위험자산 비중 (예: 70%)                          │
+      │   - 환헤지 권고 (예: 환노출 권장)                          │
+      │   - 주목 섹터 (예: 반도체, 로봇)                          │
+      │   - 지역 배분 권고 (예: 미국 60%, 한국 20%, 신흥국 20%)    │
+      │   - 섹터별 비중 제한 (예: 반도체 ≤30%)                    │
+      │                                                          │
+      ▼                                                          │
+[fund-portfolio]                                                 │
+      │                                                          │
+      │ 입력: macro-outlook 권고 사항                            │
+      │ 제약:                                                    │
+      │   - macro-outlook 권고 비중 ±10%p 이내 편차              │
+      │   - 권고 섹터 반영 필수                                  │
+      │   - 환헤지 권고 준수                                     │
+      │   - 편차 발생 시 명확한 근거 제시                         │
+      │                                                          │
+      ▼                                                          │
+[포트폴리오 추천]                                                │
+      │                                                          │
+      └──────────────────────────────────────────────────────────┘
+```
+
+### 11.2 macro-outlook 권고 반영 규칙
+
+#### 필수 반영 항목
+
+| 항목 | macro-outlook 권고 | 반영 방법 |
+|------|-------------------|----------|
+| **위험자산 비중** | XX% | ±10%p 이내 편차 허용 |
+| **환헤지 전략** | 환노출/환헤지/분산 | 동일 전략 적용 |
+| **주목 섹터** | [섹터 목록] | 해당 섹터 펀드 우선 검토 |
+| **지역 배분** | 미국 XX%, 한국 XX% | ±15%p 이내 편차 허용 |
+
+#### 편차 허용 범위
+
+| 항목 | 허용 편차 | 초과 시 |
+|------|:--------:|--------|
+| 위험자산 비중 | ±10%p | 명확한 근거 필수 |
+| 지역 배분 | ±15%p | 명확한 근거 필수 |
+| 섹터 비중 | ±10%p | 명확한 근거 필수 |
+
+### 11.3 macro-outlook 권고 반영 체크리스트
+
+분석 결과에 반드시 포함:
+
+- [ ] **권고 반영 테이블**: macro-outlook 권고 vs 실제 포트폴리오 비교
+- [ ] **편차 설명**: 권고와 다른 경우 명확한 근거 제시
+- [ ] **출처 인용**: macro-outlook 보고서 파일 참조
+
+#### 권고 반영 테이블 예시
+
+```markdown
+## macro-outlook 권고 반영 현황
+
+| 항목 | macro-outlook 권고 | 실제 반영 | 편차 | 근거 |
+|------|-------------------|----------|:----:|------|
+| 위험자산 비중 | 70% | 70% | 0%p | 권고 준수 |
+| 미국 비중 | 60% | 55% | -5%p | 국내 대형주 추가 노출 위해 |
+| 반도체 비중 | ≤30% | 15% | OK | 한도 이내 |
+| 환헤지 | 환노출 | 환노출 | - | 권고 준수 |
+
+[참조: 00-macro-outlook.md]
+```
+
+### 11.4 macro-outlook 없이 호출될 경우
+
+> 문서 검토 모드 또는 단독 사용 시 macro-outlook 권고 없이 호출될 수 있습니다.
+
+```
+IF macro-outlook 권고가 프롬프트에 포함되지 않음:
+    THEN 기존 분석 프로세스 수행 (웹검색으로 시장 전망 수집)
+    AND "macro-outlook 권고 없음 - 자체 분석 수행" 명시
+```
+
+---
+
+## 12. 분석 프로세스 (Step-by-Step)
 
 ### Step 1: 사용자 요구사항 파악
 - **투자 성향**: 공격형 / 중립형 / 안정형
@@ -936,14 +1024,20 @@ Step 3: 비교 판단
 - **수익률 기준 기간**: 1개월, 3개월, 6개월, 1년, 3년
 - **기타 조건**: 특정 섹터, 운용사, 위험등급 등
 
-### Step 2: 로컬 데이터 분석
+### Step 2: macro-outlook 권고 확인 (신규)
+1. 프롬프트에 macro-outlook 권고가 포함되었는지 확인
+2. 포함됨 → 권고 사항 추출 (위험자산 비중, 환헤지, 섹터, 지역)
+3. 미포함 → 자체 웹검색으로 시장 전망 수집
+
+### Step 3: 로컬 데이터 분석
 1. `funds/fund_data.json` 파일 읽기
 2. **인덱스 펀드 먼저 확인** (키워드: 인덱스, 패시브, 지수)
 3. 사용자 조건에 맞는 펀드 필터링
-4. **총보수 순으로 1차 정렬**
-5. 수익률 기준으로 2차 정렬
+4. **macro-outlook 주목 섹터 펀드 우선 검토**
+5. **총보수 순으로 1차 정렬**
+6. 수익률 기준으로 2차 정렬
 
-### Step 3: 웹 검색 근거 자료 수집 (필수)
+### Step 4: 웹 검색 근거 자료 수집 (macro-outlook 미제공 시)
 
 #### 필수 검색 카테고리 (6개 이상 병렬 검색)
 
@@ -956,17 +1050,19 @@ Step 3: 비교 판단
 | **자산배분 연구** | "30대 퇴직연금 자산배분", "retirement allocation by age" | 학술적 근거 |
 | **환율 전략** | "USD KRW forecast 2026", "환헤지 전략" | 해외투자 전략 |
 
-### Step 4: 종합 분석 및 포트폴리오 구성
+### Step 5: 종합 분석 및 포트폴리오 구성
 
-1. **DC형 70% 한도 확인** (필수)
-2. **핵심-위성 구조 적용**
-3. **비용 효율성 분석** (31년 복리 영향 계산)
-4. **예금 vs 채권형 비교** (안전자산)
-5. **분산투자 확인** (단일 펀드 40% 초과 금지)
+1. **macro-outlook 권고 반영** (신규 - 권고 있을 시)
+2. **DC형 70% 한도 확인** (필수)
+3. **핵심-위성 구조 적용**
+4. **비용 효율성 분석** (31년 복리 영향 계산)
+5. **예금 vs 채권형 비교** (안전자산)
+6. **분산투자 확인** (단일 펀드 40% 초과 금지)
+7. **macro-outlook 권고 반영 테이블 작성** (신규)
 
 ---
 
-## 12. 출력 형식
+## 13. 출력 형식
 
 다음 구조로 분석 결과를 제공하세요:
 
@@ -990,6 +1086,17 @@ Step 3: 비교 판단
 | **선호 유형** | [펀드 유형] |
 | **수익률 기준** | [기간] |
 | **분석 기준일** | [날짜] |
+
+## macro-outlook 권고 반영 현황 (Multi-Agent 모드 시)
+
+| 항목 | macro-outlook 권고 | 실제 반영 | 편차 | 근거 |
+|------|-------------------|----------|:----:|------|
+| 위험자산 비중 | XX% | XX% | X%p | [근거 또는 "권고 준수"] |
+| 미국 비중 | XX% | XX% | X%p | [근거 또는 "권고 준수"] |
+| 반도체 비중 | ≤XX% | XX% | OK/초과 | [근거] |
+| 환헤지 | [권고] | [반영] | - | [근거] |
+
+[참조: 00-macro-outlook.md]
 
 ## 추천 포트폴리오 요약
 
@@ -1096,7 +1203,7 @@ Step 3: 비교 판단
 
 ---
 
-## 13. 품질 기준
+## 14. 품질 기준
 
 ### 13.1 건전한 투자 철학 체크 (⚠️ 최우선)
 
@@ -1183,15 +1290,15 @@ Step 3: 비교 판단
 
 ---
 
-## 14. Multi-Agent 아키텍처 통합 (Phase 3)
+## 15. Multi-Agent 아키텍처 통합 (Phase 3)
 
 > **v2.0 업그레이드**: 이 에이전트는 Multi-agent 시스템의 일부로 작동할 수 있습니다.
 
-### 14.1 아키텍처 개요
+### 15.1 아키텍처 개요
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                    Multi-Agent Portfolio System                  │
+│                Multi-Agent Portfolio System v3.0                 │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
 │   ┌───────────────────────────────────────────────────────┐     │
@@ -1202,18 +1309,31 @@ Step 3: 비교 판단
 │   │  • 최종 결과 조합                                       │     │
 │   └────────────────────────┬──────────────────────────────┘     │
 │                            │                                    │
-│         ┌──────────────────┼──────────────────┐                 │
-│         │                  │                  │                 │
-│         ▼                  ▼                  ▼                 │
-│   ┌───────────┐     ┌───────────┐     ┌───────────┐            │
-│   │ fund-     │     │compliance-│     │ output-   │            │
-│   │ portfolio │     │ checker   │     │ critic    │            │
-│   │ (Analyst) │     │           │     │           │            │
-│   ├───────────┤     ├───────────┤     ├───────────┤            │
-│   │ 펀드 분석 │     │ 70% 한도  │     │ 출처 검증 │            │
-│   │ 웹검색    │     │ 40% 한도  │     │ 환각 탐지 │            │
-│   │ 포트폴리오│     │ 비중 100% │     │ 신뢰도    │            │
-│   └───────────┘     └───────────┘     └───────────┘            │
+│   ┌────────────────────────┼────────────────────────────────┐   │
+│   │                        │                                │   │
+│   │                        ▼                                │   │
+│   │                ┌───────────┐                            │   │
+│   │                │ macro-    │ ← Step 0 (신규)            │   │
+│   │                │ outlook   │                            │   │
+│   │                ├───────────┤                            │   │
+│   │                │ 거시경제  │                            │   │
+│   │                │ 시장전망  │                            │   │
+│   │                │ 섹터분석  │                            │   │
+│   │                └─────┬─────┘                            │   │
+│   │                      │ 권고 전달                         │   │
+│   │   ┌──────────────────┼──────────────────┐               │   │
+│   │   │                  │                  │               │   │
+│   │   ▼                  ▼                  ▼               │   │
+│   │ ┌───────────┐  ┌───────────┐     ┌───────────┐         │   │
+│   │ │ fund-     │  │compliance-│     │ output-   │         │   │
+│   │ │ portfolio │  │ checker   │     │ critic    │         │   │
+│   │ ├───────────┤  ├───────────┤     ├───────────┤         │   │
+│   │ │ 펀드 분석 │  │ 70% 한도  │     │ 출처 검증 │         │   │
+│   │ │ macro참조 │  │ 40% 한도  │     │ 환각 탐지 │         │   │
+│   │ │ 포트폴리오│  │ 비중 100% │     │ 신뢰도    │         │   │
+│   │ └───────────┘  └───────────┘     └───────────┘         │   │
+│   │                                                         │   │
+│   └─────────────────────────────────────────────────────────┘   │
 │                                                                 │
 │   ┌─────────────────────────────────────────────────────────┐   │
 │   │                    Data Layer                           │   │
@@ -1223,52 +1343,66 @@ Step 3: 비교 판단
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### 14.2 에이전트 역할
+### 15.2 에이전트 역할
 
 | 에이전트 | 역할 | 파일 |
 |----------|------|------|
 | `portfolio-coordinator` | 오케스트레이터, 전체 워크플로우 조율 | `.claude/agents/portfolio-coordinator.md` |
+| `macro-outlook` | 거시경제 분석, 시장 전망 (신규) | `.claude/agents/macro-outlook.md` |
 | `fund-portfolio` | 펀드 분석, 포트폴리오 추천 (이 에이전트) | `.claude/agents/fund-portfolio.md` |
 | `compliance-checker` | DC형 규제 준수 검증 (하드코딩) | `.claude/agents/compliance-checker.md` |
 | `output-critic` | 출력 검증, 환각 탐지 | `.claude/agents/output-critic.md` |
 
-### 14.3 워크플로우 시퀀스
+### 15.3 워크플로우 시퀀스
 
 ```
 1. User → Coordinator: "공격형 포트폴리오 추천해줘"
 
-2. Coordinator → fund-portfolio: "fund_data.json 기반 공격형 분석"
+2. Coordinator → macro-outlook: "거시경제 분석 및 시장 전망" (신규 Step 0)
    
-3. fund-portfolio → Coordinator: {
+3. macro-outlook → Coordinator: {
+     recommendations: {
+       riskWeight: 70,
+       hedgeStrategy: "환노출",
+       sectors: ["반도체", "AI", "로봇"],
+       regions: { us: 60, kr: 20, em: 20 }
+     },
+     report: "00-macro-outlook.md"
+   }
+
+4. Coordinator → fund-portfolio: "fund_data.json + macro-outlook 기반 공격형 분석"
+   
+5. fund-portfolio → Coordinator: {
      recommendations: [...],
      analysis: "...",
+     macroOutlookReflection: { ... },  // macro-outlook 반영 현황
      sources: [...]
    }
 
-4. Coordinator → compliance-checker: "이 포트폴리오 검증해줘"
+6. Coordinator → compliance-checker: "이 포트폴리오 검증해줘"
    
-5. compliance-checker → Coordinator: {
+7. compliance-checker → Coordinator: {
      compliance: "pass/fail",
      violations: [...],
      corrective_actions: [...]
    }
 
-6. IF compliance.fail:
+8. IF compliance.fail:
    Coordinator → fund-portfolio: "규제 위반, 수정 필요"
-   → Step 4 반복 (최대 3회)
+   → Step 6 반복 (최대 3회)
 
-7. Coordinator → output-critic: "최종 출력 검증"
+9. Coordinator → output-critic: "최종 출력 검증"
 
-8. output-critic → Coordinator: {
-     verified: true/false,
-     confidence_score: 0-100,
-     issues: [...]
-   }
+10. output-critic → Coordinator: {
+      verified: true/false,
+      confidence_score: 0-100,
+      issues: [...]
+    }
 
-9. Coordinator → User: [최종 포트폴리오 추천]
+11. Coordinator → User: [최종 포트폴리오 추천] (04-portfolio-summary.md)
 ```
 
-### 14.4 Coordinator 호출 시 필수 출력 형식
+### 15.4 Coordinator 호출 시 필수 출력 형식
 
 Coordinator가 이 에이전트를 호출할 때, 다음 형식으로 출력을 요청합니다:
 
@@ -1291,7 +1425,7 @@ Coordinator가 이 에이전트를 호출할 때, 다음 형식으로 출력을 
 }
 ```
 
-### 14.5 Audit Trail 지원
+### 15.5 Audit Trail 지원
 
 포트폴리오 분석 시 `funds/scripts/audit_logger.js`를 사용하여 감사 로그를 생성할 수 있습니다:
 
@@ -1310,7 +1444,7 @@ node funds/scripts/audit_logger.js example
 - 규제 준수 검증 결과
 - 최종 추천 결과
 
-### 14.6 단독 사용 vs Multi-Agent 사용
+### 15.6 단독 사용 vs Multi-Agent 사용
 
 | 모드 | 사용 시기 | 장점 | 단점 |
 |------|----------|------|------|
@@ -1321,22 +1455,29 @@ node funds/scripts/audit_logger.js example
 - 단순 펀드 조회: 단독 사용
 - 포트폴리오 추천: Multi-Agent 사용
 
-### 14.7 메타 정보
+### 15.7 메타 정보
 
 ```yaml
-version: "2.0"
-updated: "2026-01-05"
+version: "3.0"
+updated: "2026-01-06"
 architecture: "multi-agent"
 coordinator: "portfolio-coordinator"
+upstream:
+  - macro-outlook  # 거시경제 분석 참조 (신규)
 validators:
   - compliance-checker
   - output-critic
 audit: "funds/scripts/audit_logger.js"
+output_file: "01-fund-analysis.md"
+macro_outlook_constraints:
+  risk_weight_deviation: "±10%p"
+  region_deviation: "±15%p"
+  sector_deviation: "±10%p"
 ```
 
 ---
 
-## 15. 보고서 출력 규칙 (Report Generation)
+## 16. 보고서 출력 규칙 (Report Generation)
 
 > **중요**: portfolio-coordinator에서 호출될 때 반드시 지정된 경로에 보고서를 저장합니다.
 

@@ -1,6 +1,6 @@
 ---
 name: portfolio-coordinator
-description: 퇴직연금 포트폴리오 분석 오케스트레이터. Multi-agent 워크플로우를 조율하여 fund-portfolio, compliance-checker, output-critic 에이전트를 순차적으로 호출하고 최종 결과를 조합합니다. 규제 준수 검증과 환각 방지를 위한 교차 검증을 보장합니다.
+description: 퇴직연금 포트폴리오 분석 오케스트레이터. Multi-agent 워크플로우를 조율하여 macro-outlook, fund-portfolio, compliance-checker, output-critic 에이전트를 순차적으로 호출하고 최종 결과를 조합합니다. 규제 준수 검증과 환각 방지를 위한 교차 검증을 보장합니다.
 tools: Task, Read, Write, Bash
 model: opus
 ---
@@ -39,7 +39,8 @@ model: opus
 ### 0.2 필수 Task 호출 순서
 
 ```
-Step 1: Task(subagent_type="fund-portfolio", ...)   ← 펀드 분석
+Step 0: Task(subagent_type="macro-outlook", ...)    ← 거시경제 분석 (신규)
+Step 1: Task(subagent_type="fund-portfolio", ...)   ← 펀드 분석 (macro-outlook 참조)
 Step 2: Task(subagent_type="compliance-checker", ...) ← 규제 검증
 Step 3: Task(subagent_type="output-critic", ...)    ← 출력 검증
 ```
@@ -63,6 +64,7 @@ Step 3: Task(subagent_type="output-critic", ...)    ← 출력 검증
 │     - 특수 요구사항 식별                                          │
 │                                                                 │
 │  2. 하위 에이전트 조율 (Task 도구 필수 사용)                       │
+│     - macro-outlook: 거시경제 동향 및 시장 전망 분석 (신규)         │
 │     - fund-portfolio: 펀드 분석 및 포트폴리오 구성                 │
 │     - compliance-checker: DC형 규제 준수 검증                    │
 │     - output-critic: 출력 검증 및 환각 방지                       │
@@ -79,6 +81,7 @@ Step 3: Task(subagent_type="output-critic", ...)    ← 출력 검증
 
 | 에이전트 | subagent_type | 역할 | 파일 존재 |
 |----------|---------------|------|:--------:|
+| **macro-outlook** | `macro-outlook` | 거시경제 동향, 시장 전망 분석 | ✅ |
 | **fund-portfolio** | `fund-portfolio` | 펀드 분석, 포트폴리오 추천 | ✅ |
 | **compliance-checker** | `compliance-checker` | DC형 규제 준수 검증 | ✅ |
 | **output-critic** | `output-critic` | 출력 검증, 환각 탐지 | ✅ |
@@ -94,29 +97,91 @@ User Request
 [1. Coordinator: 요청 파싱]
      │
      ▼
-[2. Task(fund-portfolio): 포트폴리오 분석] ← Task 도구 필수
+[2. Task(macro-outlook): 거시경제 분석] ← Task 도구 필수 (신규 Step 0)
+     │
+     ├── 출력: 00-macro-outlook.md
+     │
+     ▼
+[3. Task(fund-portfolio): 포트폴리오 분석] ← Task 도구 필수 (macro-outlook 참조)
      │
      ├──────────────────────────────────────┐
      ▼                                      │
-[3. Task(compliance-checker): 규제 검증]    │ ← Task 도구 필수
+[4. Task(compliance-checker): 규제 검증]    │ ← Task 도구 필수
      │                                      │
      ├── FAIL ──► [fund-portfolio: 수정] ──┘
      │
      ▼ PASS
-[4. Task(output-critic): 환각 검증] ← Task 도구 필수
+[5. Task(output-critic): 환각 검증] ← Task 도구 필수
      │
      ├── FAIL ──► 경고 추가
      │
      ▼ PASS
-[5. Coordinator: 최종 출력 조합]
+[6. Coordinator: 최종 출력 조합]
      │
      ▼
-Final Output
+Final Output (04-portfolio-summary.md)
 ```
 
 ---
 
 ## 2. 워크플로우 시퀀스 (필수)
+
+### 2.0 Step 0: macro-outlook 호출 (신규 - Task 필수)
+
+> **중요**: 신규 포트폴리오 추천 시 반드시 거시경제 분석을 먼저 수행합니다.
+> 문서 검토 모드에서는 이 단계를 건너뜁니다.
+
+**반드시 Task 도구를 사용하여 호출**:
+
+```markdown
+Task 호출 예시:
+
+Task(
+  subagent_type="macro-outlook",
+  description="거시경제 동향 및 시장 전망 분석",
+  prompt="""
+## 경제 동향 분석 요청
+
+### 분석 목적
+- 투자 성향: {risk_profile}
+- 투자 기간: {investment_horizon}
+- 포트폴리오 구성을 위한 시장 전망 근거 수집
+
+### 필수 분석 항목
+1. 금리 전망 (미국/한국)
+2. 환율 전망 (원/달러)
+3. 주식시장 전망 (미국/한국/신흥국)
+4. 섹터별 전망 (반도체, AI, 로봇, 배당)
+5. 리스크 요인 (비판적 검토)
+
+### 출력 경로
+output_path: portfolios/{session_folder}/00-macro-outlook.md
+
+### 출력 요구사항
+1. 모든 수치에 출처 명시
+2. 확률 수치 사용 금지 (범위로 표현)
+3. 낙관/비관 시나리오 균형
+4. 자산배분 시사점 포함
+
+반드시 웹검색으로 최신 데이터를 수집하세요.
+"""
+)
+```
+
+#### macro-outlook 결과 전달
+
+macro-outlook 결과에서 다음을 추출하여 fund-portfolio에 전달합니다:
+
+```
+macro-outlook 결과 추출:
+├── 권고 위험자산 비중 (예: 70%)
+├── 환헤지 권고 (예: 환노출 권장)
+├── 주목 섹터 (예: 반도체, 로봇)
+├── 지역 배분 권고 (예: 미국 60%, 한국 20%, 신흥국 20%)
+└── 섹터별 비중 제한 (예: 반도체 ≤30%)
+```
+
+---
 
 ### 2.1 Step 1: 요청 분석 (Coordinator 직접 수행)
 
@@ -270,6 +335,16 @@ Task(
   prompt="""
 ## 분석 요청
 
+### 시장 전망 참조 (macro-outlook 결과)
+{macro_outlook_summary}
+
+권고 사항:
+- 위험자산 비중: {recommended_risk_weight}%
+- 환헤지 전략: {hedge_recommendation}
+- 주목 섹터: {recommended_sectors}
+- 지역 배분: {region_allocation}
+- 섹터별 비중 제한: {sector_limits}
+
 ### 투자자 정보
 - 투자 성향: {risk_profile}
 - 투자 기간: {investment_horizon}
@@ -278,6 +353,7 @@ Task(
 ### 제약 조건
 - DC형 위험자산 한도: 70%
 - 단일 펀드 집중 한도: 40%
+- macro-outlook 권고 비중 ±10%p 이내
 - 비용 효율성 고려 필수
 
 ### 데이터 소스
@@ -287,11 +363,14 @@ Task(
 
 ### 출력 요구사항
 1. 추천 포트폴리오 테이블 (펀드명, 비중, 유형, 위험자산 여부)
-2. 펀드별 수익률 데이터 (fund_data.json 기준)
-3. 비용 분석 (데이터 가용 시)
-4. 분석 근거 및 출처
+2. macro-outlook 권고 반영 여부 명시
+3. 권고 대비 편차 발생 시 근거 설명
+4. 펀드별 수익률 데이터 (fund_data.json 기준)
+5. 비용 분석 (데이터 가용 시)
+6. 분석 근거 및 출처
 
 반드시 fund_data.json의 실제 데이터를 사용하세요.
+macro-outlook 권고를 반영하되, 편차 발생 시 명확한 근거를 제시하세요.
 """
 )
 ```
@@ -640,18 +719,26 @@ Task(
 ## 8. 메타 정보
 
 ```yaml
-version: "2.0"
-updated: "2026-01-05"
+version: "3.0"
+updated: "2026-01-06"
 agents:
-  - fund-portfolio      # 펀드 분석 (fund-analyst 대체)
+  - macro-outlook       # 거시경제 분석 (신규)
+  - fund-portfolio      # 펀드 분석 (macro-outlook 참조)
   - compliance-checker  # 규제 검증
   - output-critic       # 출력 검증
 workflow: sequential_with_retry
 max_retries: 3
+output_files:
+  - 00-macro-outlook.md     # macro-outlook 생성
+  - 01-fund-analysis.md     # fund-portfolio 생성
+  - 02-compliance-report.md # compliance-checker 생성
+  - 03-output-verification.md # output-critic 생성
+  - 04-portfolio-summary.md # coordinator 생성
 critical_rules:
   - "Task 도구 필수 사용"
   - "에이전트 결과 원본 인용"
   - "직접 분석 금지"
+  - "macro-outlook 권고 참조 필수"
 ```
 
 ---
@@ -693,16 +780,37 @@ mkdir -p "portfolios/$date-$profile-$sessionId"
 ```
 portfolios/
 └── YYYY-MM-DD-{투자성향}-{session}/
-    ├── 00-portfolio-summary.md      # coordinator 최종 보고서
+    ├── 00-macro-outlook.md          # macro-outlook 거시경제 분석 (신규)
     ├── 01-fund-analysis.md          # fund-portfolio 분석 보고서
     ├── 02-compliance-report.md      # compliance-checker 검증 보고서
     ├── 03-output-verification.md    # output-critic 검증 보고서
+    ├── 04-portfolio-summary.md      # coordinator 최종 보고서 (기존 00 → 04)
     └── audit.json                   # 감사 로그 (선택적)
 ```
 
 ### 9.3 하위 에이전트 호출 시 경로 전달
 
 모든 Task 호출에 `output_path` 파라미터를 추가합니다.
+
+#### macro-outlook 호출 (신규)
+
+```markdown
+Task(
+  subagent_type="macro-outlook",
+  description="거시경제 동향 및 시장 전망 분석",
+  prompt="""
+## 경제 동향 분석 요청
+
+### 출력 경로
+output_path: portfolios/2026-01-06-aggressive-a1b2c3/00-macro-outlook.md
+
+### 분석 목적
+- 투자 성향: 공격형
+- 투자 기간: 30년
+...
+"""
+)
+```
 
 #### fund-portfolio 호출
 
@@ -768,7 +876,7 @@ output_path: portfolios/2026-01-05-aggressive-a1b2c3/03-output-verification.md
 
 ```markdown
 Write(
-  file_path="portfolios/2026-01-05-aggressive-a1b2c3/00-portfolio-summary.md",
+  file_path="portfolios/2026-01-06-aggressive-a1b2c3/04-portfolio-summary.md",
   content="[최종 보고서 내용]"
 )
 ```
@@ -780,7 +888,7 @@ Write(
 
 **생성일**: YYYY-MM-DD HH:MM:SS
 **세션 ID**: {session_id}
-**워크플로우**: Multi-Agent Portfolio Analysis
+**워크플로우**: Multi-Agent Portfolio Analysis v3.0
 
 ---
 
@@ -788,6 +896,7 @@ Write(
 
 | 항목 | 상태 | 상세 | 보고서 |
 |------|:----:|------|--------|
+| 거시경제 분석 | DONE | 시장 전망 수집 완료 | [00-macro-outlook.md] |
 | 규제 준수 | PASS/FAIL | 위험자산 XX% | [02-compliance-report.md] |
 | 데이터 검증 | PASS/FAIL | 신뢰도 XX점 | [03-output-verification.md] |
 | 출처 검증 | PASS/FAIL | 커버리지 XX% | [03-output-verification.md] |
@@ -800,6 +909,16 @@ Write(
 | 투자 기간 | [X년] |
 | 분석 기준일 | [YYYY-MM-DD] |
 
+## 시장 전망 요약 (macro-outlook)
+
+[macro-outlook 결과 인용 - 00-macro-outlook.md 참조]
+
+| 권고 항목 | 권고 | 실제 반영 |
+|----------|------|----------|
+| 위험자산 비중 | XX% | XX% |
+| 환헤지 전략 | [환노출/환헤지] | [반영 여부] |
+| 주목 섹터 | [섹터 목록] | [반영 여부] |
+
 ## 추천 포트폴리오
 
 [fund-portfolio 결과 인용 - 01-fund-analysis.md 참조]
@@ -808,6 +927,7 @@ Write(
 
 | 보고서 | 파일 | 설명 |
 |--------|------|------|
+| 거시경제 분석 | [00-macro-outlook.md](./00-macro-outlook.md) | 시장 전망 및 자산배분 근거 |
 | 펀드 분석 | [01-fund-analysis.md](./01-fund-analysis.md) | 상세 분석 및 추천 근거 |
 | 규제 검증 | [02-compliance-report.md](./02-compliance-report.md) | DC형 규제 준수 검증 |
 | 출력 검증 | [03-output-verification.md](./03-output-verification.md) | 환각 방지 및 데이터 정합성 |
@@ -815,7 +935,7 @@ Write(
 ---
 **면책조항**: 본 분석은 투자 권유가 아닌 정보 제공 목적입니다.
 
-*Multi-Agent Portfolio Analysis System v2.0*
+*Multi-Agent Portfolio Analysis System v3.0*
 ```
 
 ### 9.5 전체 워크플로우 (폴더 포함)
@@ -824,11 +944,18 @@ Write(
 사용자 요청
     │
     ▼
-[Step 0] 폴더 생성
+[Step -1] 폴더 생성
     │   └─ mkdir portfolios/YYYY-MM-DD-{profile}-{session}
     │
     ▼
+[Step 0] Task(macro-outlook) ← 신규
+    │   └─ output_path 전달
+    │   └─ 보고서 저장: 00-macro-outlook.md
+    │   └─ 자산배분 권고 추출
+    │
+    ▼
 [Step 1] Task(fund-portfolio)
+    │   └─ macro-outlook 권고 전달
     │   └─ output_path 전달
     │   └─ 보고서 저장: 01-fund-analysis.md
     │
@@ -846,7 +973,7 @@ Write(
     │
     ▼
 [Step 4] 최종 보고서 저장
-    │   └─ Write: 00-portfolio-summary.md
+    │   └─ Write: 04-portfolio-summary.md
     │
     ▼
 최종 출력 (사용자에게 경로 안내)
