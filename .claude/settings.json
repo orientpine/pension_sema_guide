@@ -1,0 +1,6 @@
+{
+  "enabledPlugins": {
+    "investments-portfolio@honeypot": true,
+    "general-agents@honeypot": true
+  }
+}
