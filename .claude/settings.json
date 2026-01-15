@@ -1,7 +1,9 @@
 {
   "enabledPlugins": {
-    "investments-portfolio@honeypot": true,
     "general-agents@honeypot": true,
-    "stock-consultation@honeypot": true
+    "isd-generator@honeypot": true,
+    "paper-style-generator@honeypot": true,
+    "report-generator@honeypot": true,
+    "trading-ideas@claude-equity-research-marketplace": true
   }
 }
