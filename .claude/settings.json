@@ -1,9 +1,10 @@
 {
   "enabledPlugins": {
     "general-agents@honeypot": true,
-    "isd-generator@honeypot": true,
     "paper-style-generator@honeypot": true,
     "report-generator@honeypot": true,
-    "trading-ideas@claude-equity-research-marketplace": true
+    "example-skills@anthropic-agent-skills": true,
+    "document-skills@anthropic-agent-skills": true,
+    "isd-generator@honeypot": true
   }
 }
