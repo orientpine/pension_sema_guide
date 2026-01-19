@@ -5,6 +5,7 @@
     "report-generator@honeypot": true,
     "example-skills@anthropic-agent-skills": true,
     "document-skills@anthropic-agent-skills": true,
-    "isd-generator@honeypot": true
+    "isd-generator@honeypot": true,
+    "investments-portfolio@honeypot": true
   }
 }
