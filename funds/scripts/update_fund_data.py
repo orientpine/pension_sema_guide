@@ -17,6 +17,7 @@ from pathlib import Path
 from datetime import datetime
 import sys
 import shutil
+import subprocess
 
 
 def parse_args():
@@ -296,6 +297,53 @@ def archive_existing_file(file_path, version_date):
     return archive_path
 
 
+def run_dependency_chain(output_dir):
+    """Execute dependent scripts after JSON generation
+    
+    Args:
+        output_dir: Directory where JSON files were written
+    """
+    print("\n" + "=" * 60)
+    print("Running Dependency Chain")
+    print("=" * 60)
+    
+    # Change to project root directory
+    project_root = Path(__file__).parent.parent.parent
+    
+    # Run classify_funds.js
+    print("\n1. Classifying funds...")
+    try:
+        result = subprocess.run(
+            ["node", "funds/scripts/classify_funds.js"],
+            cwd=project_root,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            check=True
+        )
+        print("   OK fund_classification.json regenerated")
+        if result.stdout:
+            # Print output line by line to avoid encoding issues
+            for line in result.stdout.strip().split('\n'):
+                print(f"   {line}")
+    except subprocess.CalledProcessError as e:
+        print(f"   ERROR classify_funds.js failed: {e}")
+        if e.stderr:
+            print(f"   Error output: {e.stderr}")
+    except FileNotFoundError:
+        print("   ERROR Node.js not found. Install Node.js to run classify_funds.js")
+    
+    # TODO: Investigate fund_links.json generation
+    # For now, document that it's not handled
+    print("\n2. fund_links.json: NOT IMPLEMENTED")
+    print("   Note: fund_links.json generation script not found")
+    print("   Manual update required if needed")
+    
+    print("\n" + "=" * 60)
+    print("Dependency Chain Complete")
+    print("=" * 60)
+
+
 def parse_fund_fees(row, header):
     """Parse a single CSV row into fee data structure
     
@@ -469,6 +517,9 @@ def process_csv(csv_path, output_dir, dry_run):
     print()
     print(f"Total funds processed: {len(fund_data_list)}")
     print()
+    
+    # Run dependency chain
+    run_dependency_chain(output_dir)
 
 
 def main():

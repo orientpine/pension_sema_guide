@@ -116,7 +116,10 @@ function isHedged(fundName) {
 function main() {
   // fund_data.json 읽기
   const fundDataPath = path.join(__dirname, '..', 'fund_data.json');
-  const funds = JSON.parse(fs.readFileSync(fundDataPath, 'utf8'));
+  const fundDataJson = JSON.parse(fs.readFileSync(fundDataPath, 'utf8'));
+  
+  // Handle both old format (array) and new format ({_meta, funds})
+  const funds = Array.isArray(fundDataJson) ? fundDataJson : fundDataJson.funds;
   
   // 분류 데이터 생성
   const classification = {};
