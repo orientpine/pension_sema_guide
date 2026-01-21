@@ -36,8 +36,8 @@ investments/
 | Portfolio recommendation | `.claude/agents/fund-portfolio.md` | Invoke via `fund-portfolio` agent |
 | Macro economy analysis | `.claude/agents/macro-outlook.md` | 금리/환율/시장/섹터 전망 |
 | Leadership analysis | `.claude/agents/leadership-outlook.md` | 정치 리더십/중앙은행 동향 (NEW) |
-| Fund master data | `funds/fund_data.json` | Single source of truth (JSON) |
-| Update fund data | `funds/extract_funds.py` | Requires browser snapshot |
+| Fund master data | `funds/fund_data.json` | Single source of truth (JSON, 1996 funds) |
+| Update fund data | `funds/scripts/update_fund_data.py` | CSV → JSON pipeline |
 | Regenerate markdown | `funds/generate_md.js` | Run with Node.js |
 | Fund summary/index | `funds/README.md` | 205 funds sorted by 3mo return |
 | Individual fund info | `funds/[category]/[fund].md` | Standardized template |
@@ -53,9 +53,10 @@ Classification by keyword matching in fund name:
 - **Asset class**: 주식 (stock), 채권 (bond), 혼합 (mixed)
 - **Special**: TDF/MMF/EMP/리츠/골드 → 기타
 
-### Data Pipeline
-1. Browser snapshot → `extract_funds.py` → `fund_data.json`
-2. `fund_data.json` → `generate_md.js` → category folders + README
+### Data Pipeline (CSV-based, v2.0)
+1. CSV file → `update_fund_data.py` → `fund_data.json` + `fund_fees.json` + archive
+2. Auto-execute → `classify_funds.js` → `fund_classification.json`
+3. Manual → `generate_md.js` → category folders + README (optional)
 
 ### File Naming
 - Special chars `\/:*?"<>|` removed
@@ -110,13 +111,39 @@ Resolves: DC형 위험자산 한도 초과 이슈
 - **Never** modify `fund_data.json` manually (use extraction scripts)
 - **Avoid** running `generate_md.js` without updated `fund_data.json`
 
-## COMMANDS
+## DATA UPDATE WORKFLOW
+
+### Monthly Fund Data Update (from CSV)
+
+**When**: Monthly (after receiving new CSV from 과학기술공제회)
+
+**Steps**:
+1. Place new CSV file in `resource/` directory
+2. Run update script:
+   ```bash
+   python funds/scripts/update_fund_data.py --file resource/YYYY년MM월_상품제안서_퇴직연금(DCIRP).csv
+   ```
+3. Verify outputs:
+   - `funds/fund_data.json` - Updated fund data (1996 funds)
+   - `funds/fund_fees.json` - Updated fee data (1996 fees)
+   - `funds/fund_classification.json` - Auto-regenerated (9 categories)
+   - `funds/archive/` - Previous versions backed up with date suffix
+
+**Dry-run mode** (preview without changes):
+```bash
+python funds/scripts/update_fund_data.py --dry-run --file resource/YYYY년MM월_상품제안서_퇴직연금(DCIRP).csv
+```
+
+**Schema**: See `funds/SCHEMA.md` for complete data structure specification.
+
+**New schema fields** (v2.0):
+- `return10y`, `return7y`, `return5y` - Long-term return data
+- `_meta` - Version tracking and metadata
+
+### Legacy Commands (Optional)
 
 ```bash
-# Extract fund data from browser snapshot
-cd funds && python extract_funds.py
-
-# Regenerate all markdown files
+# Regenerate all markdown files (optional, for documentation)
 cd funds && node generate_md.js
 
 # Check for duplicate funds

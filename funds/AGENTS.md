@@ -8,13 +8,16 @@ ETL pipeline and data storage for 205 Korean retirement pension funds.
 
 ```
 funds/
-├── fund_data.json      # Master JSON (source of truth)
-├── fund_crawler.py     # Data classes + parsing logic
-├── extract_funds.py    # Snapshot → JSON extraction
-├── generate_md.js      # JSON → Markdown generation
+├── fund_data.json      # Master JSON (1996 funds)
+├── fund_fees.json      # Fee data (1996 fees)
+├── fund_classification.json # Auto-generated (9 categories)
+├── scripts/
+│   ├── update_fund_data.py  # CSV → JSON pipeline
+│   └── classify_funds.js    # Auto-classification
+├── archive/            # Backup files with date suffix
+├── generate_md.js      # JSON → Markdown generation (optional)
 ├── verify_funds.js     # Data integrity checks
 ├── check_duplicates.js # Duplicate detection
-├── cleanup_duplicates.js
 ├── README.md           # Generated index (205 funds)
 └── [9 category dirs]/  # Generated fund markdown files
 ```
@@ -23,8 +26,9 @@ funds/
 
 | Script | Language | Purpose | Input → Output |
 |--------|----------|---------|----------------|
-| `extract_funds.py` | Python | Parse browser snapshot | `.log` → `fund_data.json` |
-| `generate_md.js` | Node.js | Generate documentation | `fund_data.json` → `*.md` |
+| `scripts/update_fund_data.py` | Python | CSV → JSON pipeline | CSV → `fund_data.json` + `fund_fees.json` + archive |
+| `scripts/classify_funds.js` | Node.js | Auto-classify funds | `fund_data.json` → `fund_classification.json` |
+| `generate_md.js` | Node.js | Generate documentation | `fund_data.json` → `*.md` (optional) |
 | `verify_funds.js` | Node.js | Validate consistency | - |
 | `check_duplicates.js` | Node.js | Find naming collisions | - |
 
@@ -64,35 +68,67 @@ Every generated `.md` file contains:
 
 ## DATA SCHEMA (`fund_data.json`)
 
+**Structure (v2.0)**:
 ```json
 {
-  "index": 1,
-  "name": "펀드명",
-  "riskLevel": 2,           // 1-6 (1=highest risk)
-  "riskName": "높은위험",
-  "return1m": "8.02",       // Percentage strings
-  "return3m": "31.31",
-  "return6m": "54.29",
-  "return1y": "112.59",
-  "return2y": "82.07",
-  "return3y": "152.16",
-  "returnTotal": "112.60",
-  "netAssets": "32,510,078", // KRW thousands
-  "company": "운용사명"
+  "_meta": {
+    "version": "2025-12-01",
+    "sourceFile": "25년12월_상품제안서_퇴직연금(DCIRP).csv",
+    "updatedAt": "2026-01-21T16:18:38+09:00",
+    "recordCount": 1996
+  },
+  "funds": [
+    {
+      "fundCode": "K55105EC1749",
+      "name": "펀드명",
+      "company": "운용사명",
+      "riskLevel": 2,           // 1-6 (1=highest risk)
+      "riskName": "높은위험",
+      "return10y": "",          // NEW: Long-term returns
+      "return7y": "",
+      "return5y": "",
+      "return3y": "",
+      "return1y": "112.59",
+      "return6m": "54.29",
+      "netAssets": "32510078",  // KRW thousands (no commas)
+      "inceptionDate": "20240708",
+      "isAffiliate": false,
+      "fundType": "ETF"
+    }
+  ]
 }
 ```
+
+See `SCHEMA.md` for complete specification.
 
 ## ANTI-PATTERNS
 
 - **Never** edit files in category folders (auto-generated)
-- **Never** change `fund_data.json` without re-running `generate_md.js`
-- **Avoid** hardcoding snapshot paths in `extract_funds.py`
+- **Never** change `fund_data.json` manually (use update_fund_data.py)
+- **Avoid** running `generate_md.js` without updated `fund_data.json`
 
 ## WORKFLOW
 
+### Monthly Data Update (CSV-based)
+
 ```bash
-# Full refresh cycle
-python extract_funds.py    # Update snapshot_path first!
+# 1. Update fund data from CSV
+python scripts/update_fund_data.py --file ../resource/YYYY년MM월_상품제안서_퇴직연금(DCIRP).csv
+
+# Output:
+# - fund_data.json (1996 funds)
+# - fund_fees.json (1996 fees)
+# - fund_classification.json (auto-generated, 9 categories)
+# - archive/fund_data_YYYY-MM-DD.json (backup)
+
+# 2. Optional: Regenerate markdown documentation
 node generate_md.js        # Regenerates all 205+ files
 node verify_funds.js       # Validate output
+```
+
+### Dry-run Mode
+
+```bash
+# Preview changes without modifying files
+python scripts/update_fund_data.py --dry-run --file ../resource/YYYY년MM월_상품제안서_퇴직연금(DCIRP).csv
 ```
