@@ -16,6 +16,7 @@ import json
 from pathlib import Path
 from datetime import datetime
 import sys
+import shutil
 
 
 def parse_args():
@@ -166,55 +167,162 @@ def load_csv(file_path):
     return metadata, header, data_rows
 
 
-def parse_fund_data(row, header):
-    """Parse a single CSV row into fund data structure (stub)
-    
-    This will be implemented in Task 3.
-    For now, just return a basic dict with fundCode and name.
+def parse_risk_level(risk_str):
+    """Parse 위험등급 string
     
     Args:
-        row: CSV row data
-        header: CSV header row
+        risk_str: "N등급(위험명)" format
         
     Returns:
-        dict: Basic fund data structure
+        tuple: (level: int, name: str with spaces removed)
+        
+    Example:
+        "2등급(높은 위험)" → (2, "높은위험")
     """
-    # Create column index mapping
-    col_map = {col: i for i, col in enumerate(header)}
+    import re
+    match = re.match(r'(\d+)등급\((.+)\)', risk_str)
+    if match:
+        level = int(match.group(1))
+        name = match.group(2).replace(' ', '')  # Remove spaces
+        return level, name
+    return 0, ""  # Fallback for unparseable
+
+
+def parse_fund_data(row, header):
+    """Parse a single CSV row into fund data structure
+    
+    Args:
+        row: List of CSV cell values
+        header: List of column names from header row
+        
+    Returns:
+        dict: Fund data following SCHEMA.md specification
+    """
+    # Create header index mapping
+    col_idx = {name: i for i, name in enumerate(header)}
+    
+    # Helper function to safely get cell value
+    def get_cell(col_name):
+        idx = col_idx.get(col_name)
+        if idx is not None and idx < len(row):
+            return row[idx].strip()
+        return ""
     
     # Extract basic fields
-    fund_code = row[col_map.get("펀드코드", 0)].strip() if col_map.get("펀드코드") is not None else ""
-    fund_name = row[col_map.get("펀드명", 1)].strip() if col_map.get("펀드명") is not None else ""
+    fund_code = get_cell("펀드코드")
+    fund_name = get_cell("펀드명")
+    company = get_cell("운용회사명")
+    
+    # Parse 위험등급: "2등급(높은 위험)" → riskLevel: 2, riskName: "높은위험"
+    risk_str = get_cell("위험등급")
+    risk_level, risk_name = parse_risk_level(risk_str)
+    
+    # Convert 순자산: remove commas, multiply by 10000 (억원 → 천원)
+    net_assets_str = get_cell("순자산총액(억원)").replace(",", "")
+    if net_assets_str:
+        try:
+            net_assets = str(int(float(net_assets_str) * 10000))
+        except ValueError:
+            net_assets = "0"
+    else:
+        net_assets = "0"
+    
+    # Extract return fields (handle empty as "")
+    return10y = get_cell("수익률(10Y)")
+    return7y = get_cell("수익률(7Y)")
+    return5y = get_cell("수익률(5Y)")
+    return3y = get_cell("수익률(3Y)")
+    return1y = get_cell("수익률(1Y)")
+    return6m = get_cell("수익률(6M)")
+    
+    # Extract other fields
+    inception_date = get_cell("설정일")
+    affiliate_str = get_cell("계열사 여부")
+    is_affiliate = "계열사" in affiliate_str
+    fund_type = get_cell("비고")
     
     return {
         "fundCode": fund_code,
-        "name": fund_name
+        "name": fund_name,
+        "company": company,
+        "riskLevel": risk_level,
+        "riskName": risk_name,
+        "return10y": return10y,
+        "return7y": return7y,
+        "return5y": return5y,
+        "return3y": return3y,
+        "return1y": return1y,
+        "return6m": return6m,
+        "netAssets": net_assets,
+        "inceptionDate": inception_date,
+        "isAffiliate": is_affiliate,
+        "fundType": fund_type
     }
 
 
-def parse_fund_fees(row, header):
-    """Parse a single CSV row into fee data structure (stub)
-    
-    This will be implemented in Task 4.
-    For now, just return a basic dict with fundCode and totalFee.
+def archive_existing_file(file_path, version_date):
+    """Archive existing file before overwriting
     
     Args:
-        row: CSV row data
-        header: CSV header row
+        file_path: Path to file to archive (e.g., funds/fund_data.json)
+        version_date: Version date string (YYYY-MM-DD) for archive filename
         
     Returns:
-        dict: Basic fee data structure
+        Path to archived file, or None if file didn't exist
     """
-    # Create column index mapping
-    col_map = {col: i for i, col in enumerate(header)}
+    file_path = Path(file_path)
     
-    # Extract basic fields
-    fund_code = row[col_map.get("펀드코드", 0)].strip() if col_map.get("펀드코드") is not None else ""
-    total_fee = row[col_map.get("비율(%)", -1)].strip() if col_map.get("비율(%)") is not None else ""
+    if not file_path.exists():
+        return None  # No file to archive (first run)
+    
+    # Create archive directory
+    archive_dir = file_path.parent / "archive"
+    archive_dir.mkdir(exist_ok=True)
+    
+    # Create .gitkeep file
+    gitkeep = archive_dir / ".gitkeep"
+    gitkeep.touch()
+    
+    # Build archive filename: fund_data_2025-12-01.json
+    base_name = file_path.stem  # "fund_data"
+    ext = file_path.suffix  # ".json"
+    archive_name = f"{base_name}_{version_date}{ext}"
+    archive_path = archive_dir / archive_name
+    
+    # Copy file to archive
+    shutil.copy2(file_path, archive_path)
+    
+    print(f"  Archived: {file_path.name} → archive/{archive_name}")
+    return archive_path
+
+
+def parse_fund_fees(row, header):
+    """Parse a single CSV row into fee data structure
+    
+    Args:
+        row: List of CSV cell values
+        header: List of column names from header row
+        
+    Returns:
+        dict: Fee data following SCHEMA.md specification
+        
+    Note:
+        Returns dict will be used with fundCode as key in output
+    """
+    # Create header index mapping
+    col_idx = {name: i for i, name in enumerate(header)}
+    
+    # Extract fields
+    fund_code = row[col_idx["펀드코드"]].strip()
+    fund_name = row[col_idx["펀드명"]].strip()
+    total_fee = row[col_idx["비율(%)"]].strip()
+    annual_cost = row[col_idx["1년투자비용(원)"]].strip().replace(",", "")
     
     return {
         "fundCode": fund_code,
-        "totalFee": total_fee
+        "fundName": fund_name,
+        "totalFee": total_fee,
+        "annualCost": annual_cost
     }
 
 
@@ -278,22 +386,37 @@ def process_csv(csv_path, output_dir, dry_run):
         fund_fees_dict[fund_fees["fundCode"]] = fund_fees
     
     # Display sample funds
-    print("Sample funds:")
-    for i, fund in enumerate(fund_data_list[:3], 1):
-        print(f"  {i}. {fund['fundCode']}: {fund['name']}")
+    print(f"Total funds parsed: {len(fund_data_list)}")
     print()
     
     if dry_run:
+        # Show fund_data.json preview
+        print("Sample fund_data.json preview (first 3 funds):")
+        print()
+        for i, fund in enumerate(fund_data_list[:3], 1):
+            print(f"Fund {i}:")
+            print(json.dumps(fund, ensure_ascii=False, indent=2))
+            print()
+        
+        # Show fund_fees.json preview
+        print("Sample fund_fees.json preview:")
+        print(json.dumps(
+            {k: v for k, v in list(fund_fees_dict.items())[:3]},
+            ensure_ascii=False,
+            indent=2
+        ))
+        print()
+        
         print("=" * 60)
         print("DRY RUN COMPLETE - No files created")
         print("=" * 60)
         return
     
-    # Write JSON files (placeholder for Tasks 3-4)
+    # Write JSON files
     output_path = Path(output_dir)
     output_path.mkdir(parents=True, exist_ok=True)
     
-    # Create fund_data.json (stub)
+    # Create fund_data.json
     fund_data_json = {
         "_meta": {
             "version": metadata["baseDate"],
@@ -304,11 +427,7 @@ def process_csv(csv_path, output_dir, dry_run):
         "funds": fund_data_list
     }
     
-    fund_data_path = output_path / "fund_data.json"
-    with open(fund_data_path, "w", encoding="utf-8") as f:
-        json.dump(fund_data_json, f, ensure_ascii=False, indent=2)
-    
-    # Create fund_fees.json (stub)
+    # Create fund_fees.json
     fund_fees_json = {
         "_meta": {
             "version": metadata["baseDate"],
@@ -319,17 +438,34 @@ def process_csv(csv_path, output_dir, dry_run):
         "fees": fund_fees_dict
     }
     
+    # Get version date from metadata
+    version_date = metadata["baseDate"]  # "2025-12-01"
+    
+    # Define output paths
+    fund_data_path = output_path / "fund_data.json"
     fund_fees_path = output_path / "fund_fees.json"
+    
+    # Archive existing files before overwriting
+    print()
+    print("Archiving existing files...")
+    archive_existing_file(fund_data_path, version_date)
+    archive_existing_file(fund_fees_path, version_date)
+    
+    # Write new files
+    print()
+    print("Writing new files...")
+    with open(fund_data_path, "w", encoding="utf-8") as f:
+        json.dump(fund_data_json, f, ensure_ascii=False, indent=2)
+    print(f"  {fund_data_path}")
+    
     with open(fund_fees_path, "w", encoding="utf-8") as f:
         json.dump(fund_fees_json, f, ensure_ascii=False, indent=2)
+    print(f"  {fund_fees_path}")
     
+    print()
     print("=" * 60)
     print("CONVERSION COMPLETE")
     print("=" * 60)
-    print()
-    print(f"Output files:")
-    print(f"  {fund_data_path}")
-    print(f"  {fund_fees_path}")
     print()
     print(f"Total funds processed: {len(fund_data_list)}")
     print()
@@ -348,11 +484,11 @@ def main():
     # Process
     try:
         process_csv(csv_path, args.output_dir, args.dry_run)
-    except ValueError as e:
-        print(f"Error: Invalid CSV format - {e}")
-        sys.exit(1)
     except UnicodeDecodeError as e:
         print(f"Error: File encoding error - {e}")
+        sys.exit(1)
+    except ValueError as e:
+        print(f"Error: Invalid CSV format - {e}")
         sys.exit(1)
     except Exception as e:
         print(f"Error: {e}")
