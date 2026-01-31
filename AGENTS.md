@@ -37,7 +37,7 @@ investments/
 | Macro economy analysis | `.claude/agents/macro-outlook.md` | 금리/환율/시장/섹터 전망 |
 | Leadership analysis | `.claude/agents/leadership-outlook.md` | 정치 리더십/중앙은행 동향 (NEW) |
 | Fund master data | `funds/fund_data.json` | Single source of truth (JSON, 1996 funds) |
-| Update fund data | `funds/scripts/update_fund_data.py` | CSV → JSON pipeline |
+| Update fund data | `scripts/update_fund_data.py` | CSV → JSON pipeline (symlink to honeypot) |
 | Regenerate markdown | `funds/generate_md.js` | Run with Node.js |
 | Fund summary/index | `funds/README.md` | 205 funds sorted by 3mo return |
 | Individual fund info | `funds/[category]/[fund].md` | Standardized template |
@@ -54,9 +54,11 @@ Classification by keyword matching in fund name:
 - **Special**: TDF/MMF/EMP/리츠/골드 → 기타
 
 ### Data Pipeline (CSV-based, v2.0)
-1. CSV file → `update_fund_data.py` → `fund_data.json` + `fund_fees.json` + archive
-2. Auto-execute → `classify_funds.js` → `fund_classification.json`
-3. Manual → `generate_md.js` → category folders + README (optional)
+1. CSV file → `scripts/update_fund_data.py` → `fund_data.json` + `fund_fees.json` + archive
+2. Auto-execute → `scripts/classify_funds.py` → `fund_classification.json`
+3. Manual → `funds/generate_md.js` → category folders + README (optional)
+
+> **Note**: `scripts/` is a symlink to `honeypot/plugins/investments-portfolio/scripts/`
 
 ### File Naming
 - Special chars `\/:*?"<>|` removed
@@ -121,7 +123,7 @@ Resolves: DC형 위험자산 한도 초과 이슈
 1. Place new CSV file in `resource/` directory
 2. Run update script:
    ```bash
-   python funds/scripts/update_fund_data.py --file resource/YYYY년MM월_상품제안서_퇴직연금(DCIRP).csv
+   python scripts/update_fund_data.py --file resource/YYYY년MM월_상품제안서_퇴직연금(DCIRP).csv
    ```
 3. Verify outputs:
    - `funds/fund_data.json` - Updated fund data (1996 funds)
@@ -131,7 +133,7 @@ Resolves: DC형 위험자산 한도 초과 이슈
 
 **Dry-run mode** (preview without changes):
 ```bash
-python funds/scripts/update_fund_data.py --dry-run --file resource/YYYY년MM월_상품제안서_퇴직연금(DCIRP).csv
+python scripts/update_fund_data.py --dry-run --file resource/YYYY년MM월_상품제안서_퇴직연금(DCIRP).csv
 ```
 
 **Schema**: See `funds/SCHEMA.md` for complete data structure specification.
