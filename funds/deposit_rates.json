@@ -1,0 +1,81 @@
+{
+  "_meta": {
+    "version": "2025-12-31",
+    "source": "과학기술인공제회 퇴직연금 원리금보장형 운용방법 안내",
+    "updatedAt": "2026-01-31T11:15:00+09:00",
+    "recordCount": 4,
+    "freshnessThresholdDays": 30,
+    "note": "30일 경과 시 데이터 업데이트 필요"
+  },
+  "rates": [
+    {
+      "id": "sema-1y",
+      "institution": "과학기술인공제회",
+      "productName": "과학기술인공제회 퇴직연금 운용방법 (1년)",
+      "type": "원리금보장형운용방법",
+      "term": "1년",
+      "termMonths": 12,
+      "rate": 4.9,
+      "unit": "%",
+      "earlyWithdrawal": {
+        "normal": {
+          "6m_to_1y": "입금분 이자의 70%",
+          "3m_to_6m": "입금분 이자의 60%",
+          "under_3m": "입금분 이자의 50%"
+        },
+        "special": "입금일 당시 고시된 만기금리를 가입일수로 계산하여 지급"
+      }
+    },
+    {
+      "id": "woori-1y",
+      "institution": "우리은행",
+      "productName": "우리은행 정기예금 1년",
+      "type": "원리금보장형운용방법",
+      "term": "1년",
+      "termMonths": 12,
+      "rate": 2.75,
+      "unit": "%",
+      "earlyWithdrawal": {
+        "normal": "신규일(최종 재예치일) 당시 영업점 및 홈페이지 게시된 기간별 중도해지이율 적용",
+        "special": null
+      }
+    },
+    {
+      "id": "woori-6m",
+      "institution": "우리은행",
+      "productName": "우리은행 정기예금 6개월",
+      "type": "원리금보장형운용방법",
+      "term": "6개월",
+      "termMonths": 6,
+      "rate": 2.55,
+      "unit": "%",
+      "earlyWithdrawal": {
+        "normal": "신규일(최종 재예치일) 당시 영업점 및 홈페이지 게시된 기간별 중도해지이율 적용",
+        "special": null
+      }
+    },
+    {
+      "id": "woori-3m",
+      "institution": "우리은행",
+      "productName": "우리은행 정기예금 3개월",
+      "type": "원리금보장형운용방법",
+      "term": "3개월",
+      "termMonths": 3,
+      "rate": 2.45,
+      "unit": "%",
+      "earlyWithdrawal": {
+        "normal": "신규일(최종 재예치일) 당시 영업점 및 홈페이지 게시된 기간별 중도해지이율 적용",
+        "special": null
+      }
+    }
+  ],
+  "summary": {
+    "highestRate": {
+      "institution": "과학기술인공제회",
+      "rate": 4.9,
+      "term": "1년"
+    },
+    "averageRate": 3.1625,
+    "institutions": ["과학기술인공제회", "우리은행"]
+  }
+}
