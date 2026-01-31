@@ -23,9 +23,14 @@ investments/
 │   ├── 해외주식형/     # Global equity (86)
 │   ├── 채권혼합형/     # Bond-mixed (18)
 │   └── [6 more categories]
-├── portfolio/          # Personal investment plans & tracking
-│   ├── 2026-Q1-investment-plan.md    # 퇴직연금 분기별 계획
-│   └── 2026-personal-pension-plan.md # 개인연금 연간 계획
+├── portfolios/         # Auto-generated portfolio analysis reports
+│   ├── YYYY-MM-DD-{profile}-{id}/    # Analysis session folder
+│   │   ├── 00-macro-outlook.md       # 거시경제 전망
+│   │   ├── 01-fund-analysis.md       # 펀드 분석
+│   │   ├── 02-compliance-report.md   # 규제 준수 검증
+│   │   ├── 03-output-verification.md # 출력 검증
+│   │   └── 04-portfolio-summary.md   # 최종 요약
+│   └── README.md                     # 폴더 구조 설명
 └── README.md           # Project entry (binary/corrupted)
 ```
 
@@ -44,6 +49,7 @@ investments/
 | **Investment plans** | `portfolio/` | Quarterly plans & rebalancing records |
 | Current quarter plan | `portfolio/2026-Q1-investment-plan.md` | Active investment plan |
 | Personal pension plan | `portfolio/2026-personal-pension-plan.md` | 연금저축+IRP ETF 운용 계획 |
+| Portfolio analysis | `portfolios/` | Auto-generated multi-agent analysis reports |
 
 ## CONVENTIONS
 
