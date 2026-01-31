@@ -25,7 +25,7 @@ investmunts_cbd/
 ├── portfolios/                 # Auto-generated portfolio analysis reports
 │   └── YYYY-MM-DD-{profile}-{id}/
 │       ├── 00-macro-outlook.md       # 거시경제 전망
-│       ├── 01-fund-analysis.md       # 펀드 분석 (or 01-leadership-outlook.md)
+│       ├── 01-fund-analysis.md       # 펀드 분석 (or 01-leadership-analyst.md)
 │       ├── 02-compliance-report.md   # 규제 준수 검증
 │       ├── 03-output-verification.md # 출력 검증
 │       └── 04-portfolio-summary.md   # 최종 요약
@@ -71,9 +71,9 @@ investmunts_cbd/
 | **rate-analyst** | Fed/BOK rate & USD/KRW analysis | Macro analysis phase |
 | **sector-analyst** | 5-sector outlook analysis | Macro analysis phase |
 | **risk-analyst** | Risk analysis & Bull/Base/Bear scenarios | Macro analysis phase |
+| **leadership-analyst** | Political leadership & central bank analysis (7 countries) | Macro analysis phase |
 | **macro-synthesizer** | Synthesize macro analysis reports | After all analysts complete |
 | **macro-critic** | Independent verification of macro data | After synthesizer |
-| **leadership-outlook** | Political leadership & central bank analysis (7 countries) | On-demand |
 | **fund-portfolio** | Fund recommendation with Bogle principles | Portfolio phase |
 | **compliance-checker** | DC 70% risk limit verification | After fund selection |
 | **output-critic** | Final output hallucination check | Before delivery |
