@@ -11,7 +11,7 @@
 
 ### 1.1 현상
 
-portfolio-coordinator 파이프라인의 거시경제 에이전트들이 실시간 데이터를 **허위 생성(hallucination)**하고 있음.
+portfolio-orchestrator 파이프라인의 거시경제 에이전트들이 실시간 데이터를 **허위 생성(hallucination)**하고 있음.
 
 | 에이전트 | 보고값 | 실제값 | 오차율 |
 |:---------|-------:|-------:|-------:|
@@ -706,7 +706,6 @@ consumers:
   "category": "finance",
   "strict": true,
   "agents": [
-    "./agents/portfolio-coordinator.md",
     "./agents/index-fetcher.md",
     "./agents/rate-analyst.md",
     // ... 기존 에이전트들
@@ -734,7 +733,7 @@ consumers:
 |:-------|:---------|:---------|
 | index-fetcher | S&P 500 + KOSPI 수집 | 실제값 ±2% 이내 |
 | rate-analyst | Fed + BOK 금리 수집 | 실제값 일치 |
-| 파이프라인 | portfolio-coordinator 전체 실행 | 모든 데이터 출처 명시 |
+| 파이프라인 | portfolio-orchestrator 워크플로우 전체 실행 | 모든 데이터 출처 명시 |
 
 ### 7.3 회귀 테스트
 

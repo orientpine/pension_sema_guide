@@ -293,6 +293,10 @@ Classification by keyword matching in fund name:
 | `refactor` | 구조 변경 (기능 변화 없음) |
 | `chore` | 기타 유지보수 |
 
+### Language Policy
+
+- 모든 설명과 지침은 항상 한국어로 작성할 것
+
 ## ANTI-PATTERNS
 
 | Forbidden | Reason |

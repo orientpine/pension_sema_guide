@@ -12,7 +12,7 @@
 | `01-fund-analysis.md` | fund-portfolio | 펀드 분석 및 추천 상세 |
 | `02-compliance-report.md` | compliance-checker | DC형 규제 준수 검증 결과 |
 | `03-output-verification.md` | output-critic | 출력 검증 및 신뢰도 점수 |
-| `04-portfolio-summary.md` | portfolio-coordinator | 최종 통합 보고서 |
+| `04-portfolio-summary.md` | 메인 에이전트 (portfolio-orchestrator 스킬) | 최종 통합 보고서 |
 | `audit.json` | audit_logger.js | 감사 로그 (선택적) |
 
 ## 워크플로우
@@ -33,7 +33,7 @@
 [output-critic] ── 03-output-verification.md
      │
      ▼
-[coordinator] ── 04-portfolio-summary.md
+[portfolio-orchestrator] ── 04-portfolio-summary.md
 ```
 
 ## 폴더명 규칙
@@ -58,7 +58,7 @@ YYYY-MM-DD-{투자성향}-{session_id}
 | **fund-portfolio** | macro-outlook 기반 펀드 분석, 포트폴리오 구성 | `01-fund-analysis.md` |
 | **compliance-checker** | DC형 70% 한도 검증, 단일펀드 40% 한도 | `02-compliance-report.md` |
 | **output-critic** | 출처 검증, 환각 탐지, 신뢰도 점수 | `03-output-verification.md` |
-| **portfolio-coordinator** | 전체 조율, 최종 통합 | `04-portfolio-summary.md` |
+| **메인 에이전트 (portfolio-orchestrator 스킬)** | 전체 조율, 최종 통합 | `04-portfolio-summary.md` |
 
 ## 최근 분석 기록
 

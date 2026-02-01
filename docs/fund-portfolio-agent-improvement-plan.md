@@ -635,7 +635,7 @@ module.exports = { validatePortfolio };
 #### 5.2.1 Coordinator Agent
 
 ```yaml
-name: portfolio-coordinator
+name: portfolio-orchestrator
 role: 오케스트레이터
 responsibilities:
   - 사용자 요청 파싱
