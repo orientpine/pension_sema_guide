@@ -66,7 +66,7 @@ investmunts_cbd/
 
 | Agent | Role | When Invoked |
 |-------|------|--------------|
-| **portfolio-coordinator** | Orchestrator - coordinates entire workflow | Entry point for all analysis |
+| **portfolio-orchestrator** | Orchestrator - coordinates entire workflow | Entry point for all analysis |
 | **index-fetcher** | Fetch index data with 3-source cross-verification | Macro analysis phase |
 | **rate-analyst** | Fed/BOK rate & USD/KRW analysis | Macro analysis phase |
 | **sector-analyst** | 5-sector outlook analysis | Macro analysis phase |
@@ -98,7 +98,7 @@ investmunts_cbd/
 ### Analysis Workflow
 
 ```
-[1] portfolio-coordinator (Entry)
+[1] portfolio-orchestrator (Entry)
          │
          ├──[Parallel Macro Analysis]──────────────────────┐
          │      │                                          │
@@ -124,12 +124,30 @@ investmunts_cbd/
 
 ### Invoking Portfolio Analysis
 
-```bash
-# Via Claude Code with investments-portfolio plugin
-"포트폴리오 분석해줘" or "공격형 포트폴리오 추천해줘"
+**Command**: `/investments-portfolio:portfolio-orchestrator`
 
-# The coordinator will orchestrate the entire workflow
+```markdown
+/investments-portfolio:portfolio-orchestrator 나를 위한 새로운 포트폴리오를 구성해줘.
+
+| 항목 | 내용 |
+|------|------|
+| **생년** | 1992년 (만 33세) |
+| **직업** | 정부출연연구원 (정부출연연구원) |
+| **은퇴 예정** | 65세 (2057년, 약 31년 후) |
+| **투자 성향** | **공격형** (30년+ 장기투자) |
+| **위험 수용도** | 높음 (단기 -30% 손실 감내 가능) |
 ```
+
+**필수 프로필 항목**:
+| 항목 | 설명 |
+|------|------|
+| 생년 | 투자 기간 산정용 |
+| 직업 | 소득 안정성 평가 |
+| 은퇴 예정 | 투자 호라이즌 결정 |
+| 투자 성향 | 안정형/중립형/공격형 |
+| 위험 수용도 | 손실 감내 수준 |
+
+The portfolio-orchestrator agent will coordinate the entire multi-agent workflow based on the provided investor profile.
 
 ## FUND DATA
 
