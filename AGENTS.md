@@ -8,6 +8,30 @@
 
 Korean retirement pension fund portfolio recommendation system for 과학기술공제회 (SEMA). Multi-agent system for portfolio analysis with hallucination prevention. Fund data sourced from Zeroin, stored as JSON.
 
+## AGENT SELECTION FLOWCHART
+
+```mermaid
+flowchart TD
+    Start([Need to choose an agent]) --> Q1{Need a structured plan or
+    interview-style task breakdown?}
+    Q1 -- Yes --> Prometheus[Prometheus
+    Plan creation]
+    Q1 -- No --> Q2{Need multi-agent orchestration
+    or parallel execution?}
+    Q2 -- Yes --> Sisyphus[Sisyphus
+    Orchestrator]
+    Q2 -- No --> Q3{Need deep, autonomous
+    implementation to completion?}
+    Q3 -- Yes --> Hephaestus[Hephaestus
+    Deep worker]
+    Q3 -- No --> Q4{Need high-level architecture
+    or design review?}
+    Q4 -- Yes --> Atlas[Atlas
+    Architecture review]
+    Q4 -- No --> Default[Sisyphus
+    Default orchestrator]
+```
+
 ## STRUCTURE
 
 ```
