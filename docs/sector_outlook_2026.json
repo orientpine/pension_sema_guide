@@ -1,0 +1,426 @@
+{
+  "metadata": {
+    "title": "2026년 섹터별 전망 분석",
+    "baseDate": "2026-02-01",
+    "currency": "KRW",
+    "dataSource": "과학기술공제회 펀드 데이터 + 시장 분석",
+    "disclaimer": "과거 수익률이 미래 수익률을 보장하지 않습니다. 투자 결정 시 전문가 상담을 권장합니다."
+  },
+  "sectors": [
+    {
+      "sectorId": 1,
+      "sectorName": "반도체",
+      "koreanName": "반도체",
+      "outlook2026": "긍정적",
+      "confidenceLevel": "높음",
+      "summary": "AI 칩 수요 증가와 HBM 기술 고도화로 강세 지속 예상",
+      "keyDrivers": [
+        {
+          "driver": "AI 인프라 투자 확대",
+          "description": "데이터센터 구축 가속화로 고성능 칩 수요 급증",
+          "impact": "긍정적",
+          "companies": ["NVIDIA", "SK하이닉스", "삼성전자"]
+        },
+        {
+          "driver": "HBM(고대역폭메모리) 기술 고도화",
+          "description": "HBM3E, HBM4 등 차세대 제품 출시로 가격 프리미엄 유지",
+          "impact": "긍정적",
+          "companies": ["SK하이닉스", "삼성전자", "마이크론"]
+        },
+        {
+          "driver": "파운드리 경쟁 심화",
+          "description": "TSMC, 삼성, 인텔의 경쟁으로 가격 압박 가능성",
+          "impact": "부정적",
+          "companies": ["TSMC", "삼성전자", "인텔"]
+        },
+        {
+          "driver": "지정학적 리스크 완화",
+          "description": "미-중 기술 갈등 완화 시 중국 수요 회복",
+          "impact": "긍정적",
+          "companies": ["SK하이닉스", "삼성전자"]
+        }
+      ],
+      "risks": [
+        {
+          "risk": "AI 버블 붕괴 우려",
+          "severity": "높음",
+          "description": "과도한 AI 투자 조정 시 칩 수요 급락 가능",
+          "mitigation": "장기 기술 트렌드 확인, 분산 투자"
+        },
+        {
+          "risk": "공급 과잉",
+          "severity": "중간",
+          "description": "메모리 칩 공급 증가로 가격 하락 압박",
+          "mitigation": "고부가가치 제품(HBM) 집중"
+        },
+        {
+          "risk": "환율 변동성",
+          "severity": "중간",
+          "description": "원화 약세 시 수출 경쟁력 향상, 강세 시 악화",
+          "mitigation": "환헤지 펀드 고려"
+        }
+      ],
+      "investmentOpportunities": [
+        {
+          "opportunity": "HBM 관련 펀드",
+          "description": "한화PLUS글로벌HBM반도체증권상장지수투자신탁",
+          "fundCode": "K55213DW6843",
+          "riskLevel": "매우 높음",
+          "return1y": "데이터 확인 필요",
+          "rationale": "HBM 기술 고도화의 직접 수혜"
+        },
+        {
+          "opportunity": "반도체 장비/소재",
+          "description": "반도체 생산 확대에 따른 장비/소재 수요 증가",
+          "rationale": "간접 수혜로 변동성 낮음"
+        }
+      ],
+      "targetAllocation": "15-20%",
+      "riskProfile": "높음",
+      "timeHorizon": "3-5년"
+    },
+    {
+      "sectorId": 2,
+      "sectorName": "AI/빅테크",
+      "koreanName": "AI/빅테크",
+      "outlook2026": "긍정적",
+      "confidenceLevel": "높음",
+      "summary": "Magnificent 7 중심의 AI 인프라 투자 지속, 다만 밸류에이션 조정 가능성",
+      "keyDrivers": [
+        {
+          "driver": "생성형 AI 상용화 가속",
+          "description": "ChatGPT, Claude 등 AI 서비스 수익화 본격화",
+          "impact": "긍정적",
+          "companies": ["OpenAI", "Google", "Microsoft", "Meta"]
+        },
+        {
+          "driver": "AI 인프라 투자 확대",
+          "description": "데이터센터, GPU 클러스터 구축 투자 지속",
+          "impact": "긍정적",
+          "companies": ["NVIDIA", "Google", "Microsoft", "Amazon"]
+        },
+        {
+          "driver": "AI 규제 강화",
+          "description": "EU AI Act, 각국의 AI 규제 도입으로 컴플라이언스 비용 증가",
+          "impact": "부정적",
+          "companies": ["모든 빅테크"]
+        },
+        {
+          "driver": "경쟁 심화",
+          "description": "오픈소스 AI 모델 확산으로 진입장벽 낮아짐",
+          "impact": "부정적",
+          "companies": ["OpenAI", "Google", "Meta"]
+        }
+      ],
+      "risks": [
+        {
+          "risk": "AI 버블 붕괴",
+          "severity": "높음",
+          "description": "과도한 기대감으로 인한 밸류에이션 조정",
+          "mitigation": "실적 기반 투자, 분할 매수"
+        },
+        {
+          "risk": "규제 리스크",
+          "severity": "중간",
+          "description": "각국의 AI 규제 강화로 사업 제약",
+          "mitigation": "규제 대응 능력 우수 기업 선택"
+        },
+        {
+          "risk": "기술 격차 확대",
+          "severity": "중간",
+          "description": "선도 기업과 추격 기업의 기술 격차 심화",
+          "mitigation": "선도 기업 집중 투자"
+        }
+      ],
+      "investmentOpportunities": [
+        {
+          "opportunity": "AI 인프라 관련 ETF",
+          "description": "NVIDIA, 마이크로소프트, 구글 등 포함",
+          "rationale": "AI 인프라 투자의 직접 수혜"
+        },
+        {
+          "opportunity": "AI 소프트웨어/서비스",
+          "description": "AI 기반 SaaS, 엔터프라이즈 솔루션",
+          "rationale": "AI 상용화의 수혜"
+        }
+      ],
+      "targetAllocation": "20-25%",
+      "riskProfile": "높음",
+      "timeHorizon": "3-5년"
+    },
+    {
+      "sectorId": 3,
+      "sectorName": "에너지/원자력",
+      "koreanName": "에너지/원자력",
+      "outlook2026": "긍정적",
+      "confidenceLevel": "높음",
+      "summary": "데이터센터 전력 수요 급증과 탄소중립 정책으로 원자력 르네상스 시작",
+      "keyDrivers": [
+        {
+          "driver": "데이터센터 전력 수요 폭증",
+          "description": "AI 인프라 확대로 전력 수요 연 20% 이상 증가",
+          "impact": "긍정적",
+          "companies": ["한국수력원자력", "한전", "GE"]
+        },
+        {
+          "driver": "원자력 르네상스",
+          "description": "탄소중립 목표로 원자력 재평가, 신규 건설 계획 증가",
+          "impact": "긍정적",
+          "companies": ["한국수력원자력", "Cameco", "Kazatomprom"]
+        },
+        {
+          "driver": "신재생에너지 간헐성 문제",
+          "description": "태양광/풍력의 간헐성으로 기저전력 필요성 증대",
+          "impact": "긍정적",
+          "companies": ["원자력 관련 기업"]
+        },
+        {
+          "driver": "전기요금 인상 압박",
+          "description": "전력 수요 증가로 전기요금 인상 가능성",
+          "impact": "부정적",
+          "companies": ["전력 소비 기업"]
+        }
+      ],
+      "risks": [
+        {
+          "risk": "원자력 안전 우려",
+          "severity": "중간",
+          "description": "원자력 사고 발생 시 정책 변화 가능",
+          "mitigation": "안전 기술 우수 기업 선택"
+        },
+        {
+          "risk": "방사능 폐기물 처리",
+          "severity": "중간",
+          "description": "장기적 폐기물 처리 비용 증가",
+          "mitigation": "정부 정책 모니터링"
+        },
+        {
+          "risk": "신재생에너지 가격 하락",
+          "severity": "낮음",
+          "description": "태양광/풍력 가격 하락으로 경쟁 심화",
+          "mitigation": "원자력의 기저전력 역할 강조"
+        }
+      ],
+      "investmentOpportunities": [
+        {
+          "opportunity": "원자력 ETF",
+          "description": "NH-AmundiHANARO원자력iSelect증권상장지수투자신탁",
+          "fundCode": "K55232DU8475",
+          "return1y": "178.03%",
+          "return3y": "70.34%",
+          "rationale": "원자력 르네상스의 직접 수혜, 높은 수익률 실적"
+        },
+        {
+          "opportunity": "우라늄 관련 펀드",
+          "description": "우라늄 채굴, 정제 기업",
+          "rationale": "원자력 발전 확대의 원료 수혜"
+        },
+        {
+          "opportunity": "전력 인프라 관련",
+          "description": "송배전, 스마트그리드 기업",
+          "rationale": "전력 수요 증가의 간접 수혜"
+        }
+      ],
+      "targetAllocation": "10-15%",
+      "riskProfile": "중간-높음",
+      "timeHorizon": "5-10년"
+    },
+    {
+      "sectorId": 4,
+      "sectorName": "금융",
+      "koreanName": "금융",
+      "outlook2026": "중립",
+      "confidenceLevel": "중간",
+      "summary": "금리 인하 기대감으로 긍정적이나, 경제 둔화 우려로 신중한 접근 필요",
+      "keyDrivers": [
+        {
+          "driver": "금리 인하 사이클",
+          "description": "인플레이션 완화로 중앙은행 금리 인하 예상",
+          "impact": "긍정적",
+          "companies": ["은행", "보험사"]
+        },
+        {
+          "driver": "신용 스프레드 확대",
+          "description": "경제 둔화 우려로 신용 리스크 증가",
+          "impact": "부정적",
+          "companies": ["은행", "금융사"]
+        },
+        {
+          "driver": "디지털 금융 확대",
+          "description": "핀테크, 블록체인 기술 도입으로 효율성 증대",
+          "impact": "긍정적",
+          "companies": ["핀테크 기업", "은행"]
+        },
+        {
+          "driver": "자산관리 수요 증가",
+          "description": "고령화로 자산관리 서비스 수요 증가",
+          "impact": "긍정적",
+          "companies": ["자산관리사", "보험사"]
+        }
+      ],
+      "risks": [
+        {
+          "risk": "경제 침체",
+          "severity": "높음",
+          "description": "글로벌 경제 둔화로 대출 부실 증가",
+          "mitigation": "우량 금융사 선택, 분산 투자"
+        },
+        {
+          "risk": "금리 인상 반전",
+          "severity": "중간",
+          "description": "인플레이션 재상승 시 금리 인상 가능",
+          "mitigation": "금리 민감도 낮은 기업 선택"
+        },
+        {
+          "risk": "규제 강화",
+          "severity": "중간",
+          "description": "금융 규제 강화로 수익성 악화",
+          "mitigation": "규제 대응 능력 우수 기업 선택"
+        }
+      ],
+      "investmentOpportunities": [
+        {
+          "opportunity": "은행주",
+          "description": "금리 인하 사이클에서 수익성 개선",
+          "rationale": "금리 인하로 대출 수요 증가"
+        },
+        {
+          "opportunity": "보험사",
+          "description": "자산관리 수요 증가로 수익 다각화",
+          "rationale": "고령화로 보험 수요 증가"
+        },
+        {
+          "opportunity": "핀테크",
+          "description": "디지털 금융 확대로 성장 가속",
+          "rationale": "기술 혁신으로 시장 점유율 확대"
+        }
+      ],
+      "targetAllocation": "10-15%",
+      "riskProfile": "중간",
+      "timeHorizon": "1-3년"
+    },
+    {
+      "sectorId": 5,
+      "sectorName": "헬스케어",
+      "koreanName": "헬스케어",
+      "outlook2026": "긍정적",
+      "confidenceLevel": "중간",
+      "summary": "고령화와 신약 개발 가속으로 장기 성장 기대, 단기 변동성 주의",
+      "keyDrivers": [
+        {
+          "driver": "고령화 추세",
+          "description": "전 세계 고령화로 의약품, 의료기기 수요 증가",
+          "impact": "긍정적",
+          "companies": ["제약사", "의료기기 기업"]
+        },
+        {
+          "driver": "신약 개발 가속",
+          "description": "AI 기반 신약 개발로 파이프라인 확대",
+          "impact": "긍정적",
+          "companies": ["대형 제약사", "바이오텍"]
+        },
+        {
+          "driver": "제네릭 약품 경쟁",
+          "description": "특허 만료로 제네릭 약품 경쟁 심화",
+          "impact": "부정적",
+          "companies": ["혁신 제약사"]
+        },
+        {
+          "driver": "의료비 통제 정책",
+          "description": "각국의 의료비 통제 정책으로 가격 압박",
+          "impact": "부정적",
+          "companies": ["제약사", "의료기기 기업"]
+        }
+      ],
+      "risks": [
+        {
+          "risk": "신약 개발 실패",
+          "severity": "높음",
+          "description": "임상 시험 실패로 손실 발생",
+          "mitigation": "파이프라인 다각화, 분산 투자"
+        },
+        {
+          "risk": "규제 리스크",
+          "severity": "중간",
+          "description": "FDA 등 규제 기관의 승인 거부",
+          "mitigation": "규제 대응 능력 우수 기업 선택"
+        },
+        {
+          "risk": "의료비 통제",
+          "severity": "중간",
+          "description": "정부의 의료비 통제로 수익성 악화",
+          "mitigation": "고부가가치 신약 개발 기업 선택"
+        }
+      ],
+      "investmentOpportunities": [
+        {
+          "opportunity": "대형 제약사",
+          "description": "안정적 배당과 신약 개발 파이프라인",
+          "rationale": "고령화로 의약품 수요 증가"
+        },
+        {
+          "opportunity": "바이오텍",
+          "description": "AI 기반 신약 개발로 성장 가속",
+          "rationale": "기술 혁신으로 신약 개발 속도 향상"
+        },
+        {
+          "opportunity": "의료기기 기업",
+          "description": "고령화로 의료기기 수요 증가",
+          "rationale": "만성질환 치료 기기 수요 증가"
+        }
+      ],
+      "targetAllocation": "10-15%",
+      "riskProfile": "중간",
+      "timeHorizon": "5-10년"
+    }
+  ],
+  "portfolioRecommendation": {
+    "profile": "공격형 (Aggressive)",
+    "riskAssetAllocation": "70%",
+    "safeAssetAllocation": "30%",
+    "allocation": {
+      "반도체": {
+        "percentage": 18,
+        "rationale": "AI 칩 수요 증가의 직접 수혜"
+      },
+      "AI/빅테크": {
+        "percentage": 22,
+        "rationale": "AI 인프라 투자 지속"
+      },
+      "에너지/원자력": {
+        "percentage": 12,
+        "rationale": "데이터센터 전력 수요 증가"
+      },
+      "금융": {
+        "percentage": 12,
+        "rationale": "금리 인하 사이클 수혜"
+      },
+      "헬스케어": {
+        "percentage": 6,
+        "rationale": "고령화 추세의 장기 수혜"
+      },
+      "채권/MMF": {
+        "percentage": 30,
+        "rationale": "DC 70% 위험자산 한도 준수"
+      }
+    }
+  },
+  "macroeconomicContext": {
+    "globalGrowth": "2.5-3.0%",
+    "inflation": "2.5-3.0%",
+    "interestRates": "하향 추세",
+    "usdKrwExchangeRate": "1,200-1,300",
+    "keyRisks": [
+      "AI 버블 붕괴",
+      "지정학적 긴장 (미-중)",
+      "글로벌 경제 둔화",
+      "금리 인상 반전"
+    ]
+  },
+  "updateHistory": [
+    {
+      "date": "2026-02-01",
+      "changes": "초기 분석 작성"
+    }
+  ]
+}
