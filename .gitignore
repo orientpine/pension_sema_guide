@@ -1,5 +1,11 @@
 .sisyphus/
 
+# IDE settings
+.vscode/
+
+# Generated portfolio data
+portfolios/*.json
+
 # Python cache
 __pycache__/
 *.py[cod]
