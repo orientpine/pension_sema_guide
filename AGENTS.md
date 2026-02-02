@@ -86,22 +86,22 @@ investmunts_cbd/
 
 ## MULTI-AGENT SYSTEM
 
-### Agent Architecture (honeypot/plugins/investments-portfolio/agents/)
+### Agent Architecture (macro-analysis + investments-portfolio)
 
-| Agent | Role | When Invoked |
-|-------|------|--------------|
-| **portfolio-orchestrator** | Orchestrator - coordinates entire workflow | Entry point for all analysis |
-| **index-fetcher** | Fetch index data with 3-source cross-verification | Macro analysis phase |
-| **rate-analyst** | Fed/BOK rate & USD/KRW analysis | Macro analysis phase |
-| **sector-analyst** | 5-sector outlook analysis | Macro analysis phase |
-| **risk-analyst** | Risk analysis & Bull/Base/Bear scenarios | Macro analysis phase |
-| **leadership-analyst** | Political leadership & central bank analysis (7 countries) | Macro analysis phase |
-| **macro-synthesizer** | Synthesize macro analysis reports | After all analysts complete |
-| **macro-critic** | Independent verification of macro data | After synthesizer |
-| **fund-portfolio** | Fund recommendation with Bogle principles | Portfolio phase |
-| **compliance-checker** | DC 70% risk limit verification | After fund selection |
-| **output-critic** | Final output hallucination check | Before delivery |
-| **material-organizer** | Organize collected research materials | On-demand |
+| Agent | Plugin | Role | When Invoked |
+|-------|--------|------|--------------|
+| **portfolio-orchestrator** | investments-portfolio | Orchestrator - coordinates entire workflow | Entry point for all analysis |
+| **fund-portfolio** | investments-portfolio | Fund recommendation with Bogle principles | Portfolio phase |
+| **compliance-checker** | investments-portfolio | DC 70% risk limit verification | After fund selection |
+| **output-critic** | investments-portfolio | Final output hallucination check | Before delivery |
+| **material-organizer** | investments-portfolio | Organize collected research materials | On-demand |
+| **index-fetcher** | macro-analysis | Fetch index data with 3-source cross-verification | Macro analysis phase |
+| **rate-analyst** | macro-analysis | Fed/BOK rate & USD/KRW analysis | Macro analysis phase |
+| **sector-analyst** | macro-analysis | 5-sector outlook analysis | Macro analysis phase |
+| **risk-analyst** | macro-analysis | Risk analysis & Bull/Base/Bear scenarios | Macro analysis phase |
+| **leadership-analyst** | macro-analysis | Political leadership & central bank analysis (7 countries) | Macro analysis phase |
+| **macro-synthesizer** | macro-analysis | Synthesize macro analysis reports | After all analysts complete |
+| **macro-critic** | macro-analysis | Independent verification of macro data | After synthesizer |
 
 ### Skill Architecture (honeypot/plugins/investments-portfolio/skills/)
 
