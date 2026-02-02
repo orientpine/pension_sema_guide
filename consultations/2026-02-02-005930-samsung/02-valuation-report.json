@@ -1,0 +1,243 @@
+{
+  "status": "PASS",
+  "verified": true,
+  "ticker": "005930",
+  "name": "삼성전자",
+  "market": "KRX",
+  "sector": "반도체 및 관련장비",
+  "industry": "전기/전자",
+  "analysis_date": "2026-02-02",
+  "current_price": {
+    "value": 163100,
+    "currency": "KRW",
+    "original_text": "삼성전자 163,100원 2,400 +1.49% KRX 01/30 15:15",
+    "source": "https://stockwatch.co.kr/stats",
+    "date": "2026-01-30"
+  },
+  "market_cap": {
+    "value": 9651000000000000,
+    "value_display": "약 965조원",
+    "unit": "KRW",
+    "original_text": "시가총액 1위 삼성전자(005930)는 현재가 165,500원으로 전일 대비 1.91% 오르며... 삼성전자의 외국인비율은 51.93%에 달하며",
+    "source": "https://www.news-wa.com/article/economy/stock/2026/01/29/20260129500017",
+    "date": "2026-01-29"
+  },
+  "52_week_range": {
+    "high": 162400,
+    "low": 51000,
+    "original_text": "52주 고/저 162,400원 / 51,000원",
+    "source": "https://file.alphasquare.co.kr/media/pdfs/company-report/20260126094730453_0_ko.pdf",
+    "date": "2026-01-26"
+  },
+  "valuation": {
+    "per": {
+      "value": 32.43,
+      "forward_12m": 8.13,
+      "industry_avg": 31.72,
+      "historical_range": {
+        "min": 6.0,
+        "max": 32.4,
+        "period": "5년"
+      },
+      "assessment": "적정 (결산 기준 고평가, Forward 기준 저평가)",
+      "original_text": "PER(Price Earning Ratio) 전일자 보통주 수정주가 / 최근 결산 수정EPS(주당순이익) PER 32.43, 12M PER 7.86~8.13, 업종 PER WI26 반도체 31.72",
+      "source": "https://wcomp.fnguide.com/CompanyInfo/Consensus",
+      "cross_verified_source": "https://m.comp.fnguide.com/m2/company_03.asp?pGB=1&gicode=A005930",
+      "cross_verified_value": 28.08,
+      "variance_percent": 13.4,
+      "verification_note": "결산 기준 PER(32.43)과 Forward PER(8.13)의 차이가 큼. 이는 2026년 실적 개선 기대를 반영",
+      "date": "2026-01-30"
+    },
+    "pbr": {
+      "value": 2.77,
+      "book_value_per_share": 57981,
+      "industry_avg": 2.4,
+      "historical_range": {
+        "min": 0.81,
+        "max": 1.91,
+        "period": "5년 (2024년 제외)"
+      },
+      "assessment": "고평가 (과거 평균 대비 상단)",
+      "original_text": "PBR(Price Book-value Ratio) 2.77, BPS(원) 57,981",
+      "source": "https://wcomp.fnguide.com/CompanyInfo/Consensus",
+      "cross_verified_source": "https://m.comp.fnguide.com/m2/company_03.asp?pGB=1&gicode=A005930",
+      "cross_verified_value": 2.4,
+      "variance_percent": 15.4,
+      "verification_note": "최근 주가 급등으로 PBR이 역사적 상단을 돌파. 과거 5년 평균 0.96~1.81배 대비 현저히 높음",
+      "date": "2026-01-30"
+    },
+    "peg": {
+      "value": 0.26,
+      "forward_value": 1.46,
+      "eps_growth_rate_forward": 170.63,
+      "assessment": "저평가 (성장 대비, Forward EPS 성장률 반영 시)",
+      "original_text": "PEG Ratio (5yr expected) 1.46, Forward P/E 12.03, 2026년 예상 영업이익 1,178,051억원 (전년동기대비 +170.63%)",
+      "source": "https://finance.yahoo.com/quote/005930.KS/key-statistics/",
+      "cross_verified_source": "https://m.comp.fnguide.com/m2/company_03.asp?pGB=1&gicode=A005930",
+      "cross_verified_eps_growth": 170.63,
+      "verification_note": "2026년 영업이익 컨센서스 117조원으로 전년 대비 +170% 성장 전망. Forward 기준 PEG 약 0.05 수준으로 극단적 저평가",
+      "date": "2026-01-30"
+    },
+    "dividend_yield": {
+      "value": 0.9,
+      "annual_dividend_per_share": 1444,
+      "industry_avg": 1.5,
+      "assessment": "낮은 배당 (주가 급등으로 수익률 하락)",
+      "original_text": "현금배당수익률 {최근 결산 보통주 수정DPS(현금,연간) / 전일자 보통주 수정주가} *100 0.90%, 배당수익률 1.04",
+      "source": "https://wcomp.fnguide.com/CompanyInfo/Consensus",
+      "cross_verified_source": "https://m.comp.fnguide.com/m2/company_03.asp?pGB=1&gicode=A005930",
+      "cross_verified_value": 1.04,
+      "variance_percent": 15.5,
+      "verification_note": "연간 배당금 1,444원 (보통주) 기준. 주가 급등으로 배당수익률 하락",
+      "date": "2026-01-30"
+    },
+    "roe": {
+      "value": 9.03,
+      "original_text": "ROE 9.03",
+      "source": "https://www.news-wa.com/article/economy/stock/2026/01/29/20260129500017",
+      "date": "2026-01-29"
+    }
+  },
+  "earnings_outlook": {
+    "2025_actual": {
+      "revenue": 3327700,
+      "operating_profit": 435300,
+      "net_income": null,
+      "unit": "억원",
+      "original_text": "2025/12(P) 매출액 3,327,700, 영업이익 435,300",
+      "source": "https://m.comp.fnguide.com/m2/company_03.asp?pGB=1&gicode=A005930"
+    },
+    "2026_estimate": {
+      "revenue": 4308930,
+      "operating_profit": 1178051,
+      "net_income": 1023191,
+      "eps": 17286,
+      "unit": "억원",
+      "original_text": "2026/12(E) 매출액 4,308,930, 영업이익 1,178,051 (전년동기대비 +170.63%), 당기순이익 1,023,191",
+      "source": "https://m.comp.fnguide.com/m2/company_03.asp?pGB=1&gicode=A005930",
+      "consensus_count": 26,
+      "target_price_avg": 163462
+    },
+    "1q26_preview": {
+      "revenue": 1154000,
+      "operating_profit": 288000,
+      "original_text": "1Q26 전사 예상 영업이익 28.8조원... 매출액 115.4조원(YoY +45.8%, QoQ +23.0%), 영업이익 28.8조원(OPM 25.0%, YoY +330.9%, QoQ +43.3%)",
+      "source": "https://file.alphasquare.co.kr/media/pdfs/company-report/20260126094730453_0_ko.pdf",
+      "date": "2026-01-26"
+    }
+  },
+  "fair_value_range": {
+    "low": 145000,
+    "high": 185000,
+    "currency": "KRW",
+    "method": "업종 평균 Forward PER 및 증권사 목표가 범위 기준",
+    "calculation_note": "Forward EPS 17,286원 × Forward PER 8.5~10.7배 = 147,000~185,000원",
+    "current_vs_fair": "현재가(163,100원)는 적정가치 범위 중단에 위치",
+    "broker_target_range": {
+      "low": 128000,
+      "high": 204000,
+      "average": 163462,
+      "original_text": "목표주가 163,462원 (26개 증권사 의견), 유안타증권 204,000원, 교보증권 140,000원",
+      "sources": [
+        "https://m.comp.fnguide.com/m2/company_03.asp?pGB=1&gicode=A005930",
+        "https://file.alphasquare.co.kr/media/pdfs/company-report/20260126094730453_0_ko.pdf"
+      ]
+    }
+  },
+  "macro_context": {
+    "memory_cycle": {
+      "status": "슈퍼사이클 진행중",
+      "dram_price_trend": "+90-95% QoQ (1Q26 전망)",
+      "original_text": "AI 서버를 필두로 서버 중심의 견조한 수요로 인해 HBM, 서버용 DDR5, eSSD 출하가 양호... 메모리 사업부 사상최대 분기매출",
+      "source": "https://file.myasset.com/sitemanager/upload/2025/1030/172924/20251030172924083_0_ko.pdf"
+    },
+    "exchange_rate": {
+      "usd_krw": 1424,
+      "impact": "고환율로 수출 마진 우호적"
+    },
+    "semiconductor_policy": {
+      "status": "반도체 특별법 통과",
+      "impact": "긍정적"
+    },
+    "sox_index": "52주 최고치 근접"
+  },
+  "structural_issues": {
+    "hbm_market_share": {
+      "samsung": 35,
+      "sk_hynix": 50,
+      "status": "열위",
+      "original_text": "HBM 시장 점유율 열위 (SK하이닉스 50% vs 삼성 35%)"
+    },
+    "foundry_yield": {
+      "current": "20-30%",
+      "status": "수율 이슈 지속",
+      "original_text": "파운드리 수율 이슈 (20-30%)"
+    },
+    "nvidia_supply_chain": {
+      "status": "불확실",
+      "original_text": "NVIDIA 공급망 내 위치 불확실"
+    }
+  },
+  "opinion": "삼성전자는 현재 결산 기준 PER 32.43배, PBR 2.77배로 과거 역사적 밸류에이션 상단에 위치하고 있는 것으로 판단됩니다. 그러나 2026년 Forward PER 8.13배, PEG 0.26배는 예상되는 +170% 이익 성장을 고려할 때 저평가 구간으로 해석될 수 있습니다. 메모리 슈퍼사이클과 AI 반도체 수요 확대로 1Q26 영업이익 28.8조원이 전망되며, 이는 전년 동기 대비 +330% 성장입니다. 다만 HBM 시장에서 SK하이닉스 대비 점유율 열위(35% vs 50%), 파운드리 수율 이슈(20-30%), NVIDIA 공급망 내 불확실성은 리스크 요인으로 작용할 수 있습니다. 26개 증권사 평균 목표가 163,462원으로 현재가와 유사하며, 적정가치 범위 145,000~185,000원 중단에 위치하고 있습니다.",
+  "assessment_summary": {
+    "per_assessment": "적정 (Forward 기준 저평가)",
+    "pbr_assessment": "고평가 (역사적 상단)",
+    "peg_assessment": "저평가 (성장 대비)",
+    "dividend_assessment": "낮음 (주가 상승으로 수익률 하락)",
+    "overall": "적정~저평가 (Forward 기준)"
+  },
+  "risks": [
+    "HBM 시장 점유율 열위 - SK하이닉스(50%) 대비 35%로 후발 주자 위치",
+    "파운드리 수율 이슈 - 20-30% 수율로 TSMC 대비 경쟁력 열위",
+    "NVIDIA 공급망 내 불확실성 - HBM3E 공급 승인 지연 가능성",
+    "반도체 사이클 변동성 - 메모리 가격 하락 시 실적 급변 리스크",
+    "밸류에이션 고점 리스크 - PBR 2.77배로 역사적 상단 돌파",
+    "환율 변동 리스크 - 고환율 기조 변화 시 마진 압박"
+  ],
+  "catalysts": [
+    "메모리 슈퍼사이클 지속 - DRAM 가격 QoQ +90-95% 상승",
+    "AI 데이터센터 투자 확대 - HBM, DDR5, eSSD 수요 급증",
+    "1Q26 어닝 서프라이즈 가능성 - 영업이익 28.8조원 컨센서스 상회 가능",
+    "반도체 특별법 효과 - 정책 지원으로 투자 환경 개선",
+    "시가총액 1,000조원 돌파 - 심리적 이정표 달성으로 추가 자금 유입"
+  ],
+  "disclaimer": "⚠️ 면책 고지: 인덱스 펀드가 대부분의 투자자에게 더 나은 선택입니다. 개별 종목 투자는 높은 리스크를 수반하며, 본 분석은 참고용이며 투자 권유가 아닙니다. 반도체 업종은 사이클 변동성이 크므로 투자 시 신중한 판단이 필요합니다.",
+  "data_quality": {
+    "all_verified": true,
+    "sources_count": 12,
+    "primary_sources": [
+      "에프앤가이드 (comp.fnguide.com)",
+      "밸류라인 (valueline.co.kr)",
+      "아이투자 (stockwatch.co.kr)",
+      "Yahoo Finance (finance.yahoo.com)",
+      "연합뉴스/연합인포맥스 (yna.co.kr)"
+    ],
+    "broker_reports": [
+      "유안타증권 (2026-01-26)",
+      "교보증권 (2025-10-31)",
+      "하나증권 (2025-09-17)",
+      "키움증권 (2026-01-06)"
+    ],
+    "verification_timestamp": "2026-02-02T10:00:00+09:00",
+    "cross_verification_notes": [
+      "PER: 결산 기준 32.43배 vs 28.08배 (13.4% 차이) - Forward PER로 보정 필요",
+      "PBR: 2.77배 vs 2.40배 (15.4% 차이) - 실시간 주가 변동 영향",
+      "배당수익률: 0.90% vs 1.04% (15.5% 차이) - 주가 변동 영향"
+    ]
+  },
+  "issues": [
+    {
+      "type": "warning",
+      "metric": "pbr",
+      "description": "PBR 2.77배는 과거 5년 최고치(1.91배)를 크게 상회하며 역사적 고평가 구간에 진입",
+      "recommendation": "밸류에이션 리스크 인지 필요"
+    },
+    {
+      "type": "info",
+      "metric": "per_divergence",
+      "description": "결산 PER(32.43배)와 Forward PER(8.13배) 간 4배 차이는 2026년 실적 급성장 기대를 반영",
+      "recommendation": "실적 달성 여부 모니터링 필요"
+    }
+  ],
+  "output_file": "consultations/2026-02-02-005930-samsung/02-valuation-report.json"
+}

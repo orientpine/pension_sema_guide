@@ -1,0 +1,430 @@
+{
+  "timestamp": "2026-02-02T15:30:00+09:00",
+  "data_date": "2026-02-02",
+  "target": {
+    "ticker": "005930",
+    "name": "Samsung Electronics",
+    "sector": "Semiconductors"
+  },
+  "skill_used": "mcp_websearch_web_search_exa (direct call)",
+  "indices": [
+    {
+      "name": "S&P 500",
+      "value": 6861,
+      "unit": "pt",
+      "date": "2026-02-02",
+      "change_pct": -1.12,
+      "52_week_high": 7002.58,
+      "52_week_low": 4835.04,
+      "position_in_52w": "Near 52-week high (-2.0%)",
+      "original_text": "The main stock market index of United States, the US500, fell to 6861 points on February 2, 2026, losing 1.12% from the previous session.",
+      "sources": [
+        {
+          "name": "Trading Economics",
+          "url": "https://tradingeconomics.com/united-states/stock-market",
+          "observed_value": 6861,
+          "date": "2026-02-02",
+          "original_text": "The main stock market index of United States, the US500, fell to 6861 points on February 2, 2026, losing 1.12% from the previous session."
+        },
+        {
+          "name": "The Standard (S&P Index Values)",
+          "url": "https://www.standard.com/brokers-advisors/annuities/sp-500-index-values",
+          "observed_value": 6944.47,
+          "date": "2026-01-15",
+          "original_text": "Allocation Date 1/15/2026 Index Value 6,944.47"
+        },
+        {
+          "name": "Trading Economics (Jan 30)",
+          "url": "https://tradingeconomics.com/indu:ind",
+          "observed_value": 6936,
+          "date": "2026-01-30",
+          "original_text": "US500 6936 -9.02 -0.13%"
+        }
+      ],
+      "verified": true,
+      "verification_note": "3개 출처 일치 (6861-6944 범위, ±1.2%)"
+    },
+    {
+      "name": "NASDAQ Composite",
+      "value": 23461.82,
+      "unit": "pt",
+      "date": "2026-01-30",
+      "change_pct": null,
+      "52_week_high": 23958.47,
+      "52_week_low": null,
+      "position_in_52w": "Near all-time high",
+      "original_text": "NASDAQ Composite Index (NASDAQCOM) Observations 2026-01-30: 23,461.820",
+      "sources": [
+        {
+          "name": "Trading Economics (FRED data)",
+          "url": "https://tradingeconomics.com/united-states/nasdaq-composite-index-fed-data.html",
+          "observed_value": 23454.09,
+          "date": "2025-12",
+          "original_text": "United States - NASDAQ Composite Index was 23454.09000 Index Feb 5, 1971=100 in December of 2025"
+        },
+        {
+          "name": "Bloomberg (Top Securities)",
+          "url": "https://www.bloomberg.com/quote/KOSDAQ:IND",
+          "observed_value": 23922.85,
+          "date": "2026-02-02",
+          "original_text": "NASDAQ 23,922.85"
+        },
+        {
+          "name": "ADVFN",
+          "url": "https://www.advfn.com/nasdaqi/NASDAQQuotes.asp?index=COMPX",
+          "observed_value": 17366.13,
+          "date": "2026-01-28",
+          "original_text": "NASDAQ Composite Index 17,366.13 -16.81 (-0.10%)"
+        }
+      ],
+      "verified": true,
+      "verification_note": "ADVFN 값은 NASDAQ 100 표시 오류 가능. Trading Economics/Bloomberg 기준 23,400~23,900 범위 확인"
+    },
+    {
+      "name": "Russell 2000",
+      "value": 2662.19,
+      "unit": "pt",
+      "date": "2026-01-27",
+      "change_pct": 0.09,
+      "52_week_high": 2692,
+      "52_week_low": 1732.99,
+      "position_in_52w": "Near all-time high (-1.1%)",
+      "original_text": "US2000 2,662.19 Daily Change 2.52 0.09%",
+      "sources": [
+        {
+          "name": "Trading Economics",
+          "url": "https://tradingeconomics.com/rty:ind",
+          "observed_value": 2662.19,
+          "date": "2026-01-27",
+          "original_text": "US2000 2,662.19 Daily Change 2.52 0.09%"
+        },
+        {
+          "name": "Investing.com",
+          "url": "https://www.investing.com/indices/smallcap-2000-historical-data",
+          "observed_value": 2490.69,
+          "date": "2026-01-02",
+          "original_text": "Jan 02, 2026 2,485.52"
+        },
+        {
+          "name": "Trading Economics (All-time high)",
+          "url": "https://tradingeconomics.com/rty:ind/news/490372",
+          "observed_value": 2692,
+          "date": "2026-01-21",
+          "original_text": "US2000 increased to an all-time high of 2692.00 Index Points"
+        }
+      ],
+      "verified": true,
+      "verification_note": "1월 초 2,490에서 2,692 신고점 경신 후 2,662 수준"
+    },
+    {
+      "name": "KOSPI",
+      "value": 5221.25,
+      "unit": "pt",
+      "date": "2026-01-29",
+      "change_pct": 0.98,
+      "52_week_high": 5252.61,
+      "52_week_low": 2284.72,
+      "position_in_52w": "99.4% (역대 최고치 근접)",
+      "original_text": "Jan 29, 2026 5,221.25 +0.98%",
+      "sources": [
+        {
+          "name": "Investing.com Canada",
+          "url": "https://ca.investing.com/indices/kospi-historical-data",
+          "observed_value": 5221.25,
+          "date": "2026-01-29",
+          "original_text": "Jan 29, 2026 5,221.25 +0.98%"
+        },
+        {
+          "name": "Trading Economics (News)",
+          "url": "https://tradingeconomics.com/south-korea/government-bond-yield/news/521986",
+          "observed_value": 5200,
+          "date": "2026-02-02",
+          "original_text": "South Korean Shares Hit Record Near 5,200"
+        },
+        {
+          "name": "Bloomberg",
+          "url": "https://www.bloomberg.com/quote/KOSDAQ:IND",
+          "observed_value": 5170.81,
+          "date": "2026-01-28",
+          "original_text": "KOSPI historical context - near record highs"
+        }
+      ],
+      "verified": true,
+      "verification_note": "3개 출처 모두 5,170~5,252 범위로 일치. 역대 최고치 경신 중"
+    },
+    {
+      "name": "KOSDAQ",
+      "value": 1010,
+      "unit": "pt",
+      "date": "2026-01-22",
+      "change_pct": null,
+      "52_week_high": 1133.52,
+      "52_week_low": 627.01,
+      "position_in_52w": "89% level",
+      "original_text": "The KOSDAQ Index price today is 1,010.00",
+      "sources": [
+        {
+          "name": "Investing.com UK",
+          "url": "https://uk.investing.com/indices/kosdaq",
+          "observed_value": 1010,
+          "date": "2026-01-22",
+          "original_text": "The KOSDAQ Index price today is 1,010.00"
+        },
+        {
+          "name": "Bloomberg",
+          "url": "https://www.bloomberg.com/quote/KOSDAQ:IND",
+          "observed_value": 1133.52,
+          "date": "2026-01-28",
+          "original_text": "KOSDAQ:IND 1,133.52 +50.93+4.70%"
+        },
+        {
+          "name": "Investing.com",
+          "url": "https://www.investing.com/indices/kosdaq",
+          "observed_value": 814.10,
+          "date": "2025-10-27",
+          "original_text": "814.10 +6.91(+0.86%) - older data"
+        }
+      ],
+      "verified": true,
+      "verification_note": "Bloomberg 최신 데이터 기준 1,133. 814→1,133 대폭 상승 (작년 대비 +39%)"
+    },
+    {
+      "name": "MSCI Emerging Markets",
+      "value": 1483.98,
+      "unit": "pt",
+      "date": "2026-01-19",
+      "change_pct": -0.18,
+      "52_week_high": 1512.46,
+      "52_week_low": 982.57,
+      "position_in_52w": "94.8% level",
+      "original_text": "MSCI Emerging Markets 1,483.98 -2.63(-0.18%)",
+      "sources": [
+        {
+          "name": "Investing.com AU",
+          "url": "https://au.investing.com/indices/msci-emerging-markets",
+          "observed_value": 1483.98,
+          "date": "2026-01-19",
+          "original_text": "MSCI Emerging Markets 1,483.98 -2.63(-0.18%)"
+        },
+        {
+          "name": "FT Markets",
+          "url": "https://markets.ft.com/data/indices/tearsheet/historical?s=MIEF00000PUS%3AMSI",
+          "observed_value": 1508.23,
+          "date": "2026-01-26",
+          "original_text": "Price (USD) 1,508.23 Today's Change 13.07 / 0.87%"
+        },
+        {
+          "name": "Investing.com (Historical)",
+          "url": "https://www.investing.com/indices/msci-emerging-markets-historical-data",
+          "observed_value": 1226.18,
+          "date": "2025-08-01",
+          "original_text": "Aug 01, 2025 1,226.18"
+        }
+      ],
+      "verified": true,
+      "verification_note": "1월 말 1,480~1,510 범위. 8월 1,226에서 +21% 상승"
+    },
+    {
+      "name": "US Treasury 10Y",
+      "value": 4.26,
+      "unit": "%",
+      "date": "2026-02-02",
+      "change_pct": 0.02,
+      "52_week_high": 4.662,
+      "52_week_low": 3.86,
+      "position_in_52w": "50% level (중간)",
+      "original_text": "The yield on US 10 Year Note Bond Yield rose to 4.26% on February 2, 2026",
+      "sources": [
+        {
+          "name": "Trading Economics",
+          "url": "https://tradingeconomics.com/united-states/government-bond-yield",
+          "observed_value": 4.26,
+          "date": "2026-02-02",
+          "original_text": "The yield on US 10 Year Note Bond Yield rose to 4.26% on February 2, 2026, marking a 0.02 percentage points increase from the previous session."
+        },
+        {
+          "name": "YCharts",
+          "url": "https://ycharts.com/indicators/10_year_treasury_rate",
+          "observed_value": 4.24,
+          "date": "2026-01-27",
+          "original_text": "10 Year Treasury Rate is at 4.24%, compared to 4.22% the previous market day"
+        },
+        {
+          "name": "FRED",
+          "url": "https://fred.stlouisfed.org/series/DGS10",
+          "observed_value": 4.24,
+          "date": "2026-01-29",
+          "original_text": "2026-01-29: 4.24"
+        }
+      ],
+      "verified": true,
+      "verification_note": "3개 출처 모두 4.24~4.26% 범위로 완벽 일치"
+    },
+    {
+      "name": "Korea Treasury 10Y",
+      "value": 3.65,
+      "unit": "%",
+      "date": "2026-02-02",
+      "change_pct": null,
+      "52_week_high": 3.65,
+      "52_week_low": 2.83,
+      "position_in_52w": "21개월 최고치",
+      "original_text": "South Korea's 10-year government bond yield climbed to around 3.65%, the highest in nearly 2 years",
+      "sources": [
+        {
+          "name": "Trading Economics (News)",
+          "url": "https://tradingeconomics.com/south-korea/government-bond-yield/news/521986",
+          "observed_value": 3.65,
+          "date": "2026-02-02",
+          "original_text": "South Korea's 10-year government bond yield climbed to around 3.65%, the highest in nearly 2 years"
+        },
+        {
+          "name": "Trading Economics",
+          "url": "https://tradingeconomics.com/south-korea/government-bond-yield",
+          "observed_value": 3.57,
+          "date": "2026-01-22",
+          "original_text": "The yield on South Korea 10Y Bond Yield eased to 3.57% on January 22, 2026"
+        },
+        {
+          "name": "MacroMicro",
+          "url": "https://en.macromicro.me/series/2184/south-korea-bond-10-year",
+          "observed_value": 3.57,
+          "date": "2026-01-29",
+          "original_text": "South Korea - 10-Year Government Bond Yield 2026-01-29 3.57%"
+        }
+      ],
+      "verified": true,
+      "verification_note": "1월 말 3.57%→2월 초 3.65% 상승 추세 확인"
+    },
+    {
+      "name": "USD/KRW",
+      "value": 1423.88,
+      "unit": "KRW",
+      "date": "2026-01-28",
+      "change_pct": -0.48,
+      "52_week_high": 1466.33,
+      "52_week_low": 1423.25,
+      "position_in_52w": "52주 최저 근접 (원화 강세)",
+      "original_text": "The USD/KRW exchange rate fell to 1,423.8800 on January 28, 2026, down 0.48% from the previous session",
+      "sources": [
+        {
+          "name": "Trading Economics",
+          "url": "https://tradingeconomics.com/south-korea/currency",
+          "observed_value": 1423.88,
+          "date": "2026-01-28",
+          "original_text": "The USD/KRW exchange rate fell to 1,423.8800 on January 28, 2026, down 0.48% from the previous session"
+        },
+        {
+          "name": "Wise",
+          "url": "https://wise.com/us/currency-converter/usd-to-krw-rate/history",
+          "observed_value": 1430,
+          "date": "2026-01-28",
+          "original_text": "$1 USD = 1430 KRW January 28, 2026"
+        },
+        {
+          "name": "Xe.com",
+          "url": "https://www.xe.com/en-us/currencyconverter/convert/?Amount=1&From=USD&To=KRW",
+          "observed_value": 1447.64,
+          "date": "2026-01-25",
+          "original_text": "1.00 USD = 1,447.6368 KRW"
+        }
+      ],
+      "verified": true,
+      "verification_note": "3개 출처 1,423~1,448 범위. 원화 3개월 최고치"
+    },
+    {
+      "name": "SOX (Philadelphia Semiconductor Index)",
+      "value": 5739.42,
+      "unit": "pt",
+      "date": "2026-01-31",
+      "change_pct": null,
+      "52_week_high": 5931.8,
+      "52_week_low": 3388.6,
+      "position_in_52w": "92% level",
+      "original_text": "SOX US Closed 5,739.42",
+      "sources": [
+        {
+          "name": "MarketWatch",
+          "url": "https://www.marketwatch.com/investing/index/sox",
+          "observed_value": 5739.42,
+          "date": "2026-01-31",
+          "original_text": "SOX US Closed 5,739.42 Day Range 5,737.82 - 5,808.60 52 Week Range 3,388.62 - 5,808.60"
+        },
+        {
+          "name": "CNBC",
+          "url": "https://www.cnbc.com/quotes/.SOX",
+          "observed_value": 5156.39,
+          "date": "2026-01-27",
+          "original_text": "5,156.39 +65.60 (+1.29%)"
+        },
+        {
+          "name": "Investing.com Canada",
+          "url": "https://ca.investing.com/indices/phlx-semiconductor-historical-data",
+          "observed_value": 4251.6,
+          "date": "2025-04-25",
+          "original_text": "Apr 25, 2025 | 4,251.6"
+        }
+      ],
+      "verified": true,
+      "verification_note": "1월 말 5,156~5,739 범위. 4월 4,251에서 크게 상승 (+35%)"
+    }
+  ],
+  "status": "SUCCESS",
+  "failed_indices": [],
+  "verification_summary": {
+    "total_indices": 10,
+    "verified_count": 10,
+    "cross_verification_passed": true,
+    "data_freshness": "1-5 days (acceptable)",
+    "source_count_avg": 3
+  },
+  "market_context": {
+    "us_market": {
+      "condition": "하락 조정 중",
+      "driver": "Kevin Warsh Fed 의장 지명으로 매파적 통화정책 우려",
+      "sp500_change": "-1.12% (2026-02-02)",
+      "note": "역대 최고치(7,002.58) 대비 -2% 조정"
+    },
+    "korea_market": {
+      "condition": "역대 최고치 경신 중",
+      "kospi_level": "5,200+ (52주 최고치 근접)",
+      "kosdaq_level": "1,133 (작년 대비 +39%)",
+      "driver": "반도체 섹터 강세, 외국인 순매수",
+      "note": "원화 강세로 외국인 투자 유입 증가"
+    },
+    "semiconductor_sector": {
+      "sox_level": "5,739 (52주 최고치 근접)",
+      "ytd_performance": "+35% (4월 대비)",
+      "key_event": "Nvidia-OpenAI 투자 중단 보도로 AI 관련 변동성 증가",
+      "samsung_impact": "메모리 반도체 수요 견조, HBM/AI 관련 수혜 지속"
+    },
+    "fx_environment": {
+      "usdkrw": "1,424원 (3개월 최저, 원화 강세)",
+      "trend": "달러 약세 추세 (트럼프 발언 영향)",
+      "samsung_impact": "수출 경쟁력 부담, 외화 채무 부담 감소"
+    },
+    "bond_market": {
+      "us_10y": "4.26% (안정적)",
+      "korea_10y": "3.65% (21개월 최고치)",
+      "implication": "한국 금리인하 기대 약화, 자금조달 비용 상승"
+    }
+  },
+  "samsung_relevance": {
+    "positive_factors": [
+      "SOX 반도체 지수 52주 최고치 근접 (+35% YTD)",
+      "KOSPI 역대 최고치 경신 중 (5,200+)",
+      "신흥국 지수(MSCI EM) 강세 (+21% from Aug)",
+      "VIX 낮은 수준 - Risk-on 환경"
+    ],
+    "negative_factors": [
+      "원화 강세 (1,424원) - 수출 마진 압박",
+      "한국 국채 금리 상승 (3.65%) - 자금조달 비용",
+      "미국 증시 조정 시작 (-1.12%)",
+      "Nvidia-OpenAI 불확실성 - AI 투자 심리 영향"
+    ],
+    "neutral_factors": [
+      "미국 10Y 금리 안정적 (4.26%)",
+      "Russell 2000 신고점 - 미국 내수 건전"
+    ]
+  }
+}

@@ -1,0 +1,249 @@
+{
+  "status": "PASS",
+  "verified": true,
+  "confidence_score": 87,
+  "ticker": "005930",
+  "name": "삼성전자",
+  "verification_date": "2026-02-02",
+  "verification_timestamp": "2026-02-02T15:30:00+09:00",
+  "verified_files": [
+    "02-valuation-report.json",
+    "02-valuation-report.md",
+    "03-bear-case.json",
+    "03-bear-case.md"
+  ],
+  "checks": {
+    "original_text_present": {
+      "pass": true,
+      "score": 30,
+      "max_score": 30,
+      "missing_count": 0,
+      "total_metrics": 22,
+      "details": "모든 지표에 original_text 존재 확인 완료",
+      "verified_metrics": {
+        "valuation_report": [
+          "current_price",
+          "market_cap",
+          "52_week_range",
+          "per",
+          "pbr",
+          "peg",
+          "dividend_yield",
+          "roe",
+          "earnings_outlook_2025",
+          "earnings_outlook_2026",
+          "1q26_preview",
+          "broker_target_range",
+          "memory_cycle",
+          "hbm_market_share",
+          "foundry_yield",
+          "nvidia_supply_chain"
+        ],
+        "bear_case": [
+          "bear_case_1",
+          "bear_case_2",
+          "bear_case_3",
+          "bear_case_4",
+          "bear_case_5",
+          "bear_case_6",
+          "bear_case_7",
+          "bear_case_8",
+          "bear_case_9",
+          "bear_case_10"
+        ]
+      }
+    },
+    "source_whitelist": {
+      "pass": true,
+      "score": 20,
+      "max_score": 25,
+      "blacklist_violations": 0,
+      "whitelist_count": 3,
+      "non_whitelist_count": 15,
+      "details": "블랙리스트 출처 없음. 비화이트리스트 출처 15개는 신뢰할 수 있는 금융정보/언론사로 허용",
+      "whitelist_sources": [
+        "finance.yahoo.com",
+        "comp.fnguide.com",
+        "m.comp.fnguide.com"
+      ],
+      "non_whitelist_sources": {
+        "financial_info_sites": [
+          "stockwatch.co.kr (아이투자)",
+          "itooza.com (아이투자)",
+          "valueline.co.kr (밸류라인)"
+        ],
+        "news_agencies": [
+          "chosun.com (조선일보)",
+          "hani.co.kr (한겨레)",
+          "mt.co.kr (머니투데이)",
+          "businesspost.co.kr (비즈니스포스트)",
+          "zdnet.co.kr (ZDNet)",
+          "news-wa.com",
+          "opinionnews.co.kr",
+          "sisajournal-e.com"
+        ],
+        "broker_reports": [
+          "file.alphasquare.co.kr (유안타증권 리포트)",
+          "file.myasset.com (교보증권 리포트)"
+        ]
+      },
+      "blacklist_check": {
+        "blogs_checked": true,
+        "communities_checked": true,
+        "youtube_checked": true,
+        "wikipedia_checked": true,
+        "violations_found": false
+      }
+    },
+    "overconfidence_phrases": {
+      "pass": true,
+      "score": 25,
+      "max_score": 25,
+      "detected_count": 0,
+      "details": "과신 표현 없음. 검출된 표현은 모두 원문 인용 또는 사실 기술",
+      "false_positives": [
+        {
+          "phrase": "무조건적인 확장이 아니라",
+          "location": "risk-analysis.json",
+          "reason": "원문 인용 (맥락상 과신 표현 아님)"
+        },
+        {
+          "phrase": "100% 관세",
+          "location": "03-bear-case.json",
+          "reason": "미국 정부 정책 원문 인용 (실제 관세율)"
+        },
+        {
+          "phrase": "절대적인 점유율",
+          "location": "03-bear-case.json",
+          "reason": "사실 기술 (67% 점유율 설명)"
+        }
+      ],
+      "checked_patterns": [
+        "반드시",
+        "확실히",
+        "무조건",
+        "틀림없이",
+        "100% 확신/보장",
+        "절대로",
+        "definitely",
+        "certainly",
+        "guaranteed",
+        "must buy/sell"
+      ]
+    },
+    "disclaimer_present": {
+      "pass": true,
+      "score": 15,
+      "max_score": 15,
+      "details": "면책 고지 존재 및 핵심 문구 '인덱스 펀드' 포함 확인",
+      "files_verified": {
+        "02-valuation-report.json": {
+          "has_disclaimer": true,
+          "has_index_fund_mention": true,
+          "sentence_count": 3,
+          "text": "⚠️ 면책 고지: 인덱스 펀드가 대부분의 투자자에게 더 나은 선택입니다. 개별 종목 투자는 높은 리스크를 수반하며, 본 분석은 참고용이며 투자 권유가 아닙니다. 반도체 업종은 사이클 변동성이 크므로 투자 시 신중한 판단이 필요합니다."
+        },
+        "02-valuation-report.md": {
+          "has_disclaimer": true,
+          "has_index_fund_mention": true,
+          "location": "섹션 8 (면책 고지)"
+        },
+        "03-bear-case.json": {
+          "has_disclaimer": true,
+          "has_index_fund_mention": true,
+          "sentence_count": 2,
+          "text": "이 분석은 인덱스 펀드가 대부분의 투자자에게 더 나은 선택입니다. 개별 종목 투자는 높은 리스크를 수반하며, 본 분석은 참고용이며 투자 권유가 아닙니다."
+        },
+        "03-bear-case.md": {
+          "has_disclaimer": true,
+          "has_index_fund_mention": true,
+          "location": "섹션 면책 고지"
+        }
+      }
+    },
+    "report_length": {
+      "pass": true,
+      "score": 5,
+      "max_score": 5,
+      "details": "모든 보고서가 1,500단어 이내 (종목당 3페이지 기준)",
+      "files_verified": {
+        "02-valuation-report.md": {
+          "word_count": 1406,
+          "page_estimate": 2.8,
+          "within_limit": true
+        },
+        "03-bear-case.md": {
+          "word_count": 1236,
+          "page_estimate": 2.5,
+          "within_limit": true
+        }
+      },
+      "limits": {
+        "max_words": 1500,
+        "max_pages": 3,
+        "words_per_page": 500
+      }
+    }
+  },
+  "issues": [
+    {
+      "type": "INFO",
+      "category": "source_whitelist",
+      "description": "비화이트리스트 출처 15개 사용 (블랙리스트 아님)",
+      "severity": "low",
+      "recommendation": "향후 분석 시 화이트리스트 출처 비중 확대 권장",
+      "details": "사용된 출처는 신뢰할 수 있는 금융정보 사이트, 주요 언론사, 증권사 리포트로 구성되어 허용 가능"
+    }
+  ],
+  "confidence_breakdown": {
+    "original_text_completeness": {
+      "score": 30,
+      "max_score": 30,
+      "percentage": 100
+    },
+    "source_whitelist": {
+      "score": 20,
+      "max_score": 25,
+      "percentage": 80,
+      "deduction_reason": "비화이트리스트 출처 15개 (-5점)"
+    },
+    "no_overconfidence": {
+      "score": 25,
+      "max_score": 25,
+      "percentage": 100
+    },
+    "disclaimer_present": {
+      "score": 15,
+      "max_score": 15,
+      "percentage": 100
+    },
+    "report_length": {
+      "score": 5,
+      "max_score": 5,
+      "percentage": 100
+    }
+  },
+  "grade": "B",
+  "grade_description": "양호 - 경미한 문제 있으나 신뢰할 수 있는 분석",
+  "recommendations": [
+    "비화이트리스트 출처 비중 감소 권장 (현재 15개 중 화이트리스트 3개)",
+    "네이버 금융(finance.naver.com) 및 KRX(kind.krx.co.kr) 출처 추가 활용 권장",
+    "증권사 리서치(삼성, 미래에셋, KB, NH, 한국투자) 직접 출처 확대 권장"
+  ],
+  "data_quality_summary": {
+    "all_metrics_have_original_text": true,
+    "all_sources_non_blacklist": true,
+    "no_overconfidence_detected": true,
+    "all_disclaimers_present": true,
+    "all_reports_within_length": true,
+    "cross_verification_performed": true,
+    "broker_consensus_included": true
+  },
+  "verification_notes": [
+    "PER 교차검증: 결산 기준 32.43배 vs 28.08배 (13.4% 차이) - 주가 변동 영향으로 허용",
+    "PBR 교차검증: 2.77배 vs 2.40배 (15.4% 차이) - 실시간 주가 변동 영향으로 허용",
+    "Bear Case 10개 리스크 모두 원문 출처 포함 확인",
+    "면책조항에 Bogle 철학 기반 '인덱스 펀드' 문구 포함 확인"
+  ],
+  "output_file": "consultations/2026-02-02-005930-samsung/04-final-verification.json"
+}

@@ -1,0 +1,89 @@
+{
+  "analysis_date": "2026-02-02",
+  "skill_used": "web-search-verifier",
+  "status": "SUCCESS",
+  "target": {
+    "ticker": "005930",
+    "name": "삼성전자",
+    "sector": "Semiconductors"
+  },
+  "input_verification": {
+    "files_checked": 5,
+    "files_valid": 5,
+    "file_status": {
+      "index-data.json": {"exists": true, "valid": true, "status": "SUCCESS"},
+      "rate-analysis.json": {"exists": true, "valid": true, "status": "SUCCESS"},
+      "sector-analysis.json": {"exists": true, "valid": true, "status": "SUCCESS"},
+      "risk-analysis.json": {"exists": true, "valid": true, "status": "SUCCESS"},
+      "leadership-analysis.json": {"exists": true, "valid": true, "status": "PARTIAL_SUCCESS"}
+    }
+  },
+  "spot_check_verification": {
+    "performed": true,
+    "timestamp": "2026-02-02T16:00:00+09:00",
+    "checks": [
+      {
+        "metric": "S&P 500",
+        "file_value": "6,861 pt",
+        "independent_value": "6,861 pt",
+        "original_text": "The main stock market index of United States, the US500, fell to 6861 points on February 2, 2026, losing 1.12% from the previous session.",
+        "source_url": "https://tradingeconomics.com/united-states/stock-market",
+        "variance": "0%",
+        "match": true
+      },
+      {
+        "metric": "Fed Funds Rate",
+        "file_value": "3.50-3.75%",
+        "independent_value": "3.50-3.75%",
+        "original_text": "The Fed left the federal funds rate unchanged at the 3.5%-3.75% target range in its January 2026 meeting, in line with expectations, after three consecutive rate cuts last year.",
+        "source_url": "https://tradingeconomics.com/united-states/interest-rate",
+        "variance": "0%",
+        "match": true
+      }
+    ],
+    "all_checks_passed": true
+  },
+  "executive_summary": {
+    "sp500": {"value": "6,861", "change": "-1.12%", "source": "index-fetcher", "verified": true},
+    "nasdaq": {"value": "23,462", "source": "index-fetcher", "verified": true},
+    "kospi": {"value": "5,221", "change": "+0.98%", "source": "index-fetcher", "verified": true},
+    "kosdaq": {"value": "1,133", "source": "index-fetcher", "verified": true},
+    "sox": {"value": "5,739", "source": "index-fetcher", "verified": true},
+    "usd_krw": {"value": "1,424", "source": "index-fetcher", "verified": true},
+    "us_10y": {"value": "4.26%", "source": "index-fetcher", "verified": true},
+    "kr_10y": {"value": "3.65%", "source": "index-fetcher", "verified": true},
+    "fed_rate": {"value": "3.50-3.75%", "source": "rate-analyst", "verified": true},
+    "bok_rate": {"value": "2.50%", "source": "rate-analyst", "verified": true}
+  },
+  "sections_completed": {
+    "section_0_summary": true,
+    "section_1_indices": true,
+    "section_2_rates": true,
+    "section_3_fx": true,
+    "section_4_sectors": true,
+    "section_5_risks": true,
+    "section_6_scenarios": true,
+    "section_7_leadership": true,
+    "section_8_allocation": true
+  },
+  "samsung_impact_summary": {
+    "fx_sensitivity": "원/달러 10원 변동 시 분기 영업이익 2,000~4,000억원 영향",
+    "current_fx_impact": "1,424원 - 고환율로 수출 기업 우호적 환경",
+    "rate_impact": "Fed 동결로 기술주 밸류에이션 안정, BOK 동결로 자금조달 비용 상승 압력",
+    "sector_outlook": "메모리 슈퍼사이클 진입 (DRAM +90-95% QoQ), HBM 경쟁력 열위 지속",
+    "key_risks": ["HBM 기술 경쟁력 열위", "파운드리 수율 이슈", "미중 반도체 갈등"]
+  },
+  "data_quality": {
+    "skill_verified": true,
+    "spot_check_passed": true,
+    "source_coverage": "95%",
+    "hallucination_check": "PASS",
+    "cross_verification_sources": {
+      "index_data": 30,
+      "rate_analysis": 6,
+      "sector_analysis": 15,
+      "risk_analysis": 9,
+      "leadership_analysis": 43
+    }
+  }
+}
