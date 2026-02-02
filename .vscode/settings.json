@@ -1,0 +1,11 @@
+{
+  "markdown.validate.enabled": true,
+  "markdown.validate.fileLinks.enabled": true,
+  "markdown.validate.referenceLinks.enabled": true,
+  "markdown.updateLinksOnFileMove.enabled": "prompt",
+  "[markdown]": {
+    "editor.defaultFormatter": "vscode.markdown-language-features",
+    "editor.formatOnSave": true,
+    "editor.wordWrap": "on"
+  }
+}
