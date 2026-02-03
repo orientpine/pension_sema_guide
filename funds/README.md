@@ -8,10 +8,13 @@
 
 ```
 funds/
-├── fund_data.json              # 펀드 기본 정보 및 수익률
+├── fund_data.json              # 펀드 기본 정보 및 수익률 (전체 2,015개)
 ├── fund_fees.json              # 펀드 수수료 정보
 ├── fund_classification.json    # 펀드 분류 (위험/안전자산)
+├── deposit_rates.json          # 예금 금리 정보
 ├── README.md                   # 이 파일
+├── investable/                 # 실제 투자 가능 펀드 (fund_data 교집합 206개)
+│   └── investable_funds.json   # 투자 가능 펀드(fund_data 스키마) 목록
 └── archive/                    # 이전 버전 백업
     ├── fund_data_YYYY-MM-DD_HHMMSS.json
     └── fund_fees_YYYY-MM-DD_HHMMSS.json
@@ -130,6 +133,56 @@ funds/
 - gold: 금/골드
 - robotics: 로봇
 
+### investable/investable_funds.json
+
+`fund_data.json`에서 **investable 목록(209개)**과 이름이 매칭되는 펀드만 추출한 **교집합 데이터**입니다.
+
+- 현재 매칭: **206개**
+- 미매칭 1개: fund_data.json에 존재하지 않음
+  - KB스타 한국 인덱스 증권 자투자신탁(주식) C-퇴직e 클래스
+  - 현금성 상품 2개는 원본에만 존재하며 제외됨
+
+**구조:**
+`fund_data.json`과 동일한 스키마를 사용합니다.
+
+```json
+{
+  "_meta": {
+    "version": "2026-01-01",
+    "sourceFile": "26년01월_상품제안서_퇴직연금(DCIRP).csv",
+    "updatedAt": "2026-01-21T22:07:46.467353+09:00",
+    "recordCount": 206
+  },
+  "funds": [
+    {
+      "fundCode": "K55366BU9598",
+      "name": "iM에셋월드골드증권자투자신탁(주식-재간접형)(UH)(C-Rpe)",
+      "company": "iM에셋운용",
+      "riskLevel": 1,
+      "riskName": "매우 높은",
+      "return10y": "",
+      "return7y": "25.00",
+      "return5y": "23.36",
+      "return3y": "47.42",
+      "return1y": "126.73",
+      "return6m": "66.78",
+      "netAssets": "43600000000",
+      "inceptionDate": "20170929",
+      "isAffiliate": false,
+      "fundType": "기타"
+    }
+  ]
+}
+```
+
+**fund_data.json vs investable_funds.json:**
+
+| 구분 | fund_data.json | investable_funds.json |
+|------|----------------|----------------------|
+| 펀드 수 | 2,015개 | 206개 |
+| 용도 | 전체 펀드 정보 | investable 교집합 |
+| 스키마 | fund_data 기준 | fund_data 동일 |
+
 ## 데이터 업데이트
 
 ### 자동 업데이트 스크립트
@@ -168,7 +221,8 @@ python scripts/classify_funds.py \
 ## 현재 데이터 통계 (2026-01-01 기준)
 
 ### 전체 통계
-- 총 펀드 수: 2,015개
+- 총 펀드 수: 2,015개 (fund_data.json)
+- **투자 가능 펀드: 206개** (investable_funds.json, 현금성 상품 2개 제외)
 - 위험자산: 1,836개 (91.1%)
 - 안전자산: 179개 (8.9%)
 
@@ -231,6 +285,15 @@ with open('funds/fund_classification.json', 'r', encoding='utf-8') as f:
 classification = classifications[target_fund['name']]
 print(f"카테고리: {classification['category']}")
 print(f"위험자산: {classification['riskAsset']}")
+
+# 투자 가능 펀드 조회
+with open('funds/investable/investable_funds.json', 'r', encoding='utf-8') as f:
+    investable = json.load(f)
+
+# 수익률 상위 10개 펀드 (1년 기준)
+top_funds = sorted(investable['funds'], key=lambda x: x['returns']['1y'], reverse=True)[:10]
+for fund in top_funds:
+    print(f"{fund['name']}: {fund['returns']['1y']}%")
 ```
 
 ## 관련 스크립트
