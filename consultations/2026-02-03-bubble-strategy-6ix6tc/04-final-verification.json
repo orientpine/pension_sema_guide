@@ -1,0 +1,302 @@
+{
+  "status": "PASS",
+  "verified": true,
+  "confidence_score": 89,
+  "grade": "B",
+  "verification_date": "2026-02-03",
+  "verifier": "stock-critic",
+  "files_verified": [
+    "00-macro-outlook.md",
+    "01-stock-screening.json",
+    "02-valuation-JNJ.json",
+    "02-valuation-MSFT.json",
+    "02-valuation-GLD.json",
+    "02-valuation-VYM.json",
+    "03-bear-case-JNJ.json",
+    "03-bear-case-MSFT.json",
+    "03-bear-case-portfolio.json"
+  ],
+  "checks": {
+    "original_text_present": {
+      "pass": true,
+      "score": 28,
+      "max_score": 30,
+      "missing_count": 2,
+      "details": "대부분의 주요 지표에 original_text 필드 존재. 일부 보조 지표(peer comparison 일부)에서 누락 확인",
+      "issues": [
+        {
+          "file": "02-valuation-JNJ.json",
+          "location": "peer_comparison.peers",
+          "description": "동종업체 PER 값에 개별 original_text 누락 (요약 형태로 제공됨)",
+          "severity": "low"
+        },
+        {
+          "file": "02-valuation-VYM.json",
+          "location": "sector_allocation (일부)",
+          "description": "일부 섹터 비중에 원문 부분 누락",
+          "severity": "low"
+        }
+      ]
+    },
+    "source_whitelist": {
+      "pass": true,
+      "score": 23,
+      "max_score": 25,
+      "violations": [],
+      "whitelist_sources_found": [
+        "finance.yahoo.com",
+        "tradingeconomics.com",
+        "investing.com",
+        "bloomberg.com",
+        "marketwatch.com",
+        "seekingalpha.com",
+        "morningstar.com",
+        "cnbc.com",
+        "reuters.com",
+        "ft.com (Financial Times)",
+        "gold.org (World Gold Council)",
+        "ssga.com (State Street)",
+        "investor.vanguard.com",
+        "etfdb.com",
+        "stockanalysis.com",
+        "pages.stern.nyu.edu (Damodaran)",
+        "macrotrends.net",
+        "hhs.gov (U.S. Department of Health)",
+        "accessdata.fda.gov (FDA)"
+      ],
+      "blacklist_detected": [],
+      "details": "모든 출처가 화이트리스트 내 신뢰 가능한 출처. 블랙리스트 출처 없음",
+      "notes": [
+        {
+          "source": "Wikipedia",
+          "file": "02-valuation-GLD.json",
+          "usage": "역사적 맥락 참고용으로만 사용",
+          "assessment": "허용 - 수치 데이터가 아닌 배경 정보에만 활용",
+          "severity": "info"
+        }
+      ]
+    },
+    "overconfidence_phrases": {
+      "pass": true,
+      "score": 25,
+      "max_score": 25,
+      "detected": [],
+      "patterns_checked": [
+        "반드시", "확실히", "틀림없이", "100% 확신", "절대", "무조건",
+        "definitely", "certainly", "guaranteed", "100% sure", "absolutely", "must buy", "must sell"
+      ],
+      "details": "과신 표현 없음. 모든 의견이 조건부/확률적 표현 사용"
+    },
+    "disclaimer_present": {
+      "pass": true,
+      "score": 15,
+      "max_score": 15,
+      "files_checked": {
+        "00-macro-outlook.md": {
+          "has_disclaimer": true,
+          "has_index_fund_mention": true,
+          "has_risk_warning": true,
+          "sentence_count": 5,
+          "assessment": "PASS"
+        },
+        "01-stock-screening.json": {
+          "has_disclaimer": true,
+          "has_index_fund_mention": true,
+          "disclaimer_text": "Index funds remain the better choice for most investors...",
+          "assessment": "PASS"
+        },
+        "02-valuation-JNJ.json": {
+          "has_disclaimer": true,
+          "has_index_fund_mention": true,
+          "disclaimer_text": "인덱스 펀드가 대부분의 투자자에게 더 나은 선택입니다...",
+          "assessment": "PASS"
+        },
+        "02-valuation-MSFT.json": {
+          "has_disclaimer": true,
+          "has_index_fund_mention": true,
+          "disclaimer_text": "인덱스 펀드가 대부분의 투자자에게 더 나은 선택입니다...",
+          "assessment": "PASS"
+        },
+        "02-valuation-GLD.json": {
+          "has_disclaimer": true,
+          "has_index_fund_mention": true,
+          "disclaimer_text": "인덱스 펀드가 대부분의 투자자에게 더 나은 선택입니다...",
+          "assessment": "PASS"
+        },
+        "02-valuation-VYM.json": {
+          "has_disclaimer": true,
+          "has_index_fund_mention": true,
+          "has_bogle_mention": true,
+          "disclaimer_text": "인덱스 펀드가 대부분의 투자자에게 더 나은 선택이라는 Bogle/Vanguard 철학을 바탕으로 합니다...",
+          "assessment": "PASS"
+        },
+        "03-bear-case-JNJ.json": {
+          "has_disclaimer": true,
+          "has_index_fund_mention": true,
+          "assessment": "PASS"
+        },
+        "03-bear-case-MSFT.json": {
+          "has_disclaimer": true,
+          "has_index_fund_mention": true,
+          "has_bogle_mention": true,
+          "assessment": "PASS"
+        },
+        "03-bear-case-portfolio.json": {
+          "has_disclaimer": true,
+          "has_index_fund_mention": true,
+          "assessment": "PASS"
+        }
+      },
+      "details": "모든 보고서에 면책조항 존재, Bogle 원칙 언급 확인"
+    },
+    "report_length": {
+      "pass": true,
+      "score": 5,
+      "max_score": 5,
+      "files_checked": {
+        "00-macro-outlook.md": {
+          "lines": 350,
+          "estimated_words": 1400,
+          "assessment": "PASS (적정)"
+        },
+        "01-stock-screening.json": {
+          "lines": 644,
+          "estimated_words": 1200,
+          "assessment": "PASS (JSON 구조 특성상 길이 적정)"
+        },
+        "02-valuation-JNJ.json": {
+          "lines": 317,
+          "estimated_words": 900,
+          "assessment": "PASS"
+        },
+        "02-valuation-MSFT.json": {
+          "lines": 212,
+          "estimated_words": 800,
+          "assessment": "PASS"
+        },
+        "02-valuation-GLD.json": {
+          "lines": 218,
+          "estimated_words": 750,
+          "assessment": "PASS"
+        },
+        "02-valuation-VYM.json": {
+          "lines": 325,
+          "estimated_words": 1100,
+          "assessment": "PASS"
+        }
+      },
+      "details": "모든 보고서가 적정 길이 범위 내"
+    },
+    "logic_consistency": {
+      "pass": true,
+      "score": 93,
+      "details": {
+        "bubble_comparison_consistency": {
+          "pass": true,
+          "evidence": [
+            "닷컴버블(2000-2002) 비교 논리가 00-macro-outlook, 02-valuation, 03-bear-case 전반에 걸쳐 일관됨",
+            "NASDAQ -76.81% 하락, S&P 500 -37.6% 하락 수치 일관",
+            "JNJ 닷컴버블 시 성과 (+19.14%) 일관되게 인용"
+          ]
+        },
+        "scenario_probability_check": {
+          "pass": true,
+          "bull_probability": "25%",
+          "base_probability": "50%",
+          "bear_probability": "25%",
+          "total": "100%",
+          "assessment": "확률 합계 100% - 정상"
+        },
+        "strategy_coherence": {
+          "pass": true,
+          "evidence": [
+            "방어적 포지션(40%) + 품질 기술주(20%) + 배당 회복(20%) + 헷지(20%) = 100%",
+            "Bull/Base/Bear 시나리오별 대응 전략이 상충 없이 일관됨",
+            "환헤지 60% 권고가 macro-outlook과 일치"
+          ]
+        },
+        "cross_file_data_consistency": {
+          "pass": true,
+          "verified_values": [
+            {"metric": "JNJ PER", "valuation": 20.92, "screening": 20.92, "match": true},
+            {"metric": "MSFT PER", "valuation": 26.53, "screening": 26.53, "match": true},
+            {"metric": "GLD Expense Ratio", "valuation": 0.40, "screening": 0.40, "match": true},
+            {"metric": "VYM Expense Ratio", "valuation": 0.06, "screening": 0.06, "match": true},
+            {"metric": "Fed Rate", "macro": "3.50%-3.75%", "screening_context": "3.50%-3.75%", "match": true}
+          ]
+        }
+      }
+    }
+  },
+  "confidence_breakdown": {
+    "original_text_completeness": 28,
+    "source_whitelist": 23,
+    "no_overconfidence": 25,
+    "disclaimer_present": 15,
+    "report_length": 5,
+    "total": 96,
+    "adjusted_for_minor_issues": 89
+  },
+  "issues": [
+    {
+      "type": "MINOR",
+      "file": "02-valuation-JNJ.json",
+      "description": "peer_comparison 섹션의 개별 동종업체 PER에 original_text 개별 인용 누락",
+      "recommendation": "동종업체 PER 출처 개별 명시 권장",
+      "severity": "low"
+    },
+    {
+      "type": "INFO",
+      "file": "02-valuation-GLD.json",
+      "description": "Wikipedia를 역사적 맥락 참고용으로 사용",
+      "recommendation": "수치 데이터는 공식 출처에서 인용하고 있어 문제 없음",
+      "severity": "info"
+    },
+    {
+      "type": "MINOR",
+      "file": "00-macro-outlook.md",
+      "description": "섹터 분석 일부 검색 API 오류로 교차검증 제한 (skill_verified: PARTIAL)",
+      "recommendation": "섹터 분석 출처 보강 권장",
+      "severity": "low"
+    }
+  ],
+  "strengths": [
+    {
+      "category": "출처 품질",
+      "description": "모든 주요 수치가 Yahoo Finance, Trading Economics, Bloomberg, Financial Times 등 신뢰 가능한 1차 출처에서 인용됨"
+    },
+    {
+      "category": "교차 검증",
+      "description": "주요 밸류에이션 지표(PER, PBR, PEG)가 2개 이상 출처에서 교차 검증됨 (variance 5% 이내)"
+    },
+    {
+      "category": "면책조항",
+      "description": "모든 보고서에 Bogle/인덱스 펀드 철학 기반 면책조항 포함"
+    },
+    {
+      "category": "논리 일관성",
+      "description": "닷컴버블 비교 논리, 시나리오 확률, 자산배분 전략이 전 보고서에 걸쳐 일관됨"
+    },
+    {
+      "category": "리스크 균형",
+      "description": "Bull case 가능성(AI 혁명 실현)도 bear case와 함께 균형 있게 논의됨"
+    },
+    {
+      "category": "데이터 최신성",
+      "description": "모든 데이터가 2026-02-02~03 기준으로 최신 상태"
+    }
+  ],
+  "recommendations": [
+    "peer_comparison 섹션의 개별 동종업체 수치에 original_text 필드 보강",
+    "섹터 분석 출처 추가 교차검증 (검색 API 오류 보완)",
+    "향후 보고서에서 Wikipedia 사용 시 공식 출처와 병기"
+  ],
+  "final_assessment": {
+    "overall_quality": "양호",
+    "data_reliability": "높음",
+    "hallucination_risk": "낮음",
+    "investment_suitability": "참고용으로 적합 (투자 결정은 개인 책임)",
+    "bogle_philosophy_alignment": "높음"
+  },
+  "verification_timestamp": "2026-02-03T23:30:00+09:00"
+}

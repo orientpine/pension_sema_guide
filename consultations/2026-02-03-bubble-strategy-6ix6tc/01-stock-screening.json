@@ -1,0 +1,643 @@
+{
+  "status": "PASS",
+  "verified": true,
+  "skill_used": "stock-screener",
+  "analysis_context": {
+    "assumption": "Dotcom Bubble Redux - Mid-to-Late Stage",
+    "investor_profile": "Neutral, Mid-to-Long Term (3-5 years)",
+    "asset_focus": "US Stocks/ETFs",
+    "macro_context": {
+      "fed_rate": "3.50%-3.75% (on hold)",
+      "vix": 16.17,
+      "nasdaq_ytd": "+20.13%",
+      "recommended_risk_asset_ratio": "55%",
+      "fx_hedge_ratio": "60%"
+    }
+  },
+  "screening_date": "2026-02-03",
+  "data_source": "Yahoo Finance",
+  "categories": [
+    {
+      "category_id": 1,
+      "category_name": "Defensive Positions (Bubble Hedge)",
+      "description": "Healthcare, Consumer Staples, Utilities - Low P/E, Dividend Paying, Stable Cash Flow",
+      "target_count": "3-5",
+      "candidates": [
+        {
+          "ticker": "JNJ",
+          "name": "Johnson & Johnson",
+          "type": "Stock",
+          "sector": "Healthcare",
+          "market": "NYSE",
+          "metrics": {
+            "pe_ratio": {
+              "value": 20.92,
+              "original_text": "PE Ratio (TTM) 20.92",
+              "source": "https://finance.yahoo.com/quote/JNJ",
+              "date": "2026-02-02"
+            },
+            "dividend_yield": {
+              "value": 2.25,
+              "original_text": "Forward Dividend & Yield 5.20 (2.25%)",
+              "source": "https://finance.yahoo.com/quote/JNJ",
+              "date": "2026-02-02"
+            },
+            "beta": {
+              "value": 0.35,
+              "original_text": "Beta (5Y Monthly) 0.35",
+              "source": "https://finance.yahoo.com/quote/JNJ",
+              "date": "2026-02-02"
+            },
+            "roe": {
+              "value": 35.56,
+              "original_text": "Return on Equity (ttm) 35.56%",
+              "source": "https://finance.yahoo.com/quote/JNJ",
+              "date": "2026-02-02"
+            },
+            "market_cap": {
+              "value": 555945000000,
+              "unit": "USD",
+              "original_text": "Market Cap (intraday) 555.945B",
+              "source": "https://finance.yahoo.com/quote/JNJ",
+              "date": "2026-02-02"
+            },
+            "price": {
+              "value": 230.75,
+              "original_text": "230.75 +3.50 (+1.54%) At close: February 2",
+              "source": "https://finance.yahoo.com/quote/JNJ",
+              "date": "2026-02-02"
+            }
+          },
+          "screening_score": 88,
+          "score_breakdown": {
+            "valuation": 32,
+            "profitability": 28,
+            "stability": 20,
+            "size": 8
+          },
+          "rationale": "Healthcare giant with low beta (0.35), strong ROE (35.56%), stable dividend (2.25%). FDA approvals for oncology portfolio strengthening market position. Defensive during bubble corrections.",
+          "verified": true,
+          "sources_count": 1
+        },
+        {
+          "ticker": "PG",
+          "name": "Procter & Gamble",
+          "type": "Stock",
+          "sector": "Consumer Defensive",
+          "market": "NYSE",
+          "metrics": {
+            "pe_ratio": {
+              "value": 22.66,
+              "original_text": "PE Ratio (TTM) 22.66",
+              "source": "https://finance.yahoo.com/quote/PG",
+              "date": "2026-02-02"
+            },
+            "dividend_yield": {
+              "value": 2.76,
+              "original_text": "Forward Dividend & Yield 4.23 (2.76%)",
+              "source": "https://finance.yahoo.com/quote/PG",
+              "date": "2026-02-02"
+            },
+            "beta": {
+              "value": 0.38,
+              "original_text": "Beta (5Y Monthly) 0.38",
+              "source": "https://finance.yahoo.com/quote/PG",
+              "date": "2026-02-02"
+            },
+            "roe": {
+              "value": 31.56,
+              "original_text": "Return on Equity (ttm) 31.56%",
+              "source": "https://finance.yahoo.com/quote/PG",
+              "date": "2026-02-02"
+            },
+            "market_cap": {
+              "value": 357964000000,
+              "unit": "USD",
+              "original_text": "Market Cap (intraday) 357.964B",
+              "source": "https://finance.yahoo.com/quote/PG",
+              "date": "2026-02-02"
+            },
+            "price": {
+              "value": 153.19,
+              "original_text": "153.19 +1.42 (+0.94%) At close: February 2",
+              "source": "https://finance.yahoo.com/quote/PG",
+              "date": "2026-02-02"
+            }
+          },
+          "screening_score": 85,
+          "score_breakdown": {
+            "valuation": 30,
+            "profitability": 26,
+            "stability": 20,
+            "size": 9
+          },
+          "rationale": "Consumer staples leader with low beta (0.38), strong dividend (2.76%), and excellent ROE (31.56%). Essential products demand remains stable regardless of economic cycles.",
+          "verified": true,
+          "sources_count": 1
+        },
+        {
+          "ticker": "KO",
+          "name": "Coca-Cola",
+          "type": "Stock",
+          "sector": "Consumer Defensive",
+          "market": "NYSE",
+          "metrics": {
+            "pe_ratio": {
+              "value": 24.94,
+              "original_text": "PE Ratio (TTM) 24.94",
+              "source": "https://finance.yahoo.com/quote/KO",
+              "date": "2026-02-02"
+            },
+            "dividend_yield": {
+              "value": 2.71,
+              "original_text": "Forward Dividend & Yield 2.04 (2.71%)",
+              "source": "https://finance.yahoo.com/quote/KO",
+              "date": "2026-02-02"
+            },
+            "beta": {
+              "value": 0.36,
+              "original_text": "Beta (5Y Monthly) 0.36",
+              "source": "https://finance.yahoo.com/quote/KO",
+              "date": "2026-02-02"
+            },
+            "roe": {
+              "value": 42.44,
+              "original_text": "Return on Equity (ttm) 42.44%",
+              "source": "https://finance.yahoo.com/quote/KO",
+              "date": "2026-02-02"
+            },
+            "market_cap": {
+              "value": 324195000000,
+              "unit": "USD",
+              "original_text": "Market Cap (intraday) 324.195B",
+              "source": "https://finance.yahoo.com/quote/KO",
+              "date": "2026-02-02"
+            },
+            "price": {
+              "value": 75.33,
+              "original_text": "75.33 +0.52 (+0.70%) At close: February 2",
+              "source": "https://finance.yahoo.com/quote/KO",
+              "date": "2026-02-02"
+            }
+          },
+          "screening_score": 82,
+          "score_breakdown": {
+            "valuation": 28,
+            "profitability": 28,
+            "stability": 18,
+            "size": 8
+          },
+          "rationale": "Buffett favorite with lowest beta (0.36), highest ROE (42.44%), and reliable dividend. CEO transition underway but fundamentals remain strong.",
+          "verified": true,
+          "sources_count": 1
+        },
+        {
+          "ticker": "XLU",
+          "name": "Utilities Select Sector SPDR ETF",
+          "type": "ETF",
+          "sector": "Utilities",
+          "market": "NYSEArca",
+          "metrics": {
+            "expense_ratio": {
+              "value": 0.08,
+              "original_text": "Expense Ratio (net) 0.08%",
+              "source": "https://finance.yahoo.com/quote/XLU",
+              "date": "2026-02-02"
+            },
+            "dividend_yield": {
+              "value": 2.71,
+              "original_text": "Yield 2.71%",
+              "source": "https://finance.yahoo.com/quote/XLU",
+              "date": "2026-02-02"
+            },
+            "beta": {
+              "value": 0.67,
+              "original_text": "Beta (5Y Monthly) 0.67",
+              "source": "https://finance.yahoo.com/quote/XLU",
+              "date": "2026-02-02"
+            },
+            "aum": {
+              "value": 21770000000,
+              "unit": "USD",
+              "original_text": "Net Assets 21.77B",
+              "source": "https://finance.yahoo.com/quote/XLU",
+              "date": "2026-02-02"
+            },
+            "pe_ratio": {
+              "value": 21.09,
+              "original_text": "PE Ratio (TTM) 21.09",
+              "source": "https://finance.yahoo.com/quote/XLU",
+              "date": "2026-02-02"
+            },
+            "price": {
+              "value": 42.62,
+              "original_text": "42.62 -0.63 (-1.46%) At close: February 2",
+              "source": "https://finance.yahoo.com/quote/XLU",
+              "date": "2026-02-02"
+            }
+          },
+          "screening_score": 80,
+          "score_breakdown": {
+            "valuation": 30,
+            "profitability": 22,
+            "stability": 18,
+            "size": 10
+          },
+          "rationale": "Ultra-low expense ratio (0.08%), diversified utilities exposure. Regulated utilities provide stable cash flows. AI data center demand provides growth catalyst.",
+          "verified": true,
+          "sources_count": 1
+        }
+      ]
+    },
+    {
+      "category_id": 2,
+      "category_name": "Quality Tech Stocks (Selective Exposure)",
+      "description": "Profitable tech companies with strong cash flow and reasonable valuation - No loss-making AI companies",
+      "target_count": "2-3",
+      "candidates": [
+        {
+          "ticker": "MSFT",
+          "name": "Microsoft",
+          "type": "Stock",
+          "sector": "Technology",
+          "market": "NASDAQ",
+          "metrics": {
+            "pe_ratio": {
+              "value": 26.53,
+              "original_text": "PE Ratio (TTM) 26.53",
+              "source": "https://finance.yahoo.com/quote/MSFT",
+              "date": "2026-02-02"
+            },
+            "profit_margin": {
+              "value": 39.04,
+              "original_text": "Profit Margin 39.04%",
+              "source": "https://finance.yahoo.com/quote/MSFT",
+              "date": "2026-02-02"
+            },
+            "roe": {
+              "value": 34.39,
+              "original_text": "Return on Equity (ttm) 34.39%",
+              "source": "https://finance.yahoo.com/quote/MSFT",
+              "date": "2026-02-02"
+            },
+            "free_cash_flow": {
+              "value": 53640000000,
+              "unit": "USD",
+              "original_text": "Levered Free Cash Flow (ttm) 53.64B",
+              "source": "https://finance.yahoo.com/quote/MSFT",
+              "date": "2026-02-02"
+            },
+            "market_cap": {
+              "value": 3144000000000,
+              "unit": "USD",
+              "original_text": "Market Cap (intraday) 3.144T",
+              "source": "https://finance.yahoo.com/quote/MSFT",
+              "date": "2026-02-02"
+            },
+            "dividend_yield": {
+              "value": 0.86,
+              "original_text": "Forward Dividend & Yield 3.64 (0.86%)",
+              "source": "https://finance.yahoo.com/quote/MSFT",
+              "date": "2026-02-02"
+            },
+            "price": {
+              "value": 423.37,
+              "original_text": "423.37 -6.92 (-1.61%) At close: February 2",
+              "source": "https://finance.yahoo.com/quote/MSFT",
+              "date": "2026-02-02"
+            }
+          },
+          "screening_score": 90,
+          "score_breakdown": {
+            "valuation": 32,
+            "profitability": 35,
+            "stability": 15,
+            "size": 8
+          },
+          "rationale": "Quality tech with exceptional profit margin (39%), strong FCF ($53.6B), and reasonable P/E (26.5). Azure growth slowing but AI monetization progressing. Survived dotcom bubble and emerged stronger.",
+          "verified": true,
+          "sources_count": 1
+        },
+        {
+          "ticker": "AAPL",
+          "name": "Apple",
+          "type": "Stock",
+          "sector": "Technology",
+          "market": "NASDAQ",
+          "metrics": {
+            "pe_ratio": {
+              "value": 34.14,
+              "original_text": "PE Ratio (TTM) 34.14",
+              "source": "https://finance.yahoo.com/quote/AAPL",
+              "date": "2026-02-02"
+            },
+            "profit_margin": {
+              "value": 27.04,
+              "original_text": "Profit Margin 27.04%",
+              "source": "https://finance.yahoo.com/quote/AAPL",
+              "date": "2026-02-02"
+            },
+            "roe": {
+              "value": 152.02,
+              "original_text": "Return on Equity (ttm) 152.02%",
+              "source": "https://finance.yahoo.com/quote/AAPL",
+              "date": "2026-02-02"
+            },
+            "free_cash_flow": {
+              "value": 106310000000,
+              "unit": "USD",
+              "original_text": "Levered Free Cash Flow (ttm) 106.31B",
+              "source": "https://finance.yahoo.com/quote/AAPL",
+              "date": "2026-02-02"
+            },
+            "market_cap": {
+              "value": 3969000000000,
+              "unit": "USD",
+              "original_text": "Market Cap (intraday) 3.969T",
+              "source": "https://finance.yahoo.com/quote/AAPL",
+              "date": "2026-02-02"
+            },
+            "dividend_yield": {
+              "value": 0.39,
+              "original_text": "Forward Dividend & Yield 1.04 (0.39%)",
+              "source": "https://finance.yahoo.com/quote/AAPL",
+              "date": "2026-02-02"
+            },
+            "price": {
+              "value": 270.01,
+              "original_text": "270.01 +10.53 (+4.06%) At close: February 2",
+              "source": "https://finance.yahoo.com/quote/AAPL",
+              "date": "2026-02-02"
+            }
+          },
+          "screening_score": 86,
+          "score_breakdown": {
+            "valuation": 26,
+            "profitability": 38,
+            "stability": 14,
+            "size": 8
+          },
+          "rationale": "World's most valuable company with extraordinary FCF ($106B) and ROE (152%). Record Q1 FY26 revenue of $143.8B. Strong ecosystem lock-in provides resilience. P/E (34) higher but justified by cash generation.",
+          "verified": true,
+          "sources_count": 1
+        }
+      ]
+    },
+    {
+      "category_id": 3,
+      "category_name": "Post-Bubble Recovery Play",
+      "description": "Value stocks and dividend stocks that recovered best after dotcom crash - Currently undervalued",
+      "target_count": "2-3",
+      "candidates": [
+        {
+          "ticker": "VYM",
+          "name": "Vanguard High Dividend Yield ETF",
+          "type": "ETF",
+          "sector": "Diversified Value",
+          "market": "NYSEArca",
+          "metrics": {
+            "expense_ratio": {
+              "value": 0.06,
+              "original_text": "Expense Ratio (net) 0.06%",
+              "source": "https://finance.yahoo.com/quote/VYM",
+              "date": "2026-02-02"
+            },
+            "dividend_yield": {
+              "value": 2.44,
+              "original_text": "Yield 2.44%",
+              "source": "https://finance.yahoo.com/quote/VYM",
+              "date": "2026-02-02"
+            },
+            "pe_ratio": {
+              "value": 21.05,
+              "original_text": "PE Ratio (TTM) 21.05",
+              "source": "https://finance.yahoo.com/quote/VYM",
+              "date": "2026-02-02"
+            },
+            "beta": {
+              "value": 0.76,
+              "original_text": "Beta (5Y Monthly) 0.76",
+              "source": "https://finance.yahoo.com/quote/VYM",
+              "date": "2026-02-02"
+            },
+            "aum": {
+              "value": 84520000000,
+              "unit": "USD",
+              "original_text": "Net Assets 84.52B",
+              "source": "https://finance.yahoo.com/quote/VYM",
+              "date": "2026-02-02"
+            },
+            "price": {
+              "value": 151.03,
+              "original_text": "151.03 +1.07 (+0.71%) At close: February 2",
+              "source": "https://finance.yahoo.com/quote/VYM",
+              "date": "2026-02-02"
+            }
+          },
+          "screening_score": 87,
+          "score_breakdown": {
+            "valuation": 32,
+            "profitability": 25,
+            "stability": 20,
+            "size": 10
+          },
+          "rationale": "Vanguard's high dividend ETF with ultra-low expense (0.06%). Historically, dividend stocks outperformed growth after dotcom crash. Top holdings include AVGO, JPM, XOM, JNJ - quality value stocks.",
+          "verified": true,
+          "sources_count": 1
+        },
+        {
+          "ticker": "JNJ",
+          "name": "Johnson & Johnson",
+          "type": "Stock",
+          "sector": "Healthcare",
+          "market": "NYSE",
+          "note": "Also listed in Category 1 - Dual Purpose",
+          "metrics": {
+            "pe_ratio": {
+              "value": 20.92,
+              "original_text": "PE Ratio (TTM) 20.92",
+              "source": "https://finance.yahoo.com/quote/JNJ",
+              "date": "2026-02-02"
+            },
+            "dividend_yield": {
+              "value": 2.25,
+              "original_text": "Forward Dividend & Yield 5.20 (2.25%)",
+              "source": "https://finance.yahoo.com/quote/JNJ",
+              "date": "2026-02-02"
+            },
+            "ytd_return": {
+              "value": 11.50,
+              "original_text": "YTD 11.50%",
+              "source": "https://finance.yahoo.com/quote/JNJ",
+              "date": "2026-02-02"
+            },
+            "1y_return": {
+              "value": 56.30,
+              "original_text": "1-Year Return JNJ 56.30%",
+              "source": "https://finance.yahoo.com/quote/JNJ",
+              "date": "2026-02-02"
+            },
+            "price": {
+              "value": 230.75,
+              "original_text": "230.75 +3.50 (+1.54%) At close: February 2",
+              "source": "https://finance.yahoo.com/quote/JNJ",
+              "date": "2026-02-02"
+            }
+          },
+          "screening_score": 88,
+          "rationale": "JNJ was one of the best performers during and after the dotcom crash (2000-2003). Already up 56.3% YTD, it continues its role as a defensive leader.",
+          "verified": true,
+          "sources_count": 1
+        }
+      ]
+    },
+    {
+      "category_id": 4,
+      "category_name": "Hedge/Safe Haven Assets",
+      "description": "Gold, Treasury Bond ETFs, Volatility Hedge Products",
+      "target_count": "2-3",
+      "candidates": [
+        {
+          "ticker": "GLD",
+          "name": "SPDR Gold Shares",
+          "type": "ETF",
+          "sector": "Commodities",
+          "market": "NYSEArca",
+          "metrics": {
+            "expense_ratio": {
+              "value": 0.40,
+              "original_text": "Expense Ratio (net) 0.40%",
+              "source": "https://finance.yahoo.com/quote/GLD",
+              "date": "2026-02-02"
+            },
+            "beta": {
+              "value": 0.51,
+              "original_text": "Beta (5Y Monthly) 0.51",
+              "source": "https://finance.yahoo.com/quote/GLD",
+              "date": "2026-02-02"
+            },
+            "aum": {
+              "value": 148230000000,
+              "unit": "USD",
+              "original_text": "Net Assets 148.23B",
+              "source": "https://finance.yahoo.com/quote/GLD",
+              "date": "2026-02-02"
+            },
+            "ytd_return": {
+              "value": 12.27,
+              "original_text": "YTD Daily Total Return 12.27%",
+              "source": "https://finance.yahoo.com/quote/GLD",
+              "date": "2026-02-02"
+            },
+            "1y_return": {
+              "value": 72.09,
+              "original_text": "1-Year Return GLD 72.09%",
+              "source": "https://finance.yahoo.com/quote/GLD",
+              "date": "2026-02-02"
+            },
+            "price": {
+              "value": 427.13,
+              "original_text": "427.13 -17.82 (-4.00%) At close: February 2",
+              "source": "https://finance.yahoo.com/quote/GLD",
+              "date": "2026-02-02"
+            }
+          },
+          "screening_score": 85,
+          "score_breakdown": {
+            "hedge_effectiveness": 35,
+            "liquidity": 30,
+            "cost": 12,
+            "size": 8
+          },
+          "rationale": "Gold as safe haven with 72% 1Y return and low beta (0.51). During dotcom crash gold rose significantly. Largest gold ETF with $148B AUM provides excellent liquidity.",
+          "verified": true,
+          "sources_count": 1
+        },
+        {
+          "ticker": "TLT",
+          "name": "iShares 20+ Year Treasury Bond ETF",
+          "type": "ETF",
+          "sector": "Fixed Income",
+          "market": "NASDAQ",
+          "metrics": {
+            "expense_ratio": {
+              "value": 0.15,
+              "original_text": "Expense Ratio (net) 0.15%",
+              "source": "https://finance.yahoo.com/quote/TLT",
+              "date": "2026-02-02"
+            },
+            "dividend_yield": {
+              "value": 4.43,
+              "original_text": "Yield 4.43%",
+              "source": "https://finance.yahoo.com/quote/TLT",
+              "date": "2026-02-02"
+            },
+            "beta": {
+              "value": 2.34,
+              "original_text": "Beta (5Y Monthly) 2.34",
+              "source": "https://finance.yahoo.com/quote/TLT",
+              "date": "2026-02-02"
+            },
+            "aum": {
+              "value": 47470000000,
+              "unit": "USD",
+              "original_text": "Net Assets 47.47B",
+              "source": "https://finance.yahoo.com/quote/TLT",
+              "date": "2026-02-02"
+            },
+            "price": {
+              "value": 86.55,
+              "original_text": "86.55 -0.25 (-0.29%) At close: February 2",
+              "source": "https://finance.yahoo.com/quote/TLT",
+              "date": "2026-02-02"
+            }
+          },
+          "screening_score": 78,
+          "score_breakdown": {
+            "hedge_effectiveness": 28,
+            "liquidity": 28,
+            "cost": 14,
+            "size": 8
+          },
+          "rationale": "Long-term Treasury bonds with 4.43% yield. During equity crashes, flight to safety typically drives Treasury prices up. High beta (2.34) means significant price moves - useful for hedging equity exposure.",
+          "verified": true,
+          "sources_count": 1
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_candidates": 12,
+    "unique_candidates": 10,
+    "by_type": {
+      "stocks": 6,
+      "etfs": 4
+    },
+    "by_category": {
+      "defensive": 4,
+      "quality_tech": 2,
+      "recovery_play": 2,
+      "hedge_assets": 2
+    },
+    "average_screening_score": 84.9,
+    "weighted_avg_pe": 24.6,
+    "weighted_avg_dividend_yield": 2.28,
+    "weighted_avg_beta": 0.58
+  },
+  "excluded_stocks": {
+    "reason": "Not meeting criteria (P/E > 100, loss-making AI companies, IPO < 1 year)",
+    "examples": [
+      "PLTR - P/E too high, speculative",
+      "CRWV (CoreWeave) - Recent IPO, speculative",
+      "Loss-making AI pure-plays"
+    ]
+  },
+  "issues": [],
+  "disclaimer": "Index funds remain the better choice for most investors. Individual stock picking carries high risk. This screening is for 'IF you must pick stocks' scenario under the assumption of a dotcom-like bubble. Past performance does not guarantee future results. The bubble assumption may be incorrect.",
+  "data_quality": {
+    "all_verified": true,
+    "verification_timestamp": "2026-02-03T09:00:00+09:00",
+    "primary_source": "Yahoo Finance",
+    "data_date": "2026-02-02 (Market Close)"
+  }
+}

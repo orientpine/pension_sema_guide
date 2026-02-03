@@ -1,0 +1,211 @@
+{
+  "status": "PASS",
+  "verified": true,
+  "ticker": "MSFT",
+  "name": "Microsoft Corporation",
+  "market": "NASDAQ",
+  "sector": "Technology / Software - Infrastructure",
+  "analysis_context": {
+    "scenario": "닷컴버블 재림 가정",
+    "thesis": "품질 기술주 - 적자 AI 기업과 차별화, 강력한 현금흐름, AI 인프라 투자 주도",
+    "bubble_stage": "중기-후기",
+    "sector_vulnerability": "9/10 (단, MSFT는 수익성으로 차별화)"
+  },
+  "current_price": {
+    "value": 423.37,
+    "currency": "USD",
+    "original_text": "423.37 -6.92 (-1.61%) At close: February 2 at 4:00:03 PM EST",
+    "source": "https://finance.yahoo.com/quote/MSFT",
+    "date": "2026-02-02"
+  },
+  "market_cap": {
+    "value": 3144000000000,
+    "value_formatted": "3.144T",
+    "currency": "USD",
+    "original_text": "Market Cap (intraday) 3.144T",
+    "source": "https://finance.yahoo.com/quote/MSFT"
+  },
+  "52_week_range": {
+    "low": 344.79,
+    "high": 555.45,
+    "current_position_pct": 37.3,
+    "original_text": "52 Week Range 344.79 - 555.45",
+    "source": "https://finance.yahoo.com/quote/MSFT"
+  },
+  "valuation": {
+    "per": {
+      "value": 26.53,
+      "forward_pe": 27.03,
+      "industry_avg": 28.30,
+      "sp500_avg": 29.96,
+      "historical_context": {
+        "sp500_mean": 16.19,
+        "sp500_median": 15.06,
+        "note": "현재 PER은 역사적 평균 대비 높은 수준이나, 섹터 평균 대비 할인"
+      },
+      "assessment": "섹터 대비 소폭 저평가, 시장 대비 저평가",
+      "original_text_source1": "PE Ratio (TTM) 26.53",
+      "original_text_source2": "PE Ratio 26.49",
+      "source1": "https://finance.yahoo.com/quote/MSFT",
+      "source2": "https://stockanalysis.com/stocks/msft/statistics/",
+      "date": "2026-02-02",
+      "cross_validation": {
+        "source1_value": 26.53,
+        "source2_value": 26.49,
+        "variance_pct": 0.15,
+        "status": "PASS (±5% 이내)"
+      }
+    },
+    "pbr": {
+      "value": 8.17,
+      "industry_avg": 10.32,
+      "book_value_per_share": 52.61,
+      "assessment": "섹터 평균 10.32 대비 저평가 (20.8% 할인)",
+      "original_text_source1": "Price/Book (mrq) 8.17",
+      "original_text_source2": "PB Ratio 8.05",
+      "source1": "https://finance.yahoo.com/quote/MSFT",
+      "source2": "https://stockanalysis.com/stocks/msft/statistics/",
+      "date": "2026-02-02",
+      "cross_validation": {
+        "source1_value": 8.17,
+        "source2_value": 8.05,
+        "variance_pct": 1.47,
+        "status": "PASS (±5% 이내)"
+      }
+    },
+    "peg": {
+      "value": 1.70,
+      "eps_growth_rate_5yr": 18.83,
+      "assessment": "적정 (1.0~2.0 범위, 성장 반영 시 과도한 프리미엄 아님)",
+      "original_text_source1": "PEG Ratio (5yr expected) 1.70",
+      "original_text_source2": "PEG Ratio 1.69",
+      "source1": "https://finance.yahoo.com/quote/MSFT",
+      "source2": "https://stockanalysis.com/stocks/msft/statistics/",
+      "date": "2026-02-02",
+      "cross_validation": {
+        "source1_value": 1.70,
+        "source2_value": 1.69,
+        "variance_pct": 0.59,
+        "status": "PASS (±5% 이내)"
+      }
+    },
+    "fcf_yield": {
+      "value": 2.46,
+      "fcf_per_share": 10.42,
+      "p_fcf_ratio": 40.61,
+      "annual_fcf": 77410000000,
+      "assessment": "양호 - 강력한 현금 창출력 (연 $77.4B FCF)",
+      "original_text": "FCF Yield 2.46%... Free Cash Flow 77.41B",
+      "source": "https://stockanalysis.com/stocks/msft/statistics/",
+      "date": "2026-02-02"
+    },
+    "dividend_yield": {
+      "value": 0.86,
+      "dividend_per_share": 3.64,
+      "payout_ratio": 21.78,
+      "dividend_growth_yoy": 10.13,
+      "years_of_growth": 20,
+      "assessment": "낮은 배당 (성장주 특성), 그러나 20년 연속 증가",
+      "original_text": "Forward Dividend & Yield 3.64 (0.86%)... Dividend Growth (YoY) 10.13%... Years of Dividend Growth 20",
+      "source": "https://finance.yahoo.com/quote/MSFT",
+      "date": "2026-02-02"
+    },
+    "ps_ratio": {
+      "value": 10.51,
+      "assessment": "높음 (소프트웨어 업종 특성상 매출 대비 프리미엄)",
+      "original_text": "Price/Sales (ttm) 10.51",
+      "source": "https://finance.yahoo.com/quote/MSFT",
+      "date": "2026-02-02"
+    }
+  },
+  "financial_health": {
+    "profit_margin": 39.04,
+    "roe": 34.39,
+    "roa": 14.86,
+    "roic": 28.79,
+    "current_ratio": 1.39,
+    "debt_to_equity": 31.54,
+    "cash_position": 89460000000,
+    "total_debt": 123280000000,
+    "net_cash": -33820000000,
+    "original_text": "Profit Margin 39.04%... Return on Equity (ROE) 34.39%... Return on Assets (ROA) 14.86%... Return on Invested Capital (ROIC) 28.79%... Total Cash (mrq) 89.46B... Total Debt/Equity (mrq) 31.54%",
+    "source": "https://finance.yahoo.com/quote/MSFT",
+    "assessment": "매우 건전 - 높은 수익성, 적정 레버리지, 강력한 현금흐름"
+  },
+  "dotcom_bubble_comparison": {
+    "context": "2000-2002 닷컴버블 당시와 현재 비교",
+    "year_2000_peak": {
+      "msft_pe_range": "60-80",
+      "sp500_pe": 44,
+      "msft_had_profits": true,
+      "bubble_characteristics": "무수익 닷컴 기업들의 과대평가, MSFT는 수익 있었으나 고평가"
+    },
+    "current_2026": {
+      "msft_pe": 26.53,
+      "sp500_pe": 29.96,
+      "key_differences": [
+        "현재 PER 26.5는 2000년 대비 훨씬 낮은 수준",
+        "MSFT는 AI/클라우드 실질 매출 성장 중 (Azure 성장)",
+        "강력한 FCF ($77B/년) vs 2000년 닷컴 기업들 대부분 현금 소진",
+        "20년 연속 배당 증가 - 성숙한 현금 창출 기업",
+        "다만, S&P 500 PER 29.96은 역사적 평균 16.19 대비 여전히 높음"
+      ]
+    },
+    "bubble_vulnerability_assessment": "2000년 닷컴버블 대비 MSFT 밸류에이션 리스크 낮음. 단, 시장 전체 조정 시 동반 하락 가능"
+  },
+  "fair_value_range": {
+    "method": "업종 평균 PER/PBR 기준 단순 계산",
+    "calculation": {
+      "eps_ttm": 15.96,
+      "bvps": 52.61,
+      "industry_pe": 28.30,
+      "industry_pb": 10.32,
+      "fair_value_by_pe": 451.67,
+      "fair_value_by_pb": 542.93
+    },
+    "range": {
+      "low": 406,
+      "high": 489,
+      "currency": "USD",
+      "note": "적정가치 하단(PE 기준 -10%) ~ 상단(PE 기준 +10%)"
+    },
+    "current_vs_fair": "현재가 $423.37은 적정가치 범위 $406~$489 내 하단에 위치 (저평가 구간)"
+  },
+  "analyst_consensus": {
+    "average_price_target": 607.76,
+    "upside_potential_pct": 43.55,
+    "consensus_rating": "Strong Buy",
+    "analyst_count": 34,
+    "original_text": "Price Target $607.76... Price Target Difference 43.55%... Analyst Consensus Strong Buy... Analyst Count 34",
+    "source": "https://stockanalysis.com/stocks/msft/statistics/",
+    "date": "2026-02-02",
+    "note": "애널리스트 목표가는 참고용 - 강세 편향 가능성 주의"
+  },
+  "opinion": "Microsoft는 현재 PER 26.5배로 기술 섹터 평균 28.3배 및 S&P 500 평균 29.96배 대비 소폭 저평가 상태로 판단됩니다. PBR 8.17배는 섹터 평균 10.32배 대비 20% 할인된 수준입니다. PEG 1.70은 성장률 대비 적정 범위(1.0~2.0)에 있어 과도한 프리미엄은 아닙니다.\n\n닷컴버블(2000-2002) 당시 MSFT PER이 60-80배에 달했던 것과 비교하면, 현재 밸류에이션은 훨씬 합리적입니다. 핵심 차별점은 연간 $77.4B의 강력한 잉여현금흐름(FCF), 39%의 순이익률, 20년 연속 배당 증가 등 실체 있는 수익 창출력입니다.\n\n그러나 S&P 500 전체 PER 29.96은 역사적 평균(16.19) 대비 여전히 높은 수준이므로, 시장 전체 조정 시 MSFT도 동반 하락 가능성이 있습니다. 현재가 $423은 단순 밸류에이션 기준 적정가치 범위($406~$489) 하단에 위치하여, '품질 기술주'로서 상대적 안전마진이 있는 것으로 판단됩니다.",
+  "risks": [
+    "시장 전체 밸류에이션 조정 시 동반 하락 가능성 (S&P PER 29.96 vs 역사적 평균 16.19)",
+    "Azure 성장 둔화 우려 (최근 애널리스트 목표가 하향 조정)",
+    "AI 투자 CapEx 증가로 단기 FCF 압박 가능성",
+    "기술주 버블 붕괴 시나리오에서 섹터 전체 리스크",
+    "환율 변동 (매출의 50% 이상 해외)"
+  ],
+  "disclaimer": "⚠️ 면책 고지: 인덱스 펀드가 대부분의 투자자에게 더 나은 선택입니다. 개별 종목 투자는 높은 리스크를 수반하며, 본 분석은 참고용이며 투자 권유가 아닙니다.",
+  "data_quality": {
+    "all_verified": true,
+    "sources_count": 5,
+    "primary_sources": [
+      "Yahoo Finance (finance.yahoo.com)",
+      "StockAnalysis (stockanalysis.com)",
+      "MarketWatch (marketwatch.com)",
+      "XLK ETF (sectorspdrs.com)",
+      "Multpl.com (S&P 500 PE)"
+    ],
+    "cross_validation_results": {
+      "per": "PASS (26.53 vs 26.49, variance 0.15%)",
+      "pbr": "PASS (8.17 vs 8.05, variance 1.47%)",
+      "peg": "PASS (1.70 vs 1.69, variance 0.59%)"
+    },
+    "verification_timestamp": "2026-02-03T22:45:00+09:00"
+  },
+  "issues": []
+}
