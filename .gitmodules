@@ -1,3 +1,0 @@
-[submodule "honeypot"]
-	path = honeypot
-	url = https://github.com/orientpine/honeypot.git
