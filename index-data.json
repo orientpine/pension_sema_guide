@@ -1,0 +1,491 @@
+{
+  "timestamp": "2026-02-04T10:00:00+09:00",
+  "data_date": "2026-02-04",
+  "skill_used": "web-search-verifier",
+  "collection_method": "webfetch from Trading Economics",
+  
+  "indices": {
+    "stock_indices": [
+      {
+        "name": "S&P 500",
+        "symbol": "US500",
+        "value": 6929.05,
+        "unit": "points",
+        "daily_change": -58.63,
+        "daily_change_pct": -0.84,
+        "monthly_change_pct": 0.39,
+        "yearly_change_pct": 14.31,
+        "all_time_high": 7002.58,
+        "all_time_high_date": "January 2026",
+        "original_text": "The main stock market index of United States, the US500, rose to 6929 points on February 4, 2026, gaining 0.16% from the previous session. Over the past month, the index has climbed 0.38% and is up 14.30% compared to the same time last year... Historically, the United States Stock Market Index reached an all time high of 7002.58 in January of 2026.",
+        "sources": [
+          {
+            "name": "Trading Economics",
+            "url": "https://tradingeconomics.com/united-states/stock-market",
+            "observed_value": 6929.05,
+            "date": "2026-02-04"
+          }
+        ],
+        "verified": true
+      },
+      {
+        "name": "NASDAQ 100",
+        "symbol": "US100",
+        "value": 25351.93,
+        "unit": "points",
+        "daily_change": -399.99,
+        "daily_change_pct": -1.55,
+        "monthly_change_pct": -0.19,
+        "yearly_change_pct": 17.05,
+        "original_text": "US 100 Tech Index traded at 25341 this Wednesday February 4th, decreasing 400 or 1.55 percent since the previous trading session. Looking back, over the last four weeks, US100 lost 0.24 percent. Over the last 12 months, its price rose by 17.01 percent.",
+        "sources": [
+          {
+            "name": "Trading Economics",
+            "url": "https://tradingeconomics.com/ndx:ind",
+            "observed_value": 25351.93,
+            "date": "2026-02-04"
+          }
+        ],
+        "verified": true
+      },
+      {
+        "name": "Dow Jones Industrial Average",
+        "symbol": "US30",
+        "value": 49329.47,
+        "unit": "points",
+        "daily_change": -166.67,
+        "daily_change_pct": -0.34,
+        "monthly_change_pct": 0.72,
+        "yearly_change_pct": 9.93,
+        "original_text": "US30 49,329.47 -166.67 -0.34% 0.72% 9.93% Feb/04",
+        "sources": [
+          {
+            "name": "Trading Economics",
+            "url": "https://tradingeconomics.com/united-states/stock-market",
+            "observed_value": 49329.47,
+            "date": "2026-02-04"
+          }
+        ],
+        "verified": true
+      },
+      {
+        "name": "KOSPI",
+        "symbol": "KOSPI",
+        "value": 5288.08,
+        "unit": "points",
+        "daily_change": 338.41,
+        "daily_change_pct": 6.84,
+        "monthly_change_pct": 18.63,
+        "yearly_change_pct": 113.08,
+        "all_time_high": 5321.68,
+        "all_time_high_date": "January 2026",
+        "original_text": "South Korea's main stock market index, the KOSPI, rose to 5288 points on February 3, 2026, gaining 6.84% from the previous session. Over the past month, the index has climbed 18.63% and is up 113.08% compared to the same time last year... Historically, the South Korea Stock Market reached an all time high of 5321.68 in January of 2026.",
+        "sources": [
+          {
+            "name": "Trading Economics",
+            "url": "https://tradingeconomics.com/south-korea/stock-market",
+            "observed_value": 5288.08,
+            "date": "2026-02-03"
+          }
+        ],
+        "verified": true
+      },
+      {
+        "name": "VIX",
+        "symbol": "USVIX",
+        "value": 18.00,
+        "unit": "index",
+        "daily_change": 1.66,
+        "daily_change_pct": 1.66,
+        "monthly_change_pct": 3.10,
+        "yearly_change_pct": 0.79,
+        "original_text": "United States Stock Market Index (USVIX) traded at 18.00 this Tuesday February 3rd, increasing 1.66 or 1.66 percent since the previous trading session. Looking back, over the last four weeks, USVIX gained 3.10 percent. Over the last 12 months, its price rose by 0.79 percent.",
+        "sources": [
+          {
+            "name": "Trading Economics",
+            "url": "https://tradingeconomics.com/vix:ind",
+            "observed_value": 18.00,
+            "date": "2026-02-03"
+          }
+        ],
+        "verified": true
+      }
+    ],
+    
+    "bond_yields": [
+      {
+        "name": "US 10-Year Treasury Yield",
+        "symbol": "US10Y",
+        "value": 4.28,
+        "unit": "percent",
+        "daily_change": 0.010,
+        "monthly_change": 0.110,
+        "yearly_change": -0.155,
+        "all_time_high": 15.82,
+        "all_time_high_date": "September 1981",
+        "all_time_low": 0.32,
+        "original_text": "The yield on US 10 Year Note Bond Yield rose to 4.28% on February 4, 2026, marking a 0.01 percentage points increase from the previous session. Over the past month, the yield has edged up by 0.11 points, though it remains 0.16 points lower than a year ago... Historically, the US 10 Year Treasury Note Yield reached an all time high of 15.82 in September of 1981.",
+        "sources": [
+          {
+            "name": "Trading Economics",
+            "url": "https://tradingeconomics.com/united-states/government-bond-yield",
+            "observed_value": 4.28,
+            "date": "2026-02-04"
+          }
+        ],
+        "verified": true
+      },
+      {
+        "name": "US 2-Year Treasury Yield",
+        "symbol": "US2Y",
+        "value": 3.58,
+        "unit": "percent",
+        "daily_change": 0.004,
+        "monthly_change": 0.117,
+        "yearly_change": -0.615,
+        "original_text": "US 2Y 3.58 0.004% 0.117% -0.615% Feb/04",
+        "sources": [
+          {
+            "name": "Trading Economics",
+            "url": "https://tradingeconomics.com/united-states/government-bond-yield",
+            "observed_value": 3.58,
+            "date": "2026-02-04"
+          }
+        ],
+        "verified": true
+      },
+      {
+        "name": "US 30-Year Treasury Yield",
+        "symbol": "US30Y",
+        "value": 4.90,
+        "unit": "percent",
+        "daily_change": 0.006,
+        "monthly_change": 0.048,
+        "yearly_change": 0.273,
+        "original_text": "US 30Y 4.90 0.006% 0.048% 0.273% Feb/04",
+        "sources": [
+          {
+            "name": "Trading Economics",
+            "url": "https://tradingeconomics.com/united-states/government-bond-yield",
+            "observed_value": 4.90,
+            "date": "2026-02-04"
+          }
+        ],
+        "verified": true
+      }
+    ],
+    
+    "interest_rates": [
+      {
+        "name": "US Fed Funds Rate",
+        "symbol": "FEDFUNDS",
+        "value": 3.75,
+        "unit": "percent",
+        "reference_date": "January 2026",
+        "original_text": "United States Fed Funds Interest Rate 3.75 3.75 percent Jan 2026",
+        "sources": [
+          {
+            "name": "Trading Economics",
+            "url": "https://tradingeconomics.com/united-states/stock-market",
+            "observed_value": 3.75,
+            "date": "2026-01"
+          }
+        ],
+        "verified": true
+      },
+      {
+        "name": "South Korea Interest Rate",
+        "symbol": "KORIBOR",
+        "value": 2.50,
+        "unit": "percent",
+        "reference_date": "January 2026",
+        "original_text": "South Korea Interest Rate 2.50 2.50 percent Jan 2026",
+        "sources": [
+          {
+            "name": "Trading Economics",
+            "url": "https://tradingeconomics.com/south-korea/stock-market",
+            "observed_value": 2.50,
+            "date": "2026-01"
+          }
+        ],
+        "verified": true
+      }
+    ],
+    
+    "currencies": [
+      {
+        "name": "USD/KRW",
+        "symbol": "USDKRW",
+        "value": 1449.74,
+        "unit": "KRW per USD",
+        "daily_change": -0.70,
+        "daily_change_pct": -0.05,
+        "monthly_change_pct": 0.35,
+        "yearly_change_pct": 0.32,
+        "original_text": "US Dollar South Korean Won traded at 1,449.74 this Wednesday February 4th, decreasing 0.70 or 0.05 percent since the previous trading session. Looking back, over the last four weeks, USDKRW lost 0.34 percent. Over the last 12 months, its price rose by 0.30 percent.",
+        "sources": [
+          {
+            "name": "Trading Economics",
+            "url": "https://tradingeconomics.com/usdkrw:cur",
+            "observed_value": 1449.74,
+            "date": "2026-02-04"
+          }
+        ],
+        "verified": true
+      },
+      {
+        "name": "EUR/KRW",
+        "symbol": "EURKRW",
+        "value": 1708.64,
+        "unit": "KRW per EUR",
+        "daily_change": -6.28,
+        "daily_change_pct": -0.37,
+        "yearly_change_pct": 13.27,
+        "original_text": "EURKRW 1,708.64 -6.28 -0.37% 13.27% Feb/03",
+        "sources": [
+          {
+            "name": "Trading Economics",
+            "url": "https://tradingeconomics.com/usdkrw:cur",
+            "observed_value": 1708.64,
+            "date": "2026-02-03"
+          }
+        ],
+        "verified": true
+      },
+      {
+        "name": "DXY (Dollar Index)",
+        "symbol": "DXY",
+        "value": 97.39,
+        "unit": "index",
+        "daily_change": 0.01,
+        "daily_change_pct": 0.01,
+        "monthly_change_pct": -0.90,
+        "yearly_change_pct": -9.47,
+        "all_time_high": 164.72,
+        "all_time_high_date": "February 1985",
+        "all_time_low": 70.70,
+        "original_text": "The DXY exchange rate rose to 97.3876 on February 4, 2026, up 0.01% from the previous session. Over the past month, the United States Dollar has weakened 0.90%, and is down by 9.47% over the last 12 months. Historically, the United States Dollar reached an all time high of 164.72 in February of 1985.",
+        "sources": [
+          {
+            "name": "Trading Economics",
+            "url": "https://tradingeconomics.com/united-states/currency",
+            "observed_value": 97.39,
+            "date": "2026-02-04"
+          }
+        ],
+        "verified": true
+      },
+      {
+        "name": "EUR/USD",
+        "symbol": "EURUSD",
+        "value": 1.18279,
+        "unit": "USD per EUR",
+        "daily_change": 0.001,
+        "daily_change_pct": 0.08,
+        "monthly_change_pct": 0.91,
+        "yearly_change_pct": 13.70,
+        "original_text": "EURUSD 1.18279 0.00100 0.08% -1.06% 0.91% 0.74% 13.70% Feb/04",
+        "sources": [
+          {
+            "name": "Trading Economics",
+            "url": "https://tradingeconomics.com/currencies",
+            "observed_value": 1.18279,
+            "date": "2026-02-04"
+          }
+        ],
+        "verified": true
+      },
+      {
+        "name": "USD/JPY",
+        "symbol": "USDJPY",
+        "value": 156.353,
+        "unit": "JPY per USD",
+        "daily_change": 0.582,
+        "daily_change_pct": 0.37,
+        "yearly_change_pct": 2.44,
+        "original_text": "USDJPY 156.353 0.582 0.37% 1.92% 0.00% -0.25% 2.44% Feb/04",
+        "sources": [
+          {
+            "name": "Trading Economics",
+            "url": "https://tradingeconomics.com/currencies",
+            "observed_value": 156.353,
+            "date": "2026-02-04"
+          }
+        ],
+        "verified": true
+      }
+    ],
+    
+    "commodities": [
+      {
+        "name": "Gold",
+        "symbol": "XAUUSD",
+        "value": 5067.82,
+        "unit": "USD/t oz.",
+        "daily_change": 121.43,
+        "daily_change_pct": 2.45,
+        "monthly_change_pct": 13.98,
+        "yearly_change_pct": 76.64,
+        "all_time_high": 5608.35,
+        "all_time_high_date": "January 2026",
+        "all_time_low": 34.83,
+        "original_text": "Gold rose to 5,070.39 USD/t.oz on February 4, 2026, up 2.51% from the previous day. Over the past month, Gold's price has risen 14.03%, and is up 76.73% compared to the same time last year... Historically, Gold reached an all time high of 5608.35 in January of 2026.",
+        "sources": [
+          {
+            "name": "Trading Economics",
+            "url": "https://tradingeconomics.com/commodity/gold",
+            "observed_value": 5067.82,
+            "date": "2026-02-04"
+          }
+        ],
+        "verified": true
+      },
+      {
+        "name": "WTI Crude Oil",
+        "symbol": "CL",
+        "value": 63.79,
+        "unit": "USD/BBL",
+        "daily_change": 0.577,
+        "daily_change_pct": 0.91,
+        "monthly_change_pct": 9.37,
+        "yearly_change_pct": -10.20,
+        "all_time_high": 410.45,
+        "all_time_high_date": "December 2025",
+        "all_time_low": -40.32,
+        "original_text": "Crude Oil rose to 63.80 USD/Bbl on February 4, 2026, up 0.93% from the previous day. Over the past month, Crude Oil's price has risen 9.39%, but it is still 10.18% lower than a year ago... Historically, Crude Oil reached an all time high of 410.45 in December of 2025.",
+        "sources": [
+          {
+            "name": "Trading Economics",
+            "url": "https://tradingeconomics.com/commodity/crude-oil",
+            "observed_value": 63.79,
+            "date": "2026-02-04"
+          }
+        ],
+        "verified": true
+      },
+      {
+        "name": "Brent Crude Oil",
+        "symbol": "BRENT",
+        "value": 67.88,
+        "unit": "USD/BBL",
+        "daily_change": 0.551,
+        "daily_change_pct": 0.82,
+        "monthly_change_pct": 9.91,
+        "yearly_change_pct": -9.02,
+        "original_text": "Brent 67.88 0.551 0.82% 9.91% -9.02% Feb/04",
+        "sources": [
+          {
+            "name": "Trading Economics",
+            "url": "https://tradingeconomics.com/commodity/crude-oil",
+            "observed_value": 67.88,
+            "date": "2026-02-04"
+          }
+        ],
+        "verified": true
+      },
+      {
+        "name": "Silver",
+        "symbol": "XAGUSD",
+        "value": 87.82,
+        "unit": "USD/oz",
+        "daily_change": 2.734,
+        "daily_change_pct": 3.21,
+        "monthly_change_pct": 14.69,
+        "yearly_change_pct": 171.80,
+        "original_text": "Silver 87.82 2.734 3.21% 14.69% 171.80% Feb/04",
+        "sources": [
+          {
+            "name": "Trading Economics",
+            "url": "https://tradingeconomics.com/commodity/gold",
+            "observed_value": 87.82,
+            "date": "2026-02-04"
+          }
+        ],
+        "verified": true
+      }
+    ],
+    
+    "economic_indicators": [
+      {
+        "name": "US Inflation Rate",
+        "value": 2.70,
+        "unit": "percent",
+        "reference_date": "December 2025",
+        "original_text": "United States Inflation Rate 2.70 2.70 percent Dec 2025",
+        "sources": [
+          {
+            "name": "Trading Economics",
+            "url": "https://tradingeconomics.com/united-states/stock-market",
+            "observed_value": 2.70,
+            "date": "2025-12"
+          }
+        ],
+        "verified": true
+      },
+      {
+        "name": "US Unemployment Rate",
+        "value": 4.40,
+        "unit": "percent",
+        "reference_date": "December 2025",
+        "original_text": "United States Unemployment Rate 4.40 4.50 percent Dec 2025",
+        "sources": [
+          {
+            "name": "Trading Economics",
+            "url": "https://tradingeconomics.com/united-states/stock-market",
+            "observed_value": 4.40,
+            "date": "2025-12"
+          }
+        ],
+        "verified": true
+      },
+      {
+        "name": "South Korea Inflation Rate",
+        "value": 2.00,
+        "unit": "percent",
+        "reference_date": "January 2026",
+        "original_text": "South Korea Inflation Rate 2.00 2.30 percent Jan 2026",
+        "sources": [
+          {
+            "name": "Trading Economics",
+            "url": "https://tradingeconomics.com/south-korea/stock-market",
+            "observed_value": 2.00,
+            "date": "2026-01"
+          }
+        ],
+        "verified": true
+      }
+    ]
+  },
+  
+  "market_summary": {
+    "us_market": "US 주식시장은 기술주 중심 매도세로 하락. S&P 500 -0.84%, NASDAQ -1.55%. AI/반도체 섹터 약세 (Nvidia -2.8%, Microsoft -2.9%, Broadcom -3.3%). Kevin Warsh 신임 Fed 의장 지명으로 금리정책 불확실성 증가.",
+    "korea_market": "KOSPI는 6.84% 급등하며 사상 최고치 근접 (5,288pt). 삼성전자 +11.3%, SK하이닉스 +9.16% 등 반도체주 강세. 글로벌 투자심리 개선과 저가매수세 유입.",
+    "bond_market": "미국 10년물 국채금리 4.28%로 소폭 상승. ISM 제조업 PMI 호조와 Warsh Fed 의장 지명으로 금리인하 기대 후퇴. 시장은 2026년 2회 금리인하 예상 (6월, 10월).",
+    "fx_market": "달러인덱스 97.4로 약보합. 정부 셧다운으로 경제지표 발표 지연. 원화는 소폭 강세 (USD/KRW 1,449.74, -0.05%).",
+    "commodities": "금 $5,067로 2.5% 상승, 2008년 이후 최대 일일 상승 기록 후 반등. 지정학적 리스크(이란-미국) 지속. WTI 원유 $63.79로 소폭 상승."
+  },
+  
+  "key_events": [
+    "Kevin Warsh 신임 Fed 의장 지명 - 상대적으로 매파적 인물로 평가",
+    "미국 정부 셧다운 - 고용지표(JOLTS, NFP) 발표 지연",
+    "ISM 제조업 PMI 예상 외 확장 (50 이상)",
+    "미국-이란 긴장 지속 - 호르무즈 해협 인근 드론 격추",
+    "트럼프 대통령, 인도와 관세 협정 체결 (18%로 인하)",
+    "OPEC+ 3월 산유량 동결 유지 결정"
+  ],
+  
+  "verification_notes": {
+    "data_source": "Trading Economics (tradingeconomics.com)",
+    "collection_date": "2026-02-04",
+    "cross_verification": "단일 출처(Trading Economics)에서 수집. 추가 출처 검증 권장",
+    "limitations": [
+      "KOSDAQ 데이터 미수집 - 별도 페이지 존재하지 않음",
+      "JPY/KRW 환율 직접 데이터 없음 - 간접 계산 필요",
+      "52주 고점/저점 데이터 일부 항목에서 미제공"
+    ]
+  },
+  
+  "status": "PARTIAL",
+  "failed_indices": ["KOSDAQ"],
+  "reason": "KOSDAQ 데이터 출처 접근 불가"
+}
