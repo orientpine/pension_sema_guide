@@ -1,0 +1,28 @@
+{
+  "name": "pension-sema-guide",
+  "owner": {
+    "name": "Baekdong Cha",
+    "url": "https://github.com/orientpine"
+  },
+  "metadata": {
+    "version": "1.0.0",
+    "description": "과학기술인공제회 DC형 퇴직연금 포트폴리오 분석 멀티에이전트 플러그인 마켓플레이스"
+  },
+  "plugins": [
+    {
+      "name": "investments-portfolio",
+      "source": "./plugins/investments-portfolio",
+      "description": "DC 연금 포트폴리오 분석 멀티 에이전트 시스템. web-search-verifier 스킬로 환각 방지.",
+      "version": "1.2.0",
+      "strict": true,
+      "agents": [
+        "./agents/fund-portfolio.md",
+        "./agents/compliance-checker.md",
+        "./agents/output-critic.md"
+      ],
+      "skills": [
+        "./skills"
+      ]
+    }
+  ]
+}
