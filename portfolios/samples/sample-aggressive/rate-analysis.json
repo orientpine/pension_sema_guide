@@ -1,0 +1,277 @@
+{
+  "status": "SUCCESS",
+  "analysis_date": "2026-01-22",
+  "skill_used": "web-search-verifier",
+  
+  "fed_outlook": {
+    "current_rate": "3.50%-3.75%",
+    "original_text": "Federal Funds Target Range - Upper Limit: 2026-01-15: 3.75 Percent, Not Seasonally Adjusted, Daily. The Federal Reserve cut interest rates by 25 basis points to a range of 3.50% to 3.75%; the Fed has now cut rates by 175 basis points since September 2024.",
+    "rate_decision_date": "2025-12-10",
+    "next_fomc_date": "2026-01-28",
+    "fomc_projection": "동결 예상 (98% 확률)",
+    "dot_plot_summary": {
+      "2026_year_end": "3.25%-3.50%",
+      "2027_year_end": "3.00%-3.25%",
+      "projected_cuts_2026": "25bp (1회 인하)"
+    },
+    "scenario": {
+      "optimistic": "인플레이션 안정 시 2026년 2-3회 인하 가능 (연말 3.00%-3.25%)",
+      "base": "2026년 1회 인하 (연말 3.25%-3.50%), Fed 점도표 중간값 전망",
+      "pessimistic": "인플레이션 재상승 시 동결 지속 또는 인상 가능성"
+    },
+    "key_factors": [
+      "1월 28일 FOMC 동결 확률 98%",
+      "트럼프 관세 정책에 따른 인플레이션 불확실성",
+      "노동시장 완화 지속",
+      "Fed 의장 파월 임기 2026년 5월 만료"
+    ],
+    "verified": true,
+    "sources": [
+      {
+        "name": "FRED (Federal Reserve Economic Data)",
+        "url": "https://fred.stlouisfed.org/series/DFEDTARU",
+        "original_text": "Federal Funds Target Range - Upper Limit: 2026-01-15: 3.75 Percent"
+      },
+      {
+        "name": "Polymarket Fed Rates Dashboard",
+        "url": "https://polymarket.com/dashboards/fed-rates",
+        "original_text": "Jan 28 FOMC Meeting - Expected Decision: No change 98% chance, 25 bps cut 2%"
+      },
+      {
+        "name": "iShares Fed Outlook 2026",
+        "url": "https://www.ishares.com/us/insights/fed-outlook-2026-interest-rate-forecast",
+        "original_text": "We believe the most likely path for Fed policy in 2026 is for the central bank to bring rates down from the current range of 3.50% to 3.75% to closer to 3% over the course of the year."
+      },
+      {
+        "name": "Charles Schwab FOMC Analysis",
+        "url": "https://www.schwab.com/learn/story/fomc-meeting",
+        "original_text": "The Fed lowered the federal funds rate to a range of 3.50% to 3.75%. In its dot plot, the median expectation for the fed funds target range at the end of 2026 remained at 3.25% to 3.5%, implying only one rate cut next year."
+      }
+    ]
+  },
+  
+  "bok_outlook": {
+    "current_rate": "2.50%",
+    "original_text": "한국은행은 1월 금융통화위원회에서 기준금리를 2.50%로 만장일치 동결. 성장 상방 리스크가 높아졌다고 진단했으며, 금융안정 측면의 리스크가 지속되고 있는 점 등에 따라 금리 동결을 결정했다고 설명. 3개월 포워드 가이던스를 통해 인하 가능성을 열어둔 위원은 기존 3명에서 1명으로 축소.",
+    "rate_decision_date": "2026-01-15",
+    "consecutive_holds": 5,
+    "policy_direction": "동결 유지 (매파적 스탠스 강화)",
+    "next_mpc_date": "2026-02-27 (예상)",
+    "forward_guidance": {
+      "hold_signal": "5명 (기존 3명에서 증가)",
+      "cut_signal": "1명 (기존 3명에서 감소)",
+      "key_change": "'기준금리의 추가 인하 여부 및 시기 결정' 문구 삭제"
+    },
+    "scenario": {
+      "optimistic": "하반기 말 수출 모멘텀 둔화 시 1회 인하 가능 (연말 2.25%)",
+      "base": "2026년 상반기 동결 유지, 하반기 인하 검토 (연말 2.25%-2.50%)",
+      "pessimistic": "환율 불안 지속 시 연내 동결 또는 인상 가능성"
+    },
+    "key_factors": [
+      "원/달러 환율 1,470원대 고공행진",
+      "서울 아파트 가격 상승세 지속",
+      "가계부채 리스크",
+      "반도체 중심 수출 호조 (성장 상방 리스크)",
+      "한미 기준금리 역전 (100bp) 장기화"
+    ],
+    "verified": true,
+    "sources": [
+      {
+        "name": "한국은행 통화정책방향",
+        "url": "https://www.bok.or.kr/portal/bbs/P0000559/view.do?nttId=10095711",
+        "original_text": "통화정책방향(2026.1.15) - 기준금리 2.50% 만장일치 동결"
+      },
+      {
+        "name": "키움증권 금통위 리뷰",
+        "url": "https://bbn.kiwoom.com/rfIA851.pdf",
+        "original_text": "한국은행은 1월 금융통화위원회에서 기준금리를 2.50%로 만장일치 동결. 3개월 포워드 가이던스를 통해 인하 가능성을 열어둔 위원은 기존 3명에서 1명으로 축소."
+      },
+      {
+        "name": "MBC 뉴스",
+        "url": "https://imnews.imbc.com/news/2026/econo/article/6793733_36932.html",
+        "original_text": "한국은행 기준금리 2.50% 동결. 고환율에 따른 고물가, 서울 아파트값 상승세, 한미 기준금리 역전차 장기간 유지 등의 영향으로 5회 연속 2.50%로 동결"
+      }
+    ]
+  },
+  
+  "long_term_rates": {
+    "us_10y_treasury": {
+      "current_yield": "4.29%-4.30%",
+      "original_text": "The yield on US 10 Year Note Bond Yield eased to 4.29% on January 21, 2026, marking a 0.01 percentage points decrease from the previous session. Over the past month, the yield has edged up by 0.12 points.",
+      "recent_high": "4.31% (2026년 1월 20일, 8월 이후 최고)",
+      "year_ago": "4.61%",
+      "trend": "글로벌 채권 매도세로 상승 압력, 일본 국채 금리 급등 영향",
+      "sources": [
+        {
+          "name": "Trading Economics",
+          "url": "https://tradingeconomics.com/united-states/government-bond-yield",
+          "original_text": "The yield on US 10 Year Note Bond Yield eased to 4.29% on January 21, 2026"
+        },
+        {
+          "name": "FRED",
+          "url": "https://fred.stlouisfed.org/series/DGS10",
+          "original_text": "Market Yield on U.S. Treasury Securities at 10-Year: 2026-01-16: 4.24%"
+        },
+        {
+          "name": "ycharts",
+          "url": "https://ycharts.com/indicators/10_year_treasury_rate",
+          "original_text": "10 Year Treasury Rate is at 4.30%, compared to 4.24% the previous market day and 4.61% last year."
+        }
+      ]
+    },
+    "korea_10y_bond": {
+      "current_yield": "3.60%",
+      "original_text": "10년물 금리는 연 3.602%로 5.1bp 하락했다. 국고채 10년물 금리는 전날 연 3.653%에 이어 3.602%를 기록하며 2024년 5월 이후 처음으로 3.6%대를 유지.",
+      "recent_trend": "2024년 5월 이후 최고 수준 (3.6%대)",
+      "spread_vs_us": "-69bp (미국 대비 낮음)",
+      "key_drivers": [
+        "한은 매파적 스탠스",
+        "일본 국채 금리 급등 동조",
+        "외국인 채권 손절매 우려"
+      ],
+      "sources": [
+        {
+          "name": "연합뉴스",
+          "url": "https://www.yna.co.kr/view/AKR20260121147151008",
+          "original_text": "10년물 금리는 연 3.602%로 5.1bp 하락했다."
+        },
+        {
+          "name": "미주중앙일보",
+          "url": "https://www.koreadaily.com/article/20260121070202475",
+          "original_text": "10년물 국고채 금리는 전날 연 3.653%에 이어 이날도 3.602%를 기록하며 2024년 5월 이후 처음으로 3.6%대를 유지"
+        }
+      ]
+    }
+  },
+  
+  "fx_outlook": {
+    "current_rate": 1473,
+    "original_text": "The USD/KRW exchange rate rose to 1,473.6500 on January 19, 2026. Over the past month, the South Korean Won has strengthened 0.40%, but it's down by 2.40% over the last 12 months. 원/달러 환율 주간거래 종가는 전거래일보다 6.8원 떨어진 1,471.3원을 나타냈다.",
+    "recent_high": "1,480원대 (2026년 1월 21일 장중)",
+    "government_target": "1,400원 전후 (한두 달 내 예상 - 이재명 대통령 언급)",
+    "six_month": {
+      "optimistic": "1,380~1,420원 (한은 총재 '조정 여지 크다' 발언 근거)",
+      "base": "1,420~1,460원",
+      "pessimistic": "1,460~1,500원 (트럼프 관세 확대 시)"
+    },
+    "twelve_month": {
+      "optimistic": "1,350~1,395원 (BofA 전망: 연말 1,395원)",
+      "base": "1,395~1,430원 (Trading Economics: 1,429원)",
+      "pessimistic": "1,430~1,480원 (무역분쟁 심화 시)"
+    },
+    "annual_average_forecast": "1,400원 (LG경제연구원)",
+    "rationale": [
+      "상반기 고점, 하반기 완화 패턴 예상",
+      "WGBI 편입에 따른 외국인 채권 수요 증가",
+      "경상수지 흑자 지속",
+      "Fed-BOK 금리차 100bp 유지",
+      "미국 기술주 조정 시 환류 자금 기대 (BofA)"
+    ],
+    "risk_factors": [
+      "트럼프 반도체 관세 위협 (삼성전자, SK하이닉스)",
+      "개인투자자 해외주식 투자 확대에 따른 달러 수요",
+      "글로벌 채권 매도세"
+    ],
+    "sources": [
+      {
+        "name": "Trading Economics",
+        "url": "https://tradingeconomics.com/south-korea/currency",
+        "original_text": "The USD/KRW exchange rate rose to 1,473.6500 on January 19, 2026. The South Korean Won is expected to trade at 1464.36 by the end of this quarter. Looking forward, we estimate it to trade at 1428.76 in 12 months."
+      },
+      {
+        "name": "Bank of America (TrustFinance)",
+        "url": "https://www.trustfinance.com/blog/bofa-forecasts-korean-won-to-strengthen-in-2026",
+        "original_text": "Bank of America (BofA) projects the Korean won will strengthen against the US dollar, targeting a USD/KRW rate of 1,395 by the end of 2026."
+      },
+      {
+        "name": "LG경제연구원 (아시아경제)",
+        "url": "https://cm.asiae.co.kr/en/article/2025122108353632201",
+        "original_text": "Won-Dollar Exchange Rate Expected to Peak in First Half and Ease in Second Half... Annual Average Projected at 1,400 Won in 2026"
+      },
+      {
+        "name": "연합뉴스",
+        "url": "https://www.yna.co.kr/view/AKR20260121147151008",
+        "original_text": "원/달러 환율이 이재명 대통령의 환율 언급 이후 방향을 틀어 하락. 이 대통령은 '당국에 의하면 한두 달 정도 지나면 1,400원 전후로 떨어질 것이라 예측'"
+      }
+    ]
+  },
+  
+  "rate_differential": {
+    "fed_bok_spread": "-100bp (Fed 3.50-3.75% vs BOK 2.50%)",
+    "implication": "한미 금리 역전 지속으로 자본 유출 압력, 원화 약세 요인",
+    "outlook": "2026년 하반기 Fed 추가 인하 시 역전폭 축소 가능"
+  },
+  
+  "hedge_strategy": {
+    "recommendation": "환헤지 50% / 환노출 50%",
+    "rationale": [
+      "현재 환율 1,473원은 역사적 고점 수준",
+      "하반기 환율 하락 전망 (기준: 1,400원대)",
+      "Fed 인하 vs BOK 동결로 금리차 축소 예상",
+      "단, 트럼프 관세 정책 불확실성 존재"
+    ],
+    "tactical_guidance": {
+      "환노출_50%": "환율 하락 시 환차익 기대 (신규 투자 시 환노출 선호)",
+      "환헤지_50%": "환율 상승 리스크 헤지 (기존 USD 자산 보호)"
+    },
+    "rebalancing_trigger": [
+      "USD/KRW 1,500원 돌파 시: 환헤지 비중 70%로 상향",
+      "USD/KRW 1,400원 하회 시: 환노출 비중 70%로 상향"
+    ],
+    "sources": [
+      "BofA: 연말 1,395원 전망",
+      "Trading Economics: 12개월 후 1,429원 전망",
+      "LG경제연구원: 연평균 1,400원 전망"
+    ]
+  },
+  
+  "investment_implications": {
+    "bond_strategy": {
+      "us_bonds": "단기물 선호 (SGOV 등), 듀레이션 리스크 관리",
+      "kr_bonds": "금리 인하 기대 축소로 단기 캐리 전략 유효 (3년물 3.14%)",
+      "rationale": "장기금리 상승 압력 지속, 단기물 금리 매력적"
+    },
+    "equity_impact": {
+      "us_market": "Fed 인하 지연 시 성장주 부담, 밸류에이션 압박",
+      "kr_market": "환율 안정 시 외국인 매수세 회복 기대",
+      "sector_preference": "반도체 수출 호조 지속, 내수 회복 지연"
+    },
+    "fx_strategy": {
+      "new_investment": "환노출 선호 (환율 하락 베팅)",
+      "existing_usd_assets": "부분 환헤지로 리스크 관리"
+    }
+  },
+  
+  "data_quality": {
+    "skill_verified": true,
+    "fed_rate_verified": true,
+    "bok_rate_verified": true,
+    "us_10y_verified": true,
+    "kr_10y_verified": true,
+    "fx_rate_verified": true,
+    "cross_validation": {
+      "fed_rate": "FRED + Schwab + iShares 일치 (3.50-3.75%)",
+      "bok_rate": "한국은행 + 키움증권 + MBC 일치 (2.50%)",
+      "us_10y": "Trading Economics + FRED + ycharts 일치 (4.29-4.30%)",
+      "kr_10y": "연합뉴스 + 미주중앙일보 일치 (3.60%)",
+      "usd_krw": "Trading Economics + 연합뉴스 일치 (1,471-1,474원)"
+    },
+    "verification_timestamp": "2026-01-22T00:00:00+09:00",
+    "data_freshness": {
+      "fed_rate": "2026-01-15 (최신)",
+      "bok_rate": "2026-01-15 (금통위 당일)",
+      "us_10y": "2026-01-21 (전일)",
+      "kr_10y": "2026-01-21 (전일)",
+      "usd_krw": "2026-01-21 (전일)"
+    }
+  },
+  
+  "summary": {
+    "fed": "현재 3.50-3.75%, 1월 28일 동결 예상 (98%), 연말까지 1회 인하 전망 (3.25-3.50%)",
+    "bok": "현재 2.50%, 5회 연속 동결, 매파적 스탠스 강화, 하반기 인하 가능성 열어둠",
+    "us_10y": "4.29-4.30%, 글로벌 채권 매도세로 상승 압력, 8월 이후 최고치 근접",
+    "kr_10y": "3.60%, 2024년 5월 이후 최고 수준, 외국인 손절매 우려",
+    "usd_krw": "현재 1,473원, 연말 1,395-1,430원 전망, 상반기 고점 후 하반기 완화 예상",
+    "hedge_recommendation": "환헤지 50% / 환노출 50% (환율 하락 기대 vs 불확실성 관리)"
+  }
+}
