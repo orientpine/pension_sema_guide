@@ -11,54 +11,62 @@ Korean retirement pension fund portfolio recommendation system for 과학기술�
 ## STRUCTURE
 
 ```
-investmunts_cbd/
+pension_sema_guide/
 ├── AGENTS.md                   # This file (project knowledge base)
-├── README.md                   # Investment management guide & rebalancing workflow
+├── README.md                   # Public guide & quick start
 │
-├── funds/                      # Core fund data
-│   ├── fund_data.json          # Master data (2015 funds)
+├── plugins/                    # Vendored Claude Code plugin (NOT a submodule)
+│   └── investments-portfolio/
+│       ├── .claude-plugin/     # plugin.json manifest
+│       ├── agents/             # 3 agents (fund-portfolio, compliance-checker, output-critic)
+│       ├── commands/           # portfolio-analyze (orchestrator)
+│       └── skills/             # 11 specialized skills (+ data-updater/scripts)
+├── .claude-plugin/
+│   └── marketplace.json        # Marketplace manifest (name: pension-sema-guide)
+├── .claude/
+│   └── settings.json           # enabledPlugins: investments-portfolio@pension-sema-guide
+│
+├── funds/                      # Core fund data (public, non-personal)
+│   ├── fund_data.json          # Master data (investable funds)
 │   ├── fund_fees.json          # Fee data
 │   ├── fund_classification.json # Category classification (6 types)
 │   ├── deposit_rates.json      # Deposit rate data
-│   └── README.md               # Fund index (sorted by return)
+│   └── all/                    # Full fund set
 │
-├── portfolios/                 # Auto-generated portfolio analysis reports
-│   └── YYYY-MM-DD-{profile}-{id}/
+├── portfolios/samples/         # Anonymized PUBLIC example reports only
+│   └── sample-aggressive/
 │       ├── 00-macro-outlook.md       # 거시경제 전망
-│       ├── 01-fund-analysis.md       # 펀드 분석 (or 01-leadership-analyst.md)
+│       ├── 01-fund-analysis.md       # 펀드 분석
 │       ├── 02-compliance-report.md   # 규제 준수 검증
 │       ├── 03-output-verification.md # 출력 검증
 │       └── 04-portfolio-summary.md   # 최종 요약
 │
-├── consultations/              # Investment consultation reports
-│   └── YYYY-MM-DD-{ticker}-{topic}/
-│
-├── honeypot/                   # Plugin submodule (git submodule)
-│   └── plugins/investments-portfolio/
-│       ├── agents/             # 12 Multi-agent system
-│       ├── skills/             # 11 Specialized skills
-│       └── scripts/            # Data pipeline scripts
-│
-├── resource/                   # Source CSV files from SEMA
+├── consultations/              # Investment consultation reports (non-personal)
+├── resource/                   # Source CSV/XLSX from SEMA
 ├── docs/                       # Reference documentation
-└── .sisyphus/                  # Work session artifacts
-    ├── plans/                  # Refactoring plans
-    └── drafts/                 # Draft documents
+├── scripts/                    # verify_no_pii.sh, verify_plugin.sh
+│
+└── confidentialData/           # 🔒 개인정보 보관소 (GITIGNORED — 저장소 미포함)
+    ├── cbd.md                  #   투자자 프로필
+    ├── nouse/                  #   개인 투자계획·잔고
+    └── portfolios/             #   실제(개인) 분석 산출물
 ```
 
 ## WHERE TO LOOK
 
 | Task | Location | Notes |
 |------|----------|-------|
-| **Portfolio Analysis** | `honeypot/plugins/investments-portfolio/` | Multi-agent system |
-| Fund master data | `funds/fund_data.json` | Single source of truth (2015 funds) |
+| **Portfolio Analysis** | `plugins/investments-portfolio/` | Vendored multi-agent plugin |
+| Plugin manifest | `.claude-plugin/marketplace.json` | Marketplace: pension-sema-guide |
+| Fund master data | `funds/fund_data.json` | Single source of truth |
 | Fund categories | `funds/fund_classification.json` | 6 categories |
 | Fee data | `funds/fund_fees.json` | Fund fee information |
 | Deposit rates | `funds/deposit_rates.json` | Bank deposit rates |
-| Portfolio reports | `portfolios/` | Auto-generated analysis |
-| Consultation reports | `consultations/` | Investment consultations |
+| Public sample reports | `portfolios/samples/` | Anonymized examples ONLY |
+| Consultation reports | `consultations/` | Investment consultations (non-personal) |
 | Source CSV files | `resource/` | Monthly CSV from SEMA |
 | Reference docs | `docs/` | Architecture & improvement plans |
+| **Personal data (🔒)** | `confidentialData/` | GITIGNORED — never committed |
 
 ## CONVENTIONS
 
@@ -94,9 +102,19 @@ investmunts_cbd/
 
 - 모든 설명과 지침은 항상 한국어로 작성할 것
 
+### 개인정보 보관 정책 (confidentialData)
+
+- **이 저장소는 공개(Public) 저장소입니다.** 개인정보는 절대 커밋하지 않는다.
+- 개인별 데이터(투자자 프로필 `cbd.md`, 개인 투자계획·잔고, 실제 분석 산출물 등)는
+  **반드시 `confidentialData/` 디렉토리에만 저장**한다.
+- `confidentialData/`는 `.gitignore`에 등록되어 있어 저장소에 포함되지 않는다.
+- 공개 가능한 예시는 **익명화**하여 `portfolios/samples/`에 둔다 (실명·생년·소속·계좌 금지).
+- 커밋 전 `scripts/verify_no_pii.sh`로 PII 누출이 없는지 검증할 것.
+
 ## NOTES
 
 - **Data source**: 과학기술공제회 퇴직연금 + 펀드평가사 제로인
 - **Base date**: 2026.01.21 (from fund_data.json _meta)
-- **Submodule**: `honeypot/` is a git submodule - update with `git submodule update --remote`
-- **Plugin registration**: Via Claude Code `/plugin marketplace add`
+- **Plugin**: `plugins/investments-portfolio/`는 vendored 플러그인(서브모듈 아님). 원본은 `orientpine/honeypot` 마켓플레이스.
+- **Plugin registration**: `/plugin marketplace add .` 후 `investments-portfolio@pension-sema-guide` 활성화
+- **PII 검증**: `scripts/verify_no_pii.sh` (히스토리 전수 스캔), `scripts/verify_plugin.sh` (플러그인 매니페스트 검증)
