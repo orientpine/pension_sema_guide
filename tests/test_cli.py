@@ -8,7 +8,7 @@ from pathlib import Path
 import pytest
 
 REPO = Path(__file__).resolve().parents[1]
-SCRIPT = REPO / "plugins" / "investments-portfolio" / "skills" / "data-updater" / "scripts" / "update_tdf_data.py"
+SCRIPT = REPO / ".claude" / "plugins" / "investments-portfolio" / "skills" / "data-updater" / "scripts" / "update_tdf_data.py"
 
 
 @pytest.fixture

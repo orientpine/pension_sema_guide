@@ -11,7 +11,7 @@ from pathlib import Path
 import pytest
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-SCRIPTS_DIR = REPO_ROOT / "plugins" / "investments-portfolio" / "skills" / "data-updater" / "scripts"
+SCRIPTS_DIR = REPO_ROOT / ".claude" / "plugins" / "investments-portfolio" / "skills" / "data-updater" / "scripts"
 
 # Make update_tdf_data importable as a top-level module.
 sys.path.insert(0, str(SCRIPTS_DIR))
