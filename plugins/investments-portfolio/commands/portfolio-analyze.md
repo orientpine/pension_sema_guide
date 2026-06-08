@@ -136,16 +136,67 @@ mkdir -p portfolios/YYYY-MM-DD-{risk_profile}-{SESSION_ID}
 # 예시: portfolios/2026-02-02-aggressive-abc123
 ```
 
-### 2.3 데이터 신선도 검사
+### 2.3 데이터 신선도 검사 (다중 파일 검증) ⚠️ MANDATORY
+
+> **목적**: 포트폴리오 분석에 사용되는 핵심 데이터 파일을 **모두** 검증하여,
+> 일부 파일만 최신이고 다른 파일은 stale한 상태로 분석이 진행되는 것을 방지합니다.
+> **개선 배경**: 기존에는 `fund_data.json` 단일 파일만 검사했으나, TDF 선택지(tdf_data/tdf_fees)와
+> 수수료(fund_fees)가 stale하면 잘못된 추천/비용 분석으로 이어질 수 있어 4종 전수 검증으로 강화합니다.
+
+#### 2.3.1 검증 대상 파일 (4종 필수)
+
+| 파일 | 기준일 필드 | 임계값 필드 | 기본 임계값 |
+|------|------------|------------|:----------:|
+| `funds/fund_data.json` | `_meta.version` | (없음) | 30일 |
+| `funds/fund_fees.json` | `_meta.version` | (없음) | 30일 |
+| `funds/tdf_data.json` | `_meta.version` (폴백 `_meta.updatedAt`) | `_meta.freshnessThresholdDays` | 30일 |
+| `funds/tdf_fees.json` | `_meta.version` (폴백 `_meta.updatedAt`) | `_meta.freshnessThresholdDays` | 30일 |
+
+> **주의**: TDF 파일은 `fund_data.json`과 기준일이 상이할 수 있습니다(`tdf_data.json:_meta.baseDateNote` 참조).
+> 신선도는 **각 파일의 자체 기준일로 독립 판정**하며, 파일 간 수익률 직접 교차비교는 금지합니다.
+
+#### 2.3.2 검증 프로세스 (파일마다 반복)
 
 ```
-Read("funds/fund_data.json")
-# _meta.version 확인
+FOR each file in [fund_data.json, fund_fees.json, tdf_data.json, tdf_fees.json]:
+    1. Read(file)
+    2. baseDate  = _meta.version  (없으면 _meta.updatedAt)
+    3. threshold = _meta.freshnessThresholdDays  (없으면 기본 30일)
+    4. elapsed   = today - baseDate  (경과 일수)
+    5. 파일별 판정:
+       - elapsed <= threshold              → ✅ FRESH
+       - threshold < elapsed <= 2×threshold → ⚠️ STALE
+       - elapsed > 2×threshold             → 🔴 OUTDATED
 
-판정 기준:
-- 0-30일: ✅ FRESH → 진행
-- 31-60일: ⚠️ STALE → 경고 후 진행
-- 61일+: 🔴 OUTDATED → 사용자 확인 요청
+overallStatus = 모든 파일 중 가장 나쁜(worst-case) 상태
+```
+
+#### 2.3.3 종합 판정 (worst-case)
+
+| 종합 상태 | 조건 | 액션 |
+|:---------:|------|------|
+| ✅ FRESH | **모든** 파일이 FRESH | 진행 |
+| ⚠️ STALE | 1개 이상 STALE, OUTDATED 없음 | **경고 후 진행** — stale 파일명을 명시 |
+| 🔴 OUTDATED | 1개 이상 OUTDATED | **사용자 확인 요청** — outdated 파일명을 명시하고 진행 여부 질의 |
+
+> 파일 누락(Read 실패) 시: `fund_data.json` 또는 `fund_fees.json` 누락은 **워크플로우 중단**,
+> `tdf_data.json`/`tdf_fees.json` 누락은 **경고**(SAFE_ASSET_DECISION="tdf" 선택 불가)로 처리합니다.
+
+#### 2.3.4 필수 출력 (신선도 검증 테이블)
+
+검사 직후 아래 테이블을 출력합니다 (예시는 기준일 2026-06-08 기준):
+
+```markdown
+### 데이터 신선도 검증
+
+| 파일 | 기준일 | 경과일 | 임계값 | 상태 |
+|------|:------:|:-----:|:------:|:----:|
+| fund_data.json | 2026-06-01 | 7일 | 30일 | ✅ FRESH |
+| fund_fees.json | 2026-06-01 | 7일 | 30일 | ✅ FRESH |
+| tdf_data.json | 2026-06-04 | 4일 | 30일 | ✅ FRESH |
+| tdf_fees.json | 2026-06-07 | 1일 | 30일 | ✅ FRESH |
+
+**종합 판정**: ✅ FRESH (worst-case) → 진행
 ```
 
 ---
@@ -614,10 +665,11 @@ A등급(90+), B등급(80-89), C등급(70-79), F등급(<70)
 ## 7. 메타 정보
 
 ```yaml
-version: "2.1"
+version: "2.2"
 created: "2026-02-01"
-updated: "2026-06-07"
+updated: "2026-06-08"
 changes:
+  - "v2.2: 데이터 신선도 검사를 4파일 다중 검증으로 강화 (fund_data/fund_fees/tdf_data/tdf_fees, worst-case 종합판정 + 파일별 테이블)"
   - "v2.1: Step 0.5 안전자산 3지선다 선호 수집 추가 (예금|TDF|채권)"
   - "v2.1: tdf_data.json/tdf_fees.json 데이터소스 추가 (Step 1/2/3)"
   - "v2.1: 은퇴예정연도 폴백 흐름 명시 (birthYear+60)"
