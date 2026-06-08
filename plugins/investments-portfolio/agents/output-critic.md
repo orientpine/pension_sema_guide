@@ -65,7 +65,7 @@ model: opus
 | **위험등급** | `fund_data.json` / `tdf_data.json` | 펀드명 → riskLevel 일치 |
 | **순자산** | `fund_data.json` / `tdf_data.json` | 펀드명 → netAssets 일치 |
 | **수익률 (TDF)** | `tdf_data.json` | 펀드명/fundCode → return1m/3m/6m/1y/2y/3y/returnSinceInception 일치 |
-| **총보수 (TDF)** | `tdf_fees.json` | 펀드명/fundCode → totalFee 일치 (단, `feeVerification.agree=false`는 "검증 불가" 표기, 감점 아님) |
+| **총보수 (TDF)** | `tdf_fees.json` | 펀드명/fundCode → totalFee 일치 (단, `feeVerification.agree=false`는 "검증 불가" 표기, 감점 아님. `_meta.unresolved` 항목 숫자 인용 시 환각 판정) |
 
 > **⚠️ 기준일 불일치 (교차비교 금지)**: `tdf_data.json` 기준일은 **2026-06-04**, `fund_data.json` 기준일은 **2026-03-01**으로 상이하다.
 > TDF 펀드와 일반 펀드의 수익률을 **직접 교차비교(우열 판단)하지 않는다.** 각 펀드는 자신의 소스 파일 기준으로만 일치 여부를 검증한다.
@@ -211,6 +211,7 @@ Read("funds/tdf_fees.json")   # TDF 펀드 총보수 검증용
 | **과신 표현 없음** | 15점 | 과신 표현 1개당 -5점 |
 | **확률 수치 없음** | 10점 | 확률 % 사용 시 -10점 |
 | **펀드명 정확성** | 5점 | 오타/불일치 1개당 -2점 |
+| **데이터 권위** | - | `feeVerification.authority`가 "official-csv"가 아니면 항목당 -2점 |
 
 > **⚠️ TDF 감점 예외 (오탐 방지)**: TDF 펀드는 `fund_data.json`/`fund_fees.json`에 없는 것이 정상이다.
 > - `fund_data.json` 미발견 → `tdf_data.json` 폴백 조회. 거기서 발견되면 **수익률 일치 감점 없음** (정상 펀드). `FUND_NOT_FOUND`는 두 소스 모두 미발견일 때만 적용.
@@ -625,6 +626,11 @@ funds/tdf_fees.json    # TDF 펀드 총보수 원본 데이터 (폴백 소스, f
 
 검증 전 반드시 위 파일을 Read하여 최신 데이터 확보.
 TDF 펀드는 `tdf_fees.json`에서 조회하며, `feeVerification.agree=false`면 "검증 불가 / 사람 확인 필요"로 표기(단순 MISMATCH 감점 금지).
+
+### 6.6 TDF _meta 및 권위 검증 (신규)
+
+1. **미해결 총보수 환각 탐지**: `tdf_fees.json`의 `_meta.unresolved`에 포함된 펀드(status="unresolved", value="")의 총보수를 보고서가 숫자로 인용했다면 **환각(Hallucination)**으로 플래그하고 `FEE_MISMATCH` 감점을 적용합니다.
+2. **출처 권위 검증**: `tdf_fees.json`의 `feeVerification.authority`가 "official-csv"가 아닌 항목을 신뢰도 점수에서 감점합니다. (항목당 -2점)
 
 ---
 

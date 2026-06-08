@@ -307,6 +307,10 @@ SAFE_ASSET_DECISION = "예금" | "TDF" | "채권"
 - `tdfQualified=false`인 TDF는 비적격TDF로 보고 일반 위험자산 후보로만 취급합니다.
 - `tdf_fees.json`의 `feeVerification.agree=false`인 펀드는 후보 제외합니다.
 - `totalFee` 결측 또는 파싱 불가 펀드는 후보 제외합니다.
+- **TDF 데이터 무결성 검증 (_meta 필드 검사)**:
+  - `tdf_data.json` 또는 `tdf_fees.json`의 `_meta.unresolved`(placeholderCode 보유) 또는 `_meta.missing`(코드 없음)에 포함된 TDF는 총보수 미확정 상태이므로 추천에서 제외합니다. (불가피하게 사용 시 명시적 경고 필수)
+  - `_meta.needsReview`(자동해소+검토권장) 항목은 사용 가능하나, 보고서에 "검토 권장" 주석을 반드시 추가합니다.
+  - 이는 **데이터 추정 금지** 원칙에 따라 불확실한 수수료 데이터를 기반으로 한 추천을 방지하기 위함입니다.
 - `tdf_data.json`의 `_meta.updatedAt` 또는 `_meta.version` 기준 신선도(`freshnessThresholdDays`, 기본 30일)를 초과하면 **경고 후 진행**하되, 경고 문구를 출력에 남깁니다.
 
 **vintage 매칭 우선순위 (FD4)**

@@ -21,6 +21,7 @@ model: opus
 | `TOTAL_WEIGHT_100` | 비중 합계 100% | `|총합 - 100| ≤ 0.01` | ERROR |
 | `DC_RISK_LIMIT_70` | 위험자산 70% 한도 | `nonExemptRiskWeight ≤ 70%` (적격TDF 분자 제외) | ERROR |
 | `SINGLE_FUND_LIMIT_40` | 단일 펀드 40% 한도 (일반펀드) | `각 일반펀드 ≤ 40%` | ERROR |
+| `TDF_DATA_UNRESOLVED` | TDF 데이터 미해결 | 포트폴리오에 `_meta.unresolved` 또는 `_meta.missing` 상태의 TDF 포함 | ERROR |
 
 > **§2.1 참조**: `DC_RISK_LIMIT_70`은 단순 위험자산 합계가 아니라 **비면제 위험자산 비중(nonExemptRiskWeight)** 기준으로 판정한다. 적격TDF(riskExempt)는 분자에서 제외하되 분모(전체 100%)에는 포함한다. 비적격TDF는 일반 위험자산으로 분자에 산입한다.
 >
@@ -38,6 +39,7 @@ model: opus
 | `RISK_NEAR_LIMIT` | 한도 근접 | nonExemptRiskWeight 65-70% | WARNING |
 | `DEPOSIT_COMPARISON_MISSING` | 예금 비교 누락 | 안전자산에 채권형 포함 시 예금 비교 없음 | WARNING |
 | `DEPOSIT_SUPERIOR_IGNORED` | 예금 우위 무시 | 예금 금리 > 채권 실질 수익률인데 채권 선택 | WARNING |
+| `TDF_NEEDS_REVIEW` | TDF 검토 권장 | `_meta.needsReview` 상태의 TDF 포함 | WARNING |
 
 ### 1.3 위험자산 분류 기준 (3-상태)
 
@@ -248,6 +250,14 @@ fund_classification.json에 펀드명 존재?
 ```
 
 > ⚠️ 두 모드 모두 **비적격TDF**는 일반 위험자산으로 분자 산입한다(§2.4). 100% 비적격TDF는 `nonExemptRiskWeight=100%` → **FAIL**.
+
+### 2.6 TDF _meta 필드 검증 (신규)
+
+> `tdf_data.json` 및 `tdf_fees.json`의 `_meta` 필드를 검사하여 데이터의 신뢰성을 검증합니다.
+
+1. **데이터 미해결 경고**: `_meta.unresolved` 또는 `_meta.missing`이 비어있지 않으면 보고서에 "데이터 미해결(총보수 미확정)" 경고 섹션을 추가합니다.
+2. **FAIL 처리**: 포트폴리오에 편입된 TDF 중 `_meta.unresolved` 또는 `_meta.missing`에 해당하는 펀드가 있다면 `TDF_DATA_UNRESOLVED` (ERROR)로 판정합니다. (총보수 검증 불가)
+3. **WARNING 처리**: `_meta.needsReview`에 해당하는 TDF가 포함된 경우 `TDF_NEEDS_REVIEW` (WARNING)으로 보고합니다.
 
 ---
 
