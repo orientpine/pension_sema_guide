@@ -17,7 +17,11 @@ from typing import TextIO, cast
 
 TDF_VERSION = "2026-06-04"
 TDF_SOURCE = "펀드평가사 제로인"
-BASE_DATE_NOTE = "fund_data.json 기준일 2026-03-01과 상이. 직접 교차비교 금지"
+BASE_DATE_NOTE = (
+    "all_fund_data.json 기준일과 상이할 수 있음(기준일 drift). "
+    "단위 주의: all_fund_data는 3Y/5Y/7Y/10Y=연환산·6M/1Y=누적, tdf는 전 구간 누적. "
+    "단위 정규화 없이 직접 교차비교 금지"
+)
 CURRENT_YEAR = 2026
 RETIREMENT_AGE = 60
 FRESHNESS_THRESHOLD_DAYS = 30
@@ -210,7 +214,26 @@ def write_json(
 _STRIP_TOKENS = ("적격", "종류", "CLASS", "클래스")
 _SEP_RE = re.compile(r"[\s_/\[\]\(\)\{\}\.,·\-]")
 _SHARE_CLASS_RE = re.compile(r"C[-]?[A-Z0-9]+")
-RETURN_TOLERANCE_PP = 0.20
+
+# Return-unit contract (the two sources express returns differently):
+#   all_fund_data.json (제로인 상품제안서 CSV): 6M/1Y = 누적(cumulative),
+#                                              3Y/5Y/7Y/10Y = 연환산(annualized).
+#   tdf_data.json (pasted 제로인 web/HTS):      ALL horizons = 누적(cumulative).
+# Cross-validation MUST normalize to one basis before thresholding; comparing
+# 누적(~100%) against 연환산(~25%) directly trips a false warning on every TDF.
+# Maps an authoritative annualized field to its compounding horizon (years).
+ANNUALIZED_HORIZON_YEARS: dict[str, int] = {
+    "return3y": 3,
+    "return5y": 5,
+    "return7y": 7,
+    "return10y": 10,
+}
+
+# Soft drift threshold (percentage points). Raised from 0.20 to absorb base-date
+# drift between the TDF paste date and the all_fund_data 기준일 (관측 최대 ~3.7%p
+# @1Y across 75 TDFs). After unit normalization genuine paste/code errors remain
+# far larger (단위 혼동 시 수십 %p), so 5.0%p suppresses noise without masking errors.
+RETURN_TOLERANCE_PP = 5.0
 SIMILARITY_THRESHOLD = 0.92
 
 
@@ -348,19 +371,45 @@ def _to_float(value: object) -> float | None:
         return None
 
 
+def _cumulative_to_annualized(cumulative_pct: float, years: int) -> float:
+    return ((1.0 + cumulative_pct / 100.0) ** (1.0 / years) - 1.0) * 100.0
+
+
 def cross_validate_tdf_row(tdf_row: JsonObject, auth_row: JsonObject) -> list[JsonObject]:
     """Soft-validate overlapping returns + riskLevel against the authoritative row.
 
-    Return diffs are soft (base-date 2026-06-04 vs 2026-06-01 drift); riskLevel
-    mismatch is escalated to needsReview.
+    Returns are unit-normalized before thresholding: tdf_data is 누적(cumulative)
+    for every horizon, while all_fund_data is 연환산(annualized) for 3Y/5Y/7Y/10Y
+    and 누적 for 6M/1Y. For the annualized horizons the tdf cumulative value is
+    converted to annualized so both sides share one basis (avoids the false ~80%p
+    mismatch that 누적 vs 연환산 직접 비교 produced on every TDF). Remaining diffs
+    are soft (base-date drift); riskLevel mismatch is escalated to needsReview.
     """
     warnings: list[JsonObject] = []
     for field in ("return6m", "return1y", "return3y"):
         a = _to_float(tdf_row.get(field))
         b = _to_float(auth_row.get(field))
-        if a is not None and b is not None and abs(a - b) > RETURN_TOLERANCE_PP:
-            warnings.append({"field": field, "tdf": tdf_row.get(field),
-                             "auth": auth_row.get(field), "severity": "soft"})
+        if a is None or b is None:
+            continue
+        years = ANNUALIZED_HORIZON_YEARS.get(field)
+        if years is not None:
+            a_cmp = _cumulative_to_annualized(a, years)
+            basis = "annualized"
+            note = "기준일 drift 가능 · tdf 누적→연환산 정규화 후 비교"
+        else:
+            a_cmp = a
+            basis = "cumulative"
+            note = "기준일 drift 가능 · 누적 기준 비교"
+        if abs(a_cmp - b) > RETURN_TOLERANCE_PP:
+            warnings.append({
+                "field": field,
+                "tdf": tdf_row.get(field),
+                "auth": auth_row.get(field),
+                "basis": basis,
+                "normalizedDelta": round(a_cmp - b, 2),
+                "severity": "soft",
+                "note": note,
+            })
     rt = tdf_row.get("riskLevel")
     ra = auth_row.get("riskLevel")
     if rt is not None and ra is not None and rt != ra:

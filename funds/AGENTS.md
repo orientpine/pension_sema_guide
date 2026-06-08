@@ -16,6 +16,7 @@
 **fund_data.json** = `{ _meta, funds: [...] }`
 - `_meta`: version `2026-06-01`, sourceFile `26년06월_상품제안서_퇴직연금(DCIRP).csv`, recordCount 205, missing 2개
 - per-fund: `fundCode, name, company, riskLevel(int), riskName, return10y..return6m(str), netAssets(str), inceptionDate, isAffiliate(bool), fundType`
+- **수익률 단위**(제로인 상품제안서 관행, all_fund_data 동일): `return6m`/`return1y` = **누적(cumulative)**, `return3y`/`return5y`/`return7y`/`return10y` = **연환산(annualized %/yr)**. tdf_data는 전 구간 누적이므로 직접 교차비교 금지(단위 정규화 후 비교).
 - **JOIN KEYS**: `fund_fees`는 `fundCode`로, `fund_classification`은 **펀드명(name)**으로 조인
 
 **fund_classification.json** = `{ "펀드명": { category, riskAsset, assetClass, region, themes, hedged, riskLevel, source, generatedAt } }`
@@ -56,7 +57,7 @@ TDF(Target Date Fund)는 생애주기별 자산배분을 수행하는 펀드로,
         - `{ index, fundCode, fundName, matchedFundName, reason, differences[], accepted }`
     - `missing`: `all_fund_fees`에 코드가 없거나 총보수가 빈 값이어서 총보수를 채우지 못한 `fundCode` 배열 (빈 총보수는 verified가 아닌 missing으로 표면화)
     - `validationWarnings`: 수익률 드리프트 등 경고 배열
-        - `{ index, fundCode, field, tdf, auth, severity("soft") }` (6m/1y/3y 수익률이 0.20%p 초과 차이 시 발생. 기준일 06-04 vs 06-01 드리프트 등)
+        - `{ index, fundCode, field, tdf, auth, basis, severity("soft"), note }` (6m/1y/3y 수익률 비교. **단위 정규화 후** 차이가 `RETURN_TOLERANCE_PP`(현재 5.0%p) 초과 시 발생). `basis`: `annualized`(3y — tdf 누적→연환산 변환 후 비교) 또는 `cumulative`(6m/1y). all_fund_data 3y(연환산)와 tdf 3y(누적)를 직접 비교하던 과거 버그(누적 ~100% vs 연환산 ~25% → 전 TDF 가짜 경고)를 정규화로 제거. 잔여 6m/1y 경고는 주로 기준일 drift.
     - `codeNameMismatch`: 이미 코드가 있는 행의 이름이 해당 `fundCode`의 권위 이름과 canonically 불일치할 때의 **정보성 경고** 배열 (코드는 유지, exit 2 아님 — share class 동일/포맷 차이 포함)
         - `{ index, fundCode, fundName, authoritativeName, reason }` (예: `제1호` vs `1`, `퇴직` vs `퇴직연금`, `주식혼합` vs `채권혼합`. 진짜 잘못된 코드도 여기 표면화되어 사람이 검토)
     - `resolvedFundCodeCount` / `unresolvedFundCodeCount`: 갱신된 정확한 카운트 (기존 `fundCodeSource` 메타의 stale 값을 enrichment가 교정)
@@ -70,7 +71,7 @@ TDF(Target Date Fund)는 생애주기별 자산배분을 수행하는 펀드로,
     - `tdfQualified`: 적격 TDF 여부 (bool) - DC/IRP 위험자산 70% 한도 예외(100% 편입 가능) 상품
     - `riskName`: 위험등급명 (str)
     - `riskLevel`: 위험등급 (int, 1~6)
-    - `return1m`, `return3m`, `return6m`, `return1y`, `return2y`, `return3y`, `returnSinceInception`: 수익률 (str, %, 결측 시 `""`). `returnSinceInception`은 설정후 수익률을 의미함.
+    - `return1m`, `return3m`, `return6m`, `return1y`, `return2y`, `return3y`, `returnSinceInception`: 수익률 (str, %, 결측 시 `""`). **전 구간 누적(cumulative)** — all_fund_data의 3Y/5Y/7Y/10Y(연환산)와 단위가 다르므로 교차검증은 단위 정규화 후 비교(`cross_validate_tdf_row`). `returnSinceInception`은 설정후 수익률을 의미함.
     - `netAssets`: 순자산총액 (str, **천원 단위**)
 
 **tdf_fees.json** = `{ _meta, fees: { [fundCode]: { ... } } }`
