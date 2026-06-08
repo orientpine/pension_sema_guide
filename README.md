@@ -5,6 +5,7 @@
 그 결과를 **실제 SEMA 시스템에 입력하는 단계까지** 함께 도와주는 것을 목표로 합니다.
 
 > **이 프로젝트가 도와주는 일**
+>
 > 1. 나에게 맞는 DC형 퇴직연금 포트폴리오를 **분석·추천**받기
 > 2. DC형 규제(위험자산 70% 한도 등) 준수 여부를 **자동 검증**
 > 3. 완성된 포트폴리오를 **과학기술인공제회 포털에 직접 입력**할 때 옆에서 도와주기
@@ -16,12 +17,12 @@
 
 ## 무엇을 할 수 있나요?
 
-| 하고 싶은 일 | 사용하는 명령 / 에이전트 | 결과물 |
-|------|------|------|
-| **내 퇴직연금 포트폴리오 구성** | `/investments-portfolio:portfolio-analyze` | 5단계 분석 보고서(거시경제 → 펀드 → 규제 → 검증 → 요약) |
-| **주식·ETF 투자 상담** | `/stock-consultation:stock-consult` | 스크리닝·밸류에이션·반론·검증 상담 보고서 |
-| **개별 기업 리서치** | `@equity-research` 에이전트 (티커와 함께 호출) | 기관급 리서치 리포트 |
-| **거시경제 전망** | `macro-analysis` 공용 에이전트 (위 명령들이 내부 호출) | 지수·금리·섹터·리스크·리더십 분석 |
+| 하고 싶은 일                          | 사용하는 명령 / 에이전트                                 | 결과물                                                      |
+| ------------------------------------- | -------------------------------------------------------- | ----------------------------------------------------------- |
+| **내 퇴직연금 포트폴리오 구성** | `/investments-portfolio:portfolio-analyze`             | 5단계 분석 보고서(거시경제 → 펀드 → 규제 → 검증 → 요약) |
+| **주식·ETF 투자 상담**         | `/stock-consultation:stock-consult`                    | 스크리닝·밸류에이션·반론·검증 상담 보고서                |
+| **개별 기업 리서치**            | `@equity-research` 에이전트 (티커와 함께 호출)         | 기관급 리서치 리포트                                        |
+| **거시경제 전망**               | `macro-analysis` 공용 에이전트 (위 명령들이 내부 호출) | 지수·금리·섹터·리스크·리더십 분석                       |
 
 > 핵심 설계 원칙은 **환각 방지**입니다. 모든 수치는 출처를 명시하고, 3개 출처 교차검증·출력 검증 에이전트를 거칩니다.
 
@@ -51,29 +52,29 @@
 
 이후 `pension-sema-guide` 마켓플레이스의 4개 플러그인(`investments-portfolio`, `macro-analysis`, `stock-consultation`, `equity-research`)이 활성화됩니다.
 
-### 2. 투자자 프로필 작성
+### 2. 포트폴리오 분석 실행 (투자자 프로필 인라인 입력)
 
-`confidentialData/investor-profile.md`에 본인의 투자자 프로필을 작성합니다. (이 파일은 gitignore되어 저장소에 올라가지 않습니다.)
+`portfolio-analyze` 명령에 **투자자 프로필을 함께 입력**하여 실행합니다.
+명령은 입력한 프롬프트에서 생년·투자 성향 등 투자자 정보를 직접 파싱합니다(별도 파일을 읽지 않습니다).
 
-```markdown
+```
+/investments-portfolio:portfolio-analyze 나를 위한 새로운 포트폴리오를 구성해줘.
+
 | 항목 | 내용 |
 |------|------|
-| **생년** | (예: 19XX년) |
+| **생년** | (예: 1985년) |
 | **은퇴 예정** | 65세 |
 | **투자 성향** | 공격형 (장기투자) |
 | **위험 수용도** | 높음 (단기 손실 감내 가능) |
 ```
 
-### 3. 포트폴리오 분석 실행
-
-```
-/investments-portfolio:portfolio-analyze 나를 위한 새로운 포트폴리오를 구성해줘.
-```
+> 💡 프로필을 매번 입력하기 번거롭다면 `confidentialData/investor-profile.md`(gitignore 대상)에 저장해 두고 복사해 붙여넣으세요.
+> 단, 명령이 이 파일을 **자동으로 읽지는 않으므로** 실행할 때 반드시 프롬프트에 프로필을 포함해야 합니다.
 
 명령을 실행하면 아래 5단계 멀티에이전트 워크플로우가 순차 실행되어, 추천 펀드 목록·비중·규제 준수 여부·신뢰도 점수가 담긴
 최종 보고서가 생성됩니다. 산출물은 개인정보를 포함하므로 `confidentialData/`에 저장됩니다.
 
-### 4. 결과 확인
+### 3. 결과 확인
 
 공개 예시는 `portfolios/samples/sample-aggressive/`에서 익명화된 형태로 확인할 수 있습니다:
 
@@ -95,7 +96,7 @@ portfolios/samples/sample-aggressive/
 
 ---
 
-## 5. SEMA 시스템에 입력하기 (가장 중요한 단계)
+## 4. SEMA 시스템에 입력하기 (가장 중요한 단계)
 
 분석으로 끝이 아닙니다. **이 프로젝트의 최종 목적은 추천 포트폴리오를 실제 과학기술인공제회 DC형 퇴직연금 포털에 정확히 입력하는 것**입니다.
 포털에서 펀드 비중을 설정할 때는 보고서를 옆에 띄워두고 **에이전트와 적극적으로 대화하며** 진행하세요. 혼자 입력하다 막히면 멈추지 말고 바로 물어보세요.
@@ -103,7 +104,7 @@ portfolios/samples/sample-aggressive/
 ### 에이전트와 함께 입력하는 방법
 
 1. `04-portfolio-summary.md`의 **추천 펀드 표**(펀드명·비중·유형)를 펼쳐 둡니다.
-2. SEMA 포털의 펀드 비중 설정 화면을 열고, **한 줄씩 입력하면서** 그때그때 에이전트에게 확인을 요청하세요.
+2. SEMA 포털의 펀드 비중 설정 화면을 열고, **필요한 영역을 복사·붙여넣기하면서** 그때그때 에이전트에게 확인을 요청하세요.
 3. 입력이 끝나면 **비중 합계 100%·위험자산 70% 한도**가 맞는지 에이전트에게 최종 검증을 요청하세요.
 
 ### 이렇게 물어보세요 (대화 예시)
@@ -134,7 +135,7 @@ portfolios/samples/sample-aggressive/
 공용 에이전트들이 수행하고, 이후 펀드 선별·규제 검증·출력 검증을 거쳐 최종 보고서로 통합됩니다.
 
 ```
-[사용자 요청 + 투자자 프로필(confidentialData/investor-profile.md)]
+[사용자 요청 + 투자자 프로필(명령 프롬프트에 인라인 입력)]
      │
      ▼
 [거시경제 분석]   macro-analysis 에이전트(지수·금리·섹터·리스크·리더십) → 종합/검증
@@ -153,13 +154,13 @@ portfolios/samples/sample-aggressive/
                   └─► 04-portfolio-summary.md
 ```
 
-| 단계 | 담당 | 출력 | 역할 |
-|------|------|------|------|
-| 1 | `macro-analysis` 에이전트 | `00-macro-outlook.md` | 거시경제·시장 전망, 자산배분 권고 |
-| 2 | `fund-portfolio` | `01-fund-analysis.md` | 펀드 선별·비중 배분 |
-| 3 | `compliance-checker` | `02-compliance-report.md` | DC형 규제 준수 검증 |
-| 4 | `output-critic` | `03-output-verification.md` | 환각 방지·출처 검증·신뢰도 점수 |
-| 5 | `portfolio-analyze`(조율) | `04-portfolio-summary.md` | 최종 통합 보고서 |
+| 단계 | 담당                        | 출력                          | 역할                               |
+| ---- | --------------------------- | ----------------------------- | ---------------------------------- |
+| 1    | `macro-analysis` 에이전트 | `00-macro-outlook.md`       | 거시경제·시장 전망, 자산배분 권고 |
+| 2    | `fund-portfolio`          | `01-fund-analysis.md`       | 펀드 선별·비중 배분               |
+| 3    | `compliance-checker`      | `02-compliance-report.md`   | DC형 규제 준수 검증                |
+| 4    | `output-critic`           | `03-output-verification.md` | 환각 방지·출처 검증·신뢰도 점수  |
+| 5    | `portfolio-analyze`(조율) | `04-portfolio-summary.md`   | 최종 통합 보고서                   |
 
 ---
 
@@ -171,60 +172,60 @@ portfolios/samples/sample-aggressive/
 
 3 에이전트 · 1 명령 · 11 스킬
 
-| 종류 | 이름 | 역할 |
-|------|------|------|
-| 명령 | `portfolio-analyze` | 포트폴리오 분석 오케스트레이터 |
-| 에이전트 | `fund-portfolio` | 퇴직연금 펀드 포트폴리오 추천 |
-| 에이전트 | `compliance-checker` | DC형 규제 준수 검증 |
-| 에이전트 | `output-critic` | 출력 검증·환각 탐지 |
-| 스킬 | `web-search-verifier` | 3개 출처 교차검증 웹검색 프로토콜 |
-| 스킬 | `analyst-common` | 분석 에이전트 공통 규칙 |
-| 스킬 | `bogle-principles` | John Bogle / Vanguard 투자 철학 |
-| 스킬 | `dc-pension-rules` | DC형 퇴직연금 규제 준수 규칙 |
-| 스킬 | `fund-selection-criteria` | 펀드 선택 기준·점수 체계 |
-| 스킬 | `fund-output-template` | 펀드 포트폴리오 보고서 출력 템플릿 |
-| 스킬 | `macro-output-template` | 거시경제 보고서 출력 템플릿 |
-| 스킬 | `perspective-balance` | Bull/Bear 균형 분석 |
-| 스킬 | `devil-advocate` | 반론·리스크 발굴 |
-| 스킬 | `file-save-protocol` | 분석 결과 파일 저장 프로토콜 |
-| 스킬 | `data-updater` | CSV→JSON 펀드 데이터 업데이트 |
+| 종류     | 이름                        | 역할                               |
+| -------- | --------------------------- | ---------------------------------- |
+| 명령     | `portfolio-analyze`       | 포트폴리오 분석 오케스트레이터     |
+| 에이전트 | `fund-portfolio`          | 퇴직연금 펀드 포트폴리오 추천      |
+| 에이전트 | `compliance-checker`      | DC형 규제 준수 검증                |
+| 에이전트 | `output-critic`           | 출력 검증·환각 탐지               |
+| 스킬     | `web-search-verifier`     | 3개 출처 교차검증 웹검색 프로토콜  |
+| 스킬     | `analyst-common`          | 분석 에이전트 공통 규칙            |
+| 스킬     | `bogle-principles`        | John Bogle / Vanguard 투자 철학    |
+| 스킬     | `dc-pension-rules`        | DC형 퇴직연금 규제 준수 규칙       |
+| 스킬     | `fund-selection-criteria` | 펀드 선택 기준·점수 체계          |
+| 스킬     | `fund-output-template`    | 펀드 포트폴리오 보고서 출력 템플릿 |
+| 스킬     | `macro-output-template`   | 거시경제 보고서 출력 템플릿        |
+| 스킬     | `perspective-balance`     | Bull/Bear 균형 분석                |
+| 스킬     | `devil-advocate`          | 반론·리스크 발굴                  |
+| 스킬     | `file-save-protocol`      | 분석 결과 파일 저장 프로토콜       |
+| 스킬     | `data-updater`            | CSV→JSON 펀드 데이터 업데이트     |
 
 ### 2. `macro-analysis` (v1.0.1) — 공용 거시경제 에이전트
 
 7 에이전트 (명령·스킬 없음). 다른 플러그인이 내부에서 재사용합니다.
 
-| 에이전트 | 역할 |
-|------|------|
-| `index-fetcher` | 지수·환율 데이터 수집 |
-| `rate-analyst` | Fed/BOK 금리 + USD/KRW 전망 |
-| `sector-analyst` | 5개 핵심 섹터 전망 |
-| `risk-analyst` | 지정학·경제·시장 리스크 + Bull/Base/Bear 시나리오 |
-| `leadership-analyst` | 주요 7개국 정치·중앙은행 동향 |
-| `macro-synthesizer` | 하위 분석 결과 종합 보고서 작성 |
-| `macro-critic` | 종합 결과 검증 |
+| 에이전트               | 역할                                                |
+| ---------------------- | --------------------------------------------------- |
+| `index-fetcher`      | 지수·환율 데이터 수집                              |
+| `rate-analyst`       | Fed/BOK 금리 + USD/KRW 전망                         |
+| `sector-analyst`     | 5개 핵심 섹터 전망                                  |
+| `risk-analyst`       | 지정학·경제·시장 리스크 + Bull/Base/Bear 시나리오 |
+| `leadership-analyst` | 주요 7개국 정치·중앙은행 동향                      |
+| `macro-synthesizer`  | 하위 분석 결과 종합 보고서 작성                     |
+| `macro-critic`       | 종합 결과 검증                                      |
 
 ### 3. `stock-consultation` (v1.0.1) — 주식/ETF 상담
 
 5 에이전트 · 1 명령 · 3 스킬. Bogle/Vanguard 철학 기반.
 
-| 종류 | 이름 | 역할 |
-|------|------|------|
-| 명령 | `stock-consult` | 주식/ETF 상담 오케스트레이터 |
-| 에이전트 | `materials-organizer` | 사용자 제공 자료 정리·요약 |
-| 에이전트 | `stock-screener` | 주식/ETF 후보 스크리닝 |
-| 에이전트 | `stock-valuation` | 개별 종목 심층 밸류에이션 |
-| 에이전트 | `bear-case-critic` | 반대 논거·리스크 분석 |
-| 에이전트 | `stock-critic` | 최종 검증 |
-| 스킬 | `stock-data-verifier` | 주식/ETF 데이터 교차검증 |
-| 스킬 | `analyst-common-stock` | 주식/ETF 분석 공통 규칙 |
-| 스킬 | `file-save-protocol-stock` | 결과 파일 저장 프로토콜 |
+| 종류     | 이름                         | 역할                         |
+| -------- | ---------------------------- | ---------------------------- |
+| 명령     | `stock-consult`            | 주식/ETF 상담 오케스트레이터 |
+| 에이전트 | `materials-organizer`      | 사용자 제공 자료 정리·요약  |
+| 에이전트 | `stock-screener`           | 주식/ETF 후보 스크리닝       |
+| 에이전트 | `stock-valuation`          | 개별 종목 심층 밸류에이션    |
+| 에이전트 | `bear-case-critic`         | 반대 논거·리스크 분석       |
+| 에이전트 | `stock-critic`             | 최종 검증                    |
+| 스킬     | `stock-data-verifier`      | 주식/ETF 데이터 교차검증     |
+| 스킬     | `analyst-common-stock`     | 주식/ETF 분석 공통 규칙      |
+| 스킬     | `file-save-protocol-stock` | 결과 파일 저장 프로토콜      |
 
 ### 4. `equity-research` (v1.0.0) — 기업 리서치
 
 1 에이전트 (명령·스킬 없음).
 
-| 에이전트 | 역할 |
-|------|------|
+| 에이전트                    | 역할                                       |
+| --------------------------- | ------------------------------------------ |
 | `equity-research-analyst` | 기관급 주식 리서치 분석 (티커와 함께 호출) |
 
 ---
@@ -234,18 +235,18 @@ portfolios/samples/sample-aggressive/
 데이터는 **과학기술인공제회 상품제안서(제로인 평가 데이터)** 기반이며, JSON으로 저장됩니다.
 각 파일의 정확한 기준일·레코드 수는 항상 파일 안의 `_meta` 블록을 신뢰하세요.
 
-| 파일 | 내용 | 레코드 수 | 기준일(`_meta.version`) | 조인 키 |
-|------|------|:--------:|:--------:|------|
-| `funds/fund_data.json` | 투자가능 펀드 기본정보·수익률 | 205 | 2026-06-01 | `fundCode`(요율) / `name`(분류) |
-| `funds/fund_fees.json` | 펀드 총보수·연간비용 | 205 | 2026-06-01 | `fundCode` |
-| `funds/fund_classification.json` | 카테고리·위험자산 분류 (9개 유형) | 205 | (생성 시각 기준) | `펀드명` |
-| `funds/tdf_data.json` | TDF 마스터 (결정적 enrichment) | 75 | 2026-06-04 | `fundCode` |
-| `funds/tdf_fees.json` | TDF 수수료/요율 | 75 | 2026-06-07 | `fundCode` |
-| `funds/deposit_rates.json` | 원리금보장형 예금 금리 (수동 업데이트) | 4 | 2026-02-28 | (단독 조회) |
-| `funds/investable_codes.json` | 투자가능 펀드 코드 허용목록 | 207 | — | (필터용) |
-| `funds/all/all_fund_data.json` | 전체 펀드 마스터 (투자불가 포함) | 2104 | 2026-06-01 | `fundCode` |
-| `funds/all/all_fund_fees.json` | 전체 펀드 수수료 | 2104 | 2026-06-01 | `fundCode` |
-| `funds/all/all_fund_classification.json` | 전체 펀드 분류 | 2104 | (생성 시각 기준) | `펀드명` |
+| 파일                                       | 내용                                   | 레코드 수 | 기준일(`_meta.version`) | 조인 키                             |
+| ------------------------------------------ | -------------------------------------- | :-------: | :-----------------------: | ----------------------------------- |
+| `funds/fund_data.json`                   | 투자가능 펀드 기본정보·수익률         |    205    |        2026-06-01        | `fundCode`(요율) / `name`(분류) |
+| `funds/fund_fees.json`                   | 펀드 총보수·연간비용                  |    205    |        2026-06-01        | `fundCode`                        |
+| `funds/fund_classification.json`         | 카테고리·위험자산 분류 (9개 유형)     |    205    |     (생성 시각 기준)     | `펀드명`                          |
+| `funds/tdf_data.json`                    | TDF 마스터 (결정적 enrichment)         |    75    |        2026-06-04        | `fundCode`                        |
+| `funds/tdf_fees.json`                    | TDF 수수료/요율                        |    75    |        2026-06-07        | `fundCode`                        |
+| `funds/deposit_rates.json`               | 원리금보장형 예금 금리 (수동 업데이트) |     4     |        2026-02-28        | (단독 조회)                         |
+| `funds/investable_codes.json`            | 투자가능 펀드 코드 허용목록            |    207    |            —            | (필터용)                            |
+| `funds/all/all_fund_data.json`           | 전체 펀드 마스터 (투자불가 포함)       |   2104   |        2026-06-01        | `fundCode`                        |
+| `funds/all/all_fund_fees.json`           | 전체 펀드 수수료                       |   2104   |        2026-06-01        | `fundCode`                        |
+| `funds/all/all_fund_classification.json` | 전체 펀드 분류                         |   2104   |     (생성 시각 기준)     | `펀드명`                          |
 
 > ⚠️ **TDF는 별도 기준일**(`tdf_data.json` 2026-06-04, 75개)을 사용하므로 `fund_data.json`(205개)과 **직접 교차비교하지 마세요.**
 > `tdf_data.json`의 `baseDateNote`에도 명시되어 있습니다.
@@ -292,6 +293,7 @@ python $SCRIPTS/update_tdf_data.py --input resource/tdf-raw.md --fees
 ```
 
 > ⚠️ **유지보수 주의 (게시판/양식 변경 시)**
+>
 > - 미래에셋 게시판 구조가 바뀌면 `fetch_latest_proposal.py`의 첨부 파싱 정규식(`attachmentId`·`(DCIRP).xlsx`)을 점검하세요.
 > - 상품제안서 xlsx 양식이 바뀌면 `xlsx_to_csv.py`의 시트명(`실적배당형(펀드, ETF)`)·컬럼 수(25)를 점검하세요.
 > - 회귀 검증: 과거 월 xlsx를 변환해 커밋된 `resource/*.csv`와 **byte 단위 일치**하는지 확인하세요.
