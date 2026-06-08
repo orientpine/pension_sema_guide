@@ -1,5 +1,8 @@
 {
   "enabledPlugins": {
-    "investments-portfolio@pension-sema-guide": true
+    "investments-portfolio@pension-sema-guide": true,
+    "macro-analysis@pension-sema-guide": true,
+    "stock-consultation@pension-sema-guide": true,
+    "equity-research@pension-sema-guide": true
   }
 }

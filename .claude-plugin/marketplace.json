@@ -23,6 +23,52 @@
       "skills": [
         "./skills"
       ]
+    },
+    {
+      "name": "macro-analysis",
+      "source": "./plugins/macro-analysis",
+      "description": "거시경제 분석 공용 에이전트 모음. 지수/금리/섹터/리스크/리더십 분석 및 종합/검증을 제공합니다.",
+      "version": "1.0.1",
+      "strict": true,
+      "agents": [
+        "./agents/index-fetcher.md",
+        "./agents/rate-analyst.md",
+        "./agents/sector-analyst.md",
+        "./agents/risk-analyst.md",
+        "./agents/leadership-analyst.md",
+        "./agents/macro-synthesizer.md",
+        "./agents/macro-critic.md"
+      ]
+    },
+    {
+      "name": "stock-consultation",
+      "source": "./plugins/stock-consultation",
+      "description": "주식/ETF 투자 상담 Multi-Agent 시스템. Bogle/Vanguard 철학 기반.",
+      "version": "1.0.1",
+      "strict": true,
+      "agents": [
+        "./agents/materials-organizer.md",
+        "./agents/stock-screener.md",
+        "./agents/stock-valuation.md",
+        "./agents/bear-case-critic.md",
+        "./agents/stock-critic.md"
+      ],
+      "skills": [
+        "./skills"
+      ],
+      "commands": [
+        "./commands/stock-consult.md"
+      ]
+    },
+    {
+      "name": "equity-research",
+      "source": "./plugins/equity-research",
+      "description": "Professional equity research analysis with institutional-grade formatting.",
+      "version": "1.0.0",
+      "strict": true,
+      "agents": [
+        "./agents/equity-research-analyst.md"
+      ]
     }
   ]
 }
