@@ -15,16 +15,19 @@ pension_sema_guide/
 ├── AGENTS.md                   # This file (project knowledge base)
 ├── README.md                   # Public guide & quick start
 │
-├── plugins/                    # Vendored Claude Code plugin (NOT a submodule)
-│   └── investments-portfolio/
-│       ├── .claude-plugin/     # plugin.json manifest
-│       ├── agents/             # 3 agents (fund-portfolio, compliance-checker, output-critic)
-│       ├── commands/           # portfolio-analyze (orchestrator)
-│       └── skills/             # 11 specialized skills (+ data-updater/scripts)
-├── .claude-plugin/
-│   └── marketplace.json        # Marketplace manifest (name: pension-sema-guide)
-├── .claude/
-│   └── settings.json           # enabledPlugins: investments-portfolio@pension-sema-guide
+├── .claude/                    # Claude Code project config
+│   ├── settings.json           # enabledPlugins + extraKnownMarketplaces (pension-sema-guide)
+│   └── plugins/                # Vendored marketplace + plugins (NOT a submodule)
+│       ├── .claude-plugin/
+│       │   └── marketplace.json  # Marketplace manifest (name: pension-sema-guide)
+│       ├── investments-portfolio/
+│       │   ├── .claude-plugin/   # plugin.json manifest
+│       │   ├── agents/           # 3 agents (fund-portfolio, compliance-checker, output-critic)
+│       │   ├── commands/         # portfolio-analyze (orchestrator)
+│       │   └── skills/           # specialized skills (+ data-updater/scripts)
+│       ├── macro-analysis/       # 7 macro agents
+│       ├── stock-consultation/   # stock/ETF multi-agent
+│       └── equity-research/      # equity research analyst
 │
 ├── funds/                      # Core fund data (public, non-personal)
 │   ├── fund_data.json          # Master data (206 investable funds)
@@ -56,12 +59,12 @@ pension_sema_guide/
 
 | Task | Location | Notes |
 |------|----------|-------|
-| **Portfolio Analysis** | `plugins/investments-portfolio/` | Vendored multi-agent plugin |
-| Plugin manifest | `.claude-plugin/marketplace.json` | Marketplace: pension-sema-guide |
+| **Portfolio Analysis** | `.claude/plugins/investments-portfolio/` | Vendored multi-agent plugin |
+| Plugin manifest | `.claude/plugins/.claude-plugin/marketplace.json` | Marketplace: pension-sema-guide |
 | Fund master data | `funds/fund_data.json` | Single source of truth (206 funds) |
 | Fund categories | `funds/fund_classification.json` | 9 categories |
 | Fund data schema | `funds/AGENTS.md` | Schema reference |
-| Plugin internals | `plugins/investments-portfolio/AGENTS.md` | Agent orchestration flow |
+| Plugin internals | `.claude/plugins/investments-portfolio/AGENTS.md` | Agent orchestration flow |
 | Fee data | `funds/fund_fees.json` | Fund fee information |
 | Deposit rates | `funds/deposit_rates.json` | Bank deposit rates |
 | Public sample reports | `portfolios/samples/` | Anonymized examples ONLY |
@@ -118,6 +121,6 @@ pension_sema_guide/
 - **Data source**: 과학기술공제회 퇴직연금 + 펀드평가사 제로인
 - **Base date**: 2026-03-01 (from `funds/fund_data.json` `_meta.version`, sourceFile `26년03월_상품제안서_퇴직연금(DCIRP).csv`)
 - **NOTE**: `funds/README.md`는 구버전(2015펀드/5분류)으로 stale — 실제 기준은 `funds/fund_data.json` `_meta`(206 funds, 1 missing K55223C80096)
-- **Plugin**: `plugins/investments-portfolio/`는 vendored 플러그인(서브모듈 아님). 원본은 `orientpine/honeypot` 마켓플레이스.
-- **Plugin registration**: `/plugin marketplace add .` 후 `investments-portfolio@pension-sema-guide` 활성화
+- **Plugin**: `.claude/plugins/`는 vendored 마켓플레이스(`pension-sema-guide`) + 4개 플러그인(서브모듈 아님). 마켓플레이스 매니페스트는 `.claude/plugins/.claude-plugin/marketplace.json`, 각 플러그인 source는 `./<name>`(마켓플레이스 루트 `.claude/plugins` 기준 상대경로).
+- **Plugin registration**: `.claude/settings.json`의 `extraKnownMarketplaces`(directory source, `path: ./.claude/plugins`)로 프로젝트를 열고 신뢰하면 자동 등록·프롬프트. 수동 등록 시 `/plugin marketplace add ./.claude/plugins` 후 `investments-portfolio@pension-sema-guide` 활성화
 - **PII 검증**: `scripts/verify_no_pii.sh` (히스토리 전수 스캔), `scripts/verify_plugin.sh` (플러그인 매니페스트 검증)

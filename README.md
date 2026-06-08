@@ -11,13 +11,18 @@
 
 ### 1. 플러그인 등록
 
-이 저장소는 Claude Code 플러그인을 내장(vendoring)하고 있습니다.
+이 저장소는 Claude Code 마켓플레이스 + 플러그인을 `.claude/plugins/`에 내장(vendoring)하고 있습니다.
+
+`.claude/settings.json`에 `extraKnownMarketplaces`(로컬 directory source)와 `enabledPlugins`가 등록되어 있어,
+**프로젝트를 열고 폴더를 신뢰(trust)하면** Claude Code가 마켓플레이스 설치를 자동으로 안내합니다.
+
+수동으로 등록하려면:
 
 ```
-/plugin marketplace add .
+/plugin marketplace add ./.claude/plugins
 ```
 
-`.claude/settings.json`에서 `investments-portfolio@pension-sema-guide` 플러그인이 활성화됩니다.
+이후 `investments-portfolio@pension-sema-guide` 등 4개 플러그인이 활성화됩니다.
 
 ### 2. 포트폴리오 생성
 
@@ -51,7 +56,7 @@ portfolios/samples/sample-aggressive/
 ### 4. 펀드 데이터 업데이트 (매월)
 
 ```bash
-SCRIPTS="plugins/investments-portfolio/skills/data-updater/scripts"
+SCRIPTS=".claude/plugins/investments-portfolio/skills/data-updater/scripts"
 
 # 1) 미래에셋 게시판에서 최신 xlsx 자동 다운로드 + CSV 변환 (openpyxl 필요)
 python $SCRIPTS/fetch_latest_proposal.py --out-dir resource --convert
@@ -107,13 +112,15 @@ python $SCRIPTS/update_fund_data.py \
 
 ```
 pension_sema_guide/
-├── plugins/                # 🔌 내장 플러그인 (vendored)
-│   └── investments-portfolio/
-│       ├── agents/         #   3개 에이전트
-│       ├── commands/       #   포트폴리오 분석 명령
-│       └── skills/         #   11개 전문 스킬
-├── .claude-plugin/
-│   └── marketplace.json    # 플러그인 마켓플레이스 매니페스트
+├── .claude/                # 🔌 Claude Code 설정 + 내장 마켓플레이스/플러그인
+│   ├── settings.json       #   enabledPlugins + extraKnownMarketplaces
+│   └── plugins/            #   vendored 마켓플레이스 + 4개 플러그인
+│       ├── .claude-plugin/
+│       │   └── marketplace.json   # 마켓플레이스 매니페스트 (pension-sema-guide)
+│       ├── investments-portfolio/ #   3개 에이전트 + 포트폴리오 분석 명령 + 스킬
+│       ├── macro-analysis/        #   거시경제 분석 에이전트
+│       ├── stock-consultation/    #   주식/ETF 상담 멀티에이전트
+│       └── equity-research/       #   기업 리서치 분석
 ├── funds/                  # 펀드 데이터 (제로인 기반)
 │   ├── fund_data.json      #   투자가능 펀드
 │   ├── fund_fees.json      #   수수료 정보

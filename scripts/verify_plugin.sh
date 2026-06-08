@@ -7,8 +7,10 @@ ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 cd "$ROOT" || exit 2
 fail=0
 
-MARKET=".claude-plugin/marketplace.json"
-PLUGIN="plugins/investments-portfolio/.claude-plugin/plugin.json"
+MKTROOT=".claude/plugins"
+PLUGIN_DIR="$MKTROOT/investments-portfolio"
+MARKET="$MKTROOT/.claude-plugin/marketplace.json"
+PLUGIN="$PLUGIN_DIR/.claude-plugin/plugin.json"
 
 echo "== [1] JSON validity =="
 for f in "$MARKET" "$PLUGIN" ".claude/settings.json"; do
@@ -24,15 +26,15 @@ done
 
 echo "== [2] Plugin source dir resolves =="
 src=$(jq -r '.plugins[0].source' "$MARKET" 2>/dev/null)
-if [ -d "$src" ]; then
-  echo "  OK: source dir exists ($src)"
+if [ -d "$MKTROOT/$src" ]; then
+  echo "  OK: source dir exists ($MKTROOT/$src)"
 else
-  echo "  FAIL: source dir missing ($src)"; fail=1
+  echo "  FAIL: source dir missing ($MKTROOT/$src)"; fail=1
 fi
 
 echo "== [3] Agents / commands / skills present =="
 for sub in agents commands skills; do
-  cnt=$(find "plugins/investments-portfolio/$sub" -type f 2>/dev/null | wc -l)
+  cnt=$(find "$PLUGIN_DIR/$sub" -type f 2>/dev/null | wc -l)
   if [ "$cnt" -gt 0 ]; then
     echo "  OK: $sub has $cnt files"
   else
@@ -41,7 +43,7 @@ for sub in agents commands skills; do
 done
 
 echo "== [4] Orchestrator command present =="
-if [ -f "plugins/investments-portfolio/commands/portfolio-analyze.md" ]; then
+if [ -f "$PLUGIN_DIR/commands/portfolio-analyze.md" ]; then
   echo "  OK: portfolio-analyze.md present"
 else
   echo "  FAIL: portfolio-analyze.md missing"; fail=1
