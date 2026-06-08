@@ -1,12 +1,12 @@
 # PROJECT KNOWLEDGE BASE
 
-**Generated:** 2026-06-07
-**Commit:** ec07a7f
+**Generated:** 2026-06-08
+**Commit:** 04aa5b0
 **Branch:** main
 
 ## OVERVIEW
 
-Korean retirement pension fund portfolio recommendation system for 과학기술공제회 (SEMA). Multi-agent system for portfolio analysis with hallucination prevention. Fund data sourced from Zeroin, stored as JSON.
+Korean retirement pension fund portfolio recommendation system for 과학기술공제회 (SEMA). Prompt-defined multi-agent system (no app runtime — logic lives in plugin markdown + a Python ETL/TDF-enrichment toolchain). Fund data sourced from 제로인(Zeroin), stored as JSON. Hallucination prevention is the core design constraint.
 
 ## STRUCTURE
 
@@ -20,32 +20,29 @@ pension_sema_guide/
 │   └── plugins/                # Vendored marketplace + plugins (NOT a submodule)
 │       ├── .claude-plugin/
 │       │   └── marketplace.json  # Marketplace manifest (name: pension-sema-guide)
-│       ├── investments-portfolio/
-│       │   ├── .claude-plugin/   # plugin.json manifest
-│       │   ├── agents/           # 3 agents (fund-portfolio, compliance-checker, output-critic)
-│       │   ├── commands/         # portfolio-analyze (orchestrator)
-│       │   └── skills/           # specialized skills (+ data-updater/scripts)
-│       ├── macro-analysis/       # 7 macro agents
-│       ├── stock-consultation/   # stock/ETF multi-agent
-│       └── equity-research/      # equity research analyst
+│       ├── investments-portfolio/  # AGENTS.md — 3 agents + portfolio-analyze + 11 skills
+│       ├── macro-analysis/          # AGENTS.md — 7 shared macro agents (no command)
+│       ├── stock-consultation/      # AGENTS.md — 5 agents + stock-consult command + 3 skills
+│       └── equity-research/         # single equity-research-analyst agent
 │
-├── funds/                      # Core fund data (public, non-personal)
-│   ├── fund_data.json          # Master data (206 investable funds)
-│   ├── fund_fees.json          # Fee data
-│   ├── fund_classification.json # Category classification (9 types)
-│   ├── deposit_rates.json      # Deposit rate data
-│   └── all/                    # Full fund set (2037 funds)
+├── funds/                      # Core fund data (public, non-personal) — see funds/AGENTS.md
+│   ├── fund_data.json          # Master data (205 investable funds)
+│   ├── fund_fees.json          # Fee data (key: fundCode)
+│   ├── fund_classification.json # Category classification (key: 펀드명, 9 types)
+│   ├── tdf_data.json           # TDF master (75 funds, deterministic enrichment)
+│   ├── tdf_fees.json           # TDF fees
+│   ├── deposit_rates.json      # Deposit rates (manual-update only)
+│   └── all/                    # Full universe (2104 funds, *_all_* — authoritative for TDF enrichment)
+│
+├── tests/                      # pytest suite for TDF enrichment (update_tdf_data.py)
+├── index-data.json             # Market index data (index-fetcher output snapshot)
+├── pytest.ini                  # testpaths=tests
 │
 ├── portfolios/samples/         # Anonymized PUBLIC example reports only
-│   └── sample-aggressive/
-│       ├── 00-macro-outlook.md       # 거시경제 전망
-│       ├── 01-fund-analysis.md       # 펀드 분석
-│       ├── 02-compliance-report.md   # 규제 준수 검증
-│       ├── 03-output-verification.md # 출력 검증
-│       └── 04-portfolio-summary.md   # 최종 요약
+│   └── sample-aggressive/      # 00-macro → 01-fund → 02-compliance → 03-verify → 04-summary
 │
-├── consultations/              # Investment consultation reports (non-personal)
-├── resource/                   # Source CSV/XLSX from SEMA
+├── consultations/              # Stock/ETF consultation reports (non-personal)
+├── resource/                   # Source CSV/XLSX from SEMA (monthly 상품제안서)
 ├── docs/                       # Reference documentation
 ├── scripts/                    # verify_no_pii.sh, verify_plugin.sh
 │
@@ -61,16 +58,15 @@ pension_sema_guide/
 |------|----------|-------|
 | **Portfolio Analysis** | `.claude/plugins/investments-portfolio/` | Vendored multi-agent plugin |
 | Plugin manifest | `.claude/plugins/.claude-plugin/marketplace.json` | Marketplace: pension-sema-guide |
-| Fund master data | `funds/fund_data.json` | Single source of truth (206 funds) |
-| Fund categories | `funds/fund_classification.json` | 9 categories |
-| Fund data schema | `funds/AGENTS.md` | Schema reference |
-| Plugin internals | `.claude/plugins/investments-portfolio/AGENTS.md` | Agent orchestration flow |
-| Fee data | `funds/fund_fees.json` | Fund fee information |
-| Deposit rates | `funds/deposit_rates.json` | Bank deposit rates |
+| Fund master data | `funds/fund_data.json` | Single source of truth (205 funds, `_meta.version`) |
+| Fund data schema | `funds/AGENTS.md` | Schema + join keys + TDF contract |
+| Portfolio plugin | `.claude/plugins/investments-portfolio/AGENTS.md` | Orchestration + DC limits + anti-patterns |
+| Macro agents | `.claude/plugins/macro-analysis/AGENTS.md` | 7 shared agents (reused by other plugins) |
+| Stock/ETF consult | `.claude/plugins/stock-consultation/AGENTS.md` | stock-consult orchestration |
+| Data ETL scripts | `.claude/plugins/investments-portfolio/skills/data-updater/scripts/` | CSV→JSON, TDF enrichment |
+| TDF enrichment tests | `tests/AGENTS.md` | pytest suite (⚠ import-path gotcha) |
 | Public sample reports | `portfolios/samples/` | Anonymized examples ONLY |
-| Consultation reports | `consultations/` | Investment consultations (non-personal) |
-| Source CSV files | `resource/` | Monthly CSV from SEMA |
-| Reference docs | `docs/` | Architecture & improvement plans |
+| Source CSV files | `resource/` | Monthly 상품제안서 CSV/XLSX |
 | **Personal data (🔒)** | `confidentialData/` | GITIGNORED — never committed |
 
 ## CONVENTIONS
@@ -119,8 +115,9 @@ pension_sema_guide/
 ## NOTES
 
 - **Data source**: 과학기술공제회 퇴직연금 + 펀드평가사 제로인
-- **Base date**: 2026-03-01 (from `funds/fund_data.json` `_meta.version`, sourceFile `26년03월_상품제안서_퇴직연금(DCIRP).csv`)
-- **NOTE**: `funds/README.md`는 구버전(2015펀드/5분류)으로 stale — 실제 기준은 `funds/fund_data.json` `_meta`(206 funds, 1 missing K55223C80096)
+- **Base date**: `funds/fund_data.json` `_meta`(version 2026-06-01, sourceFile `26년06월_상품제안서_퇴직연금(DCIRP).csv`, recordCount 205, missing `["K55205BU9205","K55223C80096"]`). `funds/all/` = 2104. TDF는 별도 기준일(`tdf_data.json` 2026-06-04, 75개) — 직접 교차비교 금지.
+- **STALE**: `funds/README.md`(구버전 2015펀드/5분류) 무시. 실제 기준은 항상 각 JSON의 `_meta`.
 - **Plugin**: `.claude/plugins/`는 vendored 마켓플레이스(`pension-sema-guide`) + 4개 플러그인(서브모듈 아님). 마켓플레이스 매니페스트는 `.claude/plugins/.claude-plugin/marketplace.json`, 각 플러그인 source는 `./<name>`(마켓플레이스 루트 `.claude/plugins` 기준 상대경로).
 - **Plugin registration**: `.claude/settings.json`의 `extraKnownMarketplaces`(directory source, `path: ./.claude/plugins`)로 프로젝트를 열고 신뢰하면 자동 등록·프롬프트. 수동 등록 시 `/plugin marketplace add ./.claude/plugins` 후 `investments-portfolio@pension-sema-guide` 활성화
 - **PII 검증**: `scripts/verify_no_pii.sh` (히스토리 전수 스캔), `scripts/verify_plugin.sh` (플러그인 매니페스트 검증)
+- **Tests broken**: `tests/conftest.py`의 `SCRIPTS_DIR`가 `plugins/...`(`.claude/` 누락)를 가리켜 `update_tdf_data` import 실패 → 5개 테스트 collection 에러. 자세한 내용은 `tests/AGENTS.md`.

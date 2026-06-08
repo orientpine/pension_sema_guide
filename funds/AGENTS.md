@@ -6,19 +6,20 @@
 
 | | top-level `funds/` | `funds/all/` |
 |---|---|---|
-| 범위 | 투자 가능 subset (206) | 전체 universe (2037) |
+| 범위 | 투자 가능 subset (205) | 전체 universe (2104) |
 | 파일 | fund_data / fund_fees / fund_classification | all_fund_data / all_fund_fees / all_fund_classification |
 
-동일 스키마 패밀리, 필터링 범위만 다름. `_meta.missing`: `["K55223C80096"]`.
+동일 스키마 패밀리, 필터링 범위만 다름. `_meta.missing`: `["K55205BU9205","K55223C80096"]`. `funds/all/`는 TDF 결정적 보강(enrichment)의 권위 소스.
 
 ## SCHEMA
 
 **fund_data.json** = `{ _meta, funds: [...] }`
-- `_meta`: version `2026-03-01`, sourceFile `26년03월_상품제안서_퇴직연금(DCIRP).csv`, recordCount 206
+- `_meta`: version `2026-06-01`, sourceFile `26년06월_상품제안서_퇴직연금(DCIRP).csv`, recordCount 205, missing 2개
 - per-fund: `fundCode, name, company, riskLevel(int), riskName, return10y..return6m(str), netAssets(str), inceptionDate, isAffiliate(bool), fundType`
+- **JOIN KEYS**: `fund_fees`는 `fundCode`로, `fund_classification`은 **펀드명(name)**으로 조인
 
 **fund_classification.json** = `{ "펀드명": { category, riskAsset, assetClass, region, themes, hedged, riskLevel, source, generatedAt } }`
-- 9 categories: 기타(13), 주식형(58), 주식혼합형(2), 채권형(18), 채권혼합형(20), 해외주식형(69), 해외주식혼합형(4), 해외채권형(14), 해외채권혼합형(8)
+- 205 entries, 9 categories: 기타/주식형/주식혼합형/채권형/채권혼합형/해외주식형/해외주식혼합형/해외채권형/해외채권혼합형
 
 **fund_fees.json** = `{ _meta, fees: { fundCode: { fundCode, fundName, totalFee, annualCost } } }`
 
