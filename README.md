@@ -65,6 +65,11 @@ python $SCRIPTS/update_fund_data.py \
 > `xlsx_to_csv.py`(변환) · `fetch_latest_proposal.py`(다운로드)만 `openpyxl`이 필요하고,
 > `update_fund_data.py`는 표준 라이브러리만 사용합니다.
 
+> ⚠️ **유지보수 주의 (게시판/양식 변경 시)**
+> - 미래에셋 게시판 구조가 바뀌면 `fetch_latest_proposal.py`의 첨부 파싱 정규식(`attachmentId`·`(DCIRP).xlsx`)을 점검하세요.
+> - 상품제안서 xlsx 양식이 바뀌면 `xlsx_to_csv.py`의 시트명(`실적배당형(펀드, ETF)`)·컬럼 수(25)를 점검하세요.
+> - 변환 정확성 회귀 검증: 과거 월 xlsx를 변환해 커밋된 `resource/*.csv`와 **byte 단위 일치**하는지 확인(예: 26년03월은 CRLF 기준 일치).
+
 ---
 
 ## 멀티에이전트 워크플로우
