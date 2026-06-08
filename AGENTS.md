@@ -47,7 +47,7 @@ pension_sema_guide/
 ├── scripts/                    # verify_no_pii.sh, verify_plugin.sh
 │
 └── confidentialData/           # 🔒 개인정보 보관소 (GITIGNORED — 저장소 미포함)
-    ├── cbd.md                  #   투자자 프로필
+    ├── investor-profile.md                  #   투자자 프로필
     ├── nouse/                  #   개인 투자계획·잔고
     └── portfolios/             #   실제(개인) 분석 산출물
 ```
@@ -106,7 +106,7 @@ pension_sema_guide/
 ### 개인정보 보관 정책 (confidentialData)
 
 - **이 저장소는 공개(Public) 저장소입니다.** 개인정보는 절대 커밋하지 않는다.
-- 개인별 데이터(투자자 프로필 `cbd.md`, 개인 투자계획·잔고, 실제 분석 산출물 등)는
+- 개인별 데이터(투자자 프로필 `investor-profile.md`, 개인 투자계획·잔고, 실제 분석 산출물 등)는
   **반드시 `confidentialData/` 디렉토리에만 저장**한다.
 - `confidentialData/`는 `.gitignore`에 등록되어 있어 저장소에 포함되지 않는다.
 - 공개 가능한 예시는 **익명화**하여 `portfolios/samples/`에 둔다 (실명·생년·소속·계좌 금지).

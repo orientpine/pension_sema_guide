@@ -53,7 +53,7 @@
 
 ### 2. 투자자 프로필 작성
 
-`confidentialData/cbd.md`에 본인의 투자자 프로필을 작성합니다. (이 파일은 gitignore되어 저장소에 올라가지 않습니다.)
+`confidentialData/investor-profile.md`에 본인의 투자자 프로필을 작성합니다. (이 파일은 gitignore되어 저장소에 올라가지 않습니다.)
 
 ```markdown
 | 항목 | 내용 |
@@ -134,7 +134,7 @@ portfolios/samples/sample-aggressive/
 공용 에이전트들이 수행하고, 이후 펀드 선별·규제 검증·출력 검증을 거쳐 최종 보고서로 통합됩니다.
 
 ```
-[사용자 요청 + 투자자 프로필(confidentialData/cbd.md)]
+[사용자 요청 + 투자자 프로필(confidentialData/investor-profile.md)]
      │
      ▼
 [거시경제 분석]   macro-analysis 에이전트(지수·금리·섹터·리스크·리더십) → 종합/검증
@@ -352,7 +352,7 @@ pension_sema_guide/
 
 이 저장소는 **공개(Public)** 저장소입니다. 개인정보는 절대 커밋하지 않습니다.
 
-- 개인별 데이터(투자자 프로필 `cbd.md`, 개인 투자계획·잔고, 실제 분석 산출물)는 **반드시 `confidentialData/`에만** 저장합니다.
+- 개인별 데이터(투자자 프로필 `investor-profile.md`, 개인 투자계획·잔고, 실제 분석 산출물)는 **반드시 `confidentialData/`에만** 저장합니다.
 - `confidentialData/`는 `.gitignore`에 등록되어 저장소에 포함되지 않습니다.
 - 공개 가능한 예시는 **익명화**하여 `portfolios/samples/`에 둡니다 (실명·생년·소속·계좌 금지).
 - 커밋 전 PII 누출 여부를 검증하세요:
