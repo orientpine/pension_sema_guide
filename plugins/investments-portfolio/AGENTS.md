@@ -50,15 +50,25 @@ investments-portfolio/
 - 위험자산 70% 한도 (채권혼합형 포함), 단일 펀드 40% 한도, 섹터/테마 집중 규칙(예: Tech/AI 40%)
 - `agents/fund-portfolio.md` + `agents/compliance-checker.md`에 하드게이트로 재강제
 
-## DATA PIPELINE — `skills/data-updater/scripts/`
+## TDF SUPPORT POLICY — canonical: `skills/dc-pension-rules/SKILL.md`
 
-- `update_fund_data.py --file <CSV>` → `fund_data.json`, `fund_fees.json` (+ `all/all_*`) → 체인으로 `classify_funds.py` 호출
-- `classify_funds.py`: fund_data → `fund_classification.json` / `all_fund_classification.json` (키워드 기반 category/riskAsset/assetClass/region/themes/hedged/riskLevel)
-- `deposit_rates.json`은 스크립트 산출물 아님 — 스킬 Phase 5 사용자 입력으로만 갱신
+- **자산 3-상태 분류**: 위험자산(70% 산입), 안전자산(제외), **적격TDF(면제)**.
+- **70% 한도 면제**: 적격TDF는 위험자산이나 70% 한도 계산(분자)에서 제외 (`nonExemptRiskWeight` 수식 적용).
+- **3지선다 게이트**: 포트폴리오 구성 시 `예금 | TDF | 채권` 중 하나를 반드시 포함하여 안전성 확보.
+- **데이터 관리**: `tdf_data.json`, `tdf_fees.json` 사용. `update_tdf_data.py`로 갱신.
+- **환각 방지**: TDF 인지 (데이터 소스, 수수료 검증, 적격성 판정, 연령 매핑 4개 게이트).
+
+### TDF 핵심 금지사항
+- **TDF ≠ 안전자산**: TDF는 위험자산의 예외일 뿐 안전자산이 아님. 혼동 금지.
+- **40% 한도**: 일반 펀드 40%는 하드 리밋, 적격TDF 40% 초과는 자체 권고(Warning) 사항.
+- **추정 금지**: 데이터 누락 시 과거 성과나 수수료를 임의로 추정하여 추천 금지.
+
+## DATA PIPELINE — `skills/data-updater/scripts/`
 
 ## ANTI-PATTERNS (절대 금지)
 
 - 오케스트레이터: Task 없이 단계 수행, fund_data.json 직접 읽고 추천, DC 70% 직접 계산
 - fund-portfolio: 파일 Read 없이 추천, 누락 파일에 추정 데이터, 근거 없는 "인기/성과 우수" 표현, 예금 vs 채권 비교 없이 채권 추천
-- compliance-checker: 70%→71% 해석, 40% 초과 허용
+- compliance-checker: 70%→71% 해석, 40% 초과 허용, **적격TDF를 안전자산으로 오분류** (면제 위험자산임)
 - data-updater: 스크립트 못 찾으면 자체 Python 대체(금지), 예금금리 웹검색(금지, 사용자 입력만)
+- **TDF 공통**: 적격TDF 40% 초과를 ERROR로 처리(WARNING 대상), 총보수 추정(데이터 미존재 시 사람 확인 필수)
