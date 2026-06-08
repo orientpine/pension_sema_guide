@@ -65,6 +65,12 @@ investments-portfolio/
 
 ## DATA PIPELINE — `skills/data-updater/scripts/`
 
+매월: `fetch_latest_proposal.py`(최신 xlsx 다운로드) → `xlsx_to_csv.py`(xlsx→resource CSV) → `update_fund_data.py`(CSV→JSON, 분류 자동) → `classify_funds.py`(분류 재생성).
+
+- `fetch_latest_proposal.py`: 미래에셋 게시판(categoryId=1494)에서 파일명 `YY년MM월` 최신 DCIRP xlsx 선택. `--convert`로 변환 연결. stdlib(urllib)만.
+- `xlsx_to_csv.py`: `실적배당형(펀드, ETF)` 시트→CSV. 숫자서식 적용(2자리/천단위), 25컬럼, BOM, CRLF. Excel 15유효자리+ROUND_HALF_UP 재현. **openpyxl 필요**. 26년03월 역검증 byte-identical.
+- `update_fund_data.py`/`classify_funds.py`: stdlib만.
+
 ## ANTI-PATTERNS (절대 금지)
 
 - 오케스트레이터: Task 없이 단계 수행, fund_data.json 직접 읽고 추천, DC 70% 직접 계산

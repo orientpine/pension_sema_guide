@@ -2,9 +2,69 @@
 
 ## 개요
 
-과학기술공제회 퇴직연금 CSV 데이터를 JSON 형식으로 변환하는 스크립트들입니다.
+미래에셋증권 퇴직연금 상품제안서(xlsx)를 받아 펀드 데이터 JSON 으로 변환하는 스크립트들입니다.
+
+## 전체 파이프라인 (매월)
+
+```bash
+# 1) 최신 xlsx 다운로드 + CSV 변환 (한 번에)
+python scripts/fetch_latest_proposal.py --out-dir resource --convert
+
+# 2) CSV -> JSON 업데이트 (분류 자동 재생성)
+python scripts/update_fund_data.py \
+  --file "resource/26년06월_상품제안서_퇴직연금(DCIRP).csv" \
+  --output-dir funds
+```
+
+> `fetch_latest_proposal.py` 와 `xlsx_to_csv.py` 만 `openpyxl` 이 필요하고,
+> `update_fund_data.py` / `classify_funds.py` 는 표준 라이브러리만 사용합니다.
 
 ## 스크립트 목록
+
+### 0a. fetch_latest_proposal.py
+
+미래에셋증권 게시판(categoryId=1494)에서 **최신** 퇴직연금 상품제안서 DCIRP xlsx 를 자동 다운로드합니다.
+
+**기능:**
+- 게시판의 모든 DCIRP xlsx 첨부를 수집해 파일명(`YY년MM월`)으로 최신본 선택 (DOM 순서/공지 고정 영향 없음)
+- 게시판 제공 파일명을 그대로 사용 (resource/ 명명 규칙과 동일)
+- `--convert` 지정 시 `xlsx_to_csv.py` 로 CSV 까지 생성
+
+**사용법:**
+
+```bash
+# 다운로드만
+python scripts/fetch_latest_proposal.py --out-dir resource
+
+# 다운로드 + CSV 변환
+python scripts/fetch_latest_proposal.py --out-dir resource --convert
+```
+
+**옵션:**
+- `--category`: 게시판 categoryId (기본 `1494`)
+- `--out-dir`: 저장 디렉토리 (기본 `resource`)
+- `--convert`: 다운로드 후 CSV 변환 실행 (openpyxl 필요)
+
+### 0b. xlsx_to_csv.py
+
+상품제안서 xlsx 의 `실적배당형(펀드, ETF)` 시트를 기존 `resource/*.csv` 와 **동일한 형식**으로 변환합니다.
+
+**특징:**
+- LibreOffice "표시된 값으로 저장" 재현: 숫자 서식 적용(소수 2자리/천단위 콤마), 25컬럼, UTF-8 BOM, CRLF
+- Excel 의 15 유효자리 + ROUND_HALF_UP 반올림까지 재현
+- 검증: 26년03월 xlsx 변환 결과가 커밋된 26년03월 CSV 와 **byte 단위 일치**
+
+**사용법:**
+
+```bash
+python scripts/xlsx_to_csv.py \
+  --src "resource/26년06월_상품제안서_퇴직연금(DCIRP).xlsx" \
+  --dst "resource/26년06월_상품제안서_퇴직연금(DCIRP).csv"
+```
+
+**옵션:**
+- `--src`: 입력 xlsx 경로 (필수)
+- `--dst`: 출력 csv 경로 (필수)
 
 ### 1. update_fund_data.py
 
@@ -212,13 +272,10 @@ Row 9+: 데이터      | K55105EC1749 | 펀드명 | 운용사 | ...
 ## 의존성
 
 - Python 3.10+
-- 표준 라이브러리만 사용 (외부 패키지 불필요)
-  - csv
-  - json
-  - pathlib
-  - datetime
-  - re
-  - shutil
+- `update_fund_data.py` / `classify_funds.py`: 표준 라이브러리만 사용 (외부 패키지 불필요)
+  - csv, json, pathlib, datetime, re, shutil
+- `fetch_latest_proposal.py`: 표준 라이브러리(urllib)만 사용
+- `xlsx_to_csv.py`: **openpyxl 필요** (`pip install openpyxl`)
 
 ## 성능
 

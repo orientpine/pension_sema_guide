@@ -48,14 +48,22 @@ portfolios/samples/sample-aggressive/
 └── 04-portfolio-summary.md    # 최종 포트폴리오 요약
 ```
 
-### 4. 펀드 데이터 업데이트
+### 4. 펀드 데이터 업데이트 (매월)
 
 ```bash
-# CSV → JSON 변환 (data-updater 스킬 스크립트)
-python plugins/investments-portfolio/skills/data-updater/scripts/update_fund_data.py \
-  --file "resource/26년03월_상품제안서_퇴직연금(DCIRP).csv" \
+SCRIPTS="plugins/investments-portfolio/skills/data-updater/scripts"
+
+# 1) 미래에셋 게시판에서 최신 xlsx 자동 다운로드 + CSV 변환 (openpyxl 필요)
+python $SCRIPTS/fetch_latest_proposal.py --out-dir resource --convert
+
+# 2) CSV → JSON 변환 (분류 자동 재생성)
+python $SCRIPTS/update_fund_data.py \
+  --file "resource/26년06월_상품제안서_퇴직연금(DCIRP).csv" \
   --output-dir "funds"
 ```
+
+> `xlsx_to_csv.py`(변환) · `fetch_latest_proposal.py`(다운로드)만 `openpyxl`이 필요하고,
+> `update_fund_data.py`는 표준 라이브러리만 사용합니다.
 
 ---
 

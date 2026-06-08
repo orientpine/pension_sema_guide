@@ -46,6 +46,21 @@ tools: Bash, Read, Write, mcp_question
 ## Workflow
 
 ```
+[Phase -1: xlsx 자동 다운로드 + CSV 변환 (선택, openpyxl 필요)]
+    |
+    +-- Step -1-1. 최신 xlsx 다운로드
+    |   +-- fetch_latest_proposal.py 실행 (미래에셋 게시판 categoryId=1494)
+    |   +-- 모든 DCIRP xlsx 첨부 중 파일명 YY년MM월 최신본 선택
+    |   +-- resource/{게시판 제공 파일명}.xlsx 저장
+    |
+    +-- Step -1-2. CSV 변환 (--convert)
+    |   +-- xlsx_to_csv.py 로 '실적배당형(펀드, ETF)' 시트 -> CSV
+    |   +-- 숫자 서식 적용, 25컬럼, UTF-8 BOM, CRLF (resource/*.csv 형식 동일)
+    |   +-- 명령: python scripts/fetch_latest_proposal.py --out-dir resource --convert
+    |
+    +-- (수동 변환만 필요할 때)
+        +-- python scripts/xlsx_to_csv.py --src <xlsx> --dst <csv>
+
 [Phase 0: 입력 검증]
     |
     +-- Step 0-1. CSV 파일 확인
@@ -236,7 +251,8 @@ python scripts/classify_funds.py \
 ### 의존성
 
 - Python 3.10+
-- 표준 라이브러리만 사용 (외부 패키지 불필요)
+- `update_fund_data.py` / `classify_funds.py` / `fetch_latest_proposal.py`: 표준 라이브러리만 사용
+- `xlsx_to_csv.py`: **openpyxl 필요** (`pip install openpyxl`)
 
 ---
 
