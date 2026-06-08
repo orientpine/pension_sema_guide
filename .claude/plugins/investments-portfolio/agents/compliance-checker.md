@@ -666,7 +666,7 @@ coordinator가 `output_path` 파라미터를 전달합니다:
 
 ```markdown
 ### 출력 경로
-output_path: portfolios/YYYY-MM-DD-{profile}-{session}/02-compliance-report.md
+output_path: confidentialData/portfolios/YYYY-MM-DD-{profile}-{session}/02-compliance-report.md
 ```
 
 ### 10.3 MD 보고서 템플릿
@@ -759,7 +759,7 @@ output_path: portfolios/YYYY-MM-DD-{profile}-{session}/02-compliance-report.md
 
 ```
 Write(
-  file_path="portfolios/YYYY-MM-DD-{profile}-{session}/02-compliance-report.md",
+  file_path="confidentialData/portfolios/YYYY-MM-DD-{profile}-{session}/02-compliance-report.md",
   content="[MD 보고서 내용]"
 )
 ```
@@ -769,7 +769,7 @@ Write(
 파일 저장 완료 후 coordinator에게 다음 형식으로 알립니다:
 
 ```
-보고서 저장 완료: portfolios/YYYY-MM-DD-{profile}-{session}/02-compliance-report.md
+보고서 저장 완료: confidentialData/portfolios/YYYY-MM-DD-{profile}-{session}/02-compliance-report.md
 ```
 
 ### 10.6 JSON과 MD 동시 반환
@@ -782,6 +782,6 @@ coordinator에게 반환 시 다음 형식 사용:
   "violations": [],
   "warnings": [],
   "summary": { ... },
-  "report_saved": "portfolios/YYYY-MM-DD-{profile}-{session}/02-compliance-report.md"
+  "report_saved": "confidentialData/portfolios/YYYY-MM-DD-{profile}-{session}/02-compliance-report.md"
 }
 ```

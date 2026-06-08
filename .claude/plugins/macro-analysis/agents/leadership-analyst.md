@@ -528,7 +528,7 @@ coordinator가 `output_path` 파라미터를 전달하면, 분석 완료 후 **J
 ```
 # Step 1: JSON 데이터 저장 (환각 방지 - CRITICAL)
 Write(
-  file_path="portfolios/YYYY-MM-DD-{profile}-{session}/leadership-analysis.json",
+  file_path="{output_path}/leadership-analysis.json",
   content=JSON.stringify(analysis_data, null, 2)
 )
 ```
@@ -539,7 +539,7 @@ Write(
 
 ```
 보고서 저장 완료:
-- JSON: portfolios/YYYY-MM-DD-{profile}-{session}/leadership-analysis.json
+- JSON: {output_path}/leadership-analysis.json
 ```
 
 ---
@@ -569,7 +569,7 @@ Task(
 5. 시나리오별 대응 전략
 
 ### 출력 경로
-output_path: portfolios/{session_folder}
+output_path: confidentialData/portfolios/{session_folder}
 
 ### 출력 요구사항
 1. 정치적 중립성 유지

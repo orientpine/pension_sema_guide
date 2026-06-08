@@ -131,9 +131,9 @@ ELSE:
 SESSION_ID=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 6 | head -n 1)
 
 # 폴더 생성
-mkdir -p portfolios/YYYY-MM-DD-{risk_profile}-{SESSION_ID}
+mkdir -p confidentialData/portfolios/YYYY-MM-DD-{risk_profile}-{SESSION_ID}
 
-# 예시: portfolios/2026-02-02-aggressive-abc123
+# 예시: confidentialData/portfolios/2026-02-02-aggressive-abc123
 ```
 
 ### 2.3 데이터 신선도 검사 (다중 파일 검증) ⚠️ MANDATORY

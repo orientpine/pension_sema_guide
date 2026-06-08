@@ -36,7 +36,7 @@ model: opus
 ```
 Step 0.1: 파일 경로 확인
 └─ coordinator가 제공한 output_path 확인
-└─ 예: portfolios/2026-01-14-aggressive-abc123/
+└─ 예: confidentialData/portfolios/2026-01-14-aggressive-abc123/
 
 Step 0.2: 5개 JSON 파일 직접 Read (MANDATORY - 순차 실행)
 └─ Read(file_path="{output_path}/index-data.json")

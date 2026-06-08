@@ -281,7 +281,7 @@ portfolio-orchestrator에서 호출될 때 반드시 지정된 경로에 보고�
 ### 파일 출력 경로
 
 ```
-portfolios/YYYY-MM-DD-{profile}-{session}/01-fund-analysis.md
+confidentialData/portfolios/YYYY-MM-DD-{profile}-{session}/01-fund-analysis.md
 ```
 
 ### 보고서 메타데이터 (상단 필수)

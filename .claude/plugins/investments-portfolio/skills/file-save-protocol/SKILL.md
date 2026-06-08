@@ -82,10 +82,10 @@ Step 3: 저장 성공 확인
 coordinator가 제공하는 `output_path`를 사용합니다:
 
 ```
-portfolios/{session_folder}/{filename}
+confidentialData/portfolios/{session_folder}/{filename}
 
 예시:
-portfolios/2026-01-14-aggressive-abc123/
+confidentialData/portfolios/2026-01-14-aggressive-abc123/
 ├── index-data.json             # index-fetcher 출력
 ├── 99-index-data.md            # index-fetcher 출력 (보조)
 ├── rate-analysis.json          # rate-analyst 출력
@@ -152,7 +152,7 @@ portfolios/2026-01-14-aggressive-abc123/
 
 ```
 Write(
-  file_path="portfolios/{session_folder}/rate-analysis.json",
+  file_path="confidentialData/portfolios/{session_folder}/rate-analysis.json",
   content="{\"fed_outlook\": {...}, \"bok_outlook\": {...}}"
 )
 ```
@@ -213,7 +213,7 @@ JSON.stringify(analysis_result, null, 2)
   "status": "FAIL",
   "error": "FILE_SAVE_FAILED",
   "detail": "rate-analysis.json 저장 실패",
-  "attempted_path": "portfolios/2026-01-14-aggressive-abc123/rate-analysis.json",
+  "attempted_path": "confidentialData/portfolios/2026-01-14-aggressive-abc123/rate-analysis.json",
   "action": "재시도 필요"
 }
 ```
@@ -233,7 +233,7 @@ JSON.stringify(analysis_result, null, 2)
 [Step -0.5: 세션 재개 검증]
      │
      ▼
-Glob("portfolios/{session_folder}/*.json")
+Glob("confidentialData/portfolios/{session_folder}/*.json")
      │
      ├── 필수 파일 목록:
      │   ├── index-data.json

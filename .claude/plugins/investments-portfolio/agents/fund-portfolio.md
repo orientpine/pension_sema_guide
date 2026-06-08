@@ -1016,7 +1016,7 @@ TDF 항목(`category="TDF"`, `role="riskExempt"`, 또는 `selectionRationale.ref
 
 ### 5.3 출력 형식
 
-**경로**: `portfolios/YYYY-MM-DD-{profile}-{session}/01-fund-analysis.md`
+**경로**: `confidentialData/portfolios/YYYY-MM-DD-{profile}-{session}/01-fund-analysis.md`
 
 > **중요**: `portfolio` 배열에는 펀드뿐 아니라 **예금도 포함**될 수 있습니다.
 > - 예금 항목은 `category="예금"`으로 표기하고, sources에 `deposit_rates.json`을 포함합니다.
