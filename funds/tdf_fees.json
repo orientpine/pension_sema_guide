@@ -1,0 +1,2335 @@
+{
+  "_meta": {
+    "version": "2026-06-07",
+    "feeSource": "KOFIA/FunETF/FundDoctor public web research; unresolved preserved as UNKNOWN_{idx}; all agree=false unless 3-source agreement completed",
+    "updatedAt": "2026-06-07T00:00:00+09:00",
+    "recordCount": 75
+  },
+  "fees": {
+    "K55223D29737": {
+      "fundCode": "K55223D29737",
+      "fundName": "KB 온국민 적격TDF 2055 증권 자투자신탁(주식혼합-재간접형)(UH) C-퇴직e",
+      "totalFee": "0.605",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.605",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55223D29737",
+            "value": "0.605",
+            "note": "KB국민은행/공개검색: 총보수율 0.605%; FunETF/KOFIA 추가 확인 필요"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55223DJ7549": {
+      "fundCode": "K55223DJ7549",
+      "fundName": "KB 다이나믹 적격TDF 2050 증권 자투자신탁(주식혼합-재간접형) C-퇴직e",
+      "totalFee": "0.75",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.75",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55223DJ7549",
+            "value": "0.75",
+            "note": "local all_fund match 1.000: KB다이나믹TDF2050증권자투자신탁(주식혼합-재간접형)C-퇴직e"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55101DR7009": {
+      "fundCode": "K55101DR7009",
+      "fundName": "한국투자적격TDF알아서2060증권자투자신탁UH(주식혼합-재간접형)(C-Re)",
+      "totalFee": "1.13",
+      "ter": "",
+      "feeVerification": {
+        "value": "1.13",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55101DR7009",
+            "value": "1.13",
+            "note": "local all_fund match 1.000: 한국투자TDF알아서2060증권자투자신탁UH(주식혼합-재간접형)(C-Re)"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55101DR6605": {
+      "fundCode": "K55101DR6605",
+      "fundName": "한국투자적격TDF알아서2055증권자투자신탁UH(주식혼합-재간접형)(C-Re)",
+      "totalFee": "1.12",
+      "ter": "",
+      "feeVerification": {
+        "value": "1.12",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55101DR6605",
+            "value": "1.12",
+            "note": "local all_fund match 1.000: 한국투자TDF알아서2055증권자투자신탁UH(주식혼합-재간접형)(C-Re)"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55223DJ7382": {
+      "fundCode": "K55223DJ7382",
+      "fundName": "KB 다이나믹 적격TDF 2040 증권 자투자신탁(주식혼합-재간접형) C-퇴직e",
+      "totalFee": "0.73",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.73",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55223DJ7382",
+            "value": "0.73",
+            "note": "local all_fund match 1.000: KB다이나믹TDF2040증권자투자신탁(주식혼합-재간접형)C-퇴직e"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55101CU1800": {
+      "fundCode": "K55101CU1800",
+      "fundName": "한국투자적격TDF알아서2050증권자투자신탁UH(주식혼합-재간접형)(C-Re)",
+      "totalFee": "1.12",
+      "ter": "",
+      "feeVerification": {
+        "value": "1.12",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55101CU1800",
+            "value": "1.12",
+            "note": "local all_fund match 1.000: 한국투자TDF알아서2050증권자투자신탁UH(주식혼합-재간접형)(C-Re)"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55210DT9761": {
+      "fundCode": "K55210DT9761",
+      "fundName": "신한마음편한적격TDF2055증권투자신탁[주식혼합-재간접형](종류C-re)",
+      "totalFee": "0.98",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.98",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55210DT9761",
+            "value": "0.98",
+            "note": "local all_fund match 1.000: 신한마음편한TDF2055증권투자신탁[주식혼합-재간접형](종류C-re)"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55213D64958": {
+      "fundCode": "K55213D64958",
+      "fundName": "한화 LIFEPLUS 적격 TDF 2050 증권 자투자신탁(주식혼합-재간접형) C-RPe(퇴직연금)",
+      "totalFee": "1.05",
+      "ter": "",
+      "feeVerification": {
+        "value": "1.05",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55213D64958",
+            "value": "1.05",
+            "note": "local all_fund match 0.972: 한화LIFEPLUSTDF2050증권자투자신탁(혼합-재간접형)C-RPE(퇴직연금)"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55210CO3828": {
+      "fundCode": "K55210CO3828",
+      "fundName": "신한마음편한적격TDF2050증권투자신탁[주식혼합-재간접형](종류C-re)",
+      "totalFee": "0.89",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.89",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55210CO3828",
+            "value": "0.89",
+            "note": "local all_fund match 1.000: 신한마음편한TDF2050증권투자신탁[주식혼합-재간접형](종류C-re)"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55101DX4743": {
+      "fundCode": "K55101DX4743",
+      "fundName": "한국투자적격TDF알아서ETF포커스2060증권투자신탁(주식혼합-재간접형)(C-Re)",
+      "totalFee": "0.69",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.69",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55101DX4743",
+            "value": "0.69",
+            "note": "local all_fund match 0.972: 한국투자TDF알아서ETF포커스2060증권투자신탁(혼합-재간접형)(C-Re)"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55223BT1922": {
+      "fundCode": "K55223BT1922",
+      "fundName": "KB 온국민 적격TDF 2050 증권자투자신탁(주식혼합-재간접형)(H)C-퇴직e",
+      "totalFee": "0.69",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.69",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55223BT1922",
+            "value": "0.69",
+            "note": "local all_fund match 1.000: KB온국민TDF2050증권자투자신탁(주식혼합-재간접형)(H)C-퇴직e"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55223D26790": {
+      "fundCode": "K55223D26790",
+      "fundName": "KB 온국민 적격TDF 2055 증권 자투자신탁(주식혼합-재간접형)(H) C-퇴직e",
+      "totalFee": "0.69",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.69",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55223D26790",
+            "value": "0.69",
+            "note": "local all_fund match 1.000: KB온국민TDF2055증권자투자신탁(주식혼합-재간접형)(H)C-퇴직e"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55101DX8025": {
+      "fundCode": "K55101DX8025",
+      "fundName": "한국투자적격TDF알아서ETF포커스2055증권투자신탁(주식혼합-재간접형)(C-Re)",
+      "totalFee": "0.75",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.75",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55101DX8025",
+            "value": "0.75",
+            "note": "local all_fund match 0.972: 한국투자TDF알아서ETF포커스2055증권투자신탁(혼합-재간접형)(C-Re)"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55223BT1757": {
+      "fundCode": "K55223BT1757",
+      "fundName": "KB 온국민 적격TDF 2045 증권자투자신탁(주식혼합-재간접형)(H)C-퇴직e",
+      "totalFee": "0.69",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.69",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55223BT1757",
+            "value": "0.69",
+            "note": "local all_fund match 1.000: KB온국민TDF2045증권자투자신탁(주식혼합-재간접형)(H)C-퇴직e"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55210BU2450": {
+      "fundCode": "K55210BU2450",
+      "fundName": "신한마음편한적격TDF2045증권투자신탁[주식혼합-재간접형](종류C-re)",
+      "totalFee": "0.87",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.87",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55210BU2450",
+            "value": "0.87",
+            "note": "local all_fund match 1.000: 신한마음편한TDF2045증권투자신탁[주식혼합-재간접형](종류C-re)"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55101DX7852": {
+      "fundCode": "K55101DX7852",
+      "fundName": "한국투자적격TDF알아서ETF포커스2050증권투자신탁(주식혼합-재간접형)(C-Re)",
+      "totalFee": "0.72",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.72",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55101DX7852",
+            "value": "0.72",
+            "note": "local all_fund match 0.972: 한국투자TDF알아서ETF포커스2050증권투자신탁(혼합-재간접형)(C-Re)"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55301EB3060": {
+      "fundCode": "K55301EB3060",
+      "fundName": "미래에셋ETF로자산배분적격TDF2055증권자투자신탁(혼합-재간접형) 종류C-P2e",
+      "totalFee": "0.95",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.95",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55301EB3060",
+            "value": "0.95",
+            "note": "local all_fund match 1.000: 미래에셋ETF로자산배분TDF2055증권자투자신탁(혼합-재간접형)종류C-P2e"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "UNKNOWN_18": {
+      "fundCode": "",
+      "fundName": "신한빠른대응적격TDF2040증권투자신탁(H)[주식혼합-재간접형](종류C-re)",
+      "totalFee": "",
+      "ter": "",
+      "feeVerification": {
+        "value": "",
+        "sources": [
+          {
+            "name": "unresolved-public-search",
+            "url": "",
+            "value": "",
+            "note": "신한빠른대응 2040 C-re: all_fund_data 미존재, 공개 정확 코드 미확정"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55223DJ7150": {
+      "fundCode": "K55223DJ7150",
+      "fundName": "KB 다이나믹 적격TDF 2030 증권 자투자신탁(주식혼합-재간접형) C-퇴직e",
+      "totalFee": "0.60",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.60",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55223DJ7150",
+            "value": "0.60",
+            "note": "local all_fund match 1.000: KB다이나믹TDF2030증권자투자신탁(주식혼합-재간접형)C-퇴직e"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55210D55473": {
+      "fundCode": "K55210D55473",
+      "fundName": "신한빠른대응적격TDF2030증권자투자신탁(H)[주식혼합-재간접형](종류C-re)",
+      "totalFee": "0.92",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.92",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55210D55473",
+            "value": "0.92",
+            "note": "local all_fund match 1.000: 신한빠른대응TDF2030증권자투자신탁(H)[주식혼합-재간접형](종류C-re)"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55223BT1450": {
+      "fundCode": "K55223BT1450",
+      "fundName": "KB 온국민 적격TDF 2040 증권자투자신탁(주식혼합-재간접형)(H)C-퇴직e",
+      "totalFee": "0.56",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.56",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55223BT1450",
+            "value": "0.56",
+            "note": "local all_fund match 1.000: KB온국민TDF2040증권자투자신탁(주식혼합-재간접형)(H)C-퇴직e"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55301D49705": {
+      "fundCode": "K55301D49705",
+      "fundName": "미래에셋ETF로자산배분적격TDF2050증권자투자신탁(주식혼합-재간접형)종류C-P2e",
+      "totalFee": "0.88",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.88",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55301D49705",
+            "value": "0.88",
+            "note": "local all_fund match 1.000: 미래에셋ETF로자산배분TDF2050증권자투자신탁(주식혼합-재간접형)종류C-P2e"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55301BU5479": {
+      "fundCode": "K55301BU5479",
+      "fundName": "미래에셋전략배분적격TDF2045혼합자산자투자신탁 종류C-P2e",
+      "totalFee": "0.67",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.67",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55301BU5479",
+            "value": "0.67",
+            "note": "FunETF 공개검색: 미래에셋전략배분TDF2045 C-P2e 총보수 0.6700%"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55301EB2815": {
+      "fundCode": "K55301EB2815",
+      "fundName": "미래에셋전략배분적격TDF2055혼합자산자투자신탁 종류C-P2e",
+      "totalFee": "1.00",
+      "ter": "",
+      "feeVerification": {
+        "value": "1.00",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55301EB2815",
+            "value": "1.00",
+            "note": "local all_fund match 1.000: 미래에셋전략배분TDF2055혼합자산자투자신탁종류C-P2e"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55301BU6253": {
+      "fundCode": "K55301BU6253",
+      "fundName": "미래에셋전략배분적격TDF2040혼합자산자투자신탁 종류CP2e",
+      "totalFee": "0.82",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.82",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55301BU6253",
+            "value": "0.82",
+            "note": "local all_fund match 1.000: 미래에셋전략배분TDF2040혼합자산자투자신탁 종류C-P2e"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55210BU2435": {
+      "fundCode": "K55210BU2435",
+      "fundName": "신한마음편한적격TDF2040증권투자신탁[주식혼합-재간접형](종류C-re)",
+      "totalFee": "0.72",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.72",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55210BU2435",
+            "value": "0.72",
+            "note": "local all_fund match 1.000: 신한마음편한TDF2040증권투자신탁[주식혼합-재간접형](종류C-re)"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55105CX9483": {
+      "fundCode": "K55105CX9483",
+      "fundName": "삼성 글로벌액티브 적격TDF 2055 증권투자신탁H[주식혼합-재간접형]_Cpe(퇴직연금)",
+      "totalFee": "1.14",
+      "ter": "",
+      "feeVerification": {
+        "value": "1.14",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55105CX9483",
+            "value": "1.14",
+            "note": "FunETF 공개검색/agent: 삼성 글로벌액티브 2055 Cpe 총보수 1.14"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55210D58329": {
+      "fundCode": "K55210D58329",
+      "fundName": "신한빠른대응적격TDF2035증권투자신탁(H)[주식혼합-재간접형](종류C-re)",
+      "totalFee": "0.92",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.92",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55210D58329",
+            "value": "0.92",
+            "note": "agent public finding: 신한빠른대응 2035 C-re 후보, 단일출처"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55301BT5183": {
+      "fundCode": "K55301BT5183",
+      "fundName": "미래에셋ETF로자산배분적격TDF2045증권자투자신탁(주식혼합-재간접형)종류C-P2e",
+      "totalFee": "0.81",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.81",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55301BT5183",
+            "value": "0.81",
+            "note": "local all_fund match 1.000: 미래에셋ETF로자산배분TDF2045증권자투자신탁(주식혼합-재간접형)종류C-P2e"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55101DX7688": {
+      "fundCode": "K55101DX7688",
+      "fundName": "한국투자적격TDF알아서ETF포커스2045증권투자신탁(주식혼합-재간접형)(C-Re)",
+      "totalFee": "0.55",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.55",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55101DX7688",
+            "value": "0.55",
+            "note": "local all_fund match 0.972: 한국투자TDF알아서ETF포커스2045증권투자신탁(혼합-재간접형)(C-Re)"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55105CK1592": {
+      "fundCode": "K55105CK1592",
+      "fundName": "삼성 글로벌액티브 적격TDF 2050증권투자신탁H[주식혼합-재간접형] CPe(퇴직연금)",
+      "totalFee": "1.06",
+      "ter": "",
+      "feeVerification": {
+        "value": "1.06",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55105CK1592",
+            "value": "1.06",
+            "note": "FunETF 공개검색/agent: 삼성 글로벌액티브 2050 Cpe 총보수 1.06"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55101DR6829": {
+      "fundCode": "K55101DR6829",
+      "fundName": "한국투자적격TDF알아서2060증권자투자신탁H(주식혼합-재간접형)(C-Re)",
+      "totalFee": "1.13",
+      "ter": "",
+      "feeVerification": {
+        "value": "1.13",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55101DR6829",
+            "value": "1.13",
+            "note": "local all_fund match 1.000: 한국투자TDF알아서2060증권자투자신탁H(주식혼합-재간접형)(C-Re)"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55101DR6340": {
+      "fundCode": "K55101DR6340",
+      "fundName": "한국투자적격TDF알아서2055증권자투자신탁H(주식혼합-재간접형)(C-Re)",
+      "totalFee": "1.12",
+      "ter": "",
+      "feeVerification": {
+        "value": "1.12",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55101DR6340",
+            "value": "1.12",
+            "note": "local all_fund match 1.000: 한국투자TDF알아서2055증권자투자신탁H(주식혼합-재간접형)(C-Re)"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55301BT4251": {
+      "fundCode": "K55301BT4251",
+      "fundName": "미래에셋ETF로자산배분적격TDF2040증권자투자신탁1호(주식혼합-재간접형)종류C-P2e",
+      "totalFee": "0.65",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.65",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55301BT4251",
+            "value": "0.65",
+            "note": "local all_fund match 0.987: 미래에셋ETF로자산배분TDF2040증권자투자신탁 1(주식혼합-재간접형)종류C-P2e"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55101CU1644": {
+      "fundCode": "K55101CU1644",
+      "fundName": "한국투자적격TDF알아서2050증권자투자신탁H(주식혼합-재간접형)(C-Re)",
+      "totalFee": "1.12",
+      "ter": "",
+      "feeVerification": {
+        "value": "1.12",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55101CU1644",
+            "value": "1.12",
+            "note": "local all_fund match 1.000: 한국투자TDF알아서2050증권자투자신탁H(주식혼합-재간접형)(C-Re)"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55101BT4444": {
+      "fundCode": "K55101BT4444",
+      "fundName": "한국투자적격TDF알아서2045증권투자신탁(주식혼합-재간접형)종류C-Re",
+      "totalFee": "1.12",
+      "ter": "",
+      "feeVerification": {
+        "value": "1.12",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55101BT4444",
+            "value": "1.12",
+            "note": "local all_fund match 1.000: 한국투자TDF알아서2045증권투자신탁(주식혼합-재간접형)(C-Re)"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55213C51718": {
+      "fundCode": "K55213C51718",
+      "fundName": "한화 LIFEPLUS 적격 TDF 2035 증권투자신탁(주식혼합-재간접형) 종류 C-RPe(퇴직연금)",
+      "totalFee": "0.77",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.77",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55213C51718",
+            "value": "0.77",
+            "note": "local all_fund match 0.972: 한화LIFEPLUSTDF2035증권투자신탁(혼합-재간접형)C-RPE(퇴직연금)"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55210BU2419": {
+      "fundCode": "K55210BU2419",
+      "fundName": "신한마음편한적격TDF2035증권투자신탁[주식혼합-재간접형](종류C-re)",
+      "totalFee": "0.59",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.59",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55210BU2419",
+            "value": "0.59",
+            "note": "local all_fund match 1.000: 신한마음편한TDF2035증권투자신탁[주식혼합-재간접형](종류C-re)"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55101DX8652": {
+      "fundCode": "K55101DX8652",
+      "fundName": "한국투자적격TDF알아서ETF포커스2040증권투자신탁(주식혼합-재간접형)(C-Re)",
+      "totalFee": "0.55",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.55",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55101DX8652",
+            "value": "0.55",
+            "note": "local all_fund match 0.972: 한국투자TDF알아서ETF포커스2040증권투자신탁(혼합-재간접형)(C-Re)"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55105BT9910": {
+      "fundCode": "K55105BT9910",
+      "fundName": "삼성 글로벌액티브 적격TDF2045증권투자신탁H[주식혼합-재간접형]_Cpe(퇴직)",
+      "totalFee": "1.01",
+      "ter": "",
+      "feeVerification": {
+        "value": "1.01",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55105BT9910",
+            "value": "1.01",
+            "note": "FunETF 공개검색/agent: 삼성 글로벌액티브 2045 Cpe 총보수 1.01"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55223BT1278": {
+      "fundCode": "K55223BT1278",
+      "fundName": "KB 온국민 적격TDF 2035 증권자투자신탁(주식혼합-재간접형)(H)C-퇴직e",
+      "totalFee": "0.43",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.43",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55223BT1278",
+            "value": "0.43",
+            "note": "local all_fund match 1.000: KB온국민TDF2035증권자투자신탁(주식혼합-재간접형)(H)C-퇴직e"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55301BU6139": {
+      "fundCode": "K55301BU6139",
+      "fundName": "미래에셋전략배분적격TDF2035혼합자산자투자신탁 종류C-P2e",
+      "totalFee": "0.77",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.77",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55301BU6139",
+            "value": "0.77",
+            "note": "local all_fund match 1.000: 미래에셋전략배분TDF2035혼합자산자투자신탁종류C-P2e"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "UNKNOWN_43": {
+      "fundCode": "",
+      "fundName": "삼성 글로벌 EMP 적격 TDF 2055 증권자투자신탁[주식혼합-재간접형]_Cpe(퇴직연금)",
+      "totalFee": "",
+      "ter": "",
+      "feeVerification": {
+        "value": "",
+        "sources": [
+          {
+            "name": "unresolved-public-search",
+            "url": "",
+            "value": "",
+            "note": "삼성 글로벌 EMP 2055 Cpe: Cp 페이지만 확인, class 1:1 미확정"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55101BT7397": {
+      "fundCode": "K55101BT7397",
+      "fundName": "한국투자적격TDF알아서2040증권투자신탁(주식혼합-재간접형)종류C-Re",
+      "totalFee": "0.97",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.97",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55101BT7397",
+            "value": "0.97",
+            "note": "local all_fund match 1.000: 한국투자TDF알아서2040증권투자신탁(주식혼합-재간접형)(C-Re)"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55206C95974": {
+      "fundCode": "K55206C95974",
+      "fundName": "키움키워드림적격TDF2035증권투자신탁제1호[주식혼합-재간접형] Class C-P2e(퇴직연금)",
+      "totalFee": "0.66",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.66",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55206C95974",
+            "value": "0.66",
+            "note": "local all_fund match 0.954: 키움키워드림TDF2035증권투자신탁 1[혼합-재간접형]C-P2e (퇴직연금)"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "UNKNOWN_46": {
+      "fundCode": "",
+      "fundName": "삼성 글로벌 EMP 적격 TDF 2050 증권자투자신탁[주식혼합-재간접형]_Cpe(퇴직연금)",
+      "totalFee": "",
+      "ter": "",
+      "feeVerification": {
+        "value": "",
+        "sources": [
+          {
+            "name": "unresolved-public-search",
+            "url": "",
+            "value": "",
+            "note": "삼성 글로벌 EMP 2050 Cpe: Cp 페이지만 확인, class 1:1 미확정"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55223BT1096": {
+      "fundCode": "K55223BT1096",
+      "fundName": "KB 온국민 적격TDF 2030 증권자투자신탁(주식혼합-재간접형)(H)C-퇴직e",
+      "totalFee": "0.43",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.43",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55223BT1096",
+            "value": "0.43",
+            "note": "local all_fund match 1.000: KB온국민TDF2030증권자투자신탁(주식혼합-재간접형)(H)C-퇴직e"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "UNKNOWN_48": {
+      "fundCode": "",
+      "fundName": "삼성 글로벌 EMP 적격 TDF 2045 증권자투자신탁[주식혼합-재간접형]_Cpe(퇴직연금)",
+      "totalFee": "",
+      "ter": "",
+      "feeVerification": {
+        "value": "",
+        "sources": [
+          {
+            "name": "unresolved-public-search",
+            "url": "",
+            "value": "",
+            "note": "삼성 글로벌 EMP 2045 Cpe: Cp 페이지만 확인, class 1:1 미확정"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55105BT9928": {
+      "fundCode": "K55105BT9928",
+      "fundName": "삼성 글로벌액티브 적격TDF2040증권투자신탁H[주식혼합-재간접형]_Cpe(퇴직연금)",
+      "totalFee": "0.85",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.85",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55105BT9928",
+            "value": "0.85",
+            "note": "FunETF 공개검색/agent: 삼성 글로벌액티브 2040 Cpe 총보수 0.85"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55101BT4428": {
+      "fundCode": "K55101BT4428",
+      "fundName": "한국투자적격TDF알아서2035증권투자신탁(주식혼합-재간접형)종류C-Re",
+      "totalFee": "0.85",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.85",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55101BT4428",
+            "value": "0.85",
+            "note": "local all_fund match 1.000: 한국투자TDF알아서2035증권투자신탁(주식혼합-재간접형)(C-Re)"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55301BU6113": {
+      "fundCode": "K55301BU6113",
+      "fundName": "미래에셋전략배분적격TDF2030혼합자산자투자신탁 종류C-P2e",
+      "totalFee": "0.71",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.71",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55301BU6113",
+            "value": "0.71",
+            "note": "local all_fund match 1.000: 미래에셋전략배분TDF2030혼합자산자투자신탁 종류C-P2e"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "UNKNOWN_52": {
+      "fundCode": "",
+      "fundName": "신한마음편한적격TDF2030증권투자신탁[주식혼합-재간접형](종류C-p)",
+      "totalFee": "",
+      "ter": "",
+      "feeVerification": {
+        "value": "",
+        "sources": [
+          {
+            "name": "unresolved-public-search",
+            "url": "",
+            "value": "",
+            "note": "신한마음편한 2030 C-p: KOFIA BR633은 확인, K-code/총보수 미확정"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "UNKNOWN_53": {
+      "fundCode": "",
+      "fundName": "삼성 글로벌 EMP 적격 TDF 2040 증권자투자신탁[주식혼합-재간접형]_Cpe(퇴직연금)",
+      "totalFee": "",
+      "ter": "",
+      "feeVerification": {
+        "value": "",
+        "sources": [
+          {
+            "name": "unresolved-public-search",
+            "url": "",
+            "value": "",
+            "note": "삼성 글로벌 EMP 2040 Cpe: 정확 코드/총보수 미확정"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55105BT9936": {
+      "fundCode": "K55105BT9936",
+      "fundName": "삼성 글로벌액티브 적격TDF2035증권투자신탁H[주식혼합-재간접형]_Cpe(퇴직연금)",
+      "totalFee": "0.73",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.73",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55105BT9936",
+            "value": "0.73",
+            "note": "FunETF 공개검색/agent: 삼성 글로벌액티브 2035 Cpe 총보수 0.73"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55105D34223": {
+      "fundCode": "K55105D34223",
+      "fundName": "삼성 글로벌 EMP 적격 TDF 2035 증권자투자신탁[주식혼합-재간접형]_Cpe(퇴직연금)",
+      "totalFee": "0.47",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.47",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55105D34223",
+            "value": "0.47",
+            "note": "agent: 삼성 글로벌 EMP 2035 Cpe 후보, FunETF 스니펫과 local fee 불일치"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55101BT4402": {
+      "fundCode": "K55101BT4402",
+      "fundName": "한국투자적격TDF알아서2030증권투자신탁(주식혼합-재간접형)종류C-Re",
+      "totalFee": "0.84",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.84",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55101BT4402",
+            "value": "0.84",
+            "note": "local all_fund match 1.000: 한국투자TDF알아서2030증권투자신탁(주식혼합-재간접형)(C-Re)"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55301BT3022": {
+      "fundCode": "K55301BT3022",
+      "fundName": "미래에셋ETF로자산배분적격TDF2035증권자투자신탁(주식혼합-재간접형)종류C-P2e",
+      "totalFee": "0.70",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.70",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55301BT3022",
+            "value": "0.70",
+            "note": "local all_fund match 1.000: 미래에셋ETF로자산배분TDF2035증권자투자신탁(주식혼합-재간접형)종류C-P2e"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55101DX8306": {
+      "fundCode": "K55101DX8306",
+      "fundName": "한국투자적격TDF알아서ETF포커스2030증권투자신탁(주식혼합-재간접형)(C-Re)",
+      "totalFee": "0.52",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.52",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55101DX8306",
+            "value": "0.52",
+            "note": "local all_fund match 0.972: 한국투자TDF알아서ETF포커스2030증권투자신탁(혼합-재간접형)(C-Re)"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "UNKNOWN_59": {
+      "fundCode": "",
+      "fundName": "삼성 글로벌 EMP 적격 TDF 2030 증권자투자신탁[주식혼합-재간접형]_Cpe(퇴직연금)",
+      "totalFee": "",
+      "ter": "",
+      "feeVerification": {
+        "value": "",
+        "sources": [
+          {
+            "name": "unresolved-public-search",
+            "url": "",
+            "value": "",
+            "note": "삼성 글로벌 EMP 2030 Cpe: 정확 코드/총보수 미확정"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55301BT2933": {
+      "fundCode": "K55301BT2933",
+      "fundName": "미래에셋ETF로자산배분적격TDF2030증권자투자신탁(채권혼합-재간접형)종류C-P2e",
+      "totalFee": "0.66",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.66",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55301BT2933",
+            "value": "0.66",
+            "note": "local all_fund match 1.000: 미래에셋ETF로자산배분TDF2030증권자투자신탁(채권혼합-재간접형)종류C-P2e"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55105BU1161": {
+      "fundCode": "K55105BU1161",
+      "fundName": "삼성 글로벌액티브 적격TDF2030증권투자신탁H[주식혼합-재간접형]_Cpe(퇴직연금)",
+      "totalFee": "0.70",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.70",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55105BU1161",
+            "value": "0.70",
+            "note": "FunETF 공개검색/agent: 삼성 글로벌액티브 2030 Cpe 총보수 0.70"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55301BS2942": {
+      "fundCode": "K55301BS2942",
+      "fundName": "미래에셋전략배분적격TDF2025혼합자산자투자신탁 종류C-P2e",
+      "totalFee": "0.67",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.67",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55301BS2942",
+            "value": "0.67",
+            "note": "local all_fund match 1.000: 미래에셋전략배분TDF2025혼합자산자투자신탁종류C-P2e"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55223BT0940": {
+      "fundCode": "K55223BT0940",
+      "fundName": "KB 온국민 적격TDF 2025 증권투자신탁(채권혼합-재간접형)C-퇴직e",
+      "totalFee": "0.44",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.44",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55223BT0940",
+            "value": "0.44",
+            "note": "local all_fund match 1.000: KB온국민TDF2025증권투자신탁(채권혼합-재간접형)C-퇴직e"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55223BT0783": {
+      "fundCode": "K55223BT0783",
+      "fundName": "KB온국민TDF2020증권투자신탁(채권혼합-재간접형)C-퇴직e",
+      "totalFee": "0.43",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.43",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55223BT0783",
+            "value": "0.43",
+            "note": "local all_fund match 1.000: KB온국민TDF2020증권투자신탁(채권혼합-재간접형)C-퇴직e"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55301BS9947": {
+      "fundCode": "K55301BS9947",
+      "fundName": "미래에셋ETF로자산배분적격TDF2025증권자투자신탁(채권혼합-재간접형)종류C-P2e",
+      "totalFee": "0.65",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.65",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55301BS9947",
+            "value": "0.65",
+            "note": "local all_fund match 1.000: 미래에셋ETF로자산배분TDF2025증권자투자신탁(채권혼합-재간접형)종류C-P2e"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55101BT7355": {
+      "fundCode": "K55101BT7355",
+      "fundName": "한국투자적격TDF알아서2025증권투자신탁(채권혼합-재간접형)종류C-Re",
+      "totalFee": "0.81",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.81",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55101BT7355",
+            "value": "0.81",
+            "note": "agent: 한국투자TDF알아서2025 C-Re"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55101BT7314": {
+      "fundCode": "K55101BT7314",
+      "fundName": "한국투자TDF알아서2020증권자투자신탁(채권혼합-재간접형)종류C-Re",
+      "totalFee": "0.78",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.78",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55101BT7314",
+            "value": "0.78",
+            "note": "local all_fund match 1.000: 한국투자TDF알아서2020증권자투자신탁(채권혼합-재간접형)(C-Re)"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "UNKNOWN_69": {
+      "fundCode": "",
+      "fundName": "한국투자TDF알아서2015증권투자신탁(채권혼합-재간접형) 종류 C-Re",
+      "totalFee": "",
+      "ter": "",
+      "feeVerification": {
+        "value": "",
+        "sources": [
+          {
+            "name": "unresolved-public-search",
+            "url": "",
+            "value": "",
+            "note": "한국투자TDF알아서2015 C-Re: local fuzzy 2020으로 충돌, 정확 코드 미확정"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55206C95636": {
+      "fundCode": "K55206C95636",
+      "fundName": "키움키워드림적격TDF2025증권투자신탁제1호[채권혼합-재간접형] Class C-P2e(퇴직연금)",
+      "totalFee": "0.59",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.59",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55206C95636",
+            "value": "0.59",
+            "note": "local all_fund match 0.954: 키움키워드림TDF2025증권투자신탁 1[혼합-재간접형]C-P2e(퇴직연금)"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "UNKNOWN_72": {
+      "fundCode": "",
+      "fundName": "삼성 글로벌 EMP TDF 증권투자신탁[채권혼합-재간접형]_Cpe(퇴직연금)",
+      "totalFee": "",
+      "ter": "",
+      "feeVerification": {
+        "value": "",
+        "sources": [
+          {
+            "name": "unresolved-public-search",
+            "url": "",
+            "value": "",
+            "note": "삼성 글로벌 EMP TDF 채권혼합 Cpe: 정확 코드/총보수 미확정"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55105BU1146": {
+      "fundCode": "K55105BU1146",
+      "fundName": "삼성 글로벌액티브 TDF 2020 증권투자신탁H[채권혼합-재간접형]_Cpe(퇴직연금)",
+      "totalFee": "0.67",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.67",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55105BU1146",
+            "value": "0.67",
+            "note": "FunETF 공개검색/agent: 삼성 글로벌액티브 TDF2020 Cpe 총보수 0.67"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55105BU1153": {
+      "fundCode": "K55105BU1153",
+      "fundName": "삼성 글로벌액티브 TDF 2015 증권투자신탁H[채권혼합-재간접형]Cpe(퇴직연금)",
+      "totalFee": "0.75",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.75",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55105BU1153",
+            "value": "0.75",
+            "note": "FunETF 공개검색/agent: 삼성 글로벌액티브 TDF2015 Cpe 총보수 0.75"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55223DV8616": {
+      "fundCode": "K55223DV8616",
+      "fundName": "KB 다이나믹 TDF 증권 자투자신탁(채권혼합-재간접형) C-퇴직e",
+      "totalFee": "0.47",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.47",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55223DV8616",
+            "value": "0.47",
+            "note": "local all_fund match 1.000: KB다이나믹TDF증권자투자신탁(채권혼합-재간접형)C-퇴직e"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55210BU2351": {
+      "fundCode": "K55210BU2351",
+      "fundName": "신한마음편한적격TDF2025증권투자신탁[채권혼합-재간접형](종류C-re)",
+      "totalFee": "0.57",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.57",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55210BU2351",
+            "value": "0.57",
+            "note": "FunETF 공개검색/agent: 신한마음편한TDF2025 C-re 총보수 0.57"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    },
+    "K55105BU1062": {
+      "fundCode": "K55105BU1062",
+      "fundName": "삼성 글로벌액티브 적격TDF 2025증권투자신탁H[채권혼합-재간접형]_Cpe(퇴직연금)",
+      "totalFee": "0.69",
+      "ter": "",
+      "feeVerification": {
+        "value": "0.69",
+        "sources": [
+          {
+            "name": "FunETF",
+            "url": "https://www.funetf.co.kr/product/fund/view/K55105BU1062",
+            "value": "0.69",
+            "note": "FunETF 공개검색/agent: 삼성 글로벌액티브 TDF2025 Cpe 총보수 0.69"
+          },
+          {
+            "name": "KOFIA",
+            "url": "https://dis.kofia.or.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          },
+          {
+            "name": "FundDoctor",
+            "url": "https://www.funddoctor.co.kr/",
+            "value": "",
+            "note": "전수 3출처 교차검증 미완료 또는 접근 제한; agree=false"
+          }
+        ],
+        "agree": false,
+        "checkedAt": "2026-06-07T00:00:00+09:00"
+      }
+    }
+  }
+}
