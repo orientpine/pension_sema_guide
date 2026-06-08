@@ -1,0 +1,1246 @@
+{
+  "_meta": {
+    "version": "2026-03-01",
+    "sourceFile": "26년03월_상품제안서_퇴직연금(DCIRP).csv",
+    "updatedAt": "2026-03-30T14:30:44.138032+09:00",
+    "recordCount": 206
+  },
+  "fees": {
+    "K55232C99584": {
+      "fundCode": "K55232C99584",
+      "fundName": "NH-Amundi필승코리아증권투자신탁[주식]ClassC-P2e(퇴직연금)",
+      "totalFee": "0.67",
+      "annualCost": "6700"
+    },
+    "K55301CW6508": {
+      "fundCode": "K55301CW6508",
+      "fundName": "미래에셋코어테크증권자투자신탁(주식)종류C-P2e",
+      "totalFee": "1.07",
+      "annualCost": "10700"
+    },
+    "K55102C96528": {
+      "fundCode": "K55102C96528",
+      "fundName": "하나IT코리아증권자투자신탁 1[주식]ClassC-P2E",
+      "totalFee": "1.16",
+      "annualCost": "11600"
+    },
+    "K55105BU5998": {
+      "fundCode": "K55105BU5998",
+      "fundName": "삼성퇴직연금KOSPI200증권자투자신탁 1[주식]_Ce",
+      "totalFee": "0.42",
+      "annualCost": "4200"
+    },
+    "K55203C53681": {
+      "fundCode": "K55203C53681",
+      "fundName": "대신KOSPI200인덱스증권자투자신탁[주식]ClassC-Pe",
+      "totalFee": "0.53",
+      "annualCost": "5300"
+    },
+    "K55301C39062": {
+      "fundCode": "K55301C39062",
+      "fundName": "미래에셋KRX300인덱스증권투자신탁(주식-파생형)종류C-P2e",
+      "totalFee": "0.70",
+      "annualCost": "7000"
+    },
+    "K55303BT4127": {
+      "fundCode": "K55303BT4127",
+      "fundName": "마이다스신성장기업포커스증권자투자신탁(주식)C-Pe2",
+      "totalFee": "1.11",
+      "annualCost": "11100"
+    },
+    "K55223BU8791": {
+      "fundCode": "K55223BU8791",
+      "fundName": "KB액티브배당증권자투자신탁(주식)C-퇴직e",
+      "totalFee": "1.13",
+      "annualCost": "11300"
+    },
+    "K55301BT7957": {
+      "fundCode": "K55301BT7957",
+      "fundName": "미래에셋퇴직연금코어밸류증권자투자신탁 1(주식)종류C-P2e",
+      "totalFee": "0.80",
+      "annualCost": "8000"
+    },
+    "K55101BU1595": {
+      "fundCode": "K55101BU1595",
+      "fundName": "한국투자퇴직연금한국의힘증권자투자신탁 1(주식)(C-e)",
+      "totalFee": "0.80",
+      "annualCost": "8000"
+    },
+    "K55366BU9598": {
+      "fundCode": "K55366BU9598",
+      "fundName": "iM에셋월드골드증권자투자신탁(주식-재간접형)(UH)(C-Rpe)",
+      "totalFee": "1.22",
+      "annualCost": "12200"
+    },
+    "K55366BT9674": {
+      "fundCode": "K55366BT9674",
+      "fundName": "iM에셋월드골드증권자투자신탁(주식-재간접형)(H)(C-Rpe)",
+      "totalFee": "1.22",
+      "annualCost": "12200"
+    },
+    "K55213CL1558": {
+      "fundCode": "K55213CL1558",
+      "fundName": "한화한국오퍼튜니티증권자투자신탁(주식)종류P-E",
+      "totalFee": "1.12",
+      "annualCost": "11200"
+    },
+    "K553N9BX3884": {
+      "fundCode": "K553N9BX3884",
+      "fundName": "삼성배당주장기증권투자신탁 1[주식](Cpe(퇴직연금))",
+      "totalFee": "1.12",
+      "annualCost": "11200"
+    },
+    "K55303BT4143": {
+      "fundCode": "K55303BT4143",
+      "fundName": "마이다스책임투자증권투자신탁(주식)C-Pe2",
+      "totalFee": "1.00",
+      "annualCost": "10000"
+    },
+    "K55301DD0313": {
+      "fundCode": "K55301DD0313",
+      "fundName": "미래에셋그린뉴딜인덱스증권자투자신탁(주식) 종류C-P2e",
+      "totalFee": "0.67",
+      "annualCost": "6700"
+    },
+    "K55213DB6004": {
+      "fundCode": "K55213DB6004",
+      "fundName": "한화그린히어로증권자투자신탁(주식) C-RPe(퇴직연금)",
+      "totalFee": "0.84",
+      "annualCost": "8400"
+    },
+    "K5M303CH8094": {
+      "fundCode": "K5M303CH8094",
+      "fundName": "마이다스액티브가치증권투자회사(주식)C-Pe2",
+      "totalFee": "0.95",
+      "annualCost": "9500"
+    },
+    "K55306BT9560": {
+      "fundCode": "K55306BT9560",
+      "fundName": "다올VIP스타셀렉션증권자투자신탁[주식]종류CPe",
+      "totalFee": "0.96",
+      "annualCost": "9600"
+    },
+    "K55306BU2406": {
+      "fundCode": "K55306BU2406",
+      "fundName": "다올VIP밸류퇴직연금증권자투자신탁[주식]종류Ce",
+      "totalFee": "1.14",
+      "annualCost": "11400"
+    },
+    "K55363DD7982": {
+      "fundCode": "K55363DD7982",
+      "fundName": "트러스톤ESG지배구조레벨업증권자투자신탁[주식]Cp2-E클래스",
+      "totalFee": "1.19",
+      "annualCost": "11900"
+    },
+    "K55301E22163": {
+      "fundCode": "K55301E22163",
+      "fundName": "미래에셋아시아테크증권투자신탁(주식)종류C-P2e",
+      "totalFee": "1.17",
+      "annualCost": "11700"
+    },
+    "K55301BW0791": {
+      "fundCode": "K55301BW0791",
+      "fundName": "미래에셋퇴직연금고배당포커스증권자투자신탁 1(주식)종류C-P2e",
+      "totalFee": "0.81",
+      "annualCost": "8100"
+    },
+    "K55209CT1739": {
+      "fundCode": "K55209CT1739",
+      "fundName": "신영밸류고배당증권자투자신탁(주식)C-P2e형",
+      "totalFee": "0.84",
+      "annualCost": "8400"
+    },
+    "K55209BT8990": {
+      "fundCode": "K55209BT8990",
+      "fundName": "신영퇴직연금배당주식증권자투자신탁(주식)C-E형",
+      "totalFee": "0.80",
+      "annualCost": "8000"
+    },
+    "K55302BU0040": {
+      "fundCode": "K55302BU0040",
+      "fundName": "베어링고배당증권자투자신탁(주식)ClassC-P2e",
+      "totalFee": "1.04",
+      "annualCost": "10400"
+    },
+    "K55366BU9689": {
+      "fundCode": "K55366BU9689",
+      "fundName": "iM에셋월드광업주증권자투자신탁(주식-재간접형)(UH)(C-Rpe)",
+      "totalFee": "1.21",
+      "annualCost": "12100"
+    },
+    "K55301DD7714": {
+      "fundCode": "K55301DD7714",
+      "fundName": "미래에셋클린테크증권자투자신탁(주식)종류C-P2e",
+      "totalFee": "1.07",
+      "annualCost": "10700"
+    },
+    "K55301BX0196": {
+      "fundCode": "K55301BX0196",
+      "fundName": "미래에셋코스닥혁신성장증권자투자신탁(주식)종류C-P2e",
+      "totalFee": "1.11",
+      "annualCost": "11100"
+    },
+    "K55366BU9622": {
+      "fundCode": "K55366BU9622",
+      "fundName": "iM에셋월드광업주증권자투자신탁(주식-재간접형)(H)(C-Rpe)",
+      "totalFee": "1.23",
+      "annualCost": "12300"
+    },
+    "K55303BT4101": {
+      "fundCode": "K55303BT4101",
+      "fundName": "마이다스미소중소형주증권자투자신탁(주식)C-Pe2",
+      "totalFee": "0.99",
+      "annualCost": "9900"
+    },
+    "KR5301AW7864": {
+      "fundCode": "KR5301AW7864",
+      "fundName": "미래에셋퇴직연금배당커버드콜액티브증권자투자신탁 1(주식혼합)종류C-P2e",
+      "totalFee": "0.62",
+      "annualCost": "6200"
+    },
+    "K55105DN1838": {
+      "fundCode": "K55105DN1838",
+      "fundName": "삼성글로벌반도체증권자투자신탁UH[주식]_Cpe(퇴직)",
+      "totalFee": "1.27",
+      "annualCost": "12700"
+    },
+    "K55364BU0797": {
+      "fundCode": "K55364BU0797",
+      "fundName": "에셋플러스코리아리치투게더퇴직연금증권자투자신탁 1[주식]종류Ce",
+      "totalFee": "1.10",
+      "annualCost": "11000"
+    },
+    "K55105DN1598": {
+      "fundCode": "K55105DN1598",
+      "fundName": "삼성글로벌반도체증권자투자신탁H[주식]_Cpe(퇴직)",
+      "totalFee": "1.28",
+      "annualCost": "12800"
+    },
+    "K55216BT3877": {
+      "fundCode": "K55216BT3877",
+      "fundName": "DB바이오헬스케어증권자투자신탁 1[주식]ClassC-P2E",
+      "totalFee": "1.16",
+      "annualCost": "11600"
+    },
+    "K55209BV6925": {
+      "fundCode": "K55209BV6925",
+      "fundName": "신영마라톤중소형주증권자투자신탁(주식)C-P2e형",
+      "totalFee": "1.03",
+      "annualCost": "10300"
+    },
+    "KR5301AJ2292": {
+      "fundCode": "KR5301AJ2292",
+      "fundName": "미래에셋퇴직연금성장유망중소형주증권자투자신탁 1(주식)종류C-e",
+      "totalFee": "0.95",
+      "annualCost": "9500"
+    },
+    "K55232DI0965": {
+      "fundCode": "K55232DI0965",
+      "fundName": "NH-Amundi글로벌우주항공증권자투자신탁(UH)[주식]ClassC-P2e(퇴직연금)",
+      "totalFee": "1.33",
+      "annualCost": "13300"
+    },
+    "K55232DI0791": {
+      "fundCode": "K55232DI0791",
+      "fundName": "NH-Amundi글로벌우주항공증권자투자신탁(H)[주식]ClassC-P2e(퇴직연금)",
+      "totalFee": "1.33",
+      "annualCost": "13300"
+    },
+    "K55301E51782": {
+      "fundCode": "K55301E51782",
+      "fundName": "미래에셋골드특별자산자투자신탁(금-재간접형)종류C-P2e",
+      "totalFee": "0.72",
+      "annualCost": "7200"
+    },
+    "K55107BU0229": {
+      "fundCode": "K55107BU0229",
+      "fundName": "우리중소형고배당증권자투자신탁 1(주식)ClassC-Pe",
+      "totalFee": "0.90",
+      "annualCost": "9000"
+    },
+    "K553W5E17435": {
+      "fundCode": "K553W5E17435",
+      "fundName": "VIP한국형가치투자증권자투자신탁[주식]C-P2e클래스",
+      "totalFee": "2.01",
+      "annualCost": "20100"
+    },
+    "K55235BW6807": {
+      "fundCode": "K55235BW6807",
+      "fundName": "피델리티재팬증권자투자신탁(주식-재간접형)CP-e",
+      "totalFee": "1.59",
+      "annualCost": "15900"
+    },
+    "K55307D06017": {
+      "fundCode": "K55307D06017",
+      "fundName": "유리필라델피아반도체인덱스증권자투자신탁UH[주식]ClassC-P1e",
+      "totalFee": "0.97",
+      "annualCost": "9700"
+    },
+    "K55301BW0049": {
+      "fundCode": "K55301BW0049",
+      "fundName": "미래에셋연금한국헬스케어증권자투자신탁 1(주식)종류C-P2e",
+      "totalFee": "1.01",
+      "annualCost": "10100"
+    },
+    "K55210CI0434": {
+      "fundCode": "K55210CI0434",
+      "fundName": "신한스노우볼인컴증권투자신탁[채권혼합](종류C-re)",
+      "totalFee": "0.48",
+      "annualCost": "4800"
+    },
+    "K55307D05118": {
+      "fundCode": "K55307D05118",
+      "fundName": "유리필라델피아반도체인덱스증권자투자신탁H[주식]ClassC-P1e",
+      "totalFee": "0.97",
+      "annualCost": "9700"
+    },
+    "K55303BT4176": {
+      "fundCode": "K55303BT4176",
+      "fundName": "마이다스아시아리더스성장주연금증권자투자신탁(UH)(주식)C-Pe2",
+      "totalFee": "1.17",
+      "annualCost": "11700"
+    },
+    "K55223CN7403": {
+      "fundCode": "K55223CN7403",
+      "fundName": "KB스타코스닥150인덱스증권자투자신탁(주식-파생형)C-퇴직e클래스",
+      "totalFee": "0.77",
+      "annualCost": "7700"
+    },
+    "K55105EI1255": {
+      "fundCode": "K55105EI1255",
+      "fundName": "삼성글로벌휴머노이드로봇증권자투자신탁UH[주식]_Cpe(퇴직연금)",
+      "totalFee": "1.29",
+      "annualCost": "12900"
+    },
+    "K55303CR9044": {
+      "fundCode": "K55303CR9044",
+      "fundName": "마이다스아시아리더스성장주증권자투자신탁(H)(주식)C-Pe2",
+      "totalFee": "1.29",
+      "annualCost": "12900"
+    },
+    "K55105EI1057": {
+      "fundCode": "K55105EI1057",
+      "fundName": "삼성글로벌휴머노이드로봇증권자투자신탁H[주식]_Cpe(퇴직연금)",
+      "totalFee": "1.29",
+      "annualCost": "12900"
+    },
+    "K55101E12366": {
+      "fundCode": "K55101E12366",
+      "fundName": "한국투자글로벌AI&반도체TOP10증권자투자신탁UH(주식)(C-Re)",
+      "totalFee": "1.20",
+      "annualCost": "12000"
+    },
+    "K55301BV2699": {
+      "fundCode": "K55301BV2699",
+      "fundName": "미래에셋연금브라질업종대표증권자투자신탁 1(주식)종류C-P2e",
+      "totalFee": "1.21",
+      "annualCost": "12100"
+    },
+    "K55206C22408": {
+      "fundCode": "K55206C22408",
+      "fundName": "키움글로벌차세대IT&네트워크증권자투자신탁(UH)[주식]C-P2e(퇴직연금)",
+      "totalFee": "1.26",
+      "annualCost": "12600"
+    },
+    "K55101E12200": {
+      "fundCode": "K55101E12200",
+      "fundName": "한국투자글로벌AI&반도체TOP10증권자투자신탁H(주식)(C-Re)",
+      "totalFee": "1.21",
+      "annualCost": "12100"
+    },
+    "K55301BW9560": {
+      "fundCode": "K55301BW9560",
+      "fundName": "미래에셋퇴직연금다이와일본밸류중소형증권자투자신탁 1(주식)종류C-P2e",
+      "totalFee": "1.19",
+      "annualCost": "11900"
+    },
+    "K55206C22200": {
+      "fundCode": "K55206C22200",
+      "fundName": "키움글로벌차세대IT&네트워크증권자투자신탁(H)[주식]ClassC-P2e(퇴직연금)",
+      "totalFee": "1.26",
+      "annualCost": "12600"
+    },
+    "K55223DD2264": {
+      "fundCode": "K55223DD2264",
+      "fundName": "KB스타베트남VN30인덱스증권자투자신탁(주식-파생형)C-퇴직e",
+      "totalFee": "0.89",
+      "annualCost": "8900"
+    },
+    "K55230BT8043": {
+      "fundCode": "K55230BT8043",
+      "fundName": "키움슈로더이머징위너스증권자투자신탁(주식혼합-재간접형)ClassC-Cpe(퇴직연금)",
+      "totalFee": "1.44",
+      "annualCost": "14400"
+    },
+    "K55301BU3904": {
+      "fundCode": "K55301BU3904",
+      "fundName": "미래에셋퇴직플랜KRX100인덱스안정형40증권자투자신탁 1(채권혼합) 종류C-P2e",
+      "totalFee": "0.41",
+      "annualCost": "4100"
+    },
+    "K55303BT4226": {
+      "fundCode": "K55303BT4226",
+      "fundName": "마이다스퇴직연금배당40증권자투자신탁 1(채권혼합)Ce",
+      "totalFee": "0.54",
+      "annualCost": "5400"
+    },
+    "K55363BT4686": {
+      "fundCode": "K55363BT4686",
+      "fundName": "트러스톤장기성장40퇴직연금증권자투자신탁[채권혼합]Ce클래스",
+      "totalFee": "0.62",
+      "annualCost": "6200"
+    },
+    "K55223BU8650": {
+      "fundCode": "K55223BU8650",
+      "fundName": "KB퇴직연금배당40증권자투자신탁(채권혼합)C-E",
+      "totalFee": "0.53",
+      "annualCost": "5300"
+    },
+    "K55101BT5607": {
+      "fundCode": "K55101BT5607",
+      "fundName": "한국투자퇴직연금한국의힘40증권자투자신탁 1(채권혼합)(C-e)",
+      "totalFee": "0.54",
+      "annualCost": "5400"
+    },
+    "K55301BU2989": {
+      "fundCode": "K55301BU2989",
+      "fundName": "미래에셋퇴직플랜40증권자투자신탁 1(채권혼합)종류C-P2e",
+      "totalFee": "0.56",
+      "annualCost": "5600"
+    },
+    "K55301BU2963": {
+      "fundCode": "K55301BU2963",
+      "fundName": "미래에셋퇴직연금베스트펀드컬렉션증권자투자신탁 1(채권혼합-재간접형)종류C-P2e",
+      "totalFee": "0.60",
+      "annualCost": "6000"
+    },
+    "K55229BU6948": {
+      "fundCode": "K55229BU6948",
+      "fundName": "카디안퇴직연금업종일등40증권자투자신탁[채권혼합]클래스C-E",
+      "totalFee": "0.54",
+      "annualCost": "5400"
+    },
+    "K55364C93745": {
+      "fundCode": "K55364C93745",
+      "fundName": "에셋플러스글로벌리치투게더증권자투자신탁 1(주식)종류C-P2e",
+      "totalFee": "1.25",
+      "annualCost": "12500"
+    },
+    "K55301BV2442": {
+      "fundCode": "K55301BV2442",
+      "fundName": "미래에셋퇴직연금코어밸류40증권자투자신탁 1(채권혼합)종류C-P2e",
+      "totalFee": "0.55",
+      "annualCost": "5500"
+    },
+    "K55210CY1028": {
+      "fundCode": "K55210CY1028",
+      "fundName": "신한삼성전자알파증권자투자신탁 1[채권혼합](종류C-re)",
+      "totalFee": "0.56",
+      "annualCost": "5600"
+    },
+    "K55105DK2904": {
+      "fundCode": "K55105DK2904",
+      "fundName": "삼성글로벌메타버스증권자투자신탁UH[주식]_Cpe(퇴직연금)",
+      "totalFee": "1.37",
+      "annualCost": "13700"
+    },
+    "K55105BV9965": {
+      "fundCode": "K55105BV9965",
+      "fundName": "삼성일본중소형FOCUS증권자투자신탁H[주식]Cpe(퇴직연금)",
+      "totalFee": "1.45",
+      "annualCost": "14500"
+    },
+    "K55223BU8726": {
+      "fundCode": "K55223BU8726",
+      "fundName": "KB퇴직연금스타펀드셀렉션증권자투자신탁(채권혼합-재간접형)C-E",
+      "totalFee": "0.83",
+      "annualCost": "8300"
+    },
+    "K55301DD9983": {
+      "fundCode": "K55301DD9983",
+      "fundName": "미래에셋차이나과창판증권투자신탁(주식) 종류 C-P2e",
+      "totalFee": "0.97",
+      "annualCost": "9700"
+    },
+    "K55209BT8974": {
+      "fundCode": "K55209BT8974",
+      "fundName": "신영퇴직연금가치40증권자투자신탁(채권혼합)C-E형",
+      "totalFee": "0.54",
+      "annualCost": "5400"
+    },
+    "K55216BY4761": {
+      "fundCode": "K55216BY4761",
+      "fundName": "DB글로벌차세대모빌리티증권자투자신탁(H)[주식]C/C-P2E",
+      "totalFee": "1.39",
+      "annualCost": "13900"
+    },
+    "K55105DK2748": {
+      "fundCode": "K55105DK2748",
+      "fundName": "삼성글로벌메타버스증권자투자신탁H[주식]_Cpe(퇴직연금)",
+      "totalFee": "1.38",
+      "annualCost": "13800"
+    },
+    "K55105BW2472": {
+      "fundCode": "K55105BW2472",
+      "fundName": "삼성일본중소형FOCUS증권자투자신탁UH[주식]Cpe(퇴직연금)",
+      "totalFee": "1.46",
+      "annualCost": "14600"
+    },
+    "K55223BV4542": {
+      "fundCode": "K55223BV4542",
+      "fundName": "KB중국본토A주증권자투자신탁(주식)C-퇴직e",
+      "totalFee": "1.38",
+      "annualCost": "13800"
+    },
+    "K55301BV2525": {
+      "fundCode": "K55301BV2525",
+      "fundName": "미래에셋퇴직플랜G40증권자투자신탁 1(채권혼합)종류C-P2e",
+      "totalFee": "0.61",
+      "annualCost": "6100"
+    },
+    "K55209BT8982": {
+      "fundCode": "K55209BT8982",
+      "fundName": "신영퇴직연금배당40증권자투자신탁(채권혼합)C-E형",
+      "totalFee": "0.54",
+      "annualCost": "5400"
+    },
+    "K55301BU3045": {
+      "fundCode": "K55301BU3045",
+      "fundName": "미래에셋베트남증권자투자신탁 1(UH)(주식)종류C-P2e",
+      "totalFee": "1.35",
+      "annualCost": "13500"
+    },
+    "K55105BT7773": {
+      "fundCode": "K55105BT7773",
+      "fundName": "삼성퇴직연금코리아중소형채권혼합증권자투자신탁 1[채권혼합]_Ce",
+      "totalFee": "0.60",
+      "annualCost": "6000"
+    },
+    "K55101CA2695": {
+      "fundCode": "K55101CA2695",
+      "fundName": "한국투자글로벌전기차&자율주행증권투자신탁(주식)(C-Re)",
+      "totalFee": "1.22",
+      "annualCost": "12200"
+    },
+    "KR5301AN6388": {
+      "fundCode": "KR5301AN6388",
+      "fundName": "미래에셋퇴직플랜아시아그레이트컨슈머증권자투자신탁 1(주식-재간접형)종류C-e",
+      "totalFee": "1.48",
+      "annualCost": "14800"
+    },
+    "K55223C30059": {
+      "fundCode": "K55223C30059",
+      "fundName": "KB글로벌테크놀로지EMP증권자투자신탁(주식-재간접형)C-퇴직e",
+      "totalFee": "1.44",
+      "annualCost": "14400"
+    },
+    "K55101BT7462": {
+      "fundCode": "K55101BT7462",
+      "fundName": "한국투자연금베트남그로스증권자투자신탁(주식)(C-Re)",
+      "totalFee": "1.26",
+      "annualCost": "12600"
+    },
+    "K55366BU9770": {
+      "fundCode": "K55366BU9770",
+      "fundName": "iM에셋월드에너지증권자투자신탁(주식-재간접형)(UH)(C-Rpe)",
+      "totalFee": "1.21",
+      "annualCost": "12100"
+    },
+    "K55301BU3052": {
+      "fundCode": "K55301BU3052",
+      "fundName": "미래에셋연금인디아인프라증권자투자신탁 1(주식)종류C-P2e",
+      "totalFee": "1.24",
+      "annualCost": "12400"
+    },
+    "K55301BU3037": {
+      "fundCode": "K55301BU3037",
+      "fundName": "미래에셋글로벌솔루션증권자투자신탁(주식-재간접형)종류C-P2e",
+      "totalFee": "1.78",
+      "annualCost": "17800"
+    },
+    "K55301D89594": {
+      "fundCode": "K55301D89594",
+      "fundName": "미래에셋MSCIAC월드인덱스증권자투자신탁(주식)(UH)종류C-P2e",
+      "totalFee": "0.64",
+      "annualCost": "6400"
+    },
+    "K55234CJ0997": {
+      "fundCode": "K55234CJ0997",
+      "fundName": "IBK플레인바닐라EMP증권투자신탁[혼합-재간접형]종류C-Re",
+      "totalFee": "1.14",
+      "annualCost": "11400"
+    },
+    "K55229BU7300": {
+      "fundCode": "K55229BU7300",
+      "fundName": "카디안차이나드래곤AShare증권자투자신탁(H)[주식]클래스C-P(퇴직연금)E",
+      "totalFee": "1.46",
+      "annualCost": "14600"
+    },
+    "K55301BX0493": {
+      "fundCode": "K55301BX0493",
+      "fundName": "미래에셋차이나그로스증권자투자신탁 1(주식)종류C-P2e",
+      "totalFee": "1.39",
+      "annualCost": "13900"
+    },
+    "K55235BW6799": {
+      "fundCode": "K55235BW6799",
+      "fundName": "피델리티아시아증권자투자신탁(주식)CP-e",
+      "totalFee": "1.19",
+      "annualCost": "11900"
+    },
+    "K55366BU9713": {
+      "fundCode": "K55366BU9713",
+      "fundName": "iM에셋월드에너지증권자투자신탁(주식-재간접형)(H)(C-Rpe)",
+      "totalFee": "1.22",
+      "annualCost": "12200"
+    },
+    "K55301C62544": {
+      "fundCode": "K55301C62544",
+      "fundName": "미래에셋글로벌코어테크EMP증권자투자신탁(주식-재간접형)종류C-P2e",
+      "totalFee": "1.39",
+      "annualCost": "13900"
+    },
+    "K55210DY3163": {
+      "fundCode": "K55210DY3163",
+      "fundName": "신한누버거버먼미국가치주증권투자신탁(H)[주식-재간접형](종류C-re)",
+      "totalFee": "1.37",
+      "annualCost": "13700"
+    },
+    "K55301C99009": {
+      "fundCode": "K55301C99009",
+      "fundName": "미래에셋아시아그로스증권자투자신탁(H)(주식-재간접형)종류C-P2e",
+      "totalFee": "1.65",
+      "annualCost": "16500"
+    },
+    "K55223DJ3068": {
+      "fundCode": "K55223DJ3068",
+      "fundName": "KB글로벌AI메타버스테크증권자투자신탁(주식)(UH)C-퇴직e",
+      "totalFee": "1.33",
+      "annualCost": "13300"
+    },
+    "K55365BT3678": {
+      "fundCode": "K55365BT3678",
+      "fundName": "KCGI차이나증권투자신탁[주식]종류C-Pe2",
+      "totalFee": "1.31",
+      "annualCost": "13100"
+    },
+    "K55223BU8783": {
+      "fundCode": "K55223BU8783",
+      "fundName": "KB글로벌주식솔루션EMP증권자투자신탁(주식-재간접형)(UH)C-퇴직e",
+      "totalFee": "1.18",
+      "annualCost": "11800"
+    },
+    "K55223C89220": {
+      "fundCode": "K55223C89220",
+      "fundName": "KB통중국4차산업증권자투자신탁(주식)C-퇴직e",
+      "totalFee": "1.46",
+      "annualCost": "14600"
+    },
+    "K55230BT8209": {
+      "fundCode": "K55230BT8209",
+      "fundName": "키움슈로더글로벌가치주인컴증권자투자신탁(주식-재간접형)ClassC-CPe(퇴직연금)",
+      "totalFee": "2.69",
+      "annualCost": "26900"
+    },
+    "K55105BT6528": {
+      "fundCode": "K55105BT6528",
+      "fundName": "삼성픽테로보틱스증권자투자신탁UH[주식-재간접형]_Cpe(퇴직연금)",
+      "totalFee": "1.45",
+      "annualCost": "14500"
+    },
+    "K55207BT8117": {
+      "fundCode": "K55207BT8117",
+      "fundName": "교보악사로보테크증권자투자신탁 1(H)[주식]ClassC-Re",
+      "totalFee": "1.26",
+      "annualCost": "12600"
+    },
+    "K55301E64355": {
+      "fundCode": "K55301E64355",
+      "fundName": "미래에셋미국나스닥100인덱스증권자투자신탁(주식)(UH)종류C-P2e",
+      "totalFee": "0.45",
+      "annualCost": "4500"
+    },
+    "K55235BW6823": {
+      "fundCode": "K55235BW6823",
+      "fundName": "피델리티월드Big4증권자투자신탁(주식-재간접형)CP-e",
+      "totalFee": "1.30",
+      "annualCost": "13000"
+    },
+    "K55301BW0031": {
+      "fundCode": "K55301BW0031",
+      "fundName": "미래에셋연금선진시장증권자투자신탁 1(주식-재간접형)종류C-P2e",
+      "totalFee": "1.10",
+      "annualCost": "11000"
+    },
+    "K55223DM9037": {
+      "fundCode": "K55223DM9037",
+      "fundName": "KB글로벌AI메타버스테크증권자투자신탁(주식)(H)C-퇴직e",
+      "totalFee": "1.33",
+      "annualCost": "13300"
+    },
+    "K55223DD2231": {
+      "fundCode": "K55223DD2231",
+      "fundName": "KB스타미국나스닥100인덱스증권자투자신탁(주식-파생형)(H)C-퇴직e",
+      "totalFee": "0.93",
+      "annualCost": "9300"
+    },
+    "K55236CW9742": {
+      "fundCode": "K55236CW9742",
+      "fundName": "한국밸류글로벌배당인컴증권자투자신탁(주식)(C-Re)",
+      "totalFee": "1.32",
+      "annualCost": "13200"
+    },
+    "K55105BT6502": {
+      "fundCode": "K55105BT6502",
+      "fundName": "삼성픽테로보틱스증권자투자신탁H[주식-재간접형]Cpe(퇴직연금)",
+      "totalFee": "1.45",
+      "annualCost": "14500"
+    },
+    "K55101BT4337": {
+      "fundCode": "K55101BT4337",
+      "fundName": "한국투자웰링턴글로벌퀄리티증권자투자신탁H(주식)(C-Re)",
+      "totalFee": "1.33",
+      "annualCost": "13300"
+    },
+    "K55301BW0734": {
+      "fundCode": "K55301BW0734",
+      "fundName": "미래에셋미국인덱스EMP증권자투자신탁(주식-재간접형)종류C-P2e",
+      "totalFee": "0.60",
+      "annualCost": "6000"
+    },
+    "K55105BU8349": {
+      "fundCode": "K55105BU8349",
+      "fundName": "삼성아세안증권자투자신탁 2[주식](Cpe(퇴직연금))",
+      "totalFee": "1.35",
+      "annualCost": "13500"
+    },
+    "K55301C83862": {
+      "fundCode": "K55301C83862",
+      "fundName": "미래에셋유럽블루칩인덱스증권자투자신탁 1(주식)종류C-P2e",
+      "totalFee": "0.94",
+      "annualCost": "9400"
+    },
+    "K55235BW6898": {
+      "fundCode": "K55235BW6898",
+      "fundName": "피델리티글로벌테크놀로지증권자투자신탁(주식-재간접형)종류CP-e",
+      "totalFee": "1.53",
+      "annualCost": "15300"
+    },
+    "K55301E64819": {
+      "fundCode": "K55301E64819",
+      "fundName": "미래에셋미국나스닥100인덱스증권자투자신탁(주식)(H)종류C-P2e",
+      "totalFee": "0.55",
+      "annualCost": "5500"
+    },
+    "K55210DT4614": {
+      "fundCode": "K55210DT4614",
+      "fundName": "신한미국S&P500인덱스증권자투자신탁(UH)[주식-파생형](종류C-re)",
+      "totalFee": "0.33",
+      "annualCost": "3300"
+    },
+    "K55235BW6864": {
+      "fundCode": "K55235BW6864",
+      "fundName": "피델리티글로벌배당인컴증권자투자신탁(주식-재간접형)종류CP-e",
+      "totalFee": "1.53",
+      "annualCost": "15300"
+    },
+    "K55366BT9369": {
+      "fundCode": "K55366BT9369",
+      "fundName": "iM에셋글로벌자산배분증권투자신탁(주식혼합-재간접형)(H)(C-Rpe)",
+      "totalFee": "1.33",
+      "annualCost": "13300"
+    },
+    "K55301C65992": {
+      "fundCode": "K55301C65992",
+      "fundName": "미래에셋미국배당커버드콜액티브증권자투자신탁(주식)(UH)종류C-P2e",
+      "totalFee": "0.98",
+      "annualCost": "9800"
+    },
+    "K55364BV4145": {
+      "fundCode": "K55364BV4145",
+      "fundName": "에셋플러스글로벌리치투게더40증권자투자신탁 1[채권혼합]종류C-P2e",
+      "totalFee": "0.87",
+      "annualCost": "8700"
+    },
+    "K55105BU1120": {
+      "fundCode": "K55105BU1120",
+      "fundName": "삼성미국S&P500인덱스증권자투자신탁UH[주식]_Cpe(퇴직연금)",
+      "totalFee": "0.96",
+      "annualCost": "9600"
+    },
+    "K55230BT8027": {
+      "fundCode": "K55230BT8027",
+      "fundName": "키움슈로더유로증권자투자신탁(주식-재간접형)ClassC-CPe(퇴직연금)",
+      "totalFee": "1.32",
+      "annualCost": "13200"
+    },
+    "K55301BU3425": {
+      "fundCode": "K55301BU3425",
+      "fundName": "미래에셋퇴직연금스마트롱숏30증권자투자신탁 1(채권혼합) 종류C-P2e",
+      "totalFee": "0.56",
+      "annualCost": "5600"
+    },
+    "K55210DT4440": {
+      "fundCode": "K55210DT4440",
+      "fundName": "신한미국S&P500인덱스증권자투자신탁(H)[주식-파생형](종류C-re)",
+      "totalFee": "0.37",
+      "annualCost": "3700"
+    },
+    "K55235BU7351": {
+      "fundCode": "K55235BU7351",
+      "fundName": "피델리티글로벌멀티에셋인컴증권자투자신탁(채권혼합-재간접형)종류CP-e",
+      "totalFee": "1.66",
+      "annualCost": "16600"
+    },
+    "K55301BU5453": {
+      "fundCode": "K55301BU5453",
+      "fundName": "미래에셋평생소득TIF혼합자산자투자신탁종류C-P2e",
+      "totalFee": "0.71",
+      "annualCost": "7100"
+    },
+    "K55370BU1953": {
+      "fundCode": "K55370BU1953",
+      "fundName": "AB셀렉트미국증권투자신탁(주식-재간접형)종류Ce-P2",
+      "totalFee": "1.43",
+      "annualCost": "14300"
+    },
+    "K55230C63444": {
+      "fundCode": "K55230C63444",
+      "fundName": "키움슈로더글로벌타겟리턴증권투자신탁(주식혼합-재간접형)ClassC-CPe(퇴직연금)",
+      "totalFee": "1.12",
+      "annualCost": "11200"
+    },
+    "K55301BU3391": {
+      "fundCode": "K55301BU3391",
+      "fundName": "미래에셋인도중소형포커스증권자투자신탁 1(주식)종류C-P2e",
+      "totalFee": "1.39",
+      "annualCost": "13900"
+    },
+    "K55105EE6589": {
+      "fundCode": "K55105EE6589",
+      "fundName": "삼성디딤밀당다람쥐글로벌EMP증권자투자신탁[채권혼합-재간접형]_Cpe(퇴직연금)",
+      "totalFee": "0.47",
+      "annualCost": "4700"
+    },
+    "K55364BU0813": {
+      "fundCode": "K55364BU0813",
+      "fundName": "에셋플러스차이나리치투게더퇴직연금증권자투자신탁 1[주식]종류Ce",
+      "totalFee": "1.30",
+      "annualCost": "13000"
+    },
+    "K55307DH1634": {
+      "fundCode": "K55307DH1634",
+      "fundName": "유리글로벌Top10주식과단기채증권자투자신탁[채권혼합]_ClassC-P1e",
+      "totalFee": "0.62",
+      "annualCost": "6200"
+    },
+    "K55301C65984": {
+      "fundCode": "K55301C65984",
+      "fundName": "미래에셋미국배당커버드콜액티브증권자투자신탁(주식)(H)종류C-P2e",
+      "totalFee": "0.98",
+      "annualCost": "9800"
+    },
+    "K55302BU0115": {
+      "fundCode": "K55302BU0115",
+      "fundName": "베어링독일증권자투자신탁[H](주식-재간접형)ClassC-P2e",
+      "totalFee": "1.20",
+      "annualCost": "12000"
+    },
+    "K55301C83854": {
+      "fundCode": "K55301C83854",
+      "fundName": "미래에셋미국블루칩인덱스증권투자신탁 1(주식)종류C-P2e",
+      "totalFee": "1.01",
+      "annualCost": "10100"
+    },
+    "K55206BV7827": {
+      "fundCode": "K55206BV7827",
+      "fundName": "키움디딤더높이EMP증권투자신탁[채권혼합-재간접형]C-P2e(퇴직연금)",
+      "totalFee": "0.97",
+      "annualCost": "9700"
+    },
+    "K55230D81055": {
+      "fundCode": "K55230D81055",
+      "fundName": "키움슈로더글로벌지속가능성장주증권투자신탁(주식-재간접형)ClassC-CPe(퇴직연금)",
+      "totalFee": "1.45",
+      "annualCost": "14500"
+    },
+    "K55102BT6570": {
+      "fundCode": "K55102BT6570",
+      "fundName": "하나글로벌리츠부동산자투자신탁[재간접형]ClassC-P2E",
+      "totalFee": "1.42",
+      "annualCost": "14200"
+    },
+    "K55301BU2997": {
+      "fundCode": "K55301BU2997",
+      "fundName": "미래에셋글로벌솔루션40증권자투자신탁 1(채권혼합)종류C-P2e",
+      "totalFee": "1.10",
+      "annualCost": "11000"
+    },
+    "K55101D20890": {
+      "fundCode": "K55101D20890",
+      "fundName": "한국투자미국배당귀족증권자투자신탁UH(주식)(C-Re)",
+      "totalFee": "0.91",
+      "annualCost": "9100"
+    },
+    "K55105D17574": {
+      "fundCode": "K55105D17574",
+      "fundName": "삼성글로벌다이나믹자산배분증권자투자신탁H[주식혼합-재간접형]_Cpe(퇴직연금)",
+      "totalFee": "1.07",
+      "annualCost": "10700"
+    },
+    "K55370D73627": {
+      "fundCode": "K55370D73627",
+      "fundName": "AB미국그로스UH증권투자신탁(주식-재간접형)종류Ce-P2",
+      "totalFee": "1.26",
+      "annualCost": "12600"
+    },
+    "K55301BY4585": {
+      "fundCode": "K55301BY4585",
+      "fundName": "미래에셋글로벌혁신기업ESG증권자투자신탁(주식) 종류C-P2e",
+      "totalFee": "1.27",
+      "annualCost": "12700"
+    },
+    "K55301BU4118": {
+      "fundCode": "K55301BU4118",
+      "fundName": "미래에셋G2이노베이터증권자투자신탁(주식)종류C-P2e",
+      "totalFee": "1.26",
+      "annualCost": "12600"
+    },
+    "K55366C87809": {
+      "fundCode": "K55366C87809",
+      "fundName": "iM에셋다이나믹하이인컴증권투자신탁(주식혼합-재간접형)(C-Rpe)",
+      "totalFee": "1.22",
+      "annualCost": "12200"
+    },
+    "K55223CO5620": {
+      "fundCode": "K55223CO5620",
+      "fundName": "KB글로벌ESG성장리더스증권자투자신탁(주식)(H)C-퇴직e",
+      "totalFee": "1.35",
+      "annualCost": "13500"
+    },
+    "K55101D20692": {
+      "fundCode": "K55101D20692",
+      "fundName": "한국투자미국배당귀족증권자투자신탁H(주식)(C-Re)",
+      "totalFee": "0.92",
+      "annualCost": "9200"
+    },
+    "K55235BU7336": {
+      "fundCode": "K55235BU7336",
+      "fundName": "피델리티글로벌금융주증권자투자신탁(주식-재간접형)CP-e",
+      "totalFee": "1.58",
+      "annualCost": "15800"
+    },
+    "K55229BU7193": {
+      "fundCode": "K55229BU7193",
+      "fundName": "카디안차이나드래곤AShare40증권자투자신탁(H)[채권혼합]클래스C-P(퇴직연금)E",
+      "totalFee": "0.96",
+      "annualCost": "9600"
+    },
+    "K55370BU1789": {
+      "fundCode": "K55370BU1789",
+      "fundName": "AB미국그로스증권투자신탁(주식-재간접형)종류형Ce-P2",
+      "totalFee": "1.26",
+      "annualCost": "12600"
+    },
+    "K55301BU3102": {
+      "fundCode": "K55301BU3102",
+      "fundName": "미래에셋연금글로벌그로스증권자투자신탁 1(주식)종류C-P2e",
+      "totalFee": "1.22",
+      "annualCost": "12200"
+    },
+    "K55307C28492": {
+      "fundCode": "K55307C28492",
+      "fundName": "유리글로벌거래소증권자투자신탁 1[주식]C/C-P1e",
+      "totalFee": "1.16",
+      "annualCost": "11600"
+    },
+    "K55205BU9205": {
+      "fundCode": "K55205BU9205",
+      "fundName": "미래에셋글로벌EMP솔루션증권투자신탁[채권혼합-재간접형]종류Crp-e",
+      "totalFee": "0.86",
+      "annualCost": "8600"
+    },
+    "K55301DF6763": {
+      "fundCode": "K55301DF6763",
+      "fundName": "미래에셋이머징달러우량국공채증권자투자신탁(H)(채권)종류C-P2e",
+      "totalFee": "0.80",
+      "annualCost": "8000"
+    },
+    "K55366BT9641": {
+      "fundCode": "K55366BT9641",
+      "fundName": "iM에셋월드헬스사이언스증권투자신탁(주식-재간접형)(C-Rpe)",
+      "totalFee": "1.17",
+      "annualCost": "11700"
+    },
+    "K55105C31395": {
+      "fundCode": "K55105C31395",
+      "fundName": "삼성누버거버먼이머징단기채권증권자투자신탁H[채권-재간접형]Cpe(퇴직연금)",
+      "totalFee": "1.00",
+      "annualCost": "10000"
+    },
+    "K55235BW6906": {
+      "fundCode": "K55235BW6906",
+      "fundName": "피델리티글로벌배당인컴40증권자투자신탁(채권혼합-재간접형)종류CP-e",
+      "totalFee": "1.02",
+      "annualCost": "10200"
+    },
+    "K55105BW6705": {
+      "fundCode": "K55105BW6705",
+      "fundName": "삼성누버거버먼글로벌인컴증권자투자신탁H[채권-재간접형]Cpe(퇴직연금)",
+      "totalFee": "1.00",
+      "annualCost": "10000"
+    },
+    "K55301BU2922": {
+      "fundCode": "K55301BU2922",
+      "fundName": "미래에셋글로벌다이나믹플러스증권자투자신탁 1(채권)종류C-P2e",
+      "totalFee": "0.65",
+      "annualCost": "6500"
+    },
+    "K55228BT5159": {
+      "fundCode": "K55228BT5159",
+      "fundName": "우리PIMCO토탈리턴증권자투자신탁[채권_재간접형](H)ClassPe1",
+      "totalFee": "0.92",
+      "annualCost": "9200"
+    },
+    "K55370BU1987": {
+      "fundCode": "K55370BU1987",
+      "fundName": "AB글로벌고수익증권투자신탁(채권-재간접형)종류형Ce-P2",
+      "totalFee": "1.12",
+      "annualCost": "11200"
+    },
+    "K55301CM1170": {
+      "fundCode": "K55301CM1170",
+      "fundName": "미래에셋달러우량중장기채권증권자투자신탁(UH)(채권)종류C-P2e",
+      "totalFee": "0.50",
+      "annualCost": "5000"
+    },
+    "K55301BT7965": {
+      "fundCode": "K55301BT7965",
+      "fundName": "미래에셋퇴직플랜글로벌다이나믹증권자투자신탁 1(채권)종류C-P2e",
+      "totalFee": "0.49",
+      "annualCost": "4900"
+    },
+    "K55370CU3263": {
+      "fundCode": "K55370CU3263",
+      "fundName": "AB미국인컴증권투자신탁(채권-재간접형)종류Ce-P2",
+      "totalFee": "0.97",
+      "annualCost": "9700"
+    },
+    "K55105BV3687": {
+      "fundCode": "K55105BV3687",
+      "fundName": "삼성인디아증권자투자신탁 2[주식]Cpe(퇴직연금)",
+      "totalFee": "1.85",
+      "annualCost": "18500"
+    },
+    "K55301BV2426": {
+      "fundCode": "K55301BV2426",
+      "fundName": "미래에셋연금인디아업종대표증권자투자신탁 1(주식)종류C-P2e",
+      "totalFee": "1.34",
+      "annualCost": "13400"
+    },
+    "K55235CI9634": {
+      "fundCode": "K55235CI9634",
+      "fundName": "피델리티인디아증권자투자신탁(주식-재간접형)종류CP-e",
+      "totalFee": "1.69",
+      "annualCost": "16900"
+    },
+    "K55207CF0184": {
+      "fundCode": "K55207CF0184",
+      "fundName": "교보악사공모주하이일드플러스증권투자신탁[채권혼합]ClassC-Re(퇴직연금)",
+      "totalFee": "0.87",
+      "annualCost": "8700"
+    },
+    "K55228BT5050": {
+      "fundCode": "K55228BT5050",
+      "fundName": "우리PIMCO글로벌투자등급자투자신탁[채권_재간접형](H)ClassPe1",
+      "totalFee": "0.92",
+      "annualCost": "9200"
+    },
+    "K55105DD2960": {
+      "fundCode": "K55105DD2960",
+      "fundName": "삼성글로벌채권증권자투자신탁H[채권]_Cpe(퇴직연금)",
+      "totalFee": "0.65",
+      "annualCost": "6500"
+    },
+    "K55301BW1351": {
+      "fundCode": "K55301BW1351",
+      "fundName": "미래에셋퇴직플랜친디아업종대표40증권자투자신탁 1(채권혼합)종류C-P2e",
+      "totalFee": "0.85",
+      "annualCost": "8500"
+    },
+    "K55228CZ2298": {
+      "fundCode": "K55228CZ2298",
+      "fundName": "우리아티잰글로벌그로스증권자투자신탁[주식_재간접형](H)_ClassPe1",
+      "totalFee": "1.51",
+      "annualCost": "15100"
+    },
+    "K55301CM1311": {
+      "fundCode": "K55301CM1311",
+      "fundName": "미래에셋달러우량중장기채권증권자투자신탁(H)(채권)종류C-P2e",
+      "totalFee": "0.51",
+      "annualCost": "5100"
+    },
+    "K55303CK1469": {
+      "fundCode": "K55303CK1469",
+      "fundName": "마이다스우량채권증권자투자신탁 1(채권)C-Pe2",
+      "totalFee": "0.24",
+      "annualCost": "2400"
+    },
+    "K55216BT4297": {
+      "fundCode": "K55216BT4297",
+      "fundName": "DB정통크레딧증권자투자신탁[채권]종류C-P2E",
+      "totalFee": "0.26",
+      "annualCost": "2600"
+    },
+    "K55206C11286": {
+      "fundCode": "K55206C11286",
+      "fundName": "키움더드림단기채증권투자신탁[채권]C-P2e(퇴직연금)",
+      "totalFee": "0.19",
+      "annualCost": "1900"
+    },
+    "K55210D13340": {
+      "fundCode": "K55210D13340",
+      "fundName": "신한베스트크레딧단기증권자투자신탁[채권](종류C-re)",
+      "totalFee": "0.24",
+      "annualCost": "2400"
+    },
+    "K55101BV9571": {
+      "fundCode": "K55101BV9571",
+      "fundName": "한국투자크레딧포커스ESG증권자투자신탁 1(채권)(C-Re)",
+      "totalFee": "0.30",
+      "annualCost": "3000"
+    },
+    "K55107BU0146": {
+      "fundCode": "K55107BU0146",
+      "fundName": "우리단기채권증권투자신탁(채권)ClassC-Pe",
+      "totalFee": "0.22",
+      "annualCost": "2200"
+    },
+    "K55214BU9535": {
+      "fundCode": "K55214BU9535",
+      "fundName": "유진챔피언단기채증권자투자신탁(채권) Class C-Pe2",
+      "totalFee": "0.21",
+      "annualCost": "2100"
+    },
+    "K55213BU7399": {
+      "fundCode": "K55213BU7399",
+      "fundName": "한화내일받는단기국공채증권자투자신탁(채권)C-RPe(퇴직연금)",
+      "totalFee": "0.16",
+      "annualCost": "1600"
+    },
+    "K55105CK8670": {
+      "fundCode": "K55105CK8670",
+      "fundName": "삼성글로벌중단기채권증권자투자신탁H[채권-재간접형]_Cpe(퇴직연금)",
+      "totalFee": "0.47",
+      "annualCost": "4700"
+    },
+    "K55234BZ0204": {
+      "fundCode": "K55234BZ0204",
+      "fundName": "IBK단기국공채증권자투자신탁[채권]종류C-Re",
+      "totalFee": "0.14",
+      "annualCost": "1400"
+    },
+    "K55224BT5377": {
+      "fundCode": "K55224BT5377",
+      "fundName": "흥국퇴직연금멀티크레딧증권자투자신탁[채권]C-e",
+      "totalFee": "0.23",
+      "annualCost": "2300"
+    },
+    "K55206DW2460": {
+      "fundCode": "K55206DW2460",
+      "fundName": "키움단기국공채증권자투자신탁 1[채권]C-P2e(퇴직연금)",
+      "totalFee": "0.24",
+      "annualCost": "2400"
+    },
+    "K55301CH3264": {
+      "fundCode": "K55301CH3264",
+      "fundName": "미래에셋단기채알파증권자투자신탁(채권혼합)종류C-P2e",
+      "totalFee": "0.36",
+      "annualCost": "3600"
+    },
+    "K55301C07937": {
+      "fundCode": "K55301C07937",
+      "fundName": "미래에셋퇴직플랜글로벌그로스40증권자투자신탁 1(채권혼합)종류C-P2e",
+      "totalFee": "0.85",
+      "annualCost": "8500"
+    },
+    "K55301C04025": {
+      "fundCode": "K55301C04025",
+      "fundName": "미래에셋솔로몬단기국공채증권자투자신탁 1(채권)종류C-P2e",
+      "totalFee": "0.33",
+      "annualCost": "3300"
+    },
+    "K55301BV2632": {
+      "fundCode": "K55301BV2632",
+      "fundName": "미래에셋퇴직플랜글로벌다이나믹50증권자투자신탁 1(채권)종류C-P2e",
+      "totalFee": "0.39",
+      "annualCost": "3900"
+    },
+    "K55301CG2739": {
+      "fundCode": "K55301CG2739",
+      "fundName": "미래에셋솔로몬중장기국공채증권자투자신탁 1(채권)종류C-P2e",
+      "totalFee": "0.27",
+      "annualCost": "2700"
+    },
+    "K55301BV3077": {
+      "fundCode": "K55301BV3077",
+      "fundName": "미래에셋퇴직플랜글로벌그레이트컨슈머증권자투자신탁 1(주식) 종류C-P2e",
+      "totalFee": "1.03",
+      "annualCost": "10300"
+    },
+    "K55301CQ5235": {
+      "fundCode": "K55301CQ5235",
+      "fundName": "미래에셋친디아컨슈머증권투자신탁 1(주식)종류C-P2e",
+      "totalFee": "1.45",
+      "annualCost": "14500"
+    },
+    "K55301BU3003": {
+      "fundCode": "K55301BU3003",
+      "fundName": "미래에셋퇴직플랜글로벌그레이트컨슈머40증권자투자신탁 1(채권혼합)종류C-P2e",
+      "totalFee": "0.83",
+      "annualCost": "8300"
+    },
+    "K55105E24313": {
+      "fundCode": "K55105E24313",
+      "fundName": "삼성글로벌ChatAI증권자투자신탁UH[주식]_Cpe(퇴직연금)",
+      "totalFee": "1.30",
+      "annualCost": "13000"
+    },
+    "K55301C33560": {
+      "fundCode": "K55301C33560",
+      "fundName": "미래에셋솔로몬장기국공채증권자투자신탁 1(채권)종류C-P2e",
+      "totalFee": "0.29",
+      "annualCost": "2900"
+    },
+    "K55105E24156": {
+      "fundCode": "K55105E24156",
+      "fundName": "삼성글로벌ChatAI증권자투자신탁H[주식]_Cpe(퇴직연금)",
+      "totalFee": "1.31",
+      "annualCost": "13100"
+    },
+    "K55105BT4671": {
+      "fundCode": "K55105BT4671",
+      "fundName": "삼성ABF코리아장기채권인덱스증권투자신탁[채권]Cpe(퇴직연금)",
+      "totalFee": "0.40",
+      "annualCost": "4000"
+    },
+    "K55301C75793": {
+      "fundCode": "K55301C75793",
+      "fundName": "미래에셋연금글로벌헬스케어증권자투자신탁 1(주식)종류C-P2e",
+      "totalFee": "1.20",
+      "annualCost": "12000"
+    },
+    "K55235BW6849": {
+      "fundCode": "K55235BW6849",
+      "fundName": "피델리티유럽증권자투자신탁(주식-재간접형)CP-e",
+      "totalFee": "1.57",
+      "annualCost": "15700"
+    },
+    "K55234C00141": {
+      "fundCode": "K55234C00141",
+      "fundName": "IBK퇴직연금럭셔리라이프스타일증권자투자신탁[주식]C-e",
+      "totalFee": "1.19",
+      "annualCost": "11900"
+    }
+  }
+}
