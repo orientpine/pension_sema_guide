@@ -100,6 +100,52 @@ SAFE_ASSET_DECISION = "[예금 / 채권펀드명]"
 
 > ⚠️ **HARD RULE**: SAFE_ASSET_DECISION이 "예금"이면, 포트폴리오에 채권형 펀드 비중은 반드시 0%
 
+## TDF 출력 (v3.0 신규 - SAFE_ASSET_DECISION="TDF" 시 MANDATORY)
+
+> SAFE_ASSET_DECISION이 "TDF"인 경우 아래 섹션을 **반드시** 출력한다.
+> 예금/채권 출력 포맷은 변경하지 않으며, 이 섹션을 추가로 제공한다.
+
+### Step T1: TDF 선택 모드
+
+```
+SAFE_ASSET_DECISION = "TDF"
+TDF_MODE = "[ALL_IN_ONE_TDF / HYBRID_TDF_SLEEVE]"
+```
+
+| 모드 | 설명 | nonExemptRiskWeight |
+|------|------|:-------------------:|
+| **ALL_IN_ONE_TDF** | TDF 단일 상품으로 위험자산+안전자산 통합 운용 | [X]% |
+| **HYBRID_TDF_SLEEVE** | TDF를 안전자산 sleeve로 편입, 별도 위험자산 병행 | [X]% |
+
+**선택 모드**: [ALL_IN_ONE_TDF / HYBRID_TDF_SLEEVE]
+**선택 모드 nonExemptRiskWeight**: [X]% (DC형 70% 한도 산입 기준)
+**선택 근거**: [모드 선택 이유 및 nonExemptRiskWeight 산정 설명]
+
+### Step T2: TDF 원금손실 디스클로저 (필수 - TDF 선택 시 항상 출력)
+
+> ⚠️ **TDF는 주식 최대 80% 편입, 원금 비보장 상품입니다. 투자 전 충분히 검토하세요.**
+
+### Step T3: TDF 추천 표
+
+| 펀드명 | targetYear | 추천연령대 | hedge | 위험등급 | 1Y | 3Y | 총보수 | 운용사 | 설정금액 |
+|--------|:----------:|:----------:|:-----:|:--------:|---:|---:|------:|--------|--------:|
+| [펀드명] | [20XX] | [recommendedAgeBand] | [UH/H] | [riskLevel] | [return1y]% | [return3y]% | [totalFee]% | [운용사] | [netAssets]억 |
+| ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
+
+- **targetYear/recommendedAgeBand/hedge/riskLevel/return1y/return3y/netAssets**: `tdf_data.json` 참조
+- **totalFee**: `tdf_fees.json` `totalFee` 참조
+
+### Step T4: 적격성·총보수 검증 주석 (MANDATORY)
+
+| 펀드명 | needsReview | feeVerification.agree | 주석 |
+|--------|:-----------:|:---------------------:|------|
+| [펀드명] | true/false | true/false | [아래 규칙에 따라 표기] |
+
+**주석 표기 규칙**:
+- `needsReview=true` 펀드: **⚠️ 적격성 수동 확인 필요**
+- `feeVerification.agree=false` 펀드: **⚠️ 총보수 검증 불가 (사람확인 필요)**
+- 두 조건 모두 해당 시 두 주석을 모두 표기한다.
+
 ## 데이터 정합성 검증 결과 (v5.0 신규 - MANDATORY)
 
 ### ⚠️ 데이터 정합성 검증 결과
@@ -359,9 +405,9 @@ portfolios/YYYY-MM-DD-{profile}-{session}/01-fund-analysis.md
 ## 메타 정보
 
 ```yaml
-version: "2.0"
+version: "3.0"
 created: "2026-01-15"
-updated: "2026-03-30"
+updated: "2026-06-07"
 converted_to_skill: "2026-01-30"
 purpose: "fund-portfolio 에이전트용 출력 템플릿 스킬"
 consumers:
@@ -371,4 +417,8 @@ changes:
   - "v2.0: 카테고리별 전수 비교 증적 테이블 템플릿 추가"
   - "v2.0: UH/H 환헤지 비용 비교 테이블 템플릿 추가"
   - "v2.0: 안전자산 다각화 검토 테이블 템플릿 추가"
+  - "v3.0: TDF 출력 섹션 추가 (ALL_IN_ONE_TDF/HYBRID_TDF_SLEEVE 모드, nonExemptRiskWeight)"
+  - "v3.0: TDF 원금손실 디스클로저 의무화 (주식 최대 80%, 원금 비보장)"
+  - "v3.0: TDF 추천 표 컬럼 정의 (targetYear/recommendedAgeBand/hedge/riskLevel 등)"
+  - "v3.0: needsReview/feeVerification.agree 검증 주석 표기 규칙 추가"
 ```

@@ -1,6 +1,6 @@
 ---
 name: output-critic
-description: 포트폴리오 분석 출력 검증 에이전트. 환각(hallucination) 방지를 위해 모든 수치의 출처를 확인하고, fund_data.json/fund_fees.json과의 일치 여부를 검증합니다. 과신 표현을 탐지하고 신뢰도 점수를 산출합니다.
+description: 포트폴리오 분석 출력 검증 에이전트. 환각(hallucination) 방지를 위해 모든 수치의 출처를 확인하고, fund_data.json/fund_fees.json(일반 펀드) 및 tdf_data.json/tdf_fees.json(TDF 펀드)과의 일치 여부를 검증합니다. 과신 표현을 탐지하고 신뢰도 점수를 산출합니다.
 tools: Read, Grep, Write
 skills: file-save-protocol, devil-advocate
 model: opus
@@ -26,8 +26,10 @@ model: opus
 │     - 출처가 유효한 데이터 소스인지 확인                           │
 │                                                                 │
 │  2. 데이터 일치성 (Data Consistency)                             │
-│     - fund_data.json의 수익률과 일치                             │
-│     - fund_fees.json의 총보수와 일치                             │
+│     - fund_data.json의 수익률과 일치 (일반 펀드)                  │
+│     - fund_fees.json의 총보수와 일치 (일반 펀드)                  │
+│     - tdf_data.json의 수익률과 일치 (TDF 펀드)                    │
+│     - tdf_fees.json의 총보수와 일치 (TDF 펀드)                    │
 │     - 펀드명 정확성 확인                                         │
 │                                                                 │
 │  3. 환각 탐지 (Hallucination Detection)                          │
@@ -58,10 +60,15 @@ model: opus
 
 | 데이터 유형 | 소스 파일 | 검증 방법 |
 |------------|----------|----------|
-| **수익률** | `fund_data.json` | 펀드명 → return10y/7y/5y/3y/1y/6m 일치 |
-| **총보수** | `fund_fees.json` | 펀드명 → totalFee 일치 |
-| **위험등급** | `fund_data.json` | 펀드명 → riskLevel 일치 |
-| **순자산** | `fund_data.json` | 펀드명 → netAssets 일치 |
+| **수익률 (일반)** | `fund_data.json` | 펀드명 → return10y/7y/5y/3y/1y/6m 일치 |
+| **총보수 (일반)** | `fund_fees.json` | 펀드명 → totalFee 일치 |
+| **위험등급** | `fund_data.json` / `tdf_data.json` | 펀드명 → riskLevel 일치 |
+| **순자산** | `fund_data.json` / `tdf_data.json` | 펀드명 → netAssets 일치 |
+| **수익률 (TDF)** | `tdf_data.json` | 펀드명/fundCode → return1m/3m/6m/1y/2y/3y/returnSinceInception 일치 |
+| **총보수 (TDF)** | `tdf_fees.json` | 펀드명/fundCode → totalFee 일치 (단, `feeVerification.agree=false`는 "검증 불가" 표기, 감점 아님) |
+
+> **⚠️ 기준일 불일치 (교차비교 금지)**: `tdf_data.json` 기준일은 **2026-06-04**, `fund_data.json` 기준일은 **2026-03-01**으로 상이하다.
+> TDF 펀드와 일반 펀드의 수익률을 **직접 교차비교(우열 판단)하지 않는다.** 각 펀드는 자신의 소스 파일 기준으로만 일치 여부를 검증한다.
 
 ### 2.3 환각 탐지
 
@@ -122,33 +129,56 @@ Read("funds/fund_fees.json")
      │       └─ WARNING: "fund_fees.json 없음. 총보수 검증 불가 - 해당 항목 점수 0점."
      │
      ▼
+Read("funds/tdf_data.json")   # TDF 펀드 수익률 검증용
+     │
+     ├─ 성공 → TDF 수익률 검증 가능 (fund_data.json 폴백 소스)
+     └─ 실패 → TDF 수익률 검증 SKIP
+     │       └─ WARNING: "tdf_data.json 없음. TDF 펀드 수익률 검증 불가 - TDF 수익률 항목 SKIP(점수 미감점)."
+     │
+     ▼
+Read("funds/tdf_fees.json")   # TDF 펀드 총보수 검증용
+     │
+     ├─ 성공 → TDF 총보수 검증 가능 (fund_fees.json 폴백 소스)
+     └─ 실패 → TDF 총보수 검증 SKIP
+     │       └─ WARNING: "tdf_fees.json 없음. TDF 펀드 총보수 검증 불가 - TDF 총보수 항목 SKIP(점수 미감점)."
+     │
+     ▼
 [Step 0 완료] → 가용한 항목만 검증 진행
 ```
+
+> **⚠️ TDF 펀드 처리 원칙**: 펀드가 `fund_data.json`에 없다고 해서 즉시 `FUND_NOT_FOUND`로 감점하지 않는다.
+> 반드시 `tdf_data.json` / `tdf_fees.json`를 폴백 조회한 뒤에도 없을 때만 미발견으로 처리한다.
+> TDF 펀드는 환각 펀드가 아니므로 **자동 제거/F등급 강등 금지**.
 
 **파일 누락 시 점수 처리**:
 
 | 파일 | 누락 시 영향 | 점수 조정 |
 |------|-------------|----------|
-| `fund_data.json` | 수익률 일치 검증 불가 | 수익률 일치 25점 → 0점 (최대 75점) |
-| `fund_fees.json` | 총보수 일치 검증 불가 | 총보수 일치 15점 → 0점 (최대 85점) |
+| `fund_data.json` | 일반 펀드 수익률 일치 검증 불가 | 수익률 일치 25점 → 0점 (최대 75점) |
+| `fund_fees.json` | 일반 펀드 총보수 일치 검증 불가 | 총보수 일치 15점 → 0점 (최대 85점) |
+| `tdf_data.json` | TDF 펀드 수익률 검증 불가 | 해당 TDF 수익률 항목 SKIP (감점 없음, WARNING만) |
+| `tdf_fees.json` | TDF 펀드 총보수 검증 불가 | 해당 TDF 총보수 항목 SKIP (감점 없음, WARNING만) |
 
 ### 3.3 검증 순서
 
 ```
 1. [데이터 로드]
-   └─ funds/fund_data.json
-   └─ funds/fund_fees.json
+   └─ funds/fund_data.json   (일반 펀드 수익률)
+   └─ funds/fund_fees.json   (일반 펀드 총보수)
+   └─ funds/tdf_data.json    (TDF 펀드 수익률 폴백)
+   └─ funds/tdf_fees.json    (TDF 펀드 총보수 폴백)
 
 2. [펀드명 추출]
    └─ 출력에서 모든 펀드명 추출
    └─ 테이블 파싱
 
 3. [수익률 검증]
-   └─ 각 펀드의 수익률 데이터 비교
-   └─ 불일치 시 기록
+   └─ 각 펀드의 수익률 데이터 비교 (fund_data.json → 미발견 시 tdf_data.json 폴백)
+   └─ 불일치 시 기록 (기준일 상이 펀드 간 직접 교차비교 금지)
 
 4. [총보수 검증]
-   └─ 각 펀드의 총보수 데이터 비교
+   └─ 각 펀드의 총보수 데이터 비교 (fund_fees.json → 미발견 시 tdf_fees.json 폴백)
+   └─ tdf_fees.feeVerification.agree=false → "검증 불가/사람 확인 필요" 표기 (감점 아님)
    └─ 데이터 없으면 "미확인" 표시 확인
 
 5. [출처 검증]
@@ -181,6 +211,11 @@ Read("funds/fund_fees.json")
 | **과신 표현 없음** | 15점 | 과신 표현 1개당 -5점 |
 | **확률 수치 없음** | 10점 | 확률 % 사용 시 -10점 |
 | **펀드명 정확성** | 5점 | 오타/불일치 1개당 -2점 |
+
+> **⚠️ TDF 감점 예외 (오탐 방지)**: TDF 펀드는 `fund_data.json`/`fund_fees.json`에 없는 것이 정상이다.
+> - `fund_data.json` 미발견 → `tdf_data.json` 폴백 조회. 거기서 발견되면 **수익률 일치 감점 없음** (정상 펀드). `FUND_NOT_FOUND`는 두 소스 모두 미발견일 때만 적용.
+> - `fund_fees.json` 미발견 → `tdf_fees.json` 폴백 조회. `feeVerification.agree=false`면 `NEEDS_HUMAN_REVIEW`(검증 불가)로 **총보수 일치 감점 없음**. `FEE_MISMATCH`는 agree=true이면서 수치가 실제로 다를 때만 적용.
+> - 즉, **TDF 펀드만의 이유로 신뢰도 점수가 F등급으로 강등되지 않는다.**
 
 ### 4.2 신뢰도 등급
 
@@ -290,45 +325,70 @@ Read("funds/fund_fees.json")
 
 ### 6.1 수익률 검증
 
+> **⚠️ TDF 폴백 분기 (NOT_FOUND 오탐 방지)**: 펀드를 `fund_data.json`에서 못 찾으면
+> 즉시 `FUND_NOT_FOUND`로 감점하지 말고 반드시 `tdf_data.json`에서 폴백 조회한다.
+> TDF 펀드는 `fund_data.json`에 없는 것이 정상이며, `tdf_data.json`에 존재하면 정상 펀드로 검증한다.
+> 두 소스 모두에서 못 찾을 때만 `FUND_NOT_FOUND`로 처리한다.
+
 ```javascript
-function verifyReturns(output, fundData) {
+function verifyReturns(output, fundData, tdfData) {
   const issues = [];
-  
+
+  // 일반 펀드 필드 / TDF 펀드 필드 (스키마 상이)
+  const fundFields = ['return10y', 'return7y', 'return5y', 'return3y', 'return1y', 'return6m'];
+  const tdfFields  = ['return1m', 'return3m', 'return6m', 'return1y', 'return2y', 'return3y', 'returnSinceInception'];
+
   // 출력에서 수익률 테이블 파싱
   const outputReturns = parseReturnTable(output);
-  
+
   for (const [fundName, returns] of Object.entries(outputReturns)) {
-    // fund_data.json에서 해당 펀드 찾기
-    const fundInfo = fundData.find(f => 
-      f.name === fundName || 
+    // 1차: fund_data.json에서 해당 펀드 찾기
+    let fundInfo = fundData.find(f =>
+      f.name === fundName ||
       normalizedMatch(f.name, fundName)
     );
-    
+    let fields = fundFields;
+    let sourceFile = 'fund_data.json';
+
+    // 2차(폴백): tdf_data.json에서 TDF 펀드 찾기 (NOT_FOUND 오탐 방지)
+    if (!fundInfo && tdfData) {
+      fundInfo = tdfData.find(f =>
+        f.name === fundName ||
+        f.fundCode === fundName ||
+        normalizedMatch(f.name, fundName)
+      );
+      if (fundInfo) {
+        fields = tdfFields;       // TDF 전용 수익률 필드로 전환
+        sourceFile = 'tdf_data.json';
+      }
+    }
+
     if (!fundInfo) {
+      // fund_data.json + tdf_data.json 모두에서 미발견일 때만 NOT_FOUND
       issues.push({
         type: 'FUND_NOT_FOUND',
-        description: `펀드 미발견: ${fundName}`,
+        description: `펀드 미발견(fund_data.json/tdf_data.json 모두 없음): ${fundName}`,
         severity: 'medium'
       });
       continue;
     }
-    
-    // 수익률 비교 (허용 오차: 0.1%)
-    const fields = ['return10y', 'return7y', 'return5y', 'return3y', 'return1y', 'return6m'];
+
+    // 수익률 비교 (허용 오차: 0.1%) — 각 펀드는 자기 소스와만 대조
+    // ⚠️ 기준일 상이(TDF 2026-06-04 vs 일반 2026-03-01)로 두 소스 간 직접 교차비교 금지
     for (const field of fields) {
       if (returns[field] && fundInfo[field]) {
         const diff = Math.abs(parseFloat(returns[field]) - parseFloat(fundInfo[field]));
         if (diff > 0.1) {
           issues.push({
             type: 'RETURN_MISMATCH',
-            description: `${fundName} ${field} 불일치: 출력 ${returns[field]}%, 실제 ${fundInfo[field]}%`,
+            description: `${fundName} ${field} 불일치: 출력 ${returns[field]}%, 실제 ${fundInfo[field]}% [출처: ${sourceFile}]`,
             severity: 'high'
           });
         }
       }
     }
   }
-  
+
   return issues;
 }
 ```
@@ -441,11 +501,15 @@ function verifySource(output) {
 
 ### 6.5 총보수 검증 ⚠️ MANDATORY
 
-> **목적**: 출력에 포함된 총보수(수수료)가 `fund_fees.json`의 실제 데이터와 일치하는지 검증합니다.
+> **목적**: 출력에 포함된 총보수(수수료)가 `fund_fees.json`(일반)/`tdf_fees.json`(TDF)의 실제 데이터와 일치하는지 검증합니다.
 > **환각 방지**: 임의의 총보수 수치 사용 방지
+>
+> **⚠️ TDF 폴백 분기 (FEE_MISMATCH 오탐 방지)**: 펀드를 `fund_fees.json`에서 못 찾으면 `tdf_fees.json`에서 폴백 조회한다.
+> **⚠️ `agree:false` 처리**: `tdf_fees.json`의 `feeVerification.agree === false`인 항목은 출처 간 총보수가 불일치하여 사람 확인이 필요한 상태다.
+> 이 경우 **`FEE_MISMATCH`로 감점하지 않고** `NEEDS_HUMAN_REVIEW`(검증 불가 / 사람 확인 필요)로 warning 표기한다.
 
 ```javascript
-function verifyFees(output, feeData) {
+function verifyFees(output, feeData, tdfFeeData) {
   const issues = [];
   
   // 출력에서 총보수 정보 파싱
@@ -457,25 +521,51 @@ function verifyFees(output, feeData) {
   const outputFees = parseFeesFromTable(output);
   
   for (const [fundName, reportedFee] of Object.entries(outputFees)) {
-    // fund_fees.json에서 해당 펀드 찾기
-    const feeInfo = feeData.find(f => 
+    // 1차: fund_fees.json에서 해당 펀드 찾기
+    let feeInfo = feeData.find(f => 
       f.name === fundName || 
-      normalizedMatch(f.name, fundName)
+      f.fundName === fundName ||
+      normalizedMatch(f.name || f.fundName, fundName)
     );
-    
+    let sourceFile = 'fund_fees.json';
+    let isTdf = false;
+
+    // 2차(폴백): tdf_fees.json에서 TDF 펀드 찾기 (FEE_MISMATCH 오탐 방지)
+    if (!feeInfo && tdfFeeData) {
+      feeInfo = tdfFeeData.find(f =>
+        f.fundName === fundName ||
+        f.fundCode === fundName ||
+        normalizedMatch(f.fundName, fundName)
+      );
+      if (feeInfo) {
+        sourceFile = 'tdf_fees.json';
+        isTdf = true;
+      }
+    }
+
     if (!feeInfo) {
-      // 펀드 자체가 fee 데이터에 없음 (펀드 존재 검증은 별도)
+      // fund_fees.json + tdf_fees.json 모두에 없음 (펀드 존재 검증은 별도)
       continue;
     }
-    
-    // 총보수 비교 (허용 오차: 0.01%)
+
+    // TDF: agree:false → 검증 불가/사람 확인 필요 (감점 아님, warning)
+    if (isTdf && feeInfo.feeVerification && feeInfo.feeVerification.agree === false) {
+      issues.push({
+        type: 'NEEDS_HUMAN_REVIEW',
+        description: `${fundName} 총보수 검증 불가 — 출처 간 불일치(feeVerification.agree=false), 사람 확인 필요 [출처: ${sourceFile}]`,
+        severity: 'low'   // FEE_MISMATCH 감점 아님 (warning 처리)
+      });
+      continue;   // 수치 비교 건너뜀 (단순 MISMATCH 감점 방지)
+    }
+
+    // 총보수 비교 (허용 오차: 0.01%) — 각 펀드는 자기 소스와만 대조
     const actualFee = parseFloat(feeInfo.totalFee);
     const reportedFeeNum = parseFloat(reportedFee);
     
     if (Math.abs(actualFee - reportedFeeNum) > 0.01) {
       issues.push({
         type: 'FEE_MISMATCH',
-        description: `${fundName} 총보수 불일치: 출력 ${reportedFee}%, 실제 ${feeInfo.totalFee}%`,
+        description: `${fundName} 총보수 불일치: 출력 ${reportedFee}%, 실제 ${feeInfo.totalFee}% [출처: ${sourceFile}]`,
         severity: 'high'
       });
     }
@@ -521,16 +611,20 @@ function parseFeesFromTable(output) {
 
 | 검증 항목 | 비교 기준 | 허용 오차 | 심각도 |
 |----------|----------|:--------:|:------:|
-| 펀드 총보수 | fund_fees.json.totalFee | 0.01% | HIGH |
+| 일반 펀드 총보수 | fund_fees.json.totalFee | 0.01% | HIGH |
+| TDF 펀드 총보수 | tdf_fees.json.totalFee | 0.01% | HIGH |
+| TDF 총보수(agree=false) | tdf_fees.json.feeVerification.agree | — | LOW (NEEDS_HUMAN_REVIEW, 감점 아님) |
 | 실질 수익률 계산 | return1y - totalFee | 0.05% | MEDIUM |
 
 #### 6.5.2 필수 Read 파일
 
 ```
-funds/fund_fees.json   # 총보수 원본 데이터
+funds/fund_fees.json   # 일반 펀드 총보수 원본 데이터
+funds/tdf_fees.json    # TDF 펀드 총보수 원본 데이터 (폴백 소스, feeVerification.agree 포함)
 ```
 
-검증 전 반드시 위 파일을 Read하여 최신 데이터 확보
+검증 전 반드시 위 파일을 Read하여 최신 데이터 확보.
+TDF 펀드는 `tdf_fees.json`에서 조회하며, `feeVerification.agree=false`면 "검증 불가 / 사람 확인 필요"로 표기(단순 MISMATCH 감점 금지).
 
 ---
 
@@ -606,8 +700,16 @@ funds/fund_fees.json   # 총보수 원본 데이터
 ## 9. 메타 정보
 
 ```yaml
-version: "1.0"
+version: "1.1"
 created: "2026-01-05"
+updated: "2026-06-07"
+data_sources:
+  general:
+    returns: funds/fund_data.json      # 기준일 2026-03-01
+    fees: funds/fund_fees.json
+  tdf:
+    returns: funds/tdf_data.json       # 기준일 2026-06-04 (직접 교차비교 금지)
+    fees: funds/tdf_fees.json          # feeVerification.agree=false → NEEDS_HUMAN_REVIEW
 verification_items:
   - source_completeness
   - return_match
@@ -619,6 +721,10 @@ scoring:
   max_score: 100
   passing_score: 70
   grades: [A, B, C, D, F]
+tdf_handling:
+  fund_not_found: tdf_data.json 폴백 후에도 미발견일 때만 적용 (오탐 방지)
+  fee_mismatch: agree=false는 NEEDS_HUMAN_REVIEW로 표기 (감점 아님)
+  cross_compare: TDF와 일반 펀드 수익률 직접 교차비교 금지 (기준일 상이)
 ```
 
 ---

@@ -48,7 +48,11 @@
 [Step 0.4] macro-critic (BLOCKING) - FAIL 시 Step 0.3 재시도
       │
       ▼
-[Step 1] fund-portfolio (BLOCKING)
+[Step 0.5] 안전자산 선호 수집 (사용자 질문 — 예금|TDF|채권)
+           → SAFE_ASSET_DECISION = deposit | tdf | bond
+      │
+      ▼
+[Step 1] fund-portfolio (BLOCKING) ← SAFE_ASSET_DECISION + tdf_data/tdf_fees 전달
       │
       ▼
 [Step 2] compliance-checker (BLOCKING) - FAIL 시 Step 1 재시도
@@ -72,7 +76,7 @@
 |------|:----:|--------|
 | 생년 | O | - |
 | 직업 | O | - |
-| 은퇴 예정 | O | - |
+| 은퇴 예정 나이 | O | - |
 | 투자 성향 | O | 중립형 |
 | 위험 수용도 | O | 중간 |
 
@@ -80,6 +84,45 @@
 - 공격형 → aggressive
 - 중립형 → moderate
 - 안정형 → conservative
+
+**은퇴예정연도 / TDF vintage 매핑 처리:**
+
+```
+# 은퇴예정연도 계산
+IF 생년 제공 AND 은퇴예정나이 제공:
+    retirement_year = 생년 + 은퇴예정나이
+ELIF 생년 제공 AND 은퇴예정나이 미제공:
+    retirement_year = 생년 + 65   # 폴백: 65세 기본값
+ELIF 생년 미제공:
+    retirement_year = null        # TDF vintage 매핑 불가 → 폴백
+
+# TDF vintage 매핑 (5년 단위 반올림)
+IF retirement_year != null:
+    tdf_vintage = round(retirement_year / 5) * 5
+    # 예: retirement_year=2048 → tdf_vintage=2050
+    # 예: retirement_year=2032 → tdf_vintage=2030
+ELSE:
+    tdf_vintage = null  # fund-portfolio에 null 전달 → TDF 추천 스킵 또는 전 vintage 제시
+
+# 주의: tdf_vintage는 fund-portfolio에 전달하는 힌트일 뿐
+# 실제 TDF 선택은 tdf_data.json의 recommendedAgeBand와 targetYear 기준으로 fund-portfolio가 결정
+```
+
+> **경고**: TDF는 위험자산 70% 한도의 예외(적격 TDF는 100% 편입 가능)이지만, **안전자산이 아닙니다.**
+> 안전자산 선호 선택지로 TDF를 제시할 때 반드시 이 점을 사용자에게 고지해야 합니다.
+
+**은퇴예정연도 산출 규칙:**
+
+```
+입력 우선순위:
+1. 사용자가 은퇴 예정 연도(YYYY)를 직접 제공한 경우 → 그대로 사용
+2. 사용자가 은퇴 나이(N세)를 제공한 경우 → retirement_year = birthYear + N
+3. 둘 다 없는 경우 → 폴백: retirement_year = birthYear + 60
+
+예시:
+- 생년 1985, 은퇴 65세 → retirement_year = 2050
+- 생년 1985, 은퇴 연도 미입력 → retirement_year = 2045 (1985+60)
+```
 
 ### 2.2 세션 폴더 생성
 
@@ -319,9 +362,45 @@ Task(
 
 ---
 
+### Step 0.5: 안전자산 선호 수집 (BLOCKING — 사용자 질문)
+
+> **BLOCKING**: Step 0.4 PASS 후, Step 1 호출 전에 반드시 수행
+
+fund-portfolio 호출 전에 사용자에게 안전자산 유형을 질문합니다.
+
+```
+[오케스트레이터 직접 수행 — Task 호출 아님]
+
+사용자에게 다음 질문을 제시:
+
+"안전자산(원리금보장형) 선호 유형을 선택해 주세요:
+
+  1. 예금 — 원리금보장 예금 상품 (확정금리, 최저 위험)
+  2. TDF — Target Date Fund (생애주기 자동배분, DC/IRP 위험자산 한도 예외 적격 상품)
+  3. 채권 — 채권형/채권혼합형 펀드 (중간 위험, 금리 연동)
+
+선택 (1/2/3 또는 예금/TDF/채권):"
+```
+
+**입력 처리:**
+
+| 입력 | SAFE_ASSET_DECISION |
+|------|---------------------|
+| 1 또는 예금 | `deposit` |
+| 2 또는 TDF | `tdf` |
+| 3 또는 채권 | `bond` |
+| 미입력/기타 | `deposit` (기본값, 사용자에게 고지) |
+
+> **주의**: TDF는 위험자산 70% 한도의 예외 적격 상품이지, 안전자산이 아닙니다.
+> TDF 선택 시 fund-portfolio에 이 사실을 명시하여 전달합니다.
+
+**결과 변수**: `SAFE_ASSET_DECISION = deposit | tdf | bond`
+
+---
+
 ### Step 1: fund-portfolio (펀드 포트폴리오 추천)
 
-> **BLOCKING**: Step 0.4 PASS 후 호출
+> **BLOCKING**: Step 0.5 완료 후 호출
 
 ```
 Task(
@@ -339,6 +418,13 @@ Task(
 - 투자 성향: {risk_profile}
 - 위험 수용도: {risk_tolerance}
 
+### 안전자산 선호 (SAFE_ASSET_DECISION)
+- 선택값: {safe_asset_decision}  ← deposit | tdf | bond
+- deposit: 원리금보장 예금 상품 우선 배분
+- tdf: TDF 적격 상품 우선 배분 (DC/IRP 위험자산 한도 예외 적용 가능; TDF는 안전자산이 아님에 유의)
+- bond: 채권형/채권혼합형 펀드 우선 배분
+- 은퇴예정연도: {retirement_year} (TDF targetYear 매칭 기준)
+
 ### 제약 조건
 - DC형 위험자산 한도: 70%
 - 단일 펀드 집중 한도: 40%
@@ -347,6 +433,9 @@ Task(
 - funds/fund_data.json
 - funds/fund_fees.json
 - funds/fund_classification.json
+- funds/deposit_rates.json
+- funds/tdf_data.json        ← TDF 적격 상품 목록 (safe_asset_decision=tdf 시 필수 Read)
+- funds/tdf_fees.json        ← TDF 수수료 정보 (safe_asset_decision=tdf 시 필수 Read)
 
 ### 출력 경로
 output_path: {session_folder}
@@ -376,6 +465,12 @@ Task(
 1. 위험자산 합계 ≤ 70%
 2. 단일 펀드 ≤ 40%
 3. 비중 합계 = 100%
+
+### 데이터 소스 (필요 시 Read)
+- funds/fund_data.json
+- funds/fund_classification.json
+- funds/tdf_data.json        ← TDF 적격 여부(tdfQualified) 확인용
+- funds/tdf_fees.json        ← TDF 수수료 검증용
 
 ### 출력 경로
 output_path: {session_folder}
@@ -409,10 +504,17 @@ Task(
 - {session_folder}/02-compliance-report.md
 
 ### 검증 항목
-1. 펀드명이 fund_data.json과 일치하는지
-2. 수익률이 fund_data.json과 일치하는지
+1. 펀드명이 fund_data.json 또는 tdf_data.json과 일치하는지
+2. 수익률이 fund_data.json 또는 tdf_data.json과 일치하는지
 3. 출처 태그 존재 여부
 4. 과신 표현 탐지 ("반드시", "확실히" 등)
+5. TDF 선택 시: tdfQualified=true 상품만 포함되었는지 확인
+
+### 데이터 소스 (필요 시 Read)
+- funds/fund_data.json
+- funds/fund_fees.json
+- funds/tdf_data.json        ← TDF 펀드명/수익률 검증용
+- funds/tdf_fees.json        ← TDF 수수료 검증용
 
 ### 출력 경로
 output_path: {session_folder}
@@ -512,10 +614,13 @@ A등급(90+), B등급(80-89), C등급(70-79), F등급(<70)
 ## 7. 메타 정보
 
 ```yaml
-version: "2.0"
+version: "2.1"
 created: "2026-02-01"
-updated: "2026-02-02"
+updated: "2026-06-07"
 changes:
+  - "v2.1: Step 0.5 안전자산 3지선다 선호 수집 추가 (예금|TDF|채권)"
+  - "v2.1: tdf_data.json/tdf_fees.json 데이터소스 추가 (Step 1/2/3)"
+  - "v2.1: 은퇴예정연도 폴백 흐름 명시 (birthYear+60)"
   - "v2.0: 실제 Task() 호출 코드 추가 (nested Task 문제 해결)"
   - "v1.2: 스킬 참조 방식에서 직접 실행 방식으로 전환"
 agents:
