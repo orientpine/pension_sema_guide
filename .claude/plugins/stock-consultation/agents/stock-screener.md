@@ -3,7 +3,7 @@ name: stock-screener
 description: "주식/ETF 종목 스크리닝. 섹터, 테마, 밸류에이션 기준으로 후보군을 선정합니다."
 tools: Read, Write, exa_web_search_exa, websearch_web_search_exa, WebFetch
 skills: stock-data-verifier, analyst-common-stock, file-save-protocol-stock
-model: opus
+model: sonnet
 ---
 
 # 주식/ETF 스크리닝 전문가 (Stock Screener)

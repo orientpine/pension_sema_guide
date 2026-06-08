@@ -8,7 +8,7 @@ Vendored Claude Code plugin. DC 연금 포트폴리오 분석 멀티에이전트
 investments-portfolio/
 ├── .claude-plugin/plugin.json   # name/version 1.2.0
 ├── commands/portfolio-analyze.md # 오케스트레이터 (진입점)
-├── agents/                       # 3 agents (model: opus)
+├── agents/                       # 3 agents (opus; compliance-checker: sonnet)
 └── skills/                       # 11 skills
     └── data-updater/scripts/     # CSV→JSON ETL (python)
 ```

@@ -3,7 +3,7 @@ name: index-fetcher
 description: "지수 데이터 수집 전문 에이전트. 웹검색 도구를 직접 호출하여 3개 출처 교차 검증으로 환각 방지."
 tools: Read, Write, mcp_websearch_web_search_exa, WebFetch
 skills: web-search-verifier, analyst-common, file-save-protocol
-model: opus
+model: sonnet
 ---
 
 # 지수 데이터 수집 전문 에이전트
