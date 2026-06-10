@@ -64,7 +64,10 @@ pension_sema_guide/
 | Macro agents | `.claude/plugins/macro-analysis/AGENTS.md` | 7 shared agents (reused by other plugins) |
 | Stock/ETF consult | `.claude/plugins/stock-consultation/AGENTS.md` | stock-consult orchestration |
 | Data ETL scripts | `.claude/plugins/investments-portfolio/skills/data-updater/scripts/` | CSV→JSON, TDF enrichment |
-| TDF enrichment tests | `tests/AGENTS.md` | pytest suite (⚠ import-path gotcha) |
+| TDF enrichment tests | `tests/AGENTS.md` | pytest suite (63 passed) |
+| Consistency Gate | `scripts/verify_consistency.py` | Data/Prompt consistency check |
+| Annotation Convention | `docs/consistency/annotation-convention.md` | Data tagging rules |
+| SSOT Registry | `docs/consistency/date-ssot-registry.md` | Single Source of Truth for dates |
 | Public sample reports | `portfolios/samples/` | Anonymized examples ONLY |
 | Source CSV files | `resource/` | Monthly 상품제안서 CSV/XLSX |
 | **Personal data (🔒)** | `confidentialData/` | GITIGNORED — never committed |
@@ -120,4 +123,7 @@ pension_sema_guide/
 - **Plugin**: `.claude/plugins/`는 vendored 마켓플레이스(`pension-sema-guide`) + 4개 플러그인(서브모듈 아님). 마켓플레이스 매니페스트는 `.claude/plugins/.claude-plugin/marketplace.json`, 각 플러그인 source는 `./<name>`(마켓플레이스 루트 `.claude/plugins` 기준 상대경로).
 - **Plugin registration**: `.claude/settings.json`의 `extraKnownMarketplaces`(directory source, `path: ./.claude/plugins`)로 프로젝트를 열고 신뢰하면 자동 등록·프롬프트. 수동 등록 시 `/plugin marketplace add ./.claude/plugins` 후 `investments-portfolio@pension-sema-guide` 활성화
 - **PII 검증**: `scripts/verify_no_pii.sh` (히스토리 전수 스캔), `scripts/verify_plugin.sh` (플러그인 매니페스트 검증)
-- **Tests broken**: `tests/conftest.py`의 `SCRIPTS_DIR`가 `plugins/...`(`.claude/` 누락)를 가리켜 `update_tdf_data` import 실패 → 5개 테스트 collection 에러. 자세한 내용은 `tests/AGENTS.md`.
+- **Consistency Gate (NEW)**: `python3 scripts/verify_consistency.py` — dangling refs, date sync, freshness, dup tests, manifest 등 5개 항목 검증. 데이터 업데이트나 프롬프트 수정 후 필수 실행.
+- **Annotation Convention**: `docs/consistency/annotation-convention.md` 참고.
+- **SSOT Registry**: `docs/consistency/date-ssot-registry.md` 참고.
+- **Tests**: `pytest` 63 passed (GREEN). `tests/conftest.py` 경로 설정이 올바르게 되어 있어 모듈 로드 이슈 없음.

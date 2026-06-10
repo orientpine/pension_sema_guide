@@ -334,17 +334,29 @@ python $SCRIPTS/update_tdf_data.py --input resource/tdf-raw.md --fees
 
 ---
 
-## 테스트
+## 테스트 및 정합성 검증
+
+이 프로젝트는 데이터의 결정성과 일관성을 보장하기 위해 두 단계의 검증 체계를 갖추고 있습니다.
+
+### 1. 단위 및 통합 테스트 (pytest)
 
 `tests/`는 TDF enrichment 파이프라인(`update_tdf_data.py`)의 결정성을 검증합니다.
 이름 정규화·펀드코드 해석·수수료 매칭·수익률 드리프트 경고·전체 enrichment·CLI·통합 테스트로 구성됩니다.
 
 ```bash
-python3 -m pytest          # pytest.ini: testpaths=tests
+python3 -m pytest          # 63 passed (GREEN)
 ```
 
-> ⚠️ **알려진 이슈**: `tests/conftest.py`의 `SCRIPTS_DIR` 경로 처리에 주의가 필요합니다 (저장소 루트에서 실행 권장).
-> 자세한 내용과 import-path 주의사항은 `tests/AGENTS.md`를 참고하세요.
+### 2. 정합성 게이트 (Consistency Gate)
+
+데이터 업데이트나 프롬프트 수정 후, 전체 시스템의 정합성을 검증하는 게이트를 실행합니다.
+
+```bash
+python3 scripts/verify_consistency.py
+```
+
+- **검증 항목**: dangling references, 날짜 동기화, 데이터 신선도, 중복 테스트, 플러그인 매니페스트 정합성 등 5개 항목
+- **결과**: Exit 0 (정상), Exit 1 (불일치 감지), Exit 2 (내부 에러)
 
 ---
 

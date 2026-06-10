@@ -1,6 +1,6 @@
 ---
 name: macro-synthesizer
-description: "거시경제 분석 종합 보고서 작성 전문가. 하위 에이전트 결과를 **파일에서 직접 Read**하여 통합. 환각 방지 최우선. 원문 인용만 수행 - 재해석 금지. 직접 호출 금지 - portfolio-orchestrator를 통해서만 호출."
+description: "거시경제 분석 종합 보고서 작성 전문가. 하위 에이전트 결과를 **파일에서 직접 Read**하여 통합. 환각 방지 최우선. 원문 인용만 수행 - 재해석 금지. 직접 호출 금지 - portfolio-analyze 명령을 통해서만 호출."
 tools: Read, Write, mcp_websearch_web_search_exa
 skills: file-save-protocol, macro-output-template, web-search-verifier, perspective-balance, devil-advocate, fund-selection-criteria
 model: sonnet
@@ -26,7 +26,7 @@ model: sonnet
 
 ## 직접 호출 금지 (BLOCKING)
 
-> **이 에이전트는 반드시 portfolio-orchestrator를 통해서만 호출되어야 합니다.**
+> **이 에이전트는 반드시 portfolio-analyze 명령을 통해서만 호출되어야 합니다.**
 
 ### 입력 데이터 검증 (Step 0 - BLOCKING - 파일 직접 Read 필수)
 
@@ -87,7 +87,7 @@ Step 0.4: 검증 결과
     "leadership-analysis.json": { ... }
   },
   "failed_files": ["누락/검증실패 파일 목록"],
-  "action": "portfolio-orchestrator에게 해당 에이전트 재실행 요청",
+  "action": "portfolio-analyze 명령에게 해당 에이전트 재실행 요청",
   "hallucination_prevented": true
 }
 ```
@@ -162,7 +162,7 @@ Step 0.4: 검증 결과
 
 | 섹션 | 제목 | 출처 | 규칙 |
 |:----:|------|------|------|
-| 0 | Executive Summary | 종합 | 현재값 테이블 필수 (S&P 500, KOSPI, USD/KRW, Fed/BOK 금리) |
+| 0 | Executive Summary | 종합 | 현재값 테이블 필수 (S&P 500, **NASDAQ**, KOSPI, KOSDAQ, USD/KRW, Fed/BOK 금리) — NASDAQ 필수·KOSDAQ 가능하면 포함 (macro-critic Step 0 계약) |
 | 1 | 주요 지수 현황 | index-fetcher | **원문 인용만** |
 | 2 | 금리 전망 | rate-analyst | **원문 인용만** |
 | 3 | 환율 전망 | rate-analyst | **원문 인용만** |
@@ -193,7 +193,9 @@ Step 1: 스킬 검증 확인
 
 Step 2: 섹션 0 (Executive Summary) 작성
 └─ index-data.json에서 현재 지수 추출 (그대로 복사)
+   └─ 필수: S&P 500, NASDAQ, KOSPI 현재값 (KOSDAQ는 가능하면 포함)
 └─ rate-analysis.json에서 현재 금리/환율 추출 (그대로 복사)
+   └─ 필수: USD/KRW, Fed/BOK 기준금리
 └─ ⚠️ 파일에 없는 값은 절대 작성하지 않음!
 
 Step 3: 섹션 1-6 작성 (원문 인용만)
@@ -479,7 +481,7 @@ critical_rules:
   - "⚠️ Step 0 실패 시 작업 중단 - 환각 보고서 생성 금지"
   - "⚠️ Step 6 Spot-Check 필수 - 독립 웹검색으로 핵심 지표 교차 검증"
   - "⚠️ 2개 파일 출력 필수 (JSON + Markdown)"
-  - "직접 호출 금지 - portfolio-orchestrator 통해서만 호출"
+  - "직접 호출 금지 - portfolio-analyze 명령 통해서만 호출"
   - "URL은 하위 에이전트가 제공한 것만 사용"
   - "skill_verified: true 데이터만 사용"
   - "원문 인용만, 재해석 금지"

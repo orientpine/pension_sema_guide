@@ -22,9 +22,23 @@ BASE_DATE_NOTE = (
     "단위 주의: all_fund_data는 3Y/5Y/7Y/10Y=연환산·6M/1Y=누적, tdf는 전 구간 누적. "
     "단위 정규화 없이 직접 교차비교 금지"
 )
-CURRENT_YEAR = 2026
 RETIREMENT_AGE = 60
 FRESHNESS_THRESHOLD_DAYS = 30
+
+
+def _derive_current_year(data_version: str | None = None) -> int:
+    """Age-band reference year. Priority: data base date (_meta.version) > system year."""
+    if data_version:
+        try:
+            return int(data_version[:4])
+        except (ValueError, TypeError):
+            pass
+    from datetime import date
+
+    return date.today().year
+
+
+CURRENT_YEAR = _derive_current_year(TDF_VERSION)
 
 ROW_RE = re.compile(r"^\s*(\d+)\.\s*(.+)$")
 RISK_RE = re.compile(r"^(.+?)([1-6])$")
@@ -115,9 +129,13 @@ def round_to_nearest_five(value: int) -> int:
     return int((value + 2) // 5 * 5)
 
 
-def derive_recommended_age_band(targetYear: int, retirement_age: int = RETIREMENT_AGE) -> list[int]:
+def derive_recommended_age_band(
+    targetYear: int,
+    current_year: int = CURRENT_YEAR,
+    retirement_age: int = RETIREMENT_AGE,
+) -> list[int]:
     birth_year = targetYear - retirement_age
-    current_age = CURRENT_YEAR - birth_year
+    current_age = current_year - birth_year
     return [round_to_nearest_five(current_age - 5), round_to_nearest_five(current_age + 5)]
 
 
@@ -710,4 +728,9 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    exit_code = main()
+    if exit_code == 0:
+        from _consistency_gate import run_consistency_gate
+
+        run_consistency_gate()
+    raise SystemExit(exit_code)

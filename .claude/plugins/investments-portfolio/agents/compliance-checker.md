@@ -653,7 +653,7 @@ changes:
 
 ## 10. 보고서 출력 규칙
 
-> **중요**: portfolio-orchestrator에서 호출될 때 JSON 결과와 함께 MD 보고서를 파일로 저장합니다.
+> **중요**: portfolio-analyze 명령에서 호출될 때 JSON 결과와 함께 MD 보고서를 파일로 저장합니다.
 
 ### 10.1 이중 출력 (JSON + MD)
 

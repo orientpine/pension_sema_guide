@@ -113,17 +113,6 @@ def test_already_coded_vehicle_flags_needs_review(auth_data, auth_fees):
     ]}
     tdf_fees = {"_meta": {}, "fees": {"K55210D57370": _fee("K55210D57370", VEHICLE)}}
     res = enrich_tdf_rows(tdf_data, tdf_fees, auth_data, auth_fees)
-    nr = res["tdf_data"]["_meta"]["needsReview"]
-    assert any(i["fundCode"] == "K55210D57370" and "vehicle" in i["differences"] for i in nr)
-
-
-def test_already_coded_vehicle_flags_needs_review(auth_data, auth_fees):
-    tdf_data = {"_meta": {}, "funds": [
-        {"fundCode": "K55210D57370", "name": VEHICLE, "company": "", "targetYear": 2040,
-         "hedge": "H", "riskLevel": 3, "return6m": "", "return1y": "", "return3y": ""},
-    ]}
-    tdf_fees = {"_meta": {}, "fees": {"K55210D57370": _fee("K55210D57370", VEHICLE)}}
-    res = enrich_tdf_rows(tdf_data, tdf_fees, auth_data, auth_fees)
 
     nr = res["tdf_data"]["_meta"]["needsReview"]
     assert any(i["fundCode"] == "K55210D57370" and "vehicle" in i["differences"] for i in nr)

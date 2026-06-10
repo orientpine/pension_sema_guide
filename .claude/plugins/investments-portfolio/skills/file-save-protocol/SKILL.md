@@ -101,7 +101,7 @@ confidentialData/portfolios/2026-01-14-aggressive-abc123/
 ├── 01-fund-analysis.md         # fund-portfolio 출력
 ├── 02-compliance-report.md     # compliance-checker 출력
 ├── 03-output-verification.md   # output-critic 출력
-└── 04-portfolio-summary.md     # portfolio-orchestrator 출력
+└── 04-portfolio-summary.md     # portfolio-analyze 출력
 ```
 
 ### 에이전트별 출력 파일
@@ -117,7 +117,7 @@ confidentialData/portfolios/2026-01-14-aggressive-abc123/
 | fund-portfolio | `01-fund-analysis.md` | O |
 | compliance-checker | `02-compliance-report.md` | O |
 | output-critic | `03-output-verification.md` | O |
-| portfolio-orchestrator | `04-portfolio-summary.md` | O |
+| portfolio-analyze | `04-portfolio-summary.md` | O |
 
 ---
 
@@ -225,7 +225,7 @@ JSON.stringify(analysis_result, null, 2)
 ## 7. 세션 재개 시 파일 검증 (v1.1 신규)
 
 > **목적**: 세션 재개 시 필수 JSON 파일 존재 여부 확인
-> **참조**: portfolio-orchestrator 스킬의 세션 재개 검증 섹션
+> **참조**: portfolio-analyze 명령의 세션 재개 검증 섹션
 
 ### 세션 재개 시 coordinator가 수행하는 검증
 

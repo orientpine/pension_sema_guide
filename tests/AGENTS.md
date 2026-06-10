@@ -16,11 +16,11 @@
 
 ## RUN
 
-`python3 -m pytest` (repo root) → 38 passed.
+`python3 -m pytest` (repo root) → 63 passed (현재 기준: update_tdf_data 40 + gate 17 + year derivation 6).
 
-## ⚠ PATH GOTCHA
+## PATH CONFIGURATION
 
-스크립트 경로는 `.claude/plugins/...` 전체를 써야 함 (`conftest.py:14` `SCRIPTS_DIR`, `test_cli.py:11` `SCRIPT`). `.claude/` 세그먼트 누락 시 `update_tdf_data` import 실패(collection 에러) + CLI 테스트 파일 not-found. 새 테스트 추가 시 동일 경로 패턴 사용.
+스크립트 경로는 `.claude/plugins/...` 전체를 사용하며, `conftest.py:14` (`SCRIPTS_DIR`) 및 `test_cli.py:11` (`SCRIPT`)에 올바르게 설정되어 있습니다. 저장소 루트에서 실행 시 모든 테스트가 정상적으로 수집(collection)되고 통과합니다.
 
 ## CONVENTIONS
 

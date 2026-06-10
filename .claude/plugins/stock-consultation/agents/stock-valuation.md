@@ -21,7 +21,7 @@ model: opus
 > - 검증 체크리스트
 > 
 > **file-save-protocol-stock 스킬:**
-> - Write 도구로 `02-valuation-report.json` 저장 필수
+> - Write 도구로 `02-valuation-{ticker}.json` 저장 필수
 > - 저장 실패 시 FAIL 반환
 
 ---
@@ -448,7 +448,7 @@ Step 1: 분석 완료 후 JSON 객체 생성
 
 Step 2: Write 도구로 파일 저장
         Write(
-          file_path="{output_path}/02-valuation-report.json",
+          file_path="{output_path}/02-valuation-{ticker}.json",
           content=JSON.stringify(result, null, 2)
         )
 
@@ -665,7 +665,7 @@ changes:
   - "v1.1: 웹검색, 원문 인용, 파일 저장 규칙을 스킬로 위임"
 critical_rules:
   - "analyst-common-stock, file-save-protocol-stock 스킬 규칙 준수 필수"
-  - "파일 저장 필수 (02-valuation-report.json)"
+  - "파일 저장 필수 (02-valuation-{ticker}.json)"
   - "원문 인용 필수 (original_text 없으면 FAIL)"
   - "exa_web_search_exa 또는 websearch_web_search_exa 직접 호출 필수"
   - "최소 2개 출처 교차 검증 필수"

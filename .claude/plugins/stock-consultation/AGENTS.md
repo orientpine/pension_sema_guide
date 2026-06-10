@@ -52,4 +52,4 @@ stock-consultation/
 
 - DCF/Monte Carlo 등 복잡 모델, 구체적 목표주가, "반드시/확실히/무조건" 매수·매도 강권 — 금지.
 - 오케스트레이터가 Task 없이 단계 직접 수행하거나 서브에이전트 결과를 생성(환각).
-- `file-save-protocol-stock` 문서의 파일명 예시(`02-valuation-report.json`)와 command의 실제 per-ticker 네이밍(`02-valuation-{ticker}.json`)이 불일치 — command 기준을 따를 것.
+- 파일명은 command 기준 per-ticker 네이밍(`02-valuation-{ticker}.json`, `03-bear-case-{ticker}.json`)으로 command↔agent↔`file-save-protocol-stock` 3자 통일됨. 단일 고정명(`02-valuation-report.json` 등) 재도입 금지 — 다종목 1세션 시 파일 덮어쓰기 발생.

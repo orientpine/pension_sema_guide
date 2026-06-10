@@ -67,7 +67,7 @@ model: opus
 | **수익률 (TDF)** | `tdf_data.json` | 펀드명/fundCode → return1m/3m/6m/1y/2y/3y/returnSinceInception 일치 |
 | **총보수 (TDF)** | `tdf_fees.json` | 펀드명/fundCode → totalFee 일치 (단, `feeVerification.agree=false`는 "검증 불가" 표기, 감점 아님. `_meta.unresolved` 항목 숫자 인용 시 환각 판정) |
 
-> **⚠️ 기준일 불일치 (교차비교 금지)**: `tdf_data.json` 기준일은 **2026-06-04**, `fund_data.json` 기준일은 **2026-03-01**으로 상이하다.
+> **⚠️ 기준일 불일치 (교차비교 금지)**: `tdf_data.json`과 `fund_data.json`의 `_meta.version`을 읽어 기준일을 확인하며, 두 기준일이 서로 다르면 직접 교차비교를 금지한다.
 > TDF 펀드와 일반 펀드의 수익률을 **직접 교차비교(우열 판단)하지 않는다.** 각 펀드는 자신의 소스 파일 기준으로만 일치 여부를 검증한다.
 
 ### 2.3 환각 탐지
@@ -375,7 +375,7 @@ function verifyReturns(output, fundData, tdfData) {
     }
 
     // 수익률 비교 (허용 오차: 0.1%) — 각 펀드는 자기 소스와만 대조
-    // ⚠️ 기준일 상이(TDF 2026-06-04 vs 일반 2026-03-01)로 두 소스 간 직접 교차비교 금지
+    // ⚠️ 기준일 상이(각 파일 _meta.version 참조)로 두 소스 간 직접 교차비교 금지
     for (const field of fields) {
       if (returns[field] && fundInfo[field]) {
         const diff = Math.abs(parseFloat(returns[field]) - parseFloat(fundInfo[field]));
@@ -711,10 +711,10 @@ created: "2026-01-05"
 updated: "2026-06-07"
 data_sources:
   general:
-    returns: funds/fund_data.json      # 기준일 2026-03-01
+    returns: funds/fund_data.json      # 기준일: _meta.version 참조
     fees: funds/fund_fees.json
   tdf:
-    returns: funds/tdf_data.json       # 기준일 2026-06-04 (직접 교차비교 금지)
+    returns: funds/tdf_data.json       # 기준일: _meta.version 참조 (직접 교차비교 금지)
     fees: funds/tdf_fees.json          # feeVerification.agree=false → NEEDS_HUMAN_REVIEW
 verification_items:
   - source_completeness
@@ -737,7 +737,7 @@ tdf_handling:
 
 ## 10. 보고서 출력 규칙
 
-> **중요**: portfolio-orchestrator에서 호출될 때 JSON 결과와 함께 MD 보고서를 파일로 저장합니다.
+> **중요**: portfolio-analyze 명령에서 호출될 때 JSON 결과와 함께 MD 보고서를 파일로 저장합니다.
 
 ### 10.1 이중 출력 (JSON + MD)
 

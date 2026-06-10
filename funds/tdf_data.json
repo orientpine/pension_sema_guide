@@ -5,7 +5,7 @@
     "updatedAt": "2026-06-07T00:00:00+09:00",
     "recordCount": 75,
     "freshnessThresholdDays": 30,
-    "baseDateNote": "fund_data.json 기준일 2026-03-01과 상이. 직접 교차비교 금지",
+    "baseDateNote": "fund_data.json과 tdf_data.json은 각자 독립적인 기준일을 가진다. 두 소스의 날짜는 다를 수 있으므로 직접 교차비교 금지 (_meta.version 각각 참조)",
     "fundCodeSource": "FunETF/KOFIA-compatible standard codes resolved from public all_fund_data name matching and FunETF URL validation; unresolved kept empty",
     "resolvedFundCodeCount": 75,
     "unresolvedFundCodeCount": 0,

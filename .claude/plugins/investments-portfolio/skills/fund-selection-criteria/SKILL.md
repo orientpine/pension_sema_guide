@@ -275,6 +275,7 @@ IF 1Y AND 3Y both missing:
 ## 6. 예금 vs 채권 선택 황금률 (Golden Rules)
 
 > **출처**: Vanguard 4대 원칙, Bogle 투자 철학, Boglehead 커뮤니티 가이드라인
+<!-- illustrative-date -->
 > **버전**: 2.0 (2026-02-01 개정)
 
 ---

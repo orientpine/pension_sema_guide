@@ -311,3 +311,7 @@ if __name__ == "__main__":
     # Command line argument: output directory
     output_dir = sys.argv[1] if len(sys.argv) > 1 else None
     main(output_dir)
+
+    from _consistency_gate import run_consistency_gate
+
+    run_consistency_gate()

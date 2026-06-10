@@ -1,7 +1,7 @@
 ---
 name: materials-organizer
 description: "사용자 제공 마크다운 자료를 읽고 요약/분류/키포인트 추출. macro 분석 직후 실행되어 stock-screener에 context 전달."
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, Write
 model: sonnet
 ---
 
@@ -61,7 +61,7 @@ model: sonnet
 ### Step 5: 출력 생성
 
 마크다운 형식으로 요약 문서 작성:
-- 파일 경로: `consultations/{session_folder}/materials-summary.md`
+- 파일 경로: `{output_path}/00-materials-summary.md` (Write 도구 사용)
 - 구조: 주제별 정리 + 투자 인사이트 + 출처 목록
 
 ---
@@ -114,7 +114,7 @@ model: sonnet
       "negative": ["금리 인상 리스크", "..."]
     }
   },
-  "output_file": "consultations/2026-01-15-TSLA-abc123/materials-summary.md"
+  "output_file": "consultations/2026-01-15-TSLA-abc123/00-materials-summary.md"
 }
 ```
 
@@ -160,7 +160,7 @@ model: sonnet
 
 ## Output File Structure
 
-`consultations/{session_folder}/materials-summary.md`:
+`{output_path}/00-materials-summary.md`:
 
 ```markdown
 # 수집 자료 분석 요약
@@ -232,7 +232,7 @@ model: sonnet
 - [ ] 각 파일 키포인트 3개 이내
 - [ ] 카테고리 자동 분류 (섹터분석, 종목메모, 뉴스정리, 기타)
 - [ ] 투자 인사이트 추출 (긍정/부정)
-- [ ] 출력 파일 생성: materials-summary.md
+- [ ] 출력 파일 생성: 00-materials-summary.md
 
 ---
 

@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+# SUPERSEDED (plugin manifest validation):
+#   python3 scripts/verify_consistency.py is the authoritative gate — Check E covers all 4 plugins.
+# This script remains a narrow legacy check for investments-portfolio only (5 shallow checks).
+# Boundary: keep this script for legacy reference; prefer `python3 scripts/verify_consistency.py`.
 # verify_plugin.sh — validate vendored plugin manifests and that referenced paths resolve.
 # Exit 0 = valid, nonzero = invalid.
 set -u

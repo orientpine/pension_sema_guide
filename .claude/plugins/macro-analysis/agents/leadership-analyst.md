@@ -548,7 +548,7 @@ Write(
 
 ### 7.1 호출 예시
 
-portfolio-orchestrator가 다음과 같이 호출합니다:
+portfolio-analyze 명령이 다음과 같이 호출합니다:
 
 ```markdown
 Task(
@@ -652,7 +652,7 @@ version: "3.2"
 created: "2026-01-06"
 updated: "2026-01-21"
 architecture: "multi-agent"
-coordinator: "portfolio-orchestrator"
+coordinator: "portfolio-analyze"
 related_agents:
   - "macro-outlook"
   - "fund-portfolio"

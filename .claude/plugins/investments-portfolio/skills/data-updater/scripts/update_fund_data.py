@@ -23,6 +23,7 @@ from datetime import datetime
 import sys
 import shutil
 import re
+from typing import Any
 
 
 def parse_args():
@@ -38,25 +39,35 @@ Examples:
         """,
     )
 
-    parser.add_argument("--file", required=True, help="Path to CSV file")
+    _ = parser.add_argument("--file", help="Path to CSV file")
 
-    parser.add_argument(
+    _ = parser.add_argument(
         "--output-dir",
         default=None,
         help="Output directory for JSON files (default: auto-detect investments/funds/)",
     )
 
-    parser.add_argument(
+    _ = parser.add_argument(
         "--dry-run", action="store_true", help="Show preview without writing files"
     )
 
-    parser.add_argument(
+    _ = parser.add_argument(
         "--codes-file",
         default="funds/investable_codes.json",
         help="Path to investable codes JSON file for filtering (default: funds/investable_codes.json)",
     )
 
-    return parser.parse_args()
+    _ = parser.add_argument(
+        "--stamp-prompts",
+        action="store_true",
+        help="Stamp FUND_DATA_BASE_DATE placeholders in prompts with actual _meta.version",
+    )
+
+    args = parser.parse_args()
+    if not args.stamp_prompts and not args.file:
+        parser.error("the following arguments are required: --file")
+
+    return args
 
 
 def find_investments_repo():
@@ -119,6 +130,24 @@ def get_output_directory(specified_dir=None):
         "Could not auto-detect investments repository. "
         "Please specify --output-dir explicitly."
     )
+
+
+def stamp_prompts(fund_data_path: Path, plugins_dir: Path) -> int:
+    with open(fund_data_path, "r", encoding="utf-8") as f:
+        data: dict[str, Any] = json.load(f)
+    base_date = str(data["_meta"]["version"])
+
+    placeholder = "{{" + "FUND_DATA_BASE_DATE" + "}}"
+    count = 0
+    for md_file in sorted(plugins_dir.rglob("*.md")):
+        content = md_file.read_text(encoding="utf-8")
+        if placeholder in content:
+            new_content = content.replace(placeholder, base_date)
+            _ = md_file.write_text(new_content, encoding="utf-8")
+            count += 1
+
+    print(f"스탬프 완료: {count}개 파일 처리, 기준일: {base_date}")
+    return count
 
 
 def detect_header_row(rows):
@@ -473,7 +502,7 @@ def load_investable_codes(codes_file):
     return set(codes)
 
 
-def filter_fund_data(fund_data, investable_codes):
+def filter_fund_data(fund_data: dict[str, Any], investable_codes: set[str]) -> dict[str, Any]:
     """Filter fund_data by fundCode
 
     Args:
@@ -504,7 +533,7 @@ def filter_fund_data(fund_data, investable_codes):
     }
 
 
-def filter_fund_fees(fund_fees, investable_codes):
+def filter_fund_fees(fund_fees: dict[str, Any], investable_codes: set[str]) -> dict[str, Any]:
     """Filter fund_fees by fundCode
 
     Args:
@@ -757,6 +786,13 @@ def main():
     """Main entry point"""
     args = parse_args()
 
+    if args.stamp_prompts:
+        repo_root = Path(__file__).resolve().parents[6]
+        fund_data_path = repo_root / "funds" / "fund_data.json"
+        plugins_dir = repo_root / ".claude" / "plugins"
+        _ = stamp_prompts(fund_data_path, plugins_dir)
+        sys.exit(0)
+
     # Validate file exists
     csv_path = Path(args.file)
     if not csv_path.exists():
@@ -783,6 +819,12 @@ def main():
     except Exception as e:
         print(f"Error: {e}")
         sys.exit(1)
+
+    # Run consistency gate after data update (skip on dry-run: nothing written)
+    if not args.dry_run:
+        from _consistency_gate import run_consistency_gate
+
+        run_consistency_gate()
 
 
 if __name__ == "__main__":

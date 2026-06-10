@@ -92,8 +92,8 @@ consultations/2026-01-14-TSLA-abc123/
 ├── 00-macro-outlook.md           # macro-synthesizer 출력
 ├── 00-materials-summary.md       # 자료 정리 (materials_path 제공 시)
 ├── 01-stock-screening.json       # stock-screener 출력
-├── 02-valuation-report.json      # stock-valuation 출력
-├── 03-bear-case.json             # bear-case-critic 출력
+├── 02-valuation-{ticker}.json    # stock-valuation 출력 (종목별)
+├── 03-bear-case-{ticker}.json    # bear-case-critic 출력 (종목별)
 ├── 04-final-verification.json    # stock-critic 출력
 └── 05-consultation-summary.md    # 최종 상담 보고서
 ```
@@ -103,8 +103,8 @@ consultations/2026-01-14-TSLA-abc123/
 | 에이전트 | 출력 파일 | 필수 |
 |----------|----------|:----:|
 | stock-screener | `01-stock-screening.json` | O (포트폴리오 요청 시) |
-| stock-valuation | `02-valuation-report.json` | O |
-| bear-case-critic | `03-bear-case.json` | O |
+| stock-valuation | `02-valuation-{ticker}.json` | O |
+| bear-case-critic | `03-bear-case-{ticker}.json` | O |
 | stock-critic | `04-final-verification.json` | O |
 
 ### 거시경제 분석 출력 파일 (macro-analysis 재사용)
@@ -151,7 +151,7 @@ consultations/2026-01-14-TSLA-abc123/
 
 ```
 Write(
-  file_path="consultations/{session_folder}/02-valuation-report.json",
+  file_path="consultations/{session_folder}/02-valuation-{ticker}.json",
   content="{\"status\": \"PASS\", \"ticker\": \"005930\", ...}"
 )
 ```
@@ -211,8 +211,8 @@ JSON.stringify(analysis_result, null, 2)
 {
   "status": "FAIL",
   "error": "FILE_SAVE_FAILED",
-  "detail": "02-valuation-report.json 저장 실패",
-  "attempted_path": "consultations/2026-01-14-TSLA-abc123/02-valuation-report.json",
+  "detail": "02-valuation-{ticker}.json 저장 실패",
+  "attempted_path": "consultations/2026-01-14-TSLA-abc123/02-valuation-TSLA.json",
   "action": "재시도 필요"
 }
 ```

@@ -1,7 +1,7 @@
 ---
 name: stock-critic
 description: "주식 상담 최종 검증. 환각 방지, 출처 확인, 과신 표현 탐지."
-tools: Read
+tools: Read, Write
 model: opus
 ---
 

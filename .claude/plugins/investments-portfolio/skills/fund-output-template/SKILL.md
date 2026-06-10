@@ -276,7 +276,7 @@ TDF_MODE = "[ALL_IN_ONE_TDF / HYBRID_TDF_SLEEVE]"
 
 ## 2. Multi-Agent 보고서 출력 형식 (coordinator 호출 시)
 
-portfolio-orchestrator에서 호출될 때 반드시 지정된 경로에 보고서를 저장합니다.
+portfolio-analyze 명령에서 호출될 때 반드시 지정된 경로에 보고서를 저장합니다.
 
 ### 파일 출력 경로
 

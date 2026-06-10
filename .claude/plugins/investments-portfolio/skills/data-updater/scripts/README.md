@@ -14,7 +14,12 @@ python scripts/fetch_latest_proposal.py --out-dir resource --convert
 python scripts/update_fund_data.py \
   --file "resource/26년06월_상품제안서_퇴직연금(DCIRP).csv" \
   --output-dir funds
+
+# 3) 정합성 검증 (필수)
+python scripts/verify_consistency.py
 ```
+
+> **주의**: 데이터 업데이트 후에는 반드시 `python3 scripts/verify_consistency.py`를 실행하여 데이터 간의 정합성을 확인해야 합니다. 게이트가 통과(Exit 0)해야 업데이트가 완료된 것으로 간주합니다.
 
 > `fetch_latest_proposal.py` 와 `xlsx_to_csv.py` 만 `openpyxl` 이 필요하고,
 > `update_fund_data.py` / `classify_funds.py` 는 표준 라이브러리만 사용합니다.

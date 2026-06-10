@@ -184,7 +184,7 @@ overallStatus = 모든 파일 중 가장 나쁜(worst-case) 상태
 
 #### 2.3.4 필수 출력 (신선도 검증 테이블)
 
-검사 직후 아래 테이블을 출력합니다 (예시는 기준일 2026-06-08 기준):
+검사 직후 아래 테이블을 출력합니다 (예시는 기준일 YYYY-MM-DD 기준):
 
 ```markdown
 ### 데이터 신선도 검증
@@ -678,5 +678,5 @@ changes:
 agents:
   macro: [index-fetcher, rate-analyst, sector-analyst, risk-analyst, leadership-analyst, macro-synthesizer, macro-critic]
   portfolio: [fund-portfolio, compliance-checker, output-critic]
-skills_reference: "portfolio-orchestrator, file-save-protocol"
+skills_reference: "file-save-protocol"
 ```

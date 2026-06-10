@@ -1,8 +1,8 @@
 {
   "_meta": {
-    "version": "2026-02-28",
-    "source": "과학기술인공제회 퇴직연금 원리금보장형 운용방법 안내",
-    "updatedAt": "2026-03-30T14:40:00+09:00",
+    "version": "2026-04-30",
+    "source": "과학기술인공제회 원리금보장형 운용방법 안내 (2026-04-30)",
+    "updatedAt": "2026-06-09T13:07:30+09:00",
     "recordCount": 4,
     "freshnessThresholdDays": 30,
     "note": "30일 경과 시 데이터 업데이트 필요"
@@ -33,7 +33,7 @@
       "type": "원리금보장형운용방법",
       "term": "1년",
       "termMonths": 12,
-      "rate": 2.8,
+      "rate": 2.95,
       "unit": "%",
       "earlyWithdrawal": {
         "normal": "신규일(최종 재예치일) 당시 영업점 및 홈페이지 게시된 기간별 중도해지이율 적용",
@@ -47,7 +47,7 @@
       "type": "원리금보장형운용방법",
       "term": "6개월",
       "termMonths": 6,
-      "rate": 2.35,
+      "rate": 2.45,
       "unit": "%",
       "earlyWithdrawal": {
         "normal": "신규일(최종 재예치일) 당시 영업점 및 홈페이지 게시된 기간별 중도해지이율 적용",
@@ -61,7 +61,7 @@
       "type": "원리금보장형운용방법",
       "term": "3개월",
       "termMonths": 3,
-      "rate": 2.3,
+      "rate": 2.4,
       "unit": "%",
       "earlyWithdrawal": {
         "normal": "신규일(최종 재예치일) 당시 영업점 및 홈페이지 게시된 기간별 중도해지이율 적용",
@@ -75,7 +75,7 @@
       "rate": 4.9,
       "term": "1년"
     },
-    "averageRate": 3.0875,
+    "averageRate": 3.175,
     "institutions": ["과학기술인공제회", "우리은행"]
   }
 }

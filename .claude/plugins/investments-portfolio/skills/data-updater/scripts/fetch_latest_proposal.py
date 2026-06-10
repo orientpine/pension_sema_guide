@@ -88,6 +88,10 @@ def main():
         n = mod.convert(str(xlsx_path), str(csv_path))
         print(f"Converted {n} rows -> {csv_path}")
 
+    from _consistency_gate import run_consistency_gate
+
+    run_consistency_gate()
+
 
 if __name__ == "__main__":
     main()
