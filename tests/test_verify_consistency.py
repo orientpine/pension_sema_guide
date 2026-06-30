@@ -19,6 +19,7 @@ def tmp_repo(tmp_path: Path, repo_root: Path) -> Iterator[Path]:
     destination = tmp_path / "repo"
     ignore = shutil.ignore_patterns(
         ".git",
+        ".codegraph",
         ".omo",
         ".pytest_cache",
         "__pycache__",
