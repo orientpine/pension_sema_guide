@@ -1,7 +1,7 @@
 # PROJECT KNOWLEDGE BASE
 
-**Generated:** 2026-06-08
-**Commit:** 04aa5b0
+**Generated:** 2026-06-30
+**Commit:** e75b991
 **Branch:** main
 
 ## OVERVIEW
@@ -44,7 +44,8 @@ pension_sema_guide/
 ├── consultations/              # Stock/ETF consultation reports (non-personal)
 ├── resource/                   # Source CSV/XLSX from SEMA (monthly 상품제안서)
 ├── docs/                       # Reference documentation
-├── scripts/                    # verify_no_pii.sh, verify_plugin.sh
+├── scripts/                    # 검증/CI 도구 (verify_consistency.py 게이트) — scripts/AGENTS.md
+├── .github/workflows/          # CI: consistency-gate.yml (gate + pytest, push/PR)
 │
 └── confidentialData/           # 🔒 개인정보 보관소 (GITIGNORED — 저장소 미포함)
     ├── investor-profile.md                  #   투자자 프로필
@@ -65,7 +66,7 @@ pension_sema_guide/
 | Stock/ETF consult | `.claude/plugins/stock-consultation/AGENTS.md` | stock-consult orchestration |
 | Data ETL scripts | `.claude/plugins/investments-portfolio/skills/data-updater/scripts/` | CSV→JSON, TDF enrichment |
 | TDF enrichment tests | `tests/AGENTS.md` | pytest suite (63 passed) |
-| Consistency Gate | `scripts/verify_consistency.py` | Data/Prompt consistency check |
+| Verification / CI | `scripts/AGENTS.md` | 정합성 게이트·PII 스캔·git hook·CI |
 | Annotation Convention | `docs/consistency/annotation-convention.md` | Data tagging rules |
 | SSOT Registry | `docs/consistency/date-ssot-registry.md` | Single Source of Truth for dates |
 | Public sample reports | `portfolios/samples/` | Anonymized examples ONLY |

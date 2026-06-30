@@ -1,6 +1,6 @@
 # TESTS: tests/
 
-`update_tdf_data.py`(TDF 결정적 보강)의 pytest 스위트. `pytest.ini`(repo root) `testpaths=tests`. stdlib만, 네트워크 없음 — `conftest.py`가 in-memory authoritative 슬라이스(adversarial TDF 케이스 7종) 제공.
+`update_tdf_data.py`(TDF 결정적 보강) + 정합성 게이트(`scripts/verify_consistency.py`)의 pytest 스위트. `pytest.ini`(repo root) `testpaths=tests`. stdlib만, 네트워크 없음 — `conftest.py`가 in-memory authoritative 슬라이스(adversarial TDF 케이스 7종) 제공.
 
 ## FILES
 
@@ -13,6 +13,8 @@
 | test_cross_validate.py | 수익률 드리프트 경고 |
 | test_enrich.py | 보강 파이프라인 전체 |
 | test_cli.py / test_integration.py | CLI 종단 동작 |
+| test_year_derive.py | 기준년도/연령대 산출 (`_derive_current_year`) |
+| test_verify_consistency.py | 정합성 게이트 자체 검증 (dangling/date/freshness/dup/manifest, 17) |
 
 ## RUN
 
