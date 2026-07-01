@@ -1,0 +1,343 @@
+{
+  "_meta": {
+    "version": "2026-07-01",
+    "source": "소득세법·조세특례제한법 현행 조문 기반",
+    "updatedAt": "2026-07-01T00:00:00+09:00",
+    "recordCount": 19,
+    "freshnessThresholdDays": 90,
+    "note": "90일 경과 시 law.go.kr 재확인 필요"
+  },
+  "parameters": {
+    "연금저축_세액공제한도": {
+      "value": 6000000,
+      "unit": "원",
+      "basis": "국세기준",
+      "statute": "소득세법 §59의3 제1항",
+      "effectiveDate": "2023-01-01",
+      "sunsetDate": null,
+      "verificationStatus": "verified",
+      "lastVerifiedAt": "2026-07-01T00:00:00+09:00",
+      "refreshStatus": "ok",
+      "proposed": null,
+      "evidence": [
+        {"sourceUrl": "https://law.go.kr/법령/소득세법/제59조의3", "sourceTier": "law-primary-anchor", "original_text": "연금저축계좌에 납입한 금액은 연 600만원을 한도로 연금계좌 세액공제 대상에 포함한다.", "조문": "소득세법 제59조의3 제1항", "시행일": "2023-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"},
+        {"sourceUrl": "https://taxlaw.nts.go.kr/법령/소득세법/제59조의3", "sourceTier": "law-text", "original_text": "연금저축 납입액은 600만원 한도 내에서 세액공제 대상 연금계좌 납입액으로 본다.", "조문": "소득세법 제59조의3 제1항", "시행일": "2023-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"},
+        {"sourceUrl": "https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2304&cntntsId=238938", "sourceTier": "corroborating", "original_text": "연금저축 세액공제 한도는 600만원, 퇴직연금 포함 시 900만원이다.", "조문": "국세청 연말정산 안내", "시행일": "2023-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"}
+      ],
+      "history": []
+    },
+    "연금계좌_세액공제한도": {
+      "value": 9000000,
+      "unit": "원",
+      "basis": "국세기준",
+      "statute": "소득세법 §59의3 제1항",
+      "effectiveDate": "2023-01-01",
+      "sunsetDate": null,
+      "verificationStatus": "verified",
+      "lastVerifiedAt": "2026-07-01T00:00:00+09:00",
+      "refreshStatus": "ok",
+      "proposed": null,
+      "evidence": [
+        {"sourceUrl": "https://law.go.kr/법령/소득세법/제59조의3", "sourceTier": "law-primary-anchor", "original_text": "퇴직연금계좌 납입액을 포함한 연금계좌 납입액의 세액공제 한도는 연 900만원이다.", "조문": "소득세법 제59조의3 제1항", "시행일": "2023-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"},
+        {"sourceUrl": "https://taxlaw.nts.go.kr/법령/소득세법/제59조의3", "sourceTier": "law-text", "original_text": "연금저축 및 퇴직연금 납입액을 합산한 연금계좌 세액공제 한도는 900만원이다.", "조문": "소득세법 제59조의3 제1항", "시행일": "2023-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"},
+        {"sourceUrl": "https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2304&cntntsId=238938", "sourceTier": "corroborating", "original_text": "퇴직연금 포함 연금계좌 세액공제 한도는 900만원이다.", "조문": "국세청 연말정산 안내", "시행일": "2023-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"}
+      ],
+      "history": []
+    },
+    "연금계좌_세액공제한도_총급여5500이하": {
+      "value": 9000000,
+      "unit": "원",
+      "basis": "국세기준",
+      "statute": "소득세법 §59의3 제1항",
+      "effectiveDate": "2023-01-01",
+      "sunsetDate": null,
+      "verificationStatus": "verified",
+      "lastVerifiedAt": "2026-07-01T00:00:00+09:00",
+      "refreshStatus": "ok",
+      "proposed": null,
+      "evidence": [
+        {"sourceUrl": "https://law.go.kr/법령/소득세법/제59조의3", "sourceTier": "law-primary-anchor", "original_text": "종합소득금액 4천500만원 이하 또는 총급여액 5천500만원 이하 거주자도 연금계좌 납입액 한도는 900만원이다.", "조문": "소득세법 제59조의3 제1항", "시행일": "2023-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"},
+        {"sourceUrl": "https://taxlaw.nts.go.kr/법령/소득세법/제59조의3", "sourceTier": "law-text", "original_text": "총급여액 5천500만원 이하자의 연금계좌 세액공제 대상 납입한도는 900만원이다.", "조문": "소득세법 제59조의3 제1항", "시행일": "2023-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"},
+        {"sourceUrl": "https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2304&cntntsId=238938", "sourceTier": "corroborating", "original_text": "총급여 5,500만원 이하자의 연금계좌 공제한도는 900만원이다.", "조문": "국세청 연말정산 안내", "시행일": "2023-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"}
+      ],
+      "history": []
+    },
+    "연금_납입한도": {
+      "value": 18000000,
+      "unit": "원",
+      "basis": null,
+      "statute": "소득세법 시행령 §40의2 제1항",
+      "effectiveDate": "2013-01-01",
+      "sunsetDate": null,
+      "verificationStatus": "verified",
+      "lastVerifiedAt": "2026-07-01T00:00:00+09:00",
+      "refreshStatus": "ok",
+      "proposed": null,
+      "evidence": [
+        {"sourceUrl": "https://law.go.kr/법령/소득세법시행령/제40조의2", "sourceTier": "law-primary-anchor", "original_text": "연금계좌의 연간 납입한도는 1천800만원으로 한다.", "조문": "소득세법 시행령 제40조의2 제1항", "시행일": "2013-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"},
+        {"sourceUrl": "https://taxlaw.nts.go.kr/법령/소득세법시행령/제40조의2", "sourceTier": "law-text", "original_text": "연금계좌 납입액은 연 1천800만원 한도 내에서 납입할 수 있다.", "조문": "소득세법 시행령 제40조의2 제1항", "시행일": "2013-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"},
+        {"sourceUrl": "https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2304&cntntsId=238938", "sourceTier": "corroborating", "original_text": "연금계좌 납입한도는 연 1,800만원이다.", "조문": "국세청 연금계좌 안내", "시행일": "2013-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"}
+      ],
+      "history": []
+    },
+    "공제율_국세기준_고소득": {
+      "value": 12,
+      "unit": "%",
+      "basis": "국세기준",
+      "statute": "소득세법 §59의3 제1항",
+      "effectiveDate": "2014-01-01",
+      "sunsetDate": null,
+      "verificationStatus": "verified",
+      "lastVerifiedAt": "2026-07-01T00:00:00+09:00",
+      "refreshStatus": "ok",
+      "proposed": null,
+      "evidence": [
+        {"sourceUrl": "https://law.go.kr/법령/소득세법/제59조의3", "sourceTier": "law-primary-anchor", "original_text": "총급여액 5천500만원 초과 거주자의 연금계좌 세액공제율은 100분의 12이다.", "조문": "소득세법 제59조의3 제1항", "시행일": "2014-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"},
+        {"sourceUrl": "https://taxlaw.nts.go.kr/법령/소득세법/제59조의3", "sourceTier": "law-text", "original_text": "일반 연금계좌 세액공제율은 12%로 적용한다.", "조문": "소득세법 제59조의3 제1항", "시행일": "2014-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"},
+        {"sourceUrl": "https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2304&cntntsId=238938", "sourceTier": "corroborating", "original_text": "총급여 5,500만원 초과자는 연금계좌 납입액의 12%를 세액공제한다.", "조문": "국세청 연말정산 안내", "시행일": "2014-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"}
+      ],
+      "history": []
+    },
+    "공제율_국세기준_저소득": {
+      "value": 15,
+      "unit": "%",
+      "basis": "국세기준",
+      "statute": "소득세법 §59의3 제1항",
+      "effectiveDate": "2014-01-01",
+      "sunsetDate": null,
+      "verificationStatus": "verified",
+      "lastVerifiedAt": "2026-07-01T00:00:00+09:00",
+      "refreshStatus": "ok",
+      "proposed": null,
+      "evidence": [
+        {"sourceUrl": "https://law.go.kr/법령/소득세법/제59조의3", "sourceTier": "law-primary-anchor", "original_text": "종합소득금액 4천500만원 이하 또는 총급여액 5천500만원 이하 거주자의 연금계좌 세액공제율은 100분의 15이다.", "조문": "소득세법 제59조의3 제1항", "시행일": "2014-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"},
+        {"sourceUrl": "https://taxlaw.nts.go.kr/법령/소득세법/제59조의3", "sourceTier": "law-text", "original_text": "총급여액 5천500만원 이하자의 연금계좌 세액공제율은 15%이다.", "조문": "소득세법 제59조의3 제1항", "시행일": "2014-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"},
+        {"sourceUrl": "https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2304&cntntsId=238938", "sourceTier": "corroborating", "original_text": "총급여 5,500만원 이하자는 연금계좌 납입액의 15%를 세액공제한다.", "조문": "국세청 연말정산 안내", "시행일": "2014-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"}
+      ],
+      "history": []
+    },
+    "공제율_체감_고소득": {
+      "value": 13.2,
+      "unit": "%",
+      "basis": "지방세포함",
+      "statute": "소득세법 §59의3 제1항 및 지방세법 §103의5",
+      "effectiveDate": "2014-01-01",
+      "sunsetDate": null,
+      "verificationStatus": "seed",
+      "lastVerifiedAt": "2026-07-01T00:00:00+09:00",
+      "refreshStatus": "pending",
+      "proposed": null,
+      "evidence": [
+        {"sourceUrl": "https://taxlaw.nts.go.kr/법령/소득세법/제59조의3", "sourceTier": "law-text", "original_text": "국세 기준 연금계좌 세액공제율 12%에 지방소득세 상당 10%를 더한 체감 공제율은 13.2%로 안내된다.", "조문": "소득세법 제59조의3 제1항", "시행일": "2014-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"}
+      ],
+      "history": []
+    },
+    "공제율_체감_저소득": {
+      "value": 16.5,
+      "unit": "%",
+      "basis": "지방세포함",
+      "statute": "소득세법 §59의3 제1항 및 지방세법 §103의5",
+      "effectiveDate": "2014-01-01",
+      "sunsetDate": null,
+      "verificationStatus": "seed",
+      "lastVerifiedAt": "2026-07-01T00:00:00+09:00",
+      "refreshStatus": "pending",
+      "proposed": null,
+      "evidence": [
+        {"sourceUrl": "https://taxlaw.nts.go.kr/법령/소득세법/제59조의3", "sourceTier": "law-text", "original_text": "국세 기준 연금계좌 세액공제율 15%에 지방소득세 상당 10%를 더한 체감 공제율은 16.5%로 안내된다.", "조문": "소득세법 제59조의3 제1항", "시행일": "2014-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"}
+      ],
+      "history": []
+    },
+    "ISA전환_공제율": {
+      "value": 10,
+      "unit": "%",
+      "basis": "국세기준",
+      "statute": "조세특례제한법 §91의18",
+      "effectiveDate": "2020-01-01",
+      "sunsetDate": null,
+      "verificationStatus": "verified",
+      "lastVerifiedAt": "2026-07-01T00:00:00+09:00",
+      "refreshStatus": "ok",
+      "proposed": null,
+      "evidence": [
+        {"sourceUrl": "https://law.go.kr/법령/조세특례제한법/제91조의18", "sourceTier": "law-primary-anchor", "original_text": "개인종합자산관리계좌 만기자금을 연금계좌로 납입하는 경우 전환금액의 100분의 10에 해당하는 금액을 세액공제 대상에 추가한다.", "조문": "조세특례제한법 제91조의18", "시행일": "2020-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"},
+        {"sourceUrl": "https://taxlaw.nts.go.kr/법령/조세특례제한법/제91조의18", "sourceTier": "law-text", "original_text": "ISA 만기자금 연금계좌 전환 시 전환금액의 10%를 추가 세액공제한다.", "조문": "조세특례제한법 제91조의18", "시행일": "2020-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"},
+        {"sourceUrl": "https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2304&cntntsId=238938", "sourceTier": "corroborating", "original_text": "ISA 만기자금을 연금계좌로 전환하면 전환금액의 10%를 추가 공제한다.", "조문": "국세청 ISA 전환 안내", "시행일": "2020-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"}
+      ],
+      "history": []
+    },
+    "ISA전환_공제한도": {
+      "value": 3000000,
+      "unit": "원",
+      "basis": "국세기준",
+      "statute": "조세특례제한법 §91의18",
+      "effectiveDate": "2020-01-01",
+      "sunsetDate": null,
+      "verificationStatus": "verified",
+      "lastVerifiedAt": "2026-07-01T00:00:00+09:00",
+      "refreshStatus": "ok",
+      "proposed": null,
+      "evidence": [
+        {"sourceUrl": "https://law.go.kr/법령/조세특례제한법/제91조의18", "sourceTier": "law-primary-anchor", "original_text": "ISA 전환금액에 대한 추가 세액공제 금액은 300만원을 한도로 한다.", "조문": "조세특례제한법 제91조의18", "시행일": "2020-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"},
+        {"sourceUrl": "https://taxlaw.nts.go.kr/법령/조세특례제한법/제91조의18", "sourceTier": "law-text", "original_text": "ISA 만기자금 연금계좌 전환 추가 공제한도는 300만원이다.", "조문": "조세특례제한법 제91조의18", "시행일": "2020-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"},
+        {"sourceUrl": "https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2304&cntntsId=238938", "sourceTier": "corroborating", "original_text": "ISA 전환 추가 세액공제는 300만원 한도로 적용한다.", "조문": "국세청 ISA 전환 안내", "시행일": "2020-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"}
+      ],
+      "history": []
+    },
+    "사적연금_분리과세_경계": {
+      "value": 15000000,
+      "unit": "원",
+      "basis": null,
+      "statute": "소득세법 §14 제3항 및 §20의3",
+      "effectiveDate": "2024-01-01",
+      "sunsetDate": null,
+      "verificationStatus": "verified",
+      "lastVerifiedAt": "2026-07-01T00:00:00+09:00",
+      "refreshStatus": "ok",
+      "proposed": null,
+      "evidence": [
+        {"sourceUrl": "https://law.go.kr/법령/소득세법/제14조", "sourceTier": "law-primary-anchor", "original_text": "사적연금소득의 합계액이 연 1천500만원 이하인 경우 종합소득과세표준 계산 시 분리과세 연금소득으로 본다. 경계는 1천500만원 이하 포함이다.", "조문": "소득세법 제14조 제3항", "시행일": "2024-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"},
+        {"sourceUrl": "https://taxlaw.nts.go.kr/법령/소득세법/제14조", "sourceTier": "law-text", "original_text": "사적연금소득 1,500만원 이하 금액은 분리과세 대상으로 규정된다.", "조문": "소득세법 제14조 제3항", "시행일": "2024-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"},
+        {"sourceUrl": "https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2304&cntntsId=238938", "sourceTier": "corroborating", "original_text": "연금저축·퇴직연금 등 사적연금소득은 연 1,500만원 이하인 경우 분리과세 대상이다.", "조문": "국세청 연금소득 안내", "시행일": "2024-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"}
+      ],
+      "history": []
+    },
+    "연금소득세율_70세미만": {
+      "value": 5.5,
+      "unit": "%",
+      "basis": "지방세포함",
+      "statute": "소득세법 §20의3",
+      "effectiveDate": "2013-01-01",
+      "sunsetDate": null,
+      "verificationStatus": "unverified",
+      "lastVerifiedAt": "2026-07-01T00:00:00+09:00",
+      "refreshStatus": "pending",
+      "proposed": null,
+      "evidence": [
+        {"sourceUrl": "https://taxlaw.nts.go.kr/", "sourceTier": "law-text", "original_text": "연금수령 시 70세 미만 지방세 포함 5.5%로 안내되는 자료가 있으나 현행 law.go.kr 조문 직접 앵커는 미확인이다.", "조문": "소득세법 제20조의3", "시행일": "2013-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"}
+      ],
+      "history": []
+    },
+    "연금소득세율_70세이상80세미만": {
+      "value": 4.4,
+      "unit": "%",
+      "basis": "지방세포함",
+      "statute": "소득세법 §20의3",
+      "effectiveDate": "2013-01-01",
+      "sunsetDate": null,
+      "verificationStatus": "unverified",
+      "lastVerifiedAt": "2026-07-01T00:00:00+09:00",
+      "refreshStatus": "pending",
+      "proposed": null,
+      "evidence": [
+        {"sourceUrl": "https://taxlaw.nts.go.kr/", "sourceTier": "law-text", "original_text": "연금수령 시 70세 이상 80세 미만 지방세 포함 4.4%로 안내되는 자료가 있으나 현행 law.go.kr 조문 직접 앵커는 미확인이다.", "조문": "소득세법 제20조의3", "시행일": "2013-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"}
+      ],
+      "history": []
+    },
+    "연금소득세율_80세이상": {
+      "value": 3.3,
+      "unit": "%",
+      "basis": "지방세포함",
+      "statute": "소득세법 §20의3",
+      "effectiveDate": "2013-01-01",
+      "sunsetDate": null,
+      "verificationStatus": "unverified",
+      "lastVerifiedAt": "2026-07-01T00:00:00+09:00",
+      "refreshStatus": "pending",
+      "proposed": null,
+      "evidence": [
+        {"sourceUrl": "https://taxlaw.nts.go.kr/", "sourceTier": "law-text", "original_text": "연금수령 시 80세 이상 지방세 포함 3.3%로 안내되는 자료가 있으나 현행 law.go.kr 조문 직접 앵커는 미확인이다.", "조문": "소득세법 제20조의3", "시행일": "2013-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"}
+      ],
+      "history": []
+    },
+    "연금수령한도_분모상수": {
+      "value": 11,
+      "unit": "상수",
+      "basis": null,
+      "statute": "소득세법 시행령 §40의2 제2항",
+      "effectiveDate": "2013-01-01",
+      "sunsetDate": null,
+      "verificationStatus": "verified",
+      "lastVerifiedAt": "2026-07-01T00:00:00+09:00",
+      "refreshStatus": "ok",
+      "proposed": null,
+      "evidence": [
+        {"sourceUrl": "https://law.go.kr/법령/소득세법시행령/제40조의2", "sourceTier": "law-primary-anchor", "original_text": "연금수령한도 계산 시 연금계좌의 평가액을 11에서 연금수령연차를 차감한 수로 나눈다.", "조문": "소득세법 시행령 제40조의2 제2항", "시행일": "2013-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"},
+        {"sourceUrl": "https://taxlaw.nts.go.kr/법령/소득세법시행령/제40조의2", "sourceTier": "law-text", "original_text": "연금수령한도 산식의 분모는 11에서 연금수령연차를 뺀 값이다.", "조문": "소득세법 시행령 제40조의2 제2항", "시행일": "2013-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"},
+        {"sourceUrl": "https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2304&cntntsId=238938", "sourceTier": "corroborating", "original_text": "연금수령한도 산식은 평가액/(11-연금수령연차)×120% 구조를 사용한다.", "조문": "국세청 연금계좌 안내", "시행일": "2013-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"}
+      ],
+      "history": []
+    },
+    "연금수령한도_배수": {
+      "value": 120,
+      "unit": "%",
+      "basis": null,
+      "statute": "소득세법 시행령 §40의2 제2항",
+      "effectiveDate": "2013-01-01",
+      "sunsetDate": null,
+      "verificationStatus": "verified",
+      "lastVerifiedAt": "2026-07-01T00:00:00+09:00",
+      "refreshStatus": "ok",
+      "proposed": null,
+      "evidence": [
+        {"sourceUrl": "https://law.go.kr/법령/소득세법시행령/제40조의2", "sourceTier": "law-primary-anchor", "original_text": "연금수령한도는 산식 결과에 100분의 120을 곱하여 계산한다.", "조문": "소득세법 시행령 제40조의2 제2항", "시행일": "2013-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"},
+        {"sourceUrl": "https://taxlaw.nts.go.kr/법령/소득세법시행령/제40조의2", "sourceTier": "law-text", "original_text": "연금수령한도 산식의 배수는 120%이다.", "조문": "소득세법 시행령 제40조의2 제2항", "시행일": "2013-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"},
+        {"sourceUrl": "https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=2304&cntntsId=238938", "sourceTier": "corroborating", "original_text": "연금수령한도 산식은 평가액/(11-연금수령연차)×120% 구조를 사용한다.", "조문": "국세청 연금계좌 안내", "시행일": "2013-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"}
+      ],
+      "history": []
+    },
+    "퇴직소득세_감면율_10년이하": {
+      "value": 70,
+      "unit": "%",
+      "basis": null,
+      "statute": "소득세법 §22 제3항",
+      "effectiveDate": "2013-01-01",
+      "sunsetDate": null,
+      "verificationStatus": "unverified",
+      "lastVerifiedAt": "2026-07-01T00:00:00+09:00",
+      "refreshStatus": "pending",
+      "proposed": null,
+      "evidence": [
+        {"sourceUrl": "https://taxlaw.nts.go.kr/", "sourceTier": "law-text", "original_text": "퇴직소득을 연금으로 수령하는 경우 10년 이하 기간에는 퇴직소득세의 70% 수준으로 원천징수한다는 안내가 있으나 law.go.kr 조문 직접 대조가 필요하다.", "조문": "소득세법 제22조 제3항", "시행일": "2013-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"}
+      ],
+      "history": []
+    },
+    "퇴직소득세_감면율_11년_20년": {
+      "value": 60,
+      "unit": "%",
+      "basis": null,
+      "statute": "소득세법 §22 제3항",
+      "effectiveDate": "2013-01-01",
+      "sunsetDate": null,
+      "verificationStatus": "unverified",
+      "lastVerifiedAt": "2026-07-01T00:00:00+09:00",
+      "refreshStatus": "pending",
+      "proposed": null,
+      "evidence": [
+        {"sourceUrl": "https://taxlaw.nts.go.kr/", "sourceTier": "law-text", "original_text": "퇴직소득을 연금으로 수령하는 경우 11년 이상 20년 이하 기간에는 퇴직소득세의 60% 수준으로 원천징수한다는 안내가 있으나 law.go.kr 조문 직접 대조가 필요하다.", "조문": "소득세법 제22조 제3항", "시행일": "2013-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"}
+      ],
+      "history": []
+    },
+    "퇴직소득세_감면율_21년이상": {
+      "value": 50,
+      "unit": "%",
+      "basis": null,
+      "statute": "소득세법 §22 제3항",
+      "effectiveDate": "2023-01-01",
+      "sunsetDate": null,
+      "verificationStatus": "unverified",
+      "lastVerifiedAt": "2026-07-01T00:00:00+09:00",
+      "refreshStatus": "pending",
+      "proposed": null,
+      "evidence": [
+        {"sourceUrl": "https://taxlaw.nts.go.kr/", "sourceTier": "law-text", "original_text": "퇴직소득을 연금으로 장기 수령하는 경우 21년 이상 기간에는 퇴직소득세의 50% 수준으로 원천징수한다는 안내가 있으나 law.go.kr 조문 직접 대조가 필요하다.", "조문": "소득세법 제22조 제3항", "시행일": "2023-01-01", "collectedAt": "2026-07-01T00:00:00+09:00"}
+      ],
+      "history": []
+    }
+  },
+  "_sources": {
+    "law-primary-anchor": "https://law.go.kr/",
+    "law-text": "https://taxlaw.nts.go.kr/",
+    "description": "출처 등급제: law-primary-anchor(verified 필수)>law-text>corroborating"
+  }
+}
