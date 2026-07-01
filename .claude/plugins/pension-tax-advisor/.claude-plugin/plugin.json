@@ -1,0 +1,10 @@
+{
+  "name": "pension-tax-advisor",
+  "version": "1.0.0",
+  "description": "퇴직연금·연금계좌 세금 상담 멀티에이전트. law.go.kr 출처 등급제, 3중 검증(calc-verifier→critic→devil-advocate), 미검증 자동 보류로 정확한 절세 상담 제공.",
+  "author": {
+    "name": "Baekdong Cha",
+    "email": "orientpine@gmail.com"
+  },
+  "license": "MIT"
+}
