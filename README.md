@@ -186,6 +186,98 @@ portfolios/samples/sample-aggressive/
 
 ---
 
+## 퇴직연금 세금 상담 예제 (`/pension-tax-advisor:tax-consult`)
+
+추가 기능인 `tax-consult`는 **납입 → 운용 → 수령** 3단계의 연금·퇴직연금 절세를 상담하는 오케스트레이터입니다.
+`portfolio-analyze`와 마찬가지로 **투자자 프로필을 프롬프트에 인라인으로 입력**하면(개인정보 파일을 자동으로 읽지 않습니다),
+교육 → 전략 → **3중 검증** → 최종 요약 파이프라인이 순차 실행됩니다. 모든 세제 수치는 `funds/pension_tax_params.json`(현행 조문 앵커)에서
+`parameter_id`로 로드해 **python3로 독립 재계산**하고, 검증을 통과하지 못한 항목은 숫자를 만들어내지 않고 **"보류"**로 표시합니다.
+
+### 1. 실행 (프로필 인라인 입력)
+
+```
+/pension-tax-advisor:tax-consult 내 연금계좌 절세 상담을 해줘.
+
+| 항목 | 내용 |
+|------|------|
+| **총급여** | 6,000만원 (고소득) |
+| **나이 / 수령 개시** | 45세 / 65세 (20년 후) |
+| **계좌 구성** | IRP + 연금저축 (DC는 직장에서 별도 운용) |
+| **연간 납입** | IRP 600만원 + 연금저축 300만원 |
+```
+
+> 💡 프로필에는 개인정보가 포함되므로 실행 결과는 모두 `confidentialData/tax/`(gitignore 대상) 하위에만 저장됩니다.
+
+### 2. 멀티에이전트 워크플로우
+
+```
+[프로필 인라인 입력]
+     │
+     ▼
+[0. 신선도 체크]   funds/pension_tax_params.json 90일 초과 시 → tax-law-updater (BLOCKING)
+     │
+     ▼
+[tax-knowledge-educator]  납입·운용·수령 3단계 세제 교육 (개인 맞춤 아님)
+     │            └─► 00-educator.md
+     ▼
+[tax-strategy-planner]    개인 맞춤 절세 전략 초안 (미검증 파라미터는 보류)
+     │            └─► 01-strategy.md
+     ▼
+[C4 3중 검증]  calc-verifier(python3 재계산) → critic(A~F 채점) → devil-advocate(반론)
+     │            └─► 02-calc-verify.json/.md · 03-critic.json/.md
+     │            ✗ C/D/E/F·중대 반론 → planner 재시도(최대 3회) → 초과 시 "제공 보류"
+     ▼
+[04-summary 재검증]  검증 통과(A/B) 금액만 인용 + parameter_id 1:1 매핑 → 재검증 후 확정
+                  └─► 04-summary.md
+```
+
+| 단계 | 담당 에이전트 | 산출물 | 게이트 |
+| ---- | ------------- | ------ | ------ |
+| 0 | `tax-law-updater` | (파라미터 갱신) | 90일 초과 시에만 · BLOCKING |
+| 1 | `tax-knowledge-educator` | `00-educator.md` | BLOCKING |
+| 2 | `tax-strategy-planner` | `01-strategy.md` | BLOCKING |
+| 3 | `tax-calc-verifier` → `tax-critic` → devil-advocate¹ | `02-calc-verify.*` · `03-critic.*` | A/B 통과 · 미통과 3회 시 보류 |
+| 4 | `tax-consult`(조율) | `04-summary.md` | 재검증(calc→critic) 후 확정 |
+
+> ¹ devil-advocate는 별도 에이전트가 아니라 `tax-critic`이 보유한 반론 스킬입니다(에이전트는 5개).
+
+### 3. 산출물 구조
+
+개인정보 보호를 위해 모든 파일은 `confidentialData/tax/{YYYY-MM-DD}-{slug}-{6자리}/` 하위에만 JSON+MD로 저장됩니다(공개 저장소에 커밋되지 않습니다).
+
+```
+confidentialData/tax/{YYYY-MM-DD}-{slug}-{6자리}/
+├── 00-educator.md            # 납입·운용·수령 3단계 세제 교육
+├── 01-strategy.md            # 개인 맞춤 절세 전략 초안
+├── 02-calc-verify.json/.md   # python3 독립 재계산 검증
+├── 03-critic.json/.md        # A~F 신뢰도 채점 + 반론(devil-advocate)
+└── 04-summary.md             # 최종 요약 (검증 통과 금액만 + 검증 부록)
+```
+
+### 4. 최종 요약(`04-summary.md`) 예시 발췌
+
+> 위 익명 프로필에 대한 최종 요약의 일부입니다. `tax-critic` **A등급 PASS**를 받은, `parameter_id`로 재계산된 금액만 포함됩니다.
+
+| 항목 | 금액 | parameter_id | 조문 | 등급 |
+|------|-----:|--------------|------|:----:|
+| 연간 세액공제 | **1,080,000원** | `[id:연금계좌_세액공제한도] × [id:공제율_국세기준_고소득]` | 소득세법 §59의3 제1항 | ✅ A |
+| 분리과세 경계 | 15,000,000원 | `[id:사적연금_분리과세_경계]` | 소득세법 §14 제3항 및 §20의3 | ✅ A |
+
+**보류(미검증) 항목** — 숫자를 생성하지 않고 세무사 확인을 권고합니다.
+
+| parameter_id | 조문 | 상태 |
+|--------------|------|------|
+| `연금소득세율_70세미만` | 소득세법 §20의3 | 보류(미검증) |
+| `퇴직소득세_감면율_11년_20년` | 소득세법 §22 제3항 | 보류(미검증) |
+
+> ⚠️ **면책**: 본 상담은 정보 제공 목적이며 공인 세무사의 자문을 대체하지 않습니다. 세법·파라미터는 변경될 수 있으므로 실행 전 최신 조문(law.go.kr)을 재확인하세요.
+
+### 5. 공개 예시
+
+익명화된 전체 예시는 `portfolios/samples/sample-tax-consult/`에서 5단계 산출물(`00-educator` → `01-strategy` → `02-calc-verify` → `03-critic` → `04-summary`)로 확인할 수 있습니다. 실명·생년·소속·계좌 등 개인정보는 포함되어 있지 않습니다.
+
+---
+
 ## 플러그인 구성
 
 마켓플레이스 `pension-sema-guide`에 5개 플러그인이 vendoring되어 있습니다. (서브모듈이 아닌 내장 디렉토리)
