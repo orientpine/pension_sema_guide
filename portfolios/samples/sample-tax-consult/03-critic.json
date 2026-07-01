@@ -1,0 +1,42 @@
+{
+  "report_type": "tax-critic",
+  "sample": "sample-tax-consult",
+  "anonymized": true,
+  "grade": "A",
+  "verdict": "PASS",
+  "checks": {
+    "verified_params_only": true,
+    "basis_labels_correct": true,
+    "summary_mapped": true,
+    "no_unmapped_amounts": true,
+    "calc_verify_pass": true,
+    "disclaimer_present": true,
+    "anonymized_no_pii": true
+  },
+  "amount_audit": [
+    {
+      "amount": "세액공제 1,080,000원",
+      "mapped_params": ["연금계좌_세액공제한도", "공제율_국세기준_고소득"],
+      "statute": "소득세법 §59의3 제1항",
+      "calc_status": "PASS"
+    },
+    {
+      "amount": "분리과세 경계 15,000,000원",
+      "mapped_params": ["사적연금_분리과세_경계"],
+      "statute": "소득세법 §14 제3항 및 §20의3",
+      "calc_status": "PASS"
+    },
+    {
+      "amount": "연금수령한도(예시) 7,500,000원",
+      "mapped_params": ["연금수령한도_분모상수", "연금수령한도_배수"],
+      "statute": "소득세법 시행령 §40의2 제2항",
+      "calc_status": "PASS"
+    }
+  ],
+  "suspended_params_flagged": [
+    "연금소득세율_70세미만",
+    "퇴직소득세_감면율_11년_20년"
+  ],
+  "issues": [],
+  "notes": "All amounts trace to verified parameter_id + statute + python3-recomputed value (02-calc-verify.json). No hardcoded tax constants; unverified params correctly held. Anonymized (no name/birth/institution/account)."
+}

@@ -7,8 +7,9 @@
 - `ILLUSTRATIVE`: frontmatter/변경이력 날짜, 샘플 경로 날짜, fenced 예시 출력블록·예시 JSON 내부 날짜.
 - 모호한 항목은 fail-closed 원칙상 SEMANTIC으로 분류해야 하나, 본 레지스트리에서는 주변 ±3라인 확인 결과 모호 항목이 없었다.
 
-- grep occurrence count: `114`
+- grep occurrence count: `122`
 - SEMANTIC rows with missing ssot-pointer: `0`
+- 5번째 플러그인 반영(`pension-tax-advisor`, T17): 로직 `.md` 날짜 리터럴 **8건 추가**(2 skills + 1 agent). **전부 ILLUSTRATIVE** — fenced `evidence[]` 예시 JSON의 `시행일`(3건, `2023-01-01`), fenced yaml meta `created`/`updated`(4건), fenced JSON 예시 경로 날짜(1건). 세제 수치는 `{id:parameter_id}`로 참조하므로 `.md`에 `funds/pension_tax_params.json#parameters.<id>.effectiveDate`를 인용하는 **SEMANTIC 날짜 리터럴은 0건** → 추가 SSOT 포인터 불필요.
 
 | file:line | literal | class | ssot-pointer | 처리방침 |
 |---|---|---|---|---|
@@ -126,3 +127,11 @@
 | .claude/plugins/stock-consultation/skills/file-save-protocol-stock/SKILL.md:226 | 2026-01-20 | ILLUSTRATIVE | — | annotate-illustrative |
 | .claude/plugins/stock-consultation/skills/stock-data-verifier/SKILL.md:562 | 2026-01-14 | ILLUSTRATIVE | — | annotate-illustrative |
 | .claude/plugins/stock-consultation/skills/stock-data-verifier/SKILL.md:563 | 2026-01-14 | ILLUSTRATIVE | — | annotate-illustrative |
+| .claude/plugins/pension-tax-advisor/agents/tax-knowledge-educator.md:187 | 2026-07-01 | ILLUSTRATIVE | — | annotate-illustrative |
+| .claude/plugins/pension-tax-advisor/skills/file-save-protocol-tax/SKILL.md:194 | 2026-07-01 | ILLUSTRATIVE | — | annotate-illustrative |
+| .claude/plugins/pension-tax-advisor/skills/file-save-protocol-tax/SKILL.md:205 | 2026-07-01 | ILLUSTRATIVE | — | annotate-illustrative |
+| .claude/plugins/pension-tax-advisor/skills/tax-law-verifier/SKILL.md:178 | 2023-01-01 | ILLUSTRATIVE | — | annotate-illustrative |
+| .claude/plugins/pension-tax-advisor/skills/tax-law-verifier/SKILL.md:186 | 2023-01-01 | ILLUSTRATIVE | — | annotate-illustrative |
+| .claude/plugins/pension-tax-advisor/skills/tax-law-verifier/SKILL.md:194 | 2023-01-01 | ILLUSTRATIVE | — | annotate-illustrative |
+| .claude/plugins/pension-tax-advisor/skills/tax-law-verifier/SKILL.md:248 | 2026-07-01 | ILLUSTRATIVE | — | annotate-illustrative |
+| .claude/plugins/pension-tax-advisor/skills/tax-law-verifier/SKILL.md:249 | 2026-07-01 | ILLUSTRATIVE | — | annotate-illustrative |

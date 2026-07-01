@@ -1,0 +1,76 @@
+{
+  "report_type": "tax-calc-verification",
+  "sample": "sample-tax-consult",
+  "anonymized": true,
+  "ssot": {
+    "params_file": "funds/pension_tax_params.json",
+    "params_version": "2026-07-01",
+    "method": "python3 deterministic recompute (no LLM arithmetic)",
+    "rounding": "floor to 원 (법정 원 단위 절사)"
+  },
+  "profile": {
+    "총급여": "6,000만원 (고소득, 국세기준 12%)",
+    "나이": "45세",
+    "은퇴예정": "65세 (20년 후)",
+    "IRP_납입": "연 600만원",
+    "연금저축_납입": "연 300만원",
+    "ISA전환": "없음",
+    "연금수령연차": "없음 (납입 단계)"
+  },
+  "amounts": [
+    {
+      "amount_name": "연간 세액공제 (합산 납입, 고소득 국세기준)",
+      "report_value": 1080000,
+      "computed_value": 1080000,
+      "status": "PASS",
+      "diff": 0,
+      "dependent_params": [
+        "연금계좌_세액공제한도",
+        "공제율_국세기준_고소득"
+      ],
+      "statute": "소득세법 §59의3 제1항",
+      "formula": "floor(min(납입합산, 연금계좌_세액공제한도) × 공제율_국세기준_고소득 / 100)",
+      "note": "min(9,000,000, 9,000,000) × 12% = 1,080,000원"
+    },
+    {
+      "amount_name": "사적연금 분리과세 경계 (판정 기준)",
+      "report_value": 15000000,
+      "computed_value": 15000000,
+      "status": "PASS",
+      "diff": 0,
+      "dependent_params": [
+        "사적연금_분리과세_경계"
+      ],
+      "statute": "소득세법 §14 제3항 및 §20의3",
+      "formula": "연간 사적연금소득 ≤ 사적연금_분리과세_경계 → 분리과세 available",
+      "note": "경계값 15,000,000원 검증(판정 기준). 납입 단계이므로 현재 수령소득 0 → available"
+    },
+    {
+      "amount_name": "연금수령한도 (예시: 잔고 5,000만원·3년차)",
+      "report_value": 7500000,
+      "computed_value": 7500000,
+      "status": "PASS",
+      "diff": 0,
+      "dependent_params": [
+        "연금수령한도_분모상수",
+        "연금수령한도_배수"
+      ],
+      "statute": "소득세법 시행령 §40의2 제2항",
+      "formula": "floor(잔고 / (연금수령한도_분모상수 − 연차) × 연금수령한도_배수 / 100)",
+      "note": "floor(50,000,000 / (11−3) × 120%) = 7,500,000원 (예시 시나리오)"
+    }
+  ],
+  "suspended_params": [
+    {
+      "parameter_id": "연금소득세율_70세미만",
+      "statute": "소득세법 §20의3",
+      "status": "SUSPEND: 연금소득세율_70세미만 verificationStatus=unverified"
+    },
+    {
+      "parameter_id": "퇴직소득세_감면율_11년_20년",
+      "statute": "소득세법 §22 제3항",
+      "status": "SUSPEND: 퇴직소득세_감면율_11년_20년 verificationStatus=unverified"
+    }
+  ],
+  "overall_status": "PASS"
+}

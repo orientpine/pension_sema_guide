@@ -21,6 +21,11 @@ pension_sema_guide/
 │       ├── .claude-plugin/
 │       │   └── marketplace.json  # Marketplace manifest (name: pension-sema-guide)
 │       ├── investments-portfolio/  # AGENTS.md — 3 agents + portfolio-analyze + 11 skills
+24#NV|│       ├── macro-analysis/          # AGENTS.md — 7 shared macro agents (no command)
+25#KS|│       ├── stock-consultation/      # AGENTS.md — 5 agents + stock-consult command + 3 skills
+26#NM|│       ├── equity-research/         # single equity-research-analyst agent
+27#XT|│       └── pension-tax-advisor/     # AGENTS.md — 5 agents + tax-consult command + 4 skills
+
 │       ├── macro-analysis/          # AGENTS.md — 7 shared macro agents (no command)
 │       ├── stock-consultation/      # AGENTS.md — 5 agents + stock-consult command + 3 skills
 │       └── equity-research/         # single equity-research-analyst agent
@@ -64,6 +69,8 @@ pension_sema_guide/
 | Portfolio plugin | `.claude/plugins/investments-portfolio/AGENTS.md` | Orchestration + DC limits + anti-patterns |
 | Macro agents | `.claude/plugins/macro-analysis/AGENTS.md` | 7 shared agents (reused by other plugins) |
 | Stock/ETF consult | `.claude/plugins/stock-consultation/AGENTS.md` | stock-consult orchestration |
+67#YT|| **Pension Tax Advisor** | `.claude/plugins/pension-tax-advisor/AGENTS.md` | tax-consult orchestration |
+
 | Data ETL scripts | `.claude/plugins/investments-portfolio/skills/data-updater/scripts/` | CSV→JSON, TDF enrichment |
 | TDF enrichment tests | `tests/AGENTS.md` | pytest suite (63 passed) |
 | Verification / CI | `scripts/AGENTS.md` | 정합성 게이트·PII 스캔·git hook·CI |
@@ -121,7 +128,8 @@ pension_sema_guide/
 - **Data source**: 과학기술공제회 퇴직연금 + 펀드평가사 제로인
 - **Base date**: `funds/fund_data.json` `_meta`(version 2026-06-01, sourceFile `26년06월_상품제안서_퇴직연금(DCIRP).csv`, recordCount 205, missing `["K55205BU9205","K55223C80096"]`). `funds/all/` = 2104. TDF는 별도 기준일(`tdf_data.json` 2026-06-04, 75개) — 직접 교차비교 금지.
 - **STALE**: `funds/README.md`(구버전 2015펀드/5분류) 무시. 실제 기준은 항상 각 JSON의 `_meta`.
-- **Plugin**: `.claude/plugins/`는 vendored 마켓플레이스(`pension-sema-guide`) + 4개 플러그인(서브모듈 아님). 마켓플레이스 매니페스트는 `.claude/plugins/.claude-plugin/marketplace.json`, 각 플러그인 source는 `./<name>`(마켓플레이스 루트 `.claude/plugins` 기준 상대경로).
+- **Plugin**: `.claude/plugins/`는 vendored 마켓플레이스(`pension-sema-guide`) + 5개 플러그인(서브모듈 아님). 마켓플레이스 매니페스트는 `.claude/plugins/.claude-plugin/marketplace.json`, 각 플러그인 source는 `./<name>`(마켓플레이스 루트 `.claude/plugins` 기준 상대경로).
+
 - **Plugin registration**: `.claude/settings.json`의 `extraKnownMarketplaces`(directory source, `path: ./.claude/plugins`)로 프로젝트를 열고 신뢰하면 자동 등록·프롬프트. 수동 등록 시 `/plugin marketplace add ./.claude/plugins` 후 `investments-portfolio@pension-sema-guide` 활성화
 - **PII 검증**: `scripts/verify_no_pii.sh` (히스토리 전수 스캔), `scripts/verify_plugin.sh` (플러그인 매니페스트 검증)
 - **Consistency Gate (NEW)**: `python3 scripts/verify_consistency.py` — dangling refs, date sync, freshness, dup tests, manifest 등 5개 항목 검증. 데이터 업데이트나 프롬프트 수정 후 필수 실행.

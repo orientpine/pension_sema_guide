@@ -32,6 +32,7 @@
 | ------------------------ | ---------------------------------------- | ---------------------------------------- |
 | **주식·ETF 투자 상담** | `/stock-consultation:stock-consult`    | 스크리닝·밸류에이션·반론·검증 상담 보고서 |
 | **개별 기업 리서치**   | `@equity-research` 에이전트 (티커와 함께 호출) | 기관급 리서치 리포트                |
+| **퇴직연금 세금 상담** | `/pension-tax-advisor:tax-consult` | 납입→운용→수령 절세 상담, 3중 검증, 보류 안전 |
 
 > ⚙️ **공용 엔진** — `macro-analysis`(지수·금리·섹터·리스크·리더십)는 위 기능들이 **내부에서 호출**하는 공용 거시경제 분석 엔진으로, 사용자가 직접 실행하는 기능이 아닙니다.
 
@@ -51,8 +52,8 @@
 
 ### 1. 플러그인 등록
 
-이 저장소는 Claude Code 마켓플레이스 + 4개 플러그인을 `.claude/plugins/`에 내장(vendoring)하고 있습니다.
-`.claude/settings.json`에 마켓플레이스(`extraKnownMarketplaces`)와 활성 플러그인(`enabledPlugins`, 4개 모두 `true`)이 등록되어 있어,
+이 저장소는 Claude Code 마켓플레이스 + 5개 플러그인을 `.claude/plugins/`에 내장(vendoring)하고 있습니다.
+`.claude/settings.json`에 마켓플레이스(`extraKnownMarketplaces`)와 활성 플러그인(`enabledPlugins`, 5개 모두 `true`)이 등록되어 있어,
 **프로젝트를 열고 폴더를 신뢰(trust)하면** Claude Code가 자동으로 설치를 안내합니다.
 
 수동으로 등록하려면:
@@ -61,7 +62,8 @@
 /plugin marketplace add ./.claude/plugins
 ```
 
-이후 `pension-sema-guide` 마켓플레이스의 4개 플러그인(`investments-portfolio`, `macro-analysis`, `stock-consultation`, `equity-research`)이 활성화됩니다.
+이후 `pension-sema-guide` 마켓플레이스의 5개 플러그인(`investments-portfolio`, `macro-analysis`, `stock-consultation`, `equity-research`, `pension-tax-advisor`)이 활성화됩니다.
+
 
 ### 2. 포트폴리오 분석 실행 (투자자 프로필 인라인 입력)
 
@@ -186,7 +188,8 @@ portfolios/samples/sample-aggressive/
 
 ## 플러그인 구성
 
-마켓플레이스 `pension-sema-guide`에 4개 플러그인이 vendoring되어 있습니다. (서브모듈이 아닌 내장 디렉토리)
+마켓플레이스 `pension-sema-guide`에 5개 플러그인이 vendoring되어 있습니다. (서브모듈이 아닌 내장 디렉토리)
+
 역할 위계는 다음과 같습니다.
 
 | 구분            | 플러그인               | 위치                                          |
@@ -195,6 +198,7 @@ portfolios/samples/sample-aggressive/
 | ⚙️ **공용 엔진** | `macro-analysis`       | 메인·추가 기능이 내부 호출하는 거시경제 분석 엔진 |
 | ➕ **추가 기능** | `stock-consultation`   | 주식/ETF 투자 상담                            |
 | ➕ **추가 기능** | `equity-research`      | 개별 기업 리서치                              |
+| ➕ **추가 기능** | `pension-tax-advisor`  | 퇴직연금·연금계좌 세금 상담                   |
 
 ### 🎯 메인 기능
 
@@ -262,6 +266,21 @@ portfolios/samples/sample-aggressive/
 | --------------------------- | ------------------------------------------ |
 | `equity-research-analyst` | 기관급 주식 리서치 분석 (티커와 함께 호출) |
 
+#### 5. `pension-tax-advisor` (v1.0.0) — 퇴직연금 세금 상담
+
+5 에이전트 · 1 명령 · 3 스킬. law.go.kr 출처 등급제 + 3중 검증(재계산→비판→반론) 기반 환각 방지.
+
+| 종류     | 이름                       | 역할                                            |
+| -------- | -------------------------- | ----------------------------------------------- |
+| 명령     | `tax-consult`            | 절세 상담 오케스트레이터 (read-time 신선도·C4 3중 검증) |
+| 에이전트 | `tax-knowledge-educator` | 납입·운용·수령 3단계 세제 기초 교육            |
+| 에이전트 | `tax-strategy-planner`   | 개인 맞춤 절세 전략 (미검증 시 보류·강한 면책)  |
+| 에이전트 | `tax-calc-verifier`      | python3 독립 재계산 검증 (LLM 암산 금지)        |
+| 에이전트 | `tax-critic`             | 조문·basis·미검증·미래시행 탐지, A~F 채점      |
+| 에이전트 | `tax-law-updater`        | 90일 법령 자동 재확인 (law.go.kr 현행 앵커)     |
+| 스킬     | `pension-tax-rules`      | 납입/운용/수령 규칙 + 계산식 스펙 (parameter_id 참조) |
+| 스킬     | `tax-law-verifier`       | 출처 등급제·EXACT 법령 검증                     |
+| 스킬     | `file-save-protocol-tax` | 세금 상담 결과 저장 프로토콜                     |
 ---
 
 ## 펀드 데이터
@@ -344,7 +363,7 @@ python $SCRIPTS/update_tdf_data.py --input resource/tdf-raw.md --fees
 이름 정규화·펀드코드 해석·수수료 매칭·수익률 드리프트 경고·전체 enrichment·CLI·통합 테스트로 구성됩니다.
 
 ```bash
-python3 -m pytest          # 63 passed (GREEN)
+python3 -m pytest          # 98 passed (GREEN)
 ```
 
 ### 2. 정합성 게이트 (Consistency Gate)
@@ -365,14 +384,15 @@ python3 scripts/verify_consistency.py
 ```
 pension_sema_guide/
 ├── .claude/                        # 🔌 Claude Code 설정 + 내장 마켓플레이스/플러그인
-│   ├── settings.json               #   enabledPlugins(4개) + extraKnownMarketplaces
-│   └── plugins/                    #   vendored 마켓플레이스 + 4개 플러그인
+│   ├── settings.json               #   enabledPlugins(5개) + extraKnownMarketplaces
+│   └── plugins/                    #   vendored 마켓플레이스 + 5개 플러그인
 │       ├── .claude-plugin/
 │       │   └── marketplace.json    #     마켓플레이스 매니페스트 (pension-sema-guide)
 │       ├── investments-portfolio/  #     3 에이전트 + portfolio-analyze + 11 스킬
 │       ├── macro-analysis/         #     7 공용 거시경제 에이전트
 │       ├── stock-consultation/     #     5 에이전트 + stock-consult + 3 스킬
-│       └── equity-research/        #     1 에이전트 (기업 리서치)
+│       ├── equity-research/        #     1 에이전트 (기업 리서치)
+│       └── pension-tax-advisor/    #     5 에이전트 + tax-consult + 3 스킬
 ├── funds/                          # 펀드 데이터 (제로인 기반) — funds/AGENTS.md 참고
 │   ├── fund_data.json              #   투자가능 펀드 (205)
 │   ├── fund_fees.json              #   수수료 정보 (205)
