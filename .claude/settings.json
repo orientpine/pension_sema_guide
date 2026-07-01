@@ -4,7 +4,8 @@
     "investments-portfolio@pension-sema-guide": true,
     "macro-analysis@pension-sema-guide": true,
     "stock-consultation@pension-sema-guide": true,
-    "equity-research@pension-sema-guide": true
+    "equity-research@pension-sema-guide": true,
+    "pension-tax-advisor@pension-sema-guide": true
   },
   "extraKnownMarketplaces": {
     "pension-sema-guide": {
