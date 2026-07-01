@@ -256,6 +256,18 @@ def _set_deposit_updated_at(root: Path, value: str) -> None:
     _ = rates_path.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
 
 
+def _set_all_freshness_updated_at(root: Path, value: str) -> None:
+    for json_path in sorted((root / "funds").glob("*.json")):
+        data = json.loads(json_path.read_text(encoding="utf-8"))
+        if not isinstance(data, dict):
+            continue
+        meta = data.get("_meta", {})
+        if "freshnessThresholdDays" not in meta:
+            continue
+        meta["updatedAt"] = value
+        _ = json_path.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+
+
 def test_freshness_stale(tmp_repo: Path):
     stale = (datetime.now(timezone.utc) - timedelta(days=40)).isoformat()
     _set_deposit_updated_at(tmp_repo, stale)
@@ -268,7 +280,7 @@ def test_freshness_stale(tmp_repo: Path):
 
 def test_freshness_fresh(tmp_repo: Path):
     fresh = datetime.now(timezone.utc).isoformat()
-    _set_deposit_updated_at(tmp_repo, fresh)
+    _set_all_freshness_updated_at(tmp_repo, fresh)
 
     exit_code, stdout = run_gate(tmp_repo, only="freshness")
 

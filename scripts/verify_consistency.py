@@ -423,29 +423,44 @@ def check_date_sync(root: Path) -> CheckResult:
 
 
 def check_freshness(root: Path) -> CheckResult:
-    relative = "funds/deposit_rates.json"
-    raw: object = json.loads((root / relative).read_text(encoding="utf-8"))
-    meta = cast(dict[str, object], cast(dict[str, object], raw)["_meta"])
+    violations: CheckResult = []
 
-    parsed = datetime.fromisoformat(cast(str, meta["updatedAt"]))
-    if parsed.tzinfo is None:
-        parsed = parsed.replace(tzinfo=timezone.utc)
+    for json_path in sorted((root / "funds").glob("*.json")):
+        relative = json_path.relative_to(root).as_posix()
+        try:
+            raw: object = json.loads(json_path.read_text(encoding="utf-8"))
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+            continue
 
-    threshold = int(cast(int, meta.get("freshnessThresholdDays", 30)))
-    now = datetime.now(timezone.utc)
-    age = (now - parsed).days
+        if not isinstance(raw, dict):
+            continue
+        meta = cast(dict[str, object], raw.get("_meta", {}))
+        if "freshnessThresholdDays" not in meta:
+            continue
 
-    if age > threshold:
-        return [
-            Violation(
-                file=relative,
-                line=1,
-                ssot=f"{relative}#_meta.updatedAt",
-                message_ko=f"deposit_rates.json 신선도 만료: {age}일 경과 (임계: {threshold}일) — 수동 갱신 필요",
+        updated_at_str = cast(str, meta.get("updatedAt", ""))
+        if not updated_at_str:
+            continue
+
+        threshold = int(cast(int, meta["freshnessThresholdDays"]))
+        parsed = datetime.fromisoformat(updated_at_str)
+        if parsed.tzinfo is None:
+            parsed = parsed.replace(tzinfo=timezone.utc)
+
+        now = datetime.now(timezone.utc)
+        age = (now - parsed).days
+
+        if age > threshold:
+            violations.append(
+                Violation(
+                    file=relative,
+                    line=1,
+                    ssot=f"{relative}#_meta.updatedAt",
+                    message_ko=f"{relative} 신선도 만료: {age}일 경과 (임계: {threshold}일) — 갱신 필요",
+                )
             )
-        ]
 
-    return []
+    return violations
 
 
 def check_dup_test(root: Path) -> CheckResult:
