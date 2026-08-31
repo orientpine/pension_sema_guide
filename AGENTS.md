@@ -1,5 +1,7 @@
 # PROJECT KNOWLEDGE BASE
 
+> **Tool-call encoding**: Always write Korean (and other non-ASCII) strings in tool-call parameters as literal UTF-8; never as `\uXXXX` unicode escapes.
+
 **Generated:** 2026-06-30
 **Commit:** e75b991
 **Branch:** main
