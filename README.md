@@ -382,18 +382,18 @@ confidentialData/tax/{YYYY-MM-DD}-{slug}-{6자리}/
 
 | 파일                                       | 내용                                   | 레코드 수 | 기준일(`_meta.version`) | 조인 키                             |
 | ------------------------------------------ | -------------------------------------- | :-------: | :-----------------------: | ----------------------------------- |
-| `funds/fund_data.json`                   | 투자가능 펀드 기본정보·수익률         |    205    |        2026-06-01        | `fundCode`(요율) / `name`(분류) |
-| `funds/fund_fees.json`                   | 펀드 총보수·연간비용                  |    205    |        2026-06-01        | `fundCode`                        |
-| `funds/fund_classification.json`         | 카테고리·위험자산 분류 (9개 유형)     |    205    |     (생성 시각 기준)     | `펀드명`                          |
-| `funds/tdf_data.json`                    | TDF 마스터 (결정적 enrichment)         |    75    |        2026-06-04        | `fundCode`                        |
-| `funds/tdf_fees.json`                    | TDF 수수료/요율                        |    75    |        2026-06-07        | `fundCode`                        |
-| `funds/deposit_rates.json`               | 원리금보장형 예금 금리 (수동 업데이트) |     4     |        2026-02-28        | (단독 조회)                         |
+| `funds/fund_data.json`                   | 투자가능 펀드 기본정보·수익률         |    204    |        2026-10-30        | `fundCode`(요율) / `name`(분류) |
+| `funds/fund_fees.json`                   | 펀드 총보수·연간비용                  |    204    |        2026-10-30        | `fundCode`                        |
+| `funds/fund_classification.json`         | 카테고리·위험자산 분류 (9개 유형)     |    204    |     (생성 시각 기준)     | `펀드명`                          |
+| `funds/tdf_data.json`                    | TDF 마스터 (결정적 enrichment)         |    75    |        2026-10-30        | `fundCode`                        |
+| `funds/tdf_fees.json`                    | TDF 수수료/요율                        |    75    |        2026-10-30        | `fundCode`                        |
+| `funds/deposit_rates.json`               | 원리금보장형 예금 금리 (수동 업데이트) |     4     |        2026-11-16        | (단독 조회)                         |
 | `funds/investable_codes.json`            | 투자가능 펀드 코드 허용목록            |    207    |            —            | (필터용)                            |
-| `funds/all/all_fund_data.json`           | 전체 펀드 마스터 (투자불가 포함)       |   2104   |        2026-06-01        | `fundCode`                        |
-| `funds/all/all_fund_fees.json`           | 전체 펀드 수수료                       |   2104   |        2026-06-01        | `fundCode`                        |
-| `funds/all/all_fund_classification.json` | 전체 펀드 분류                         |   2104   |     (생성 시각 기준)     | `펀드명`                          |
+| `funds/all/all_fund_data.json`           | 전체 펀드 마스터 (투자불가 포함)       |   2169   |        2026-10-30        | `fundCode`                        |
+| `funds/all/all_fund_fees.json`           | 전체 펀드 수수료                       |   2169   |        2026-10-30        | `fundCode`                        |
+| `funds/all/all_fund_classification.json` | 전체 펀드 분류                         |   2169   |     (생성 시각 기준)     | `펀드명`                          |
 
-> ⚠️ **TDF는 별도 기준일**(`tdf_data.json` 2026-06-04, 75개)을 사용하므로 `fund_data.json`(205개)과 **직접 교차비교하지 마세요.**
+> ⚠️ **TDF는 별도 파일·단위**입니다. `update_tdf_data.py --from-proposal`로 갱신하면 상품제안서와 같은 기준일이지만, SEMA 포털 표(`--input`)로 갱신하면 기준일이 달라지고 수익률이 전 구간 누적이므로 `fund_data.json`(204개)과 **직접 교차비교하지 마세요.**
 > `tdf_data.json`의 `baseDateNote`에도 명시되어 있습니다.
 >
 > ⚠️ `funds/README.md`는 **구버전(STALE)** 문서입니다. 펀드 수·분류 기준은 항상 각 JSON의 `_meta`를 따르세요.
@@ -493,7 +493,7 @@ pension_sema_guide/
 │   ├── tdf_fees.json               #   TDF 수수료 (75)
 │   ├── deposit_rates.json          #   예금 금리 (수동 업데이트)
 │   ├── investable_codes.json       #   투자가능 코드 허용목록 (207)
-│   └── all/                        #   전체 펀드 (2104, *_all_*)
+│   └── all/                        #   전체 펀드 (2169, *_all_*)
 ├── tests/                          # TDF enrichment pytest 스위트
 ├── portfolios/samples/             # 익명화된 공개 예시 (sample-aggressive)
 ├── consultations/                  # 주식/ETF 상담 보고서 (비개인)

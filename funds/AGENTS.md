@@ -6,15 +6,15 @@
 
 | | top-level `funds/` | `funds/all/` |
 |---|---|---|
-| 범위 | 투자 가능 subset (205) | 전체 universe (2104) |
+| 범위 | 투자 가능 subset (204) | 전체 universe (2169) |
 | 파일 | fund_data / fund_fees / fund_classification | all_fund_data / all_fund_fees / all_fund_classification |
 
-동일 스키마 패밀리, 필터링 범위만 다름. `_meta.missing`: `["K55205BU9205","K55223C80096"]`. `funds/all/`는 TDF 결정적 보강(enrichment)의 권위 소스.
+동일 스키마 패밀리, 필터링 범위만 다름. `_meta.missing`: `["K55105CK8670","K55205BU9205","K55223C80096"]` (investable_codes.json 207개 중 상품제안서에 없는 코드). `funds/all/`는 TDF 결정적 보강(enrichment)의 권위 소스.
 
 ## SCHEMA
 
 **fund_data.json** = `{ _meta, funds: [...] }`
-- `_meta`: version `2026-06-01`, sourceFile `26년06월_상품제안서_퇴직연금(DCIRP).csv`, recordCount 205, missing 2개
+- `_meta`: version `2026-10-30`, sourceFile `26년11월_상품제안서_퇴직연금(DCIRP).csv`, recordCount 204, missing 3개
 - per-fund: `fundCode, name, company, riskLevel(int), riskName, return10y..return6m(str), netAssets(str), inceptionDate, isAffiliate(bool), fundType`
 - **수익률 단위**(제로인 상품제안서 관행, all_fund_data 동일): `return6m`/`return1y` = **누적(cumulative)**, `return3y`/`return5y`/`return7y`/`return10y` = **연환산(annualized %/yr)**. tdf_data는 전 구간 누적이므로 직접 교차비교 금지(단위 정규화 후 비교).
 - **JOIN KEYS**: `fund_fees`는 `fundCode`로, `fund_classification`은 **펀드명(name)**으로 조인
@@ -92,7 +92,7 @@ TDF(Target Date Fund)는 생애주기별 자산배분을 수행하는 펀드로,
 
 ### 관리 규칙
 
-1. **갱신 경로**: 데이터 갱신은 반드시 `update_tdf_data.py --fees` 스크립트를 통한 결정적 로컬 보강(enrichment)을 우선한다. 웹 크롤링은 CSV에 없는 필드(1m/3m/2y/설정후 등)에만 제한적으로 사용한다.
+1. **갱신 경로**: 데이터 갱신은 반드시 `update_tdf_data.py --fees` 스크립트를 통한 결정적 로컬 보강(enrichment)을 우선한다. 월간 상품제안서 갱신 뒤에는 `update_tdf_data.py --from-proposal --fees`로 TDF 행의 6M/1Y(누적)·3Y(연환산→누적)·위험등급·순자산(천원)을 상품제안서 기준일로 다시 맞추고, 상품제안서에 없는 1M/3M/2Y/설정후는 빈 값으로 둔다(옛 붙여넣기 값과 새 기준일을 섞지 않음, `_meta.returnsBasis`·`_meta.notInProposal`). SEMA 포털 TDF 표가 있으면 `--input`으로 채운다. 웹 크롤링은 CSV에 없는 필드(1m/3m/2y/설정후 등)에만 제한적으로 사용한다.
 2. **미해결 처리**: 미해결(`unresolved`) 또는 누락(`missing`) 데이터 존재 시 스크립트는 stderr 경고와 함께 종료 코드 2를 반환한다. (`--allow-unresolved` 옵션 사용 시 0 반환)
 3. **수동 트리거**: 제로인 등 외부 데이터를 붙여넣어 수동으로 트리거할 수 있다.
 4. **신선도 유지**: `freshnessThresholdDays: 30`을 준수하며, 30일 경과 시 경고를 발생시킨다.

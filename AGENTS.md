@@ -33,13 +33,13 @@ pension_sema_guide/
 │       └── equity-research/         # single equity-research-analyst agent
 │
 ├── funds/                      # Core fund data (public, non-personal) — see funds/AGENTS.md
-│   ├── fund_data.json          # Master data (205 investable funds)
+│   ├── fund_data.json          # Master data (204 investable funds)
 │   ├── fund_fees.json          # Fee data (key: fundCode)
 │   ├── fund_classification.json # Category classification (key: 펀드명, 9 types)
 │   ├── tdf_data.json           # TDF master (75 funds, deterministic enrichment)
 │   ├── tdf_fees.json           # TDF fees
 │   ├── deposit_rates.json      # Deposit rates (manual-update only)
-│   └── all/                    # Full universe (2104 funds, *_all_* — authoritative for TDF enrichment)
+│   └── all/                    # Full universe (2169 funds, *_all_* — authoritative for TDF enrichment)
 │
 ├── tests/                      # pytest suite for TDF enrichment (update_tdf_data.py)
 ├── index-data.json             # Market index data (index-fetcher output snapshot)
@@ -66,7 +66,7 @@ pension_sema_guide/
 |------|----------|-------|
 | **Portfolio Analysis** | `.claude/plugins/investments-portfolio/` | Vendored multi-agent plugin |
 | Plugin manifest | `.claude/plugins/.claude-plugin/marketplace.json` | Marketplace: pension-sema-guide |
-| Fund master data | `funds/fund_data.json` | Single source of truth (205 funds, `_meta.version`) |
+| Fund master data | `funds/fund_data.json` | Single source of truth (204 funds, `_meta.version`) |
 | Fund data schema | `funds/AGENTS.md` | Schema + join keys + TDF contract |
 | Portfolio plugin | `.claude/plugins/investments-portfolio/AGENTS.md` | Orchestration + DC limits + anti-patterns |
 | Macro agents | `.claude/plugins/macro-analysis/AGENTS.md` | 7 shared agents (reused by other plugins) |
@@ -74,7 +74,7 @@ pension_sema_guide/
 67#YT|| **Pension Tax Advisor** | `.claude/plugins/pension-tax-advisor/AGENTS.md` | tax-consult orchestration |
 
 | Data ETL scripts | `.claude/plugins/investments-portfolio/skills/data-updater/scripts/` | CSV→JSON, TDF enrichment |
-| TDF enrichment tests | `tests/AGENTS.md` | pytest suite (63 passed) |
+| TDF enrichment tests | `tests/AGENTS.md` | pytest suite (100 passed) |
 | Verification / CI | `scripts/AGENTS.md` | 정합성 게이트·PII 스캔·git hook·CI |
 | Annotation Convention | `docs/consistency/annotation-convention.md` | Data tagging rules |
 | SSOT Registry | `docs/consistency/date-ssot-registry.md` | Single Source of Truth for dates |
@@ -128,7 +128,7 @@ pension_sema_guide/
 ## NOTES
 
 - **Data source**: 과학기술공제회 퇴직연금 + 펀드평가사 제로인
-- **Base date**: `funds/fund_data.json` `_meta`(version 2026-06-01, sourceFile `26년06월_상품제안서_퇴직연금(DCIRP).csv`, recordCount 205, missing `["K55205BU9205","K55223C80096"]`). `funds/all/` = 2104. TDF는 별도 기준일(`tdf_data.json` 2026-06-04, 75개) — 직접 교차비교 금지.
+- **Base date**: `funds/fund_data.json` `_meta`(version 2026-10-30, sourceFile `26년11월_상품제안서_퇴직연금(DCIRP).csv`, recordCount 204, missing `["K55105CK8670","K55205BU9205","K55223C80096"]`). `funds/all/` = 2169. TDF(`tdf_data.json`, 75개)는 `update_tdf_data.py --from-proposal`로 같은 상품제안서 기준일(2026-10-30)에 맞췄지만 별도 SSOT·누적 단위 — 직접 교차비교 금지. 예금 금리 2026-11-16(형 포털 확인).
 - **STALE**: `funds/README.md`(구버전 2015펀드/5분류) 무시. 실제 기준은 항상 각 JSON의 `_meta`.
 - **Plugin**: `.claude/plugins/`는 vendored 마켓플레이스(`pension-sema-guide`) + 5개 플러그인(서브모듈 아님). 마켓플레이스 매니페스트는 `.claude/plugins/.claude-plugin/marketplace.json`, 각 플러그인 source는 `./<name>`(마켓플레이스 루트 `.claude/plugins` 기준 상대경로).
 
@@ -137,4 +137,4 @@ pension_sema_guide/
 - **Consistency Gate (NEW)**: `python3 scripts/verify_consistency.py` — dangling refs, date sync, freshness, dup tests, manifest 등 5개 항목 검증. 데이터 업데이트나 프롬프트 수정 후 필수 실행.
 - **Annotation Convention**: `docs/consistency/annotation-convention.md` 참고.
 - **SSOT Registry**: `docs/consistency/date-ssot-registry.md` 참고.
-- **Tests**: `pytest` 63 passed (GREEN). `tests/conftest.py` 경로 설정이 올바르게 되어 있어 모듈 로드 이슈 없음.
+- **Tests**: `pytest` 100 passed (GREEN, 2026-11-16). `tests/conftest.py` 경로 설정이 올바르게 되어 있어 모듈 로드 이슈 없음.

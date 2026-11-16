@@ -11,7 +11,7 @@
 날짜 리터럴(`\d{4}-\d{2}-\d{2}` 형태)이 로직 파일에 그대로 박혀 있으면,
 원본 데이터(`funds/*.json`의 `_meta.version`)가 갱신될 때 **소리 없이 드리프트(silent drift)**한다.
 실제로 `output-critic.md`에는 `fund_data.json` 기준일이 `2026-03-01`로 박혀 있으나
-현재 SSOT(`funds/fund_data.json#_meta.version`)는 `2026-06-01`이다 — 이미 드리프트가 발생한 사례다.
+작성 당시(2026-06) SSOT(`funds/fund_data.json#_meta.version`)는 `2026-06-01`이었다 — 이미 드리프트가 발생한 사례다.
 
 이를 막기 위해 본 규약은 **fail-closed**를 채택한다.
 
@@ -138,13 +138,13 @@ truth source가 아니므로 이 파일의 날짜 리터럴은 **규약 검사 �
 
 | SSOT 포인터 | 현재 값 | 비고 |
 |-------------|---------|------|
-| `funds/fund_data.json#_meta.version` | `2026-06-01` | 투자가능 펀드 205 |
-| `funds/tdf_data.json#_meta.version` | `2026-06-04` | TDF 75 (**별도 기준일**) |
+| `funds/fund_data.json#_meta.version` | `2026-10-30` | 투자가능 펀드 204 |
+| `funds/tdf_data.json#_meta.version` | `2026-10-30` | TDF 75 (**별도 SSOT** — 포털 표 갱신 시 기준일이 달라짐) |
 | `funds/deposit_rates.json#_meta.version` | (파일의 `_meta.version`) | 예금 금리, `updatedAt`/`freshnessThresholdDays` 동반 |
 
 ### 6.2 왜 per-SSOT인가 — 교차비교 금지
 
-`fund_data`(2026-06-01)와 `tdf_data`(2026-06-04)는 **서로 다른 기준일이 정상**이다(`funds/AGENTS.md`, `tdf_data.json#baseDateNote`).
+`fund_data`와 `tdf_data`는 **서로 다른 기준일이 정상**이다(예: 2026-06에는 2026-06-01 vs 2026-06-04)(`funds/AGENTS.md`, `tdf_data.json#baseDateNote`).
 따라서 "두 SSOT의 날짜가 같은지" 비교하는 것은 **틀린 검사**다.
 
 - semantic 마커의 포인터는 **각 날짜를 자기 자신의 SSOT에만 묶는다(per-SSOT)**.

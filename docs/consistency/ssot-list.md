@@ -4,17 +4,17 @@
 
 | SSOT 파일 | JSON 포인터 | 현재값 | 의미 | 게이트 용도 |
 |---|---|---|---|---|
-| `funds/fund_data.json` | `funds/fund_data.json#_meta.version` | `2026-06-01` | 투자가능 펀드 기준일(월간 sync) | 기본 펀드 기준선 |
-| `funds/fund_data.json` | `funds/fund_data.json#_meta.missing` | `['K55205BU9205','K55223C80096']` | 누락 코드(의도된 제외) | dangling 오탐 방지 |
-| `funds/tdf_data.json` | `funds/tdf_data.json#_meta.version` | `2026-06-04` | TDF 별도 기준일 | TDF gate 기준선 |
-| `funds/tdf_data.json` | `funds/tdf_data.json#_meta.baseDateNote` | `fund_data.json 기준일 2026-03-01과 상이. 직접 교차비교 금지` | TDF는 별도 universe/기준일 | cross-compare 금지 |
-| `funds/tdf_fees.json` | `funds/tdf_fees.json#_meta.version` | `2026-06-07` | TDF 수수료 기준일 | TDF 수수료 동기화 |
-| `funds/deposit_rates.json` | `funds/deposit_rates.json#_meta.version` | `2026-02-28` | 예금 금리 기준일 | 원리금보장형 비교 기준 |
-| `funds/deposit_rates.json` | `funds/deposit_rates.json#_meta.updatedAt` | `2026-03-30T14:40:00+09:00` | 마지막 수동 갱신 시각 | staleness 판정 |
+| `funds/fund_data.json` | `funds/fund_data.json#_meta.version` | `2026-10-30` | 투자가능 펀드 기준일(월간 sync) | 기본 펀드 기준선 |
+| `funds/fund_data.json` | `funds/fund_data.json#_meta.missing` | `['K55105CK8670','K55205BU9205','K55223C80096']` | 누락 코드(의도된 제외) | dangling 오탐 방지 |
+| `funds/tdf_data.json` | `funds/tdf_data.json#_meta.version` | `2026-10-30` | TDF 별도 기준일 | TDF gate 기준선 |
+| `funds/tdf_data.json` | `funds/tdf_data.json#_meta.baseDateNote` | `fund_data.json과 tdf_data.json은 각자 독립적인 기준일을 가진다. …직접 교차비교 금지` | TDF는 별도 universe/기준일 | cross-compare 금지 |
+| `funds/tdf_fees.json` | `funds/tdf_fees.json#_meta.version` | `2026-10-30` | TDF 수수료 기준일 | TDF 수수료 동기화 |
+| `funds/deposit_rates.json` | `funds/deposit_rates.json#_meta.version` | `2026-11-16` | 예금 금리 기준일 | 원리금보장형 비교 기준 |
+| `funds/deposit_rates.json` | `funds/deposit_rates.json#_meta.updatedAt` | `2026-11-16T21:44:23.514579+09:00` | 마지막 수동 갱신 시각 | staleness 판정 |
 | `funds/deposit_rates.json` | `funds/deposit_rates.json#_meta.freshnessThresholdDays` | `30` | 신선도 임계값 | 30일 초과 시 stale 경고 |
-| `funds/fund_fees.json` | `funds/fund_fees.json#_meta.version` | `2026-06-01` | 펀드 총보수 기준일 | fee join 기준 |
-| `funds/all/all_fund_data.json` | `funds/all/all_fund_data.json#_meta.version` | `2026-06-01` | 전체 universe 원장 | TDF enrichment 권위 소스 |
-| `funds/all/all_fund_fees.json` | `funds/all/all_fund_fees.json#_meta.version` | `2026-06-01` | 전체 universe 수수료 원장 | TDF fee enrichment 권위 소스 |
+| `funds/fund_fees.json` | `funds/fund_fees.json#_meta.version` | `2026-10-30` | 펀드 총보수 기준일 | fee join 기준 |
+| `funds/all/all_fund_data.json` | `funds/all/all_fund_data.json#_meta.version` | `2026-10-30` | 전체 universe 원장 | TDF enrichment 권위 소스 |
+| `funds/all/all_fund_fees.json` | `funds/all/all_fund_fees.json#_meta.version` | `2026-10-30` | 전체 universe 수수료 원장 | TDF fee enrichment 권위 소스 |
 
 ## 의미 정리
 
