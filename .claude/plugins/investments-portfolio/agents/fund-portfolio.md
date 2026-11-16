@@ -521,7 +521,7 @@ IF SAFE_ASSET_DECISION == "TDF":
 }
 ```
 
-> ⚠️ **웹검색 금지**: 과학기술인공제회 예금 상품은 외부 웹에서 검색되지 않습니다. 반드시 `deposit_rates.json` 파일을 사용하세요.
+> ⚠️ **웹검색 금지**: 분석 중에는 예금 금리를 웹에서 찾지 말고 반드시 `deposit_rates.json`(기준일 `_meta.version`)을 사용하세요. 갱신은 data-updater가 공제회 공개 페이지(기준일 필수)로 합니다.
 
 ---
 

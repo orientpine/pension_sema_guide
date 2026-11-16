@@ -128,7 +128,7 @@ pension_sema_guide/
 ## NOTES
 
 - **Data source**: 과학기술공제회 퇴직연금 + 펀드평가사 제로인
-- **Base date**: `funds/fund_data.json` `_meta`(version 2026-10-30, sourceFile `26년11월_상품제안서_퇴직연금(DCIRP).csv`, recordCount 204, missing `["K55105CK8670","K55205BU9205","K55223C80096"]`). `funds/all/` = 2169. TDF(`tdf_data.json`, 75개)는 `update_tdf_data.py --from-proposal`로 같은 상품제안서 기준일(2026-10-30)에 맞췄지만 별도 SSOT·누적 단위 — 직접 교차비교 금지. 예금 금리 2026-11-16(형 포털 확인).
+- **Base date**: `funds/fund_data.json` `_meta`(version 2026-10-30, sourceFile `26년11월_상품제안서_퇴직연금(DCIRP).csv`, recordCount 204, missing `["K55105CK8670","K55205BU9205","K55223C80096"]`). `funds/all/` = 2169. TDF(`tdf_data.json`, 75개)는 `update_tdf_data.py --from-proposal`로 같은 상품제안서 기준일(2026-10-30)에 맞췄지만 별도 SSOT·누적 단위 — 직접 교차비교 금지. 예금 금리 2026-10-31(공제회 공개 페이지 기준일, 소유자 포털 값과 일치).
 - **STALE**: `funds/README.md`(구버전 2015펀드/5분류) 무시. 실제 기준은 항상 각 JSON의 `_meta`.
 - **Plugin**: `.claude/plugins/`는 vendored 마켓플레이스(`pension-sema-guide`) + 5개 플러그인(서브모듈 아님). 마켓플레이스 매니페스트는 `.claude/plugins/.claude-plugin/marketplace.json`, 각 플러그인 source는 `./<name>`(마켓플레이스 루트 `.claude/plugins` 기준 상대경로).
 

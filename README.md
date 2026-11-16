@@ -387,7 +387,7 @@ confidentialData/tax/{YYYY-MM-DD}-{slug}-{6자리}/
 | `funds/fund_classification.json`         | 카테고리·위험자산 분류 (9개 유형)     |    204    |     (생성 시각 기준)     | `펀드명`                          |
 | `funds/tdf_data.json`                    | TDF 마스터 (결정적 enrichment)         |    75    |        2026-10-30        | `fundCode`                        |
 | `funds/tdf_fees.json`                    | TDF 수수료/요율                        |    75    |        2026-10-30        | `fundCode`                        |
-| `funds/deposit_rates.json`               | 원리금보장형 예금 금리 (수동 업데이트) |     4     |        2026-11-16        | (단독 조회)                         |
+| `funds/deposit_rates.json`               | 원리금보장형 예금 금리 (공제회 공개 페이지, 기준일 필수) |     4     |        2026-10-31        | (단독 조회)                         |
 | `funds/investable_codes.json`            | 투자가능 펀드 코드 허용목록            |    207    |            —            | (필터용)                            |
 | `funds/all/all_fund_data.json`           | 전체 펀드 마스터 (투자불가 포함)       |   2169   |        2026-10-30        | `fundCode`                        |
 | `funds/all/all_fund_fees.json`           | 전체 펀드 수수료                       |   2169   |        2026-10-30        | `fundCode`                        |

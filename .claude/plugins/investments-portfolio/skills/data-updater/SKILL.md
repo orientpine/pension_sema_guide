@@ -21,8 +21,8 @@ tools: Bash, Read, Write, mcp_question
 - **deposit_rates.json 업데이트 (예금금리 - 사용자 입력 필수)**
 - 기존 파일 자동 백업 (archive/ 디렉토리)
 
-> **⚠️ 중요**: 예금금리 데이터는 웹 검색으로 얻을 수 **없습니다**.
-> 과학기술인공제회 내부 금리이므로 반드시 **사용자에게 직접 확인**해야 합니다.
+> **⚠️ 중요**: 예금금리는 과학기술인공제회 공개 페이지(원리금보장형상품, menuNo=200059)에서 **기준일과 함께** 확인하고,
+> 사용자가 포털에서 본 값이 있으면 대조한다. 기준일 없는 값은 쓰지 않는다.
 
 ---
 
@@ -139,15 +139,13 @@ tools: Bash, Read, Write, mcp_question
     |   +-- _meta.version 기준 경과일 계산
     |   +-- 30일 이상 경과 시 업데이트 권장
     |
-    +-- Step 5-1. 사용자에게 예금금리 확인 요청 (mcp_question 사용)
-    |   +-- ⚠️ 웹 검색 불가 - 사용자 직접 입력 필수
-    |   +-- 질문: "과학기술인공제회 퇴직연금 예금금리를 입력해주세요"
-    |   +-- 필수 입력 항목:
-    |       - 과학기술인공제회 1년 정기예금 금리 (%)
-    |       - 우리은행 1년 정기예금 금리 (%) - 선택
+    +-- Step 5-1. 공제회 공개 페이지 조회 (기준일 필수)
+    |   +-- https://www.sema.or.kr/sema/annty/guidance/fundProduct.do?menuNo=200059
+    |   +-- [기준일:YYYY.MM.DD], 기본금리·특별가산·가산기간, 은행 금리 적용기간, 중도해지·만기 규칙
+    |   +-- 사용자 포털 값이 있으면 대조 (불일치 시 중단·보고), 페이지 접근 불가 시에만 사용자에게 질문
     |
     +-- Step 5-2. deposit_rates.json 업데이트
-    |   +-- _meta.version: 현재 날짜 (YYYY-MM-DD)
+    |   +-- _meta.version: 페이지 기준일 (YYYY-MM-DD)
     |   +-- _meta.updatedAt: 현재 ISO 8601 타임스탬프
     |   +-- rates 배열 업데이트
     |
@@ -386,51 +384,29 @@ funds/
 
 ## 예금금리 업데이트 (Phase 5)
 
-### ⚠️ 중요: 웹 검색 불가
+### 출처: 과학기술인공제회 공개 페이지 (기준일 필수) + 사용자 포털 값 대조
 
-**예금금리 데이터는 웹 검색으로 얻을 수 없습니다.**
+원리금보장형 금리는 공제회 공개 페이지에 기준일과 함께 게시된다.
 
-- 과학기술인공제회 내부 금리는 공개 웹에 게시되지 않음
-- 회원 전용 포털 또는 고객센터에서만 확인 가능
-- 따라서 **사용자에게 직접 확인 요청**이 필수
+- URL: https://www.sema.or.kr/sema/annty/guidance/fundProduct.do?menuNo=200059 (퇴직연금 > 원리금보장형상품)
+- 페이지 상단 `[기준일:YYYY.MM.DD]`를 반드시 읽어 `_meta.version`/`sourceBaseDate`에 기록한다. 기준일을 못 찾으면 갱신하지 않는다.
+- 표의 기간·금리·일반/특별 중도해지 규칙과 표 아래 ※ 주석(특별가산금리·가산기간·회원지급률, 은행 금리 적용기간, 만기 처리)을 모두 옮긴다.
+  - 공제회 상품: `rate`(회원지급률), `baseRate`(기본), `bonusRate`·`bonusPeriod`(특별가산), `maturityRule`(재예치)
+  - 은행 상품: `rate`, `appliesFrom`·`appliesTo`(적용기간), `maturityRule`(자동연장 없음 → 현금성자산), `depositProtection`
+- 사용자가 포털 화면 값을 주면 `_meta.ownerPortalCheck`에 대조 결과(`matches`, 값, 확인 시각)를 남긴다. 불일치면 갱신을 멈추고 사용자에게 알린다.
+- 페이지에 접근할 수 없을 때만 사용자에게 포털 값을 직접 묻는다 (아래 질문 예시).
 
-### 사용자 질문 예시 (mcp_question 사용)
-
-```json
-{
-  "questions": [
-    {
-      "header": "예금금리 업데이트",
-      "question": "과학기술인공제회 퇴직연금 1년 정기예금 금리(%)를 입력해주세요. (예: 4.9)",
-      "options": [
-        {"label": "4.9%", "description": "현재 저장된 금리"},
-        {"label": "5.0%", "description": ""},
-        {"label": "4.8%", "description": ""},
-        {"label": "4.7%", "description": ""}
-      ]
-    }
-  ]
-}
-```
-
-또는 직접 입력을 받는 경우:
+### 사용자 질문 예시 (페이지 접근 불가 시, mcp_question 사용)
 
 ```
-사용자에게 예금금리 확인을 요청합니다.
-
-과학기술인공제회 퇴직연금 포털에서 현재 예금금리를 확인해주세요:
-- 과학기술인공제회 1년 정기예금 금리: _____ %
-- (선택) 우리은행 1년 정기예금 금리: _____ %
-
-확인 방법:
-1. 과학기술인공제회 퇴직연금 포털 로그인
-2. 원리금보장형 운용방법 안내 페이지 확인
-3. 현재 금리 입력
+과학기술인공제회 퇴직연금 원리금보장형 금리를 확인해주세요 (페이지 기준일 포함):
+- 과학기술인공제회 퇴직연금 운용방법(1년): _____ % (기본/가산 구분)
+- 우리은행 정기예금 1년·6개월·3개월: _____ % (적용기간)
 ```
 
 ### 업데이트 수행 방법
 
-사용자로부터 금리 정보를 받은 후:
+공개 페이지(및 사용자 포털 값 대조)로 금리를 확인한 후:
 
 ```python
 # deposit_rates.json 업데이트
@@ -442,15 +418,15 @@ with open('funds/deposit_rates.json', 'r', encoding='utf-8') as f:
     data = json.load(f)
 
 # 메타데이터 업데이트
-data['_meta']['version'] = datetime.now().strftime('%Y-%m-%d')
+data['_meta']['version'] = page_base_date  # 페이지 [기준일:YYYY.MM.DD] → 'YYYY-MM-DD' (현재 날짜 아님)
 data['_meta']['updatedAt'] = datetime.now().isoformat()
 
-# 금리 업데이트 (사용자 입력값 사용)
+# 금리 업데이트 (공개 페이지 값, 사용자 포털 값과 대조)
 for rate in data['rates']:
     if rate['id'] == 'sema-1y':
-        rate['rate'] = 4.9  # 사용자 입력값
+        rate['rate'] = 5.7  # 회원지급률 = 기본 5.2 + 특별가산 0.5
     elif rate['id'] == 'woori-1y':
-        rate['rate'] = 2.75  # 사용자 입력값
+        rate['rate'] = 3.7  # 2026-11-01~11-30 적용
 
 # 요약 업데이트
 data['summary']['highestRate']['rate'] = max(r['rate'] for r in data['rates'])

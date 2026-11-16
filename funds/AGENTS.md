@@ -30,7 +30,7 @@
 
 ## REGEN
 
-`fund_data`/`fund_fees`/`fund_classification`은 수기 편집 금지 — `.claude/plugins/investments-portfolio/skills/data-updater/scripts/`로 `resource/*.csv`에서 재생성. `deposit_rates.json`만 수동 갱신.
+`fund_data`/`fund_fees`/`fund_classification`은 수기 편집 금지 — `.claude/plugins/investments-portfolio/skills/data-updater/scripts/`로 `resource/*.csv`에서 재생성. `deposit_rates.json`만 수동 갱신(공제회 공개 페이지 원리금보장형상품, 기준일 필수 + 사용자 포털 값 대조 — data-updater Phase 5).
 
 ## TDF 데이터 관리
 

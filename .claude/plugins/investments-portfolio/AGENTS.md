@@ -76,5 +76,5 @@ investments-portfolio/
 - 오케스트레이터: Task 없이 단계 수행, fund_data.json 직접 읽고 추천, DC 70% 직접 계산
 - fund-portfolio: 파일 Read 없이 추천, 누락 파일에 추정 데이터, 근거 없는 "인기/성과 우수" 표현, 예금 vs 채권 비교 없이 채권 추천
 - compliance-checker: 70%→71% 해석, 40% 초과 허용, **적격TDF를 안전자산으로 오분류** (면제 위험자산임)
-- data-updater: 스크립트 못 찾으면 자체 Python 대체(금지), 예금금리 웹검색(금지, 사용자 입력만)
+- data-updater: 스크립트 못 찾으면 자체 Python 대체(금지), 예금금리를 기준일 없이 갱신(금지 — 공제회 공개 페이지 기준일 + 사용자 포털 값 대조)
 - **TDF 공통**: 적격TDF 40% 초과를 ERROR로 처리(WARNING 대상), 총보수 추정(데이터 미존재 시 사람 확인 필수)

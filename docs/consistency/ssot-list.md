@@ -9,8 +9,8 @@
 | `funds/tdf_data.json` | `funds/tdf_data.json#_meta.version` | `2026-10-30` | TDF 별도 기준일 | TDF gate 기준선 |
 | `funds/tdf_data.json` | `funds/tdf_data.json#_meta.baseDateNote` | `fund_data.json과 tdf_data.json은 각자 독립적인 기준일을 가진다. …직접 교차비교 금지` | TDF는 별도 universe/기준일 | cross-compare 금지 |
 | `funds/tdf_fees.json` | `funds/tdf_fees.json#_meta.version` | `2026-10-30` | TDF 수수료 기준일 | TDF 수수료 동기화 |
-| `funds/deposit_rates.json` | `funds/deposit_rates.json#_meta.version` | `2026-11-16` | 예금 금리 기준일 | 원리금보장형 비교 기준 |
-| `funds/deposit_rates.json` | `funds/deposit_rates.json#_meta.updatedAt` | `2026-11-16T21:44:23.514579+09:00` | 마지막 수동 갱신 시각 | staleness 판정 |
+| `funds/deposit_rates.json` | `funds/deposit_rates.json#_meta.version` | `2026-10-31` | 예금 금리 기준일 | 원리금보장형 비교 기준 |
+| `funds/deposit_rates.json` | `funds/deposit_rates.json#_meta.updatedAt` | `2026-11-16T22:12:12.037073+09:00` | 마지막 수동 갱신 시각 | staleness 판정 |
 | `funds/deposit_rates.json` | `funds/deposit_rates.json#_meta.freshnessThresholdDays` | `30` | 신선도 임계값 | 30일 초과 시 stale 경고 |
 | `funds/fund_fees.json` | `funds/fund_fees.json#_meta.version` | `2026-10-30` | 펀드 총보수 기준일 | fee join 기준 |
 | `funds/all/all_fund_data.json` | `funds/all/all_fund_data.json#_meta.version` | `2026-10-30` | 전체 universe 원장 | TDF enrichment 권위 소스 |

@@ -1,17 +1,31 @@
 {
   "_meta": {
-    "version": "2026-11-16",
-    "source": "SEMA 퇴직연금 포털 화면 확인(저장소 소유자 입력) (2026-11-16 21:43 KST, 화면에 안내 기준일 없음) https://discord.com/channels/1528936606264856737/1571866693003649054/1571868432482308147",
-    "updatedAt": "2026-11-16T21:44:23.514579+09:00",
+    "version": "2026-10-31",
+    "source": "과학기술인공제회 원리금보장형 운용방법 안내 (공개 페이지 [기준일:2026.10.31]) https://www.sema.or.kr/sema/annty/guidance/fundProduct.do?menuNo=200059",
+    "updatedAt": "2026-11-16T22:12:12.037073+09:00",
     "recordCount": 4,
     "freshnessThresholdDays": 30,
-    "note": "30일 경과 시 데이터 업데이트 필요"
+    "note": "30일 경과 시 공개 페이지 재조회(기준일 필수) + 소유자 포털 값 대조. 우리은행 금리는 적용기간(appliesFrom~appliesTo) 밖이면 재조회.",
+    "sourceUrl": "https://www.sema.or.kr/sema/annty/guidance/fundProduct.do?menuNo=200059",
+    "sourceBaseDate": "2026-10-31",
+    "fetchedAt": "2026-11-16T22:12:12.037073+09:00",
+    "ownerPortalCheck": {
+      "checkedAt": "2026-11-16T21:43:00+09:00",
+      "matches": true,
+      "values": {
+        "sema-1y": 5.7,
+        "woori-1y": 3.7,
+        "woori-6m": 3.3,
+        "woori-3m": 3.1
+      },
+      "note": "저장소 소유자가 SEMA 퇴직연금 포털 화면에서 본 값(SEMA는 회원지급률 5.70%)과 공개 페이지 값이 일치"
+    }
   },
   "rates": [
     {
       "id": "sema-1y",
       "institution": "과학기술인공제회",
-      "productName": "과학기술인공제회 퇴직연금 New 정기예금 1년",
+      "productName": "과학기술인공제회 퇴직연금 운용방법 (1년)",
       "type": "원리금보장형운용방법",
       "term": "1년",
       "termMonths": 12,
@@ -23,13 +37,21 @@
           "3m_to_6m": "입금분 이자의 60%",
           "under_3m": "입금분 이자의 50%"
         },
-        "special": "입금일 당시 고시된 만기금리를 가입일수로 계산하여 지급"
-      }
+        "special": "퇴직 및 중도인출 등의 사유로 특별 중도해지 시 입금일 당시 고시된 만기금리를 가입일수로 계산하여 지급"
+      },
+      "baseRate": 5.2,
+      "bonusRate": 0.5,
+      "bonusPeriod": {
+        "from": "2026-09-01",
+        "to": "2027-02-28"
+      },
+      "rateNote": "공개 페이지 원문: \"과학기술인공제회 정기예금은 2026. 9.1부터 변경된 금리입니다. 변경 이후 6개월 (2026.9.1 ~ 2027.2.28) 간 특별가산금리(+0.50%p, 적용 회원지급률 연 5.7%) 적용됩니다.\" rate = 회원지급률(기본 5.2 + 가산 0.5), 입금일 당시 고시된 이율 적용",
+      "maturityRule": "만기 시 별도 운용지시가 없으면 같은 상품으로 재예치(재예치 시 고시이율 적용)"
     },
     {
       "id": "woori-1y",
       "institution": "우리은행",
-      "productName": "우리은행정기예금(1년)",
+      "productName": "우리은행 정기예금 1년",
       "type": "원리금보장형운용방법",
       "term": "1년",
       "termMonths": 12,
@@ -38,12 +60,17 @@
       "earlyWithdrawal": {
         "normal": "신규일(최종 재예치일) 당시 영업점 및 홈페이지 게시된 기간별 중도해지이율 적용",
         "special": null
-      }
+      },
+      "appliesFrom": "2026-11-01",
+      "appliesTo": "2026-11-30",
+      "distributor": "미래에셋증권",
+      "maturityRule": "2023-07-12 이후 만기 도래분은 자동 연장되지 않고, 만기 전 별도 의사표시가 없으면 미래에셋증권 현금성자산으로 운용(기회손실 가능)",
+      "depositProtection": "예금자보호 1인당 1억원(판매회사별 보호상품 합산, 다른 보호상품과 별도)"
     },
     {
       "id": "woori-6m",
       "institution": "우리은행",
-      "productName": "우리은행정기예금(6개월)",
+      "productName": "우리은행 정기예금 6개월",
       "type": "원리금보장형운용방법",
       "term": "6개월",
       "termMonths": 6,
@@ -52,12 +79,17 @@
       "earlyWithdrawal": {
         "normal": "신규일(최종 재예치일) 당시 영업점 및 홈페이지 게시된 기간별 중도해지이율 적용",
         "special": null
-      }
+      },
+      "appliesFrom": "2026-11-01",
+      "appliesTo": "2026-11-30",
+      "distributor": "미래에셋증권",
+      "maturityRule": "2023-07-12 이후 만기 도래분은 자동 연장되지 않고, 만기 전 별도 의사표시가 없으면 미래에셋증권 현금성자산으로 운용(기회손실 가능)",
+      "depositProtection": "예금자보호 1인당 1억원(판매회사별 보호상품 합산, 다른 보호상품과 별도)"
     },
     {
       "id": "woori-3m",
       "institution": "우리은행",
-      "productName": "우리은행정기예금(3개월)",
+      "productName": "우리은행 정기예금 3개월",
       "type": "원리금보장형운용방법",
       "term": "3개월",
       "termMonths": 3,
@@ -66,7 +98,12 @@
       "earlyWithdrawal": {
         "normal": "신규일(최종 재예치일) 당시 영업점 및 홈페이지 게시된 기간별 중도해지이율 적용",
         "special": null
-      }
+      },
+      "appliesFrom": "2026-11-01",
+      "appliesTo": "2026-11-30",
+      "distributor": "미래에셋증권",
+      "maturityRule": "2023-07-12 이후 만기 도래분은 자동 연장되지 않고, 만기 전 별도 의사표시가 없으면 미래에셋증권 현금성자산으로 운용(기회손실 가능)",
+      "depositProtection": "예금자보호 1인당 1억원(판매회사별 보호상품 합산, 다른 보호상품과 별도)"
     }
   ],
   "summary": {
