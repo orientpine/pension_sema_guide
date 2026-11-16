@@ -52,6 +52,7 @@ class CliArgs:
     fees: bool
     all_dir: str
     allow_unresolved: bool
+    from_proposal: bool
 
 
 JsonValue = str | int | bool | None | list[int]
@@ -82,6 +83,14 @@ def parse_args() -> CliArgs:
         help="Directory holding all_fund_data.json/all_fund_fees.json (default: <output_dir>/all)",
     )
     _ = parser.add_argument(
+        "--from-proposal",
+        action="store_true",
+        help=(
+            "Re-base existing tdf_data.json rows on the monthly 상품제안서 (all_fund_data.json): "
+            "6M/1Y/3Y·위험등급·순자산 갱신, 상품제안서에 없는 1M/3M/2Y/설정후는 빈 값"
+        ),
+    )
+    _ = parser.add_argument(
         "--allow-unresolved",
         action="store_true",
         help="Exit 0 (warn only) even when unresolved/missing rows remain",
@@ -94,6 +103,7 @@ def parse_args() -> CliArgs:
         fees=bool(parsed["fees"]),
         all_dir=str(parsed["all_dir"]),
         allow_unresolved=bool(parsed["allow_unresolved"]),
+        from_proposal=bool(parsed["from_proposal"]),
     )
 
 
@@ -393,6 +403,74 @@ def _cumulative_to_annualized(cumulative_pct: float, years: int) -> float:
     return ((1.0 + cumulative_pct / 100.0) ** (1.0 / years) - 1.0) * 100.0
 
 
+def _annualized_to_cumulative(annualized_pct: float, years: int) -> float:
+    return ((1.0 + annualized_pct / 100.0) ** years - 1.0) * 100.0
+
+
+# Horizons the monthly 상품제안서 does not carry. Blanked on a proposal refresh so a
+# row never mixes an older paste's numbers with the newer base date.
+PROPOSAL_ABSENT_FIELDS = ("return1m", "return3m", "return2y", "returnSinceInception")
+
+
+def refresh_from_proposal(tdf_data: JsonObject, all_fund_data: JsonObject) -> JsonObject:
+    """Re-base every TDF row on the 상품제안서 base date (all_fund_data `_meta.version`).
+
+    Keeps the TDF lineup (fundCode/name/targetYear/hedge/qualification) and replaces the
+    numbers: 6M/1Y 누적 as-is, 3Y 연환산 -> 누적 (tdf contract), 위험등급, 순자산 천원.
+    Rows whose fundCode is absent from the proposal keep no numbers and are listed in
+    `_meta.notInProposal` instead of carrying stale values.
+    """
+    auth_meta = cast(JsonObject, all_fund_data.get("_meta", {}))
+    version = str(auth_meta.get("version", ""))
+    current_year = _derive_current_year(version)
+    auth_by_code: dict[str, JsonObject] = {
+        str(f.get("fundCode", "")): f for f in cast(list[JsonObject], all_fund_data.get("funds", []))
+    }
+
+    funds: list[JsonObject] = []
+    not_in_proposal: list[str] = []
+    for row in cast(list[JsonObject], tdf_data.get("funds", [])):
+        fund = dict(row)
+        for field in PROPOSAL_ABSENT_FIELDS:
+            fund[field] = ""
+        code = str(row.get("fundCode", ""))
+        auth = auth_by_code.get(code)
+        if auth is None:
+            fund["return6m"] = fund["return1y"] = fund["return3y"] = ""
+            not_in_proposal.append(code)
+        else:
+            fund["return6m"] = str(auth.get("return6m", ""))
+            fund["return1y"] = str(auth.get("return1y", ""))
+            annualized_3y = _to_float(auth.get("return3y"))
+            fund["return3y"] = (
+                f"{_annualized_to_cumulative(annualized_3y, 3):.2f}" if annualized_3y is not None else ""
+            )
+            fund["riskLevel"] = auth.get("riskLevel", fund.get("riskLevel"))
+            fund["riskName"] = auth.get("riskName", fund.get("riskName"))
+            # all_fund_data netAssets = 순자산총액(억원) x 10000; tdf netAssets is 천원 (1억원 = 100000천원).
+            net_assets = _to_float(auth.get("netAssets"))
+            fund["netAssets"] = str(int(round(net_assets * 10))) if net_assets is not None else ""
+        target_year = fund.get("targetYear")
+        if isinstance(target_year, int):
+            fund["recommendedAgeBand"] = derive_recommended_age_band(target_year, current_year)
+        funds.append(fund)
+
+    meta = copy.deepcopy(cast(JsonObject, tdf_data.get("_meta", {})))
+    meta.update({
+        "version": version,
+        "source": f"{TDF_SOURCE} (미래에셋증권 퇴직연금 상품제안서 {auth_meta.get('sourceFile', '')})",
+        "updatedAt": datetime.now().astimezone().isoformat(),
+        "recordCount": len(funds),
+        "returnsBasis": (
+            "상품제안서 기준 갱신: return6m/return1y=누적 그대로, return3y=연환산을 3년 누적으로 환산. "
+            "return1m/return3m/return2y/returnSinceInception은 상품제안서에 없어 빈 값 "
+            "(SEMA 포털 TDF 표를 --input으로 붙여넣으면 채울 수 있음)"
+        ),
+        "notInProposal": not_in_proposal,
+    })
+    return {"_meta": meta, "funds": funds}
+
+
 def cross_validate_tdf_row(tdf_row: JsonObject, auth_row: JsonObject) -> list[JsonObject]:
     """Soft-validate overlapping returns + riskLevel against the authoritative row.
 
@@ -645,6 +723,13 @@ def enrich_tdf_rows(
     out_fees = copy.deepcopy(tdf_fees)
     out_fees["fees"] = new_fees
     attach_meta(out_fees, with_record_count=len(new_fees))
+    # Every fee above is re-derived from all_fund_fees, so its base date is the fee file's base date.
+    fees_meta = cast(JsonObject, out_fees["_meta"])
+    auth_fee_meta = cast(JsonObject, all_fund_fees.get("_meta", {}))
+    if auth_fee_meta.get("version"):
+        fees_meta["version"] = auth_fee_meta["version"]
+        fees_meta["updatedAt"] = checked_at
+        fees_meta["feeSource"] = f"funds/all/all_fund_fees.json ({auth_fee_meta.get('sourceFile', '')})"
 
     return {
         "tdf_data": out_data,
@@ -712,8 +797,23 @@ def run_enrichment(args: CliArgs) -> int:
     return 0
 
 
+def run_proposal_refresh(args: CliArgs) -> None:
+    out_path = Path(args.output)
+    all_dir = Path(args.all_dir) if args.all_dir else out_path.parent / "all"
+    tdf_data = cast(JsonObject, json.loads(out_path.read_text(encoding="utf-8")))
+    all_fund_data = cast(JsonObject, json.loads((all_dir / "all_fund_data.json").read_text(encoding="utf-8")))
+    refreshed = refresh_from_proposal(tdf_data, all_fund_data)
+    _ = out_path.write_text(json.dumps(refreshed, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    meta = cast(JsonObject, refreshed["_meta"])
+    print(f"Refreshed {meta['recordCount']} TDF rows to {meta['version']} (not in proposal: {meta['notInProposal']})")
+
+
 def main() -> int:
     args = parse_args()
+    if args.from_proposal:
+        run_proposal_refresh(args)
+        if not args.fees:
+            return 0
     if args.fees:
         return run_enrichment(args)
     if not args.input:
@@ -732,5 +832,5 @@ if __name__ == "__main__":
     if exit_code == 0:
         from _consistency_gate import run_consistency_gate
 
-        run_consistency_gate()
+        run_consistency_gate(written=Path(parse_args().output))
     raise SystemExit(exit_code)

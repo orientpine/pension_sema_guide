@@ -14,11 +14,12 @@
 | test_enrich.py | 보강 파이프라인 전체 |
 | test_cli.py / test_integration.py | CLI 종단 동작 |
 | test_year_derive.py | 기준년도/연령대 산출 (`_derive_current_year`) |
+| test_from_proposal.py | `--from-proposal` TDF 상품제안서 기준 갱신 (`refresh_from_proposal`) |
 | test_verify_consistency.py | 정합성 게이트 자체 검증 (dangling/date/freshness/dup/manifest, 17) |
 
 ## RUN
 
-`python3 -m pytest` (repo root) → 63 passed (현재 기준: update_tdf_data 40 + gate 17 + year derivation 6).
+`python3 -m pytest` (repo root) → 100 passed (2026-11-16 기준, 세법 테스트 포함).
 
 ## PATH CONFIGURATION
 
@@ -27,4 +28,4 @@
 ## CONVENTIONS
 
 - 픽스처 fund 코드/이름은 실제 적격TDF 사례(KB/삼성/신한/미래에셋/한국투자) 기반 — adversarial(연도 인접·share class 충돌·헤지 불일치) 검증용. 임의 변경 금지.
-- 테스트는 `funds/` 실데이터를 읽지 않음 — fixture 슬라이스만 사용.
+- 단위 테스트는 `funds/` 실데이터를 읽지 않음 — fixture 슬라이스만 사용. 예외: `test_cli.py`·`test_integration.py`는 저장된 실데이터가 `funds/all/` 권위 값과 맞는지 본다(고정 리터럴 대신 권위 파일과 비교 — 월간 갱신에도 깨지지 않게).

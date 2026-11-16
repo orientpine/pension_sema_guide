@@ -157,6 +157,12 @@ tools: Bash, Read, Write, mcp_question
 
 [Phase 6: TDF 데이터 업데이트 (수동)]
     |
+    +-- Step 6-0. 월간 상품제안서 기준 갱신 (Phase 2 뒤, 자동)
+    |   +-- python scripts/update_tdf_data.py --from-proposal --fees
+    |   +-- 기존 75개 TDF 행을 funds/all/all_fund_data.json 기준일로: 6M/1Y(누적)·3Y(연환산→누적)·위험등급·순자산(천원)
+    |   +-- 상품제안서에 없는 1M/3M/2Y/설정후는 빈 값 (_meta.returnsBasis), 상품제안서에 없는 코드는 _meta.notInProposal
+    |   +-- 포털 표가 있으면 아래 Step 6-1~6-2로 빈 구간을 채운다
+    |
     +-- Step 6-1. TDF 원본 데이터 확보
     |   +-- 사용자로부터 TDF 수익률 표(Markdown/Text) 붙여넣기 받기
     |   +-- 임시 파일 저장 (예: resource/tdf-raw.md)
@@ -247,6 +253,8 @@ python scripts/classify_funds.py \
 | classify_funds.py | `--output` | X | 출력 파일 경로 |
 | update_tdf_data.py | `--input` | O | TDF 표 파일 경로 |
 | update_tdf_data.py | `--output` | X | 출력 JSON 경로 |
+| update_tdf_data.py | `--from-proposal` | X | 기존 tdf_data.json 행을 상품제안서(all_fund_data) 기준일로 갱신 |
+| update_tdf_data.py | `--fees` | X | all_fund_fees 기준 fundCode·총보수 결정적 보강 (tdf_fees 기준일도 따라감) |
 
 ### 의존성
 

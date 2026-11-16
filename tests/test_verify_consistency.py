@@ -171,6 +171,10 @@ def test_tdf_lockstep_negative(tmp_repo: Path):
 
 
 def test_cross_ssot_isolation(tmp_repo: Path):
+    fund_path = tmp_repo / "funds" / "fund_data.json"
+    fund_data = json.loads(fund_path.read_text(encoding="utf-8"))
+    fund_data["_meta"]["version"] = "2026-06-01"
+    _ = fund_path.write_text(json.dumps(fund_data, ensure_ascii=False), encoding="utf-8")
     _prepare_date_sync_repo(tmp_repo)
     tdf_path = tmp_repo / "funds" / "tdf_data.json"
     tdf_data = json.loads(tdf_path.read_text(encoding="utf-8"))

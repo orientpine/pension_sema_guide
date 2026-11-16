@@ -22,11 +22,14 @@ def _repo_root() -> Path:
     return Path(__file__).resolve().parents[6]
 
 
-def run_consistency_gate() -> None:
+def run_consistency_gate(written: Path | None = None) -> None:
     """Run the repository consistency gate; exit non-zero on failure.
 
     데이터 갱신 후 필수 게이트. exit 0 이 아니면 갱신을 차단한다.
+    `written`이 저장소 밖(테스트 임시 폴더 등)이면 저장소가 바뀌지 않았으므로 건너뛴다.
     """
+    if written is not None and not written.resolve().is_relative_to(_repo_root()):
+        return
     gate_path = _repo_root() / "scripts" / "verify_consistency.py"
     result = subprocess.run([sys.executable, str(gate_path)], capture_output=False)
     if result.returncode != 0:

@@ -63,5 +63,6 @@ def test_allow_unresolved_exits_0(staged):
 def test_fees_writes_corrected_files(staged):
     _run(staged / "tdf_data.json")
     fees = json.loads((staged / "tdf_fees.json").read_text(encoding="utf-8"))["fees"]
-    assert fees["K55223D29737"]["totalFee"] == "0.69"
+    auth = json.loads((REPO / "funds" / "all" / "all_fund_fees.json").read_text(encoding="utf-8"))["fees"]
+    assert fees["K55223D29737"]["totalFee"] == auth["K55223D29737"]["totalFee"]
     assert "K55210BR6431" in fees and "UNKNOWN_52" not in fees

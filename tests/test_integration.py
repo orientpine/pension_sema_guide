@@ -8,11 +8,11 @@ import json
 
 import pytest
 
+# Codes whose fee was corrected to the official CSV (2026-06). The persisted fee must keep
+# following funds/all/all_fund_fees.json as the monthly CSV moves.
 FEE_FIXES = {
-    "K55223D29737": "0.69", "K55101DR7009": "1.12", "K55213D64958": "0.94",
-    "K55301BU5479": "0.82", "K55301BU6253": "0.77", "K55301BT5183": "0.82",
-    "K55105CK1592": "1.10", "K55301BU6139": "0.72", "K55105D34223": "0.49",
-    "K55301BS2942": "0.64",
+    "K55223D29737", "K55101DR7009", "K55213D64958", "K55301BU5479", "K55301BU6253",
+    "K55301BT5183", "K55105CK1592", "K55301BU6139", "K55105D34223", "K55301BS2942",
 }
 MIGRATED_CODES = {
     "K55105D43299", "K55105D32763", "K55105D43000", "K55105D42499",
@@ -31,14 +31,20 @@ def tdf_fees(repo_root):
 
 
 @pytest.fixture
+def auth_fee(repo_root):
+    fees = json.loads((repo_root / "funds" / "all" / "all_fund_fees.json").read_text(encoding="utf-8"))["fees"]
+    return lambda code: fees[code]["totalFee"]
+
+
+@pytest.fixture
 def tdf_data(repo_root):
     return json.loads((repo_root / "funds" / "tdf_data.json").read_text(encoding="utf-8"))
 
 
-def test_ten_fee_corrections_persisted(tdf_fees):
+def test_ten_fee_corrections_persisted(tdf_fees, auth_fee):
     fees = tdf_fees["fees"]
-    for code, expected in FEE_FIXES.items():
-        assert fees[code]["totalFee"] == expected
+    for code in FEE_FIXES:
+        assert fees[code]["totalFee"] == auth_fee(code)
         assert isinstance(fees[code]["totalFee"], str)
 
 
@@ -50,10 +56,10 @@ def test_unknown_keys_migrated(tdf_fees):
         assert placeholder not in fees
 
 
-def test_cp_typo_resolved_to_cr(tdf_fees):
+def test_cp_typo_resolved_to_cr(tdf_fees, auth_fee):
     fees = tdf_fees["fees"]
     assert "UNKNOWN_52" not in fees
-    assert fees["K55210BR6431"]["totalFee"] == "0.77"
+    assert fees["K55210BR6431"]["totalFee"] == auth_fee("K55210BR6431")
     assert fees["K55210BR6431"]["feeVerification"]["status"] == "verified"
 
 
