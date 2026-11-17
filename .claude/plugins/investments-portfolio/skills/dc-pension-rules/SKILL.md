@@ -57,14 +57,16 @@ DC형 자산은 다음 **세 가지 상태**로 구분한다. 이 구분이 70% 
 
 70% 한도는 **비면제 위험자산 비중(nonExemptRiskWeight)** 기준으로 판정한다. 적격TDF는 분자에서 제외하되 분모(총 포트폴리오)에는 포함한다.
 
+> **계산은 스크립트로만 한다**: `python3 .claude/plugins/investments-portfolio/skills/dc-pension-rules/scripts/dc_limits.py check --allocation <배분.json> --json` (보유분 점검은 `--mode holdings`, 포털 환산은 `portal`). 에이전트가 비중을 직접 더해 판정하지 않는다. 경계(70% 이하 통과, 초과 차단)는 같은 폴더 `dc_limits_config.json` 한 곳에 있고, SEMA 포털이 정확히 70%를 통과시킨다는 소유자 화면 확인을 그 파일에 출처로 적었다. 판정 값: PASS / PASS_PENDING_CONFIRMATION(`needsConfirmation` 비위험 펀드를 위험으로 보면 초과 — 포털 표시 확인 전 확정 금지) / FAIL / ERROR / MARKET_DRIFT_OVER_LIMIT(감독규정 제13조② 시가 변동 초과, 위반 아님).
+
 ```
-nonExemptRiskWeight = Σ weight(riskAsset=true AND NOT 적격TDF) / total
-                    ≤ 70%
+nonExemptRiskWeight    = Σ weight(riskStatus∈{risk, unverified} AND NOT 적격TDF) / total  ≤ 70%
+conservativeRiskWeight = nonExemptRiskWeight + Σ weight(nonRisk AND needsConfirmation) / total
 ```
 
 수식의 의미를 prose로 풀면 다음과 같다:
 
-- **분자(Σ weight, 한도 산입 대상)**: `riskAsset=true`이면서 적격TDF가 **아닌** 모든 펀드의 비중 합계. 즉 일반 위험자산(주식형·해외주식형·주식혼합형·채권혼합형) **+ 비적격TDF**의 비중을 모두 더한다.
+- **분자(Σ weight, 한도 산입 대상)**: `riskStatus`가 risk 또는 unverified이면서 적격TDF가 **아닌** 모든 펀드의 비중 합계(주식형·주식혼합형·혼합자산·특별자산·미확인, 적격 근거 없는 TDF는 유형대로). 채권형·채권혼합형(제11조①5호)은 분자에서 빠지되 보수적 비중에는 들어간다.
 - **분모(total)**: 적격TDF·안전자산을 포함한 **전체 포트폴리오 비중(100%)**. 적격TDF는 분모에 포함되므로, 적격TDF 비중이 커질수록 일반 위험자산이 차지할 수 있는 여유 한도가 늘어나지는 않는다(분모 고정 100% 기준).
 - **판정**: `nonExemptRiskWeight ≤ 70%`이면 위험자산 한도 PASS. 적격TDF 비중은 이 분자에 더해지지 **않으므로**, 적격TDF를 100%까지 편입해도 위험자산 한도 위반이 아니다.
 
@@ -147,9 +149,9 @@ targetYear ≈ birthYear + 60      # 은퇴연령 60세 기본 가정
 
 | 실수 | 결과 | 예방책 |
 |------|------|--------|
-| 채권혼합형을 안전자산으로 착각 | 70% 한도 초과 | 펀드명에 "혼합" 있으면 확인 |
-| "채권" 키워드만 보고 판단 | 잘못된 분류 | fund_classification.json 확인 |
-| 해외채권혼합형 분류 실수 | 70% 한도 초과 | "혼합" = 위험자산 원칙 |
+| 테마 이름(골드·EMP·인컴·리츠)만 보고 비위험으로 판단 | 70% 한도 초과 | 이름의 유형 표기와 `riskStatus` 확인 |
+| 채권혼합형을 무조건 위험자산으로 셌 | 규정이 허용하는 선택지 누락 | 제11조①5호, `needsConfirmation` 표시와 함께 |
+| `needsConfirmation` 펀드 덕분에 경계 통과한 안을 확정 | 포털에서 막힘 | `dc_limits.py`의 PASS_PENDING_CONFIRMATION이면 포털 표시 확인 후 확정 |
 
 ---
 

@@ -1,0 +1,7 @@
+{
+  "funds": [
+    {"fundCode": "Q", "name": "적격TDF", "tdfQualified": true, "riskStatus": "risk", "riskBasis": "퇴직연금감독규정 제11조①", "hedge": "UH"},
+    {"fundCode": "N", "name": "비적격TDF", "tdfQualified": false, "riskStatus": "nonRisk", "needsConfirmation": false},
+    {"fundCode": "T", "name": "구분류TDF", "tdfQualified": false}
+  ]
+}

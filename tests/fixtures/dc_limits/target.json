@@ -1,0 +1,5 @@
+[
+  {"fundCode": "R1", "weight": "40"},
+  {"fundCode": "R2", "weight": "30"},
+  {"kind": "principalGuaranteed", "name": "예금", "weight": "30"}
+]

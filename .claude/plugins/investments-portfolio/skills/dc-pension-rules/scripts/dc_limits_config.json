@@ -1,0 +1,10 @@
+{
+  "riskLimitPct": "70",
+  "inclusive": true,
+  "singleFundLimitPct": "40",
+  "legalBasis": "근로자퇴직급여보장법 시행령 제26조 / 퇴직연금감독규정 제11조①: 위험자산은 적립금의 70%를 초과할 수 없음",
+  "marketDriftBasis": "퇴직연금감독규정 제13조②: 평가액 변동만으로 발생한 한도 초과는 위반 아님, 운용관리기관 통보 필요",
+  "verifiedDate": "2026-11-17",
+  "note": "portal boundary confirmed: 부담금 투자비율에서 비TDF 위험자산 합 70%는 포털이 통과시킴(70% 이하 통과, 초과 차단 — 법령 문언과 같음)",
+  "portalBoundarySource": "소유자 포털 화면 확인 2026-11-17 09:14 KST https://discord.com/channels/1528936606264856737/1571866693003649054/1572042228472479886"
+}

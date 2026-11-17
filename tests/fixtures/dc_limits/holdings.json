@@ -1,0 +1,4 @@
+[
+  {"fundCode": "R1", "evalAmount": 60000},
+  {"kind": "principalGuaranteed", "name": "예금", "evalAmount": 40000}
+]

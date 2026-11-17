@@ -79,6 +79,7 @@
 | 은퇴 예정 나이 | O | - |
 | 투자 성향 | O | 중립형 |
 | 위험 수용도 | O | 중간 |
+| 현재 보유 표(펀드·평가금액 원) | X | 없으면 포털 매도·매수 환산 생략(Step 4.5), 부담금 3칸은 목표 비중으로 환산 |
 
 **투자 성향 영문 변환:**
 - 공격형 → aggressive
@@ -477,8 +478,9 @@ Task(
 - 은퇴예정연도: {retirement_year} (TDF targetYear 매칭 기준)
 
 ### 제약 조건
-- DC형 위험자산 한도: 70%
+- DC형 위험자산 한도: 70% 이하 (판정은 Step 2의 dc_limits.py)
 - 단일 펀드 집중 한도: 40%
+- 최종 배분을 dc_limits 입력 계약(fundCode 또는 정확한 펀드명 + weight, 예금은 kind=principalGuaranteed)으로 {session_folder}/allocation.json에도 저장
 
 ### 데이터 소스
 - funds/fund_data.json
@@ -512,10 +514,12 @@ Task(
 ### 검증 대상
 {session_folder}/01-fund-analysis.md
 
-### 검증 규칙
-1. 위험자산 합계 ≤ 70%
-2. 단일 펀드 ≤ 40%
+### 검증 규칙 (직접 계산 금지 — 스크립트 출력만 인용)
+python3 .claude/plugins/investments-portfolio/skills/dc-pension-rules/scripts/dc_limits.py check --allocation {session_folder}/allocation.json --json > {session_folder}/dc-limits-check.json
+1. 위험자산(nonExemptRiskWeight) ≤ 70% (경계는 dc_limits_config.json, 포털도 70% 통과 확인)
+2. 단일 펀드 ≤ 40% (적격TDF는 WARNING)
 3. 비중 합계 = 100%
+4. verdict=PASS_PENDING_CONFIRMATION이면 확정 통과로 쓰지 말고 confirmationFunds를 "포털 표시 확인 필요"로 보고
 
 ### 데이터 소스 (필요 시 Read)
 - funds/fund_data.json
@@ -527,7 +531,7 @@ Task(
 output_path: {session_folder}
 
 ### 출력 파일
-02-compliance-report.md
+02-compliance-report.md (+ dc-limits-check.json 원문)
 
 ### PASS/FAIL 반환
 - PASS: 다음 단계 진행
@@ -560,6 +564,7 @@ Task(
 3. 출처 태그 존재 여부
 4. 과신 표현 탐지 ("반드시", "확실히" 등)
 5. TDF 선택 시: tdfQualified=true 상품만 포함되었는지 확인
+6. 02의 위험자산 비중·판정·펀드별 분류(riskStatus·환헤지)가 {session_folder}/dc-limits-check.json과 글자 그대로 같은지 확인
 
 ### 데이터 소스 (필요 시 Read)
 - funds/fund_data.json
@@ -602,6 +607,21 @@ A등급(90+), B등급(80-89), C등급(70-79), F등급(<70)
    {session_folder}/04-portfolio-summary.md
 ```
 
+### Step 4.5: 포털 입력 환산 (스크립트 실행, 직접 계산 금지)
+
+포털은 매도를 보유 펀드별 비율(%), 매수를 매도 재원의 정수 %(합 100), 부담금을 기본·일시전환·경영성과 3칸(각 합 100)으로 받는다.
+
+```
+1. 보유 표가 있으면 {session_folder}/holdings.json([{fundCode|name|kind, evalAmount}]),
+   부담금 목표는 {session_folder}/contributions.json({"기본": [...], "일시전환": [...], "경영성과": [...]})으로 저장
+2. python3 .claude/plugins/investments-portfolio/skills/dc-pension-rules/scripts/dc_limits.py portal \
+     --holdings {session_folder}/holdings.json --target {session_folder}/allocation.json \
+     --contributions {session_folder}/contributions.json --json > {session_folder}/portal-input.json
+   (보유 표가 없으면 부담금만: 예금 100% 가상 보유 없이 dc_limits.py check로 3칸 각각을 검사)
+3. Write {session_folder}/05-portal-input.md: portal-input.json의 sells·buys(정수 %)·contributions 3칸·postTradeCheck·
+   integerSellScenarios를 표로 옮기고 판정을 적는다. 입력·주문은 투자자가 직접 한다.
+```
+
 ---
 
 ## 4. 출력 파일 구조
@@ -624,6 +644,8 @@ A등급(90+), B등급(80-89), C등급(70-79), F등급(<70)
 | 02 | `02-compliance-report.md` | compliance-checker |
 | 03 | `03-output-verification.md` | output-critic |
 | 04 | `04-portfolio-summary.md` | **이 에이전트** |
+| - | `allocation.json`, `dc-limits-check.json` | fund-portfolio 배분 / dc_limits.py check |
+| 05 | `05-portal-input.md` (+ `portal-input.json`) | dc_limits.py portal (Step 4.5) |
 
 ---
 

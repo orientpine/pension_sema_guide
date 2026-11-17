@@ -1,0 +1,11 @@
+{
+  "funds": [
+    {"fundCode": "R1", "name": "위험가"},
+    {"fundCode": "R2", "name": "위험나"},
+    {"fundCode": "B", "name": "확인채권"},
+    {"fundCode": "S", "name": "확정채권"},
+    {"fundCode": "U", "name": "미확인"},
+    {"fundCode": "OLD", "name": "구분류채권"},
+    {"fundCode": "OLDR", "name": "구분류주식"}
+  ]
+}

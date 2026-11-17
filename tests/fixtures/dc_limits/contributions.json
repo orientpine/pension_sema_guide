@@ -1,0 +1,15 @@
+{
+  "기본": [
+    {"fundCode": "R1", "weight": "35"},
+    {"fundCode": "R2", "weight": "35"},
+    {"kind": "principalGuaranteed", "name": "예금", "weight": "30"}
+  ],
+  "일시전환": [
+    {"fundCode": "R1", "weight": "35.01"},
+    {"fundCode": "R2", "weight": "35.01"},
+    {"kind": "principalGuaranteed", "name": "예금", "weight": "29.98"}
+  ],
+  "경영성과": [
+    {"fundCode": "Q", "weight": "100"}
+  ]
+}
