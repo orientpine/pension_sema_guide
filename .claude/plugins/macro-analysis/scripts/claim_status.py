@@ -24,7 +24,7 @@ NUMERIC_KEYS: Final = ("weight", "target_weight", "target_pct", "pct", "percent"
 # 발표 기관 호스트(접미사 일치). 지도자·경제팀은 정부, 기준금리·총재는 중앙은행.
 ISSUERS: Final = {
     "미국": {"government": ("whitehouse.gov", "treasury.gov"), "central_bank": ("federalreserve.gov", "newyorkfed.org")},
-    "중국": {"government": ("gov.cn",), "central_bank": ("pbc.gov.cn",)},
+    "중국": {"government": ("gov.cn",), "central_bank": ("pbc.gov.cn", "chinamoney.com.cn")},
     "한국": {"government": ("president.go.kr", "korea.kr", "moef.go.kr", "mofe.go.kr"), "central_bank": ("bok.or.kr",)},
     "일본": {"government": ("kantei.go.jp", "mof.go.jp"), "central_bank": ("boj.or.jp",)},
     "인도": {"government": ("pmindia.gov.in", "pib.gov.in", "india.gov.in", "finmin.gov.in"), "central_bank": ("rbi.org.in",)},

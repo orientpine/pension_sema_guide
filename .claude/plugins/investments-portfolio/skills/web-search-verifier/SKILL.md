@@ -54,7 +54,7 @@ tools: WebSearch, WebFetch
 | `interpretation` 해석 | 정책 성향(매파·확장 등), 지역 확대/유지/축소, 시나리오 | `claim_type: "interpretation"`·`is_inference: true` 표시 + 근거 원문·출처. 배분에는 **방향(확대·유지·축소)만** 쓰고 수치 비중을 만들지 않는다 | 표시 없으면 배분 근거로 쓰지 않는다 |
 
 - 발표 기관 호스트 목록과 판정은 `.claude/plugins/macro-analysis/scripts/claim_status.py`(`ISSUERS`) 하나로 한다. 리더십 결과는 `python3 .claude/plugins/macro-analysis/scripts/claim_status.py {output_path}/leadership-analysis.json --as-of YYYY-MM-DD`로 판정하고, `decision_usable`은 파일이 스스로 적은 값이 아니라 이 출력값을 쓴다(7개국 지도자·기준금리가 모두 확정되고 해석 위반이 없을 때 true).
-- 국가별 기준금리 정의(무엇을 적을지): 미국 FOMC 연방기금금리 목표 범위, 중국 인민은행 7일물 역레포 금리(공개시장 정책금리), 한국 한국은행 기준금리, 일본 일본은행 무담보 콜 익일물 유도 목표, 인도 RBI 정책 레포금리, 베트남 SBV 재융자금리(refinancing rate), 인도네시아 BI-Rate. 현재 금리를 보여 주는 발표 기관 페이지나 최신 결정문을 열고, 결정문을 쓸 때는 같은 기관의 회의 일정·결정 목록으로 그 뒤 결정이 없었는지 확인해 `original_text`에 함께 남긴다.
+- 국가별 기준금리 정의(무엇을 적을지): 미국 FOMC 연방기금금리 목표 범위, 중국 인민은행 7일물 역레포 금리(공개시장 정책금리, 인민은행이 다중가격 입찰로 운영해 단일 금리를 공표하지 않으면 그 공고 원문을 남기고 인민은행 위임으로 전국은행간동업자금조달센터가 공표하는 1년 LPR을 `rate_definition`과 함께 적는다 — 2026. 11. 17. 재실행에서 확인한 제도 변경에 맞춘 정의), 한국 한국은행 기준금리, 일본 일본은행 무담보 콜 익일물 유도 목표, 인도 RBI 정책 레포금리, 베트남 SBV 재융자금리(refinancing rate), 인도네시아 BI-Rate. 현재 금리를 보여 주는 발표 기관 페이지나 최신 결정문을 열고, 결정문을 쓸 때는 같은 기관의 회의 일정·결정 목록으로 그 뒤 결정이 없었는지 확인해 `original_text`에 함께 남긴다.
 - 보도(AP·Reuters·Bloomberg 등)는 공식 사실의 **값 충돌 확인용**으로 남길 수 있다. 확정 근거로 세지 않는다.
 
 ## 1차 출처 직접 조회 (검색보다 먼저)
