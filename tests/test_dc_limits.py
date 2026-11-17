@@ -220,3 +220,25 @@ def test_portal_missing_contribution_column(tmp_path):
         holdings=[{"fundCode": "Q", "evalAmount": 100}], target=[{"fundCode": "Q", "weight": 100}],
         contributions={"기본": [{"fundCode": "Q", "weight": 100}]})
     assert (rc, result["verdict"]) == (1, "ERROR")
+
+HEDGE_ALLOCATION = [{"fundCode": "R1", "weight": "20"}, {"fundCode": "R2", "weight": "10"},
+                    {"fundCode": "EU", "weight": "20"}, {"fundCode": "KR", "weight": "20"}, deposit(30)]
+
+
+@pytest.mark.parametrize("target,tolerance,status", [
+    (None, None, "INFO"), ("60", "15", "UNCERTAIN"), ("0", "5", "OUTSIDE_REFERENCE"), ("40", "25", "WITHIN_REFERENCE")])
+def test_check_hedge_mix_is_reference_only(tmp_path, target, tolerance, status):
+    args = [sys.executable, str(SCRIPT), "check", "--funds-dir", str(FIXTURES), "--json"]
+    path = tmp_path / "allocation.json"
+    path.write_text(json.dumps(HEDGE_ALLOCATION, ensure_ascii=False), encoding="utf-8")
+    args += ["--allocation", str(path)]
+    if target is not None:
+        args += ["--hedge-target", target, "--hedge-tolerance", tolerance]
+    completed = subprocess.run(args, capture_output=True, text=True, check=False)
+    result = json.loads(completed.stdout)
+    mix = result["hedgeMix"]
+    assert (completed.returncode, result["verdict"]) == (0, "PASS")
+    assert (Decimal(mix["foreignWeight"]), Decimal(mix["hedged"]), Decimal(mix["unhedged"]),
+            Decimal(mix["unknown"])) == (50, 10, 20, 20)
+    assert (Decimal(mix["hedgedShareMin"]), Decimal(mix["hedgedShareMax"])) == (20, 60)
+    assert mix["status"] == status

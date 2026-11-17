@@ -1,8 +1,10 @@
 {
-  "위험가": {"riskStatus": "risk", "riskBasis": "퇴직연금감독규정 제11조①", "hedged": false},
-  "위험나": {"riskStatus": "risk", "riskBasis": "퇴직연금감독규정 제11조①", "hedged": true},
+  "위험가": {"riskStatus": "risk", "riskBasis": "퇴직연금감독규정 제11조①", "hedged": false, "region": "global"},
+  "위험나": {"riskStatus": "risk", "riskBasis": "퇴직연금감독규정 제11조①", "hedged": true, "region": "global"},
   "확인채권": {"riskStatus": "nonRisk", "riskBasis": "퇴직연금감독규정 제11조①5호 조건 확인 필요", "needsConfirmation": true},
   "확정채권": {"riskStatus": "nonRisk", "riskBasis": "퇴직연금감독규정 제11조①", "needsConfirmation": false},
   "구분류채권": {"riskAsset": false},
-  "구분류주식": {"riskAsset": true}
+  "구분류주식": {"riskAsset": true},
+  "해외지수미상": {"riskStatus": "risk", "riskBasis": "퇴직연금감독규정 제11조①", "region": "europe"},
+  "국내지수": {"riskStatus": "risk", "riskBasis": "퇴직연금감독규정 제11조①", "region": "korea"}
 }

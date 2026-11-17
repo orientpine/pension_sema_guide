@@ -16,10 +16,11 @@
 | test_year_derive.py | 기준년도/연령대 산출 (`_derive_current_year`) |
 | test_from_proposal.py | `--from-proposal` TDF 상품제안서 기준 갱신 (`refresh_from_proposal`) |
 | test_verify_consistency.py | 정합성 게이트 자체 검증 (dangling/date/freshness — 원천 기준일·적용기간·파라미터별 확인일 포함/dup/manifest) |
-| test_classify_risk.py | `classify_funds.py` 위험자산(riskStatus, 감독규정 제11조①)·환헤지(UH 우선) 분류 |
+| test_classify_risk.py | `classify_funds.py` 위험자산(riskStatus, 감독규정 제11조①)·환헤지(UH 우선)·지역(해외 이름이 korea 기본값으로 빠지지 않게) 분류 |
 | test_tdf_limits.py | TDF 적격 근거(`tdfQualified`)와 `--input --base-date` 기준일 |
-| test_dc_limits.py | `dc_limits.py` 70%·40%·합계 판정과 포털 매도·매수·부담금 3칸 환산 |
+| test_dc_limits.py | `dc_limits.py` 70%·40%·합계 판정과 포털 매도·매수·부담금 3칸 환산, 환헤지 `hedgeMix`(참고 목표, 판정 무관) |
 | test_index_status.py | `index_status.py` 지수 수집 full/partial/none·7일 신선도 |
+| test_claim_status.py | `claim_status.py` 주장 종류별 출처 기준(공식 사실=발표 기관 1차 출처, 재게시·비발표기관·오래된 조회·값 충돌은 실패, 해석은 방향만)과 리더십 `decision_usable` |
 | test_verify_no_pii.py | `verify_no_pii.sh` 공개 경로의 개인 보유정보 검사 |
 | test_fetch_latest_proposal.py | 상품제안서 게시판 파싱·최신월 선택(오프라인 픽스처) |
 | test_tax_rule_regressions.py | 연금 인출순서·분리과세 선택·퇴직소득 원천징수 적용비율 |
@@ -27,7 +28,7 @@
 
 ## RUN
 
-`python3 -m pytest` (repo root) → 274 passed (2026-11-17 기준, 세법 테스트 포함).
+`python3 -m pytest` (repo root) → 296 passed (2026-11-17 기준, 세법 테스트 포함).
 
 ## PATH CONFIGURATION
 

@@ -70,6 +70,7 @@ class Fund:
     hedge: str | bool | None
     qualified: bool = False
     principal: bool = False
+    region: str | None = None
 
     @property
     def counted(self) -> bool:
@@ -108,6 +109,7 @@ class Catalog:
                     legacy_nonrisk or confirmation,
                     source.get("hedge", source.get("hedged")),
                     is_tdf and row.get("tdfQualified") is True,
+                    region=source.get("region"),
                 )
         for fund in self.by_code.values():
             self.by_name.setdefault(fund.name, []).append(fund)
@@ -224,6 +226,33 @@ def check(values: Positions, config: dict, mode: str = "proposal",
             "confirmationFunds": [f.name for f in pending],
             "funds": table, "singleFundChecks": singles, "messages": messages,
             "config": config}
+
+
+def hedge_mix(values: Positions, target: Decimal | None, tolerance: Decimal | None) -> dict:
+    """해외(region이 korea가 아닌) 펀드의 환헤지 비중. 참고 목표와의 비교일 뿐 verdict에는 영향이 없다.
+
+    헤지 미상 펀드는 추정하지 않고 범위(전부 UH ~ 전부 H)로 낸다.
+    """
+    def side(hedge: object) -> str:
+        return "hedged" if hedge in (True, "H") else "unhedged" if hedge in (False, "UH") else "unknown"
+
+    sums = {"hedged": Decimal(0), "unhedged": Decimal(0), "unknown": Decimal(0)}
+    total = sum(values.values(), Decimal(0))
+    for fund, amount in values.items():
+        if not fund.principal and fund.region not in (None, "korea"):
+            sums[side(fund.hedge)] += amount * 100 / total
+    foreign = sum(sums.values(), Decimal(0))
+    low = sums["hedged"] * 100 / foreign if foreign else Decimal(0)
+    high = (sums["hedged"] + sums["unknown"]) * 100 / foreign if foreign else Decimal(0)
+    status = "INFO"
+    if target is not None and tolerance is not None:
+        lower, upper = target - tolerance, target + tolerance
+        status = ("WITHIN_REFERENCE" if lower <= low and high <= upper else
+                  "OUTSIDE_REFERENCE" if high < lower or low > upper else "UNCERTAIN")
+    return {"foreignWeight": foreign, **sums, "hedgedShareMin": low, "hedgedShareMax": high,
+            "reference": None if target is None else {"hedgedSharePct": target, "tolerancePct": tolerance},
+            "status": status,
+            "note": "참고 목표. 판정(verdict)과 무관하며 펀드 선택은 보수·분산·지수형을 먼저 본다"}
 
 
 def largest_remainder(amounts: dict[str, Decimal], units: int = 100) -> dict[str, int]:
@@ -360,6 +389,11 @@ def human(result: dict) -> None:
                   f'{row["basis"]} | {row["hedge"]} | {single["severity"]}')
         if result["confirmationFunds"]:
             print("포털 확인 대상:", ", ".join(result["confirmationFunds"]))
+    if "hedgeMix" in result:
+        mix = result["hedgeMix"]
+        print(f'환헤지(참고, 판정 무관) {mix["status"]}: 해외 {json_default(mix["foreignWeight"])}% 중 '
+              f'H {json_default(mix["hedged"])} / UH {json_default(mix["unhedged"])} / 미상 {json_default(mix["unknown"])}, '
+              f'H 몫 {mix["hedgedShareMin"]:.2f}~{mix["hedgedShareMax"]:.2f}%')
     if "sells" in result:
         print("매도: 상품 | 매도금액(원) | 정확 비율(%) | 내림% / 오차(원) | 올림% / 오차(원)")
         for r in result["sells"]:
@@ -392,6 +426,8 @@ def main(argv: list[str] | None = None) -> int:
     checker = commands.add_parser("check", help="목표 배분 또는 평가액 변동 보유분 검사")
     checker.add_argument("--allocation", type=Path, required=True)
     checker.add_argument("--mode", choices=("proposal", "holdings"), default="proposal")
+    checker.add_argument("--hedge-target", type=Decimal, help="해외 펀드 중 환헤지 참고 목표(%%)")
+    checker.add_argument("--hedge-tolerance", type=Decimal, help="참고 목표 허용 오차(%%p)")
     converter = commands.add_parser("portal", help="SEMA 매도·매수·부담금 환산")
     converter.add_argument("--holdings", type=Path, required=True)
     converter.add_argument("--target", type=Path, required=True)
@@ -405,7 +441,9 @@ def main(argv: list[str] | None = None) -> int:
         config = mapping(load_json(Path(__file__).with_name("dc_limits_config.json")), "설정")
         catalog = Catalog(args.funds_dir)
         if args.command == "check":
-            result = check(positions(load_json(args.allocation), catalog, "weight"), config, args.mode)
+            weights = positions(load_json(args.allocation), catalog, "weight")
+            result = check(weights, config, args.mode)
+            result["hedgeMix"] = hedge_mix(weights, args.hedge_target, args.hedge_tolerance)
         else:
             result = portal(
                 positions(load_json(args.holdings), catalog, "evalAmount"),

@@ -196,7 +196,7 @@
     "needsConfirmation": false,
     "typeTag": "주식",
     "assetClass": "equity",
-    "region": "korea",
+    "region": "us",
     "themes": [
       "semiconductor",
       "index"
@@ -265,7 +265,7 @@
     "needsConfirmation": false,
     "typeTag": "주식",
     "assetClass": "equity",
-    "region": "korea",
+    "region": "us",
     "themes": [
       "semiconductor",
       "index"
@@ -1394,7 +1394,7 @@
     "needsConfirmation": false,
     "typeTag": "주식-재간접형",
     "assetClass": "equity",
-    "region": "korea",
+    "region": "global",
     "themes": [
       "gold"
     ],
@@ -2046,7 +2046,7 @@
     "needsConfirmation": false,
     "typeTag": "주식-재간접형",
     "assetClass": "equity",
-    "region": "korea",
+    "region": "europe",
     "themes": [
       "general"
     ],

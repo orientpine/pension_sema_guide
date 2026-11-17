@@ -6,6 +6,8 @@
     {"fundCode": "S", "name": "확정채권"},
     {"fundCode": "U", "name": "미확인"},
     {"fundCode": "OLD", "name": "구분류채권"},
-    {"fundCode": "OLDR", "name": "구분류주식"}
+    {"fundCode": "OLDR", "name": "구분류주식"},
+    {"fundCode": "EU", "name": "해외지수미상"},
+    {"fundCode": "KR", "name": "국내지수"}
   ]
 }

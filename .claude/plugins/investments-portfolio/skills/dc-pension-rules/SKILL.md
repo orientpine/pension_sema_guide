@@ -57,7 +57,7 @@ DC형 자산은 다음 **세 가지 상태**로 구분한다. 이 구분이 70% 
 
 70% 한도는 **비면제 위험자산 비중(nonExemptRiskWeight)** 기준으로 판정한다. 적격TDF는 분자에서 제외하되 분모(총 포트폴리오)에는 포함한다.
 
-> **계산은 스크립트로만 한다**: `python3 .claude/plugins/investments-portfolio/skills/dc-pension-rules/scripts/dc_limits.py check --allocation <배분.json> --json` (보유분 점검은 `--mode holdings`, 포털 환산은 `portal`). 에이전트가 비중을 직접 더해 판정하지 않는다. 경계(70% 이하 통과, 초과 차단)는 같은 폴더 `dc_limits_config.json` 한 곳에 있고, SEMA 포털이 정확히 70%를 통과시킨다는 소유자 화면 확인을 그 파일에 출처로 적었다. 판정 값: PASS / PASS_PENDING_CONFIRMATION(`needsConfirmation` 비위험 펀드를 위험으로 보면 초과 — 포털 표시 확인 전 확정 금지) / FAIL / ERROR / MARKET_DRIFT_OVER_LIMIT(감독규정 제13조② 시가 변동 초과, 위반 아님).
+> **계산은 스크립트로만 한다**: `python3 .claude/plugins/investments-portfolio/skills/dc-pension-rules/scripts/dc_limits.py check --allocation <배분.json> --json` (보유분 점검은 `--mode holdings`, 포털 환산은 `portal`). `check`의 `hedgeMix`는 해외(region≠korea) 펀드의 H/UH/미상 비중과 H 몫 범위(미상 전부 UH~전부 H)를 낸다. `--hedge-target <H%> --hedge-tolerance <%p>`를 주면 참고 목표와 비교해 `WITHIN_REFERENCE`/`UNCERTAIN`/`OUTSIDE_REFERENCE`를 적지만 **판정(verdict)에는 영향이 없다**(fund-selection-criteria 7.0). 에이전트가 비중을 직접 더해 판정하지 않는다. 경계(70% 이하 통과, 초과 차단)는 같은 폴더 `dc_limits_config.json` 한 곳에 있고, SEMA 포털이 정확히 70%를 통과시킨다는 소유자 화면 확인을 그 파일에 출처로 적었다. 판정 값: PASS / PASS_PENDING_CONFIRMATION(`needsConfirmation` 비위험 펀드를 위험으로 보면 초과 — 포털 표시 확인 전 확정 금지) / FAIL / ERROR / MARKET_DRIFT_OVER_LIMIT(감독규정 제13조② 시가 변동 초과, 위반 아님).
 
 ```
 nonExemptRiskWeight    = Σ weight(riskStatus∈{risk, unverified} AND NOT 적격TDF) / total  ≤ 70%

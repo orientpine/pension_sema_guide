@@ -5,6 +5,8 @@
 """
 import json
 
+import pytest
+
 import classify_funds
 
 GOLD_MINER_UH = "iM에셋월드골드증권자투자신탁(주식-재간접형)(UH)(C-Rpe)"
@@ -75,3 +77,13 @@ def test_r28_high_yield_bond_mixed_stays_in_limit_as_unverified(tmp_path):
     out = _classify(tmp_path)
     assert out[BOND_MIXED_HIGH_YIELD]["riskAsset"] is True
     assert out[BOND_MIXED_HIGH_YIELD].get("riskStatus") == "unverified"
+
+
+@pytest.mark.parametrize("name,region", [
+    ("유리필라델피아반도체인덱스증권자투자신탁UH[주식]ClassC-P1e", "us"),
+    ("베어링독일증권자투자신탁[H](주식-재간접형)ClassC-P2e", "europe"),
+    ("미래에셋연금선진시장증권자투자신탁 1(주식-재간접형)종류C-P2e", "global"),
+    ("삼성퇴직연금KOSPI200증권자투자신탁 1[주식]_Ce", "korea"),
+])
+def test_region_foreign_names_are_not_defaulted_to_korea(name, region):
+    assert classify_funds.extract_region(name) == region

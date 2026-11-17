@@ -134,17 +134,17 @@ def extract_region(fund_name: str) -> str:
         str: 지역 코드
     """
     region_patterns = [
-        (r"미국|USA|S&P|나스닥|Nasdaq", "us"),
+        (r"미국|USA|S&P|나스닥|Nasdaq|필라델피아", "us"),
         (r"차이나|중국|China", "china"),
         (r"인디아|인도|India", "india"),
         (r"일본|Japan|재팬", "japan"),
-        (r"유럽|Europe|유로", "europe"),
+        (r"유럽|Europe|유로|독일", "europe"),
         (r"베트남|Vietnam", "vietnam"),
         (r"아세안|ASEAN", "asean"),
         (r"아시아|Asia", "asia"),
         (r"브라질|Brazil", "brazil"),
         (r"이머징|Emerging", "emerging"),
-        (r"글로벌|Global|월드|World", "global"),
+        (r"글로벌|Global|월드|World|선진", "global"),
         (r"코리아|한국|KOSPI|KRX|코스닥", "korea"),
     ]
 
