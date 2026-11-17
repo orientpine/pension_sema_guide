@@ -232,14 +232,75 @@
       "effectiveDate": "2014-01-01",
       "sunsetDate": "2026-12-31",
       "verificationStatus": "seed",
-      "lastVerifiedAt": "2026-11-16T21:45:52.665+09:00",
+      "lastVerifiedAt": "2026-11-17T14:29:08.894+09:00",
       "refreshStatus": "ok",
       "proposed": null,
       "evidence": [
-        {"sourceUrl":"https://taxlaw.nts.go.kr/법령/소득세법/제59조의3","sourceTier":"law-text","original_text":"국세 기준 연금계좌 세액공제율 12%에 지방소득세 상당 10%를 더한 체감 공제율은 13.2%로 안내된다.","조문":"소득세법 제59조의3 제1항","시행일":"2014-01-01","collectedAt":"2026-07-01T00:00:00+09:00"},
-        {"sourceUrl":"https://law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1030454707","sourceTier":"law-primary-anchor","original_text":"100분의 12[해당 과세기간에 종합소득과세표준을 계산할 때 합산하는 종합소득금액이 4천 500만원 이하(근로소득만 있는 경우에는 총급여액 5천 500만원 이하)인 거주자에 대해서는 100분의 15]","조문":"소득세법 제59조의3 제1항","시행일":"2026-07-01","collectedAt":"2026-11-16T21:45:52.665+09:00"},
-        {"sourceUrl":"https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1021964939","sourceTier":"law-primary-anchor","original_text":"그 공제ㆍ감면되는 금액(「조세특례제한법」 제127조부터 제129조까지, 제132조 및 제133조가 적용되는 경우에는 이를 적용한 최종 금액을 말한다)의 100분의 10에 해당하는 개인지방소득세를 공제ㆍ감면한다.","조문":"지방세특례제한법 제167조의2 제1항","시행일":"2026-06-02","collectedAt":"2026-11-16T21:45:52.665+09:00"},
-        {"sourceUrl":"https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1021964939","sourceTier":"law-primary-anchor","original_text":"이 조 제1항 및 제2항은 2026년 12월 31일까지 적용함","조문":"지방세특례제한법 제167조의2 법률 제12955호 부칙 제2조 적용기한","시행일":"2026-06-02","collectedAt":"2026-11-16T21:45:52.665+09:00"}
+        {
+          "sourceUrl": "https://taxlaw.nts.go.kr/법령/소득세법/제59조의3",
+          "sourceTier": "law-text",
+          "original_text": "국세 기준 연금계좌 세액공제율 12%에 지방소득세 상당 10%를 더한 체감 공제율은 13.2%로 안내된다.",
+          "조문": "소득세법 제59조의3 제1항",
+          "시행일": "2014-01-01",
+          "collectedAt": "2026-07-01T00:00:00+09:00"
+        },
+        {
+          "sourceUrl": "https://law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1030454707",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "100분의 12[해당 과세기간에 종합소득과세표준을 계산할 때 합산하는 종합소득금액이 4천 500만원 이하(근로소득만 있는 경우에는 총급여액 5천 500만원 이하)인 거주자에 대해서는 100분의 15]",
+          "조문": "소득세법 제59조의3 제1항",
+          "시행일": "2026-07-01",
+          "collectedAt": "2026-11-16T21:45:52.665+09:00"
+        },
+        {
+          "sourceUrl": "https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1021964939",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "그 공제ㆍ감면되는 금액(「조세특례제한법」 제127조부터 제129조까지, 제132조 및 제133조가 적용되는 경우에는 이를 적용한 최종 금액을 말한다)의 100분의 10에 해당하는 개인지방소득세를 공제ㆍ감면한다.",
+          "조문": "지방세특례제한법 제167조의2 제1항",
+          "시행일": "2026-06-02",
+          "collectedAt": "2026-11-16T21:45:52.665+09:00"
+        },
+        {
+          "sourceUrl": "https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1021964939",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "이 조 제1항 및 제2항은 2026년 12월 31일까지 적용함",
+          "조문": "지방세특례제한법 제167조의2 법률 제12955호 부칙 제2조 적용기한",
+          "시행일": "2026-06-02",
+          "collectedAt": "2026-11-16T21:45:52.665+09:00"
+        },
+        {
+          "sourceUrl": "https://law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1030454707",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "100분의 12[해당 과세기간에 종합소득과세표준을 계산할 때 합산하는 종합소득금액이 4천 500만원 이하(근로소득만 있는 경우에는 총급여액 5천 500만원 이하)인 거주자에 대해서는 100분의 15]",
+          "조문": "소득세법 제59조의3 제1항",
+          "시행일": "2026-07-01",
+          "collectedAt": "2026-11-17T14:29:08.894+09:00"
+        },
+        {
+          "sourceUrl": "https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1021964939",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "그 공제ㆍ감면되는 금액(「조세특례제한법」 제127조부터 제129조까지, 제132조 및 제133조가 적용되는 경우에는 이를 적용한 최종 금액을 말한다)의 100분의 10에 해당하는 개인지방소득세를 공제ㆍ감면한다.",
+          "조문": "지방세특례제한법 제167조의2 제1항",
+          "시행일": "2026-06-02",
+          "collectedAt": "2026-11-17T14:29:08.894+09:00"
+        },
+        {
+          "sourceUrl": "https://law.go.kr/lsLinkProc.do?joNo=009200000&lsNm=지방세법&mode=11",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "제92조(세율) ①거주자의 종합소득에 대한 개인지방소득세의 표준세율은 다음 표와 같다.\n과세표준 | 세율\n1천400만원 이하 | 과세표준의 1천분의 6",
+          "조문": "지방세법 제92조 제1항",
+          "시행일": "2026-01-01",
+          "collectedAt": "2026-11-17T14:29:08.894+09:00",
+          "note": "조문 페이지 시행 표시는 2026-01-01, 법률 제21308호. 표 첫 행은 본문 연결 이미지 flSeq=125883797를 직접 열어 전사. 공제액 10%의 직접 근거는 지방세특례제한법 제167조의2이며 기본세율표로 공제율을 추론하지 않음."
+        },
+        {
+          "sourceUrl": "https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1021964939",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "이 조 제1항 및 제2항은 2026년 12월 31일까지 적용함",
+          "조문": "지방세특례제한법 제167조의2 적용기한 주석(법률 제12955호 부칙 제2조)",
+          "시행일": "2026-06-02",
+          "collectedAt": "2026-11-17T14:29:08.894+09:00"
+        }
       ],
       "history": [
         {
@@ -258,6 +319,21 @@
             "https://law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1030454707",
             "https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1021964939"
           ]
+        },
+        {
+          "date": "2026-11-17",
+          "action": "refreshed_ok",
+          "note": "현행 공식 본문과 시행일 직접 재확인. EXACT 일치: 12 + 12 × 10/100 = 13.2. 값과 기존 검증등급은 tax-law-updater 규칙에 따라 유지. 독립 공식출처 3개로 검증등급 승격한 것이 아니므로 seed/unverified에 따른 확정 계산 보류 유지.",
+          "oldValue": 13.2,
+          "oldVerificationStatus": "seed",
+          "oldRefreshStatus": "ok",
+          "oldLastVerifiedAt": "2026-11-16T21:45:52.665+09:00",
+          "evidenceUrls": [
+            "https://law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1030454707",
+            "https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1021964939",
+            "https://law.go.kr/lsLinkProc.do?joNo=009200000&lsNm=지방세법&mode=11",
+            "https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1021964939"
+          ]
         }
       ]
     },
@@ -269,14 +345,75 @@
       "effectiveDate": "2014-01-01",
       "sunsetDate": "2026-12-31",
       "verificationStatus": "seed",
-      "lastVerifiedAt": "2026-11-16T21:45:52.665+09:00",
+      "lastVerifiedAt": "2026-11-17T14:29:08.894+09:00",
       "refreshStatus": "ok",
       "proposed": null,
       "evidence": [
-        {"sourceUrl":"https://taxlaw.nts.go.kr/법령/소득세법/제59조의3","sourceTier":"law-text","original_text":"국세 기준 연금계좌 세액공제율 15%에 지방소득세 상당 10%를 더한 체감 공제율은 16.5%로 안내된다.","조문":"소득세법 제59조의3 제1항","시행일":"2014-01-01","collectedAt":"2026-07-01T00:00:00+09:00"},
-        {"sourceUrl":"https://law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1030454707","sourceTier":"law-primary-anchor","original_text":"100분의 12[해당 과세기간에 종합소득과세표준을 계산할 때 합산하는 종합소득금액이 4천 500만원 이하(근로소득만 있는 경우에는 총급여액 5천 500만원 이하)인 거주자에 대해서는 100분의 15]","조문":"소득세법 제59조의3 제1항","시행일":"2026-07-01","collectedAt":"2026-11-16T21:45:52.665+09:00"},
-        {"sourceUrl":"https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1021964939","sourceTier":"law-primary-anchor","original_text":"그 공제ㆍ감면되는 금액(「조세특례제한법」 제127조부터 제129조까지, 제132조 및 제133조가 적용되는 경우에는 이를 적용한 최종 금액을 말한다)의 100분의 10에 해당하는 개인지방소득세를 공제ㆍ감면한다.","조문":"지방세특례제한법 제167조의2 제1항","시행일":"2026-06-02","collectedAt":"2026-11-16T21:45:52.665+09:00"},
-        {"sourceUrl":"https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1021964939","sourceTier":"law-primary-anchor","original_text":"이 조 제1항 및 제2항은 2026년 12월 31일까지 적용함","조문":"지방세특례제한법 제167조의2 법률 제12955호 부칙 제2조 적용기한","시행일":"2026-06-02","collectedAt":"2026-11-16T21:45:52.665+09:00"}
+        {
+          "sourceUrl": "https://taxlaw.nts.go.kr/법령/소득세법/제59조의3",
+          "sourceTier": "law-text",
+          "original_text": "국세 기준 연금계좌 세액공제율 15%에 지방소득세 상당 10%를 더한 체감 공제율은 16.5%로 안내된다.",
+          "조문": "소득세법 제59조의3 제1항",
+          "시행일": "2014-01-01",
+          "collectedAt": "2026-07-01T00:00:00+09:00"
+        },
+        {
+          "sourceUrl": "https://law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1030454707",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "100분의 12[해당 과세기간에 종합소득과세표준을 계산할 때 합산하는 종합소득금액이 4천 500만원 이하(근로소득만 있는 경우에는 총급여액 5천 500만원 이하)인 거주자에 대해서는 100분의 15]",
+          "조문": "소득세법 제59조의3 제1항",
+          "시행일": "2026-07-01",
+          "collectedAt": "2026-11-16T21:45:52.665+09:00"
+        },
+        {
+          "sourceUrl": "https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1021964939",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "그 공제ㆍ감면되는 금액(「조세특례제한법」 제127조부터 제129조까지, 제132조 및 제133조가 적용되는 경우에는 이를 적용한 최종 금액을 말한다)의 100분의 10에 해당하는 개인지방소득세를 공제ㆍ감면한다.",
+          "조문": "지방세특례제한법 제167조의2 제1항",
+          "시행일": "2026-06-02",
+          "collectedAt": "2026-11-16T21:45:52.665+09:00"
+        },
+        {
+          "sourceUrl": "https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1021964939",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "이 조 제1항 및 제2항은 2026년 12월 31일까지 적용함",
+          "조문": "지방세특례제한법 제167조의2 법률 제12955호 부칙 제2조 적용기한",
+          "시행일": "2026-06-02",
+          "collectedAt": "2026-11-16T21:45:52.665+09:00"
+        },
+        {
+          "sourceUrl": "https://law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1030454707",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "100분의 12[해당 과세기간에 종합소득과세표준을 계산할 때 합산하는 종합소득금액이 4천 500만원 이하(근로소득만 있는 경우에는 총급여액 5천 500만원 이하)인 거주자에 대해서는 100분의 15]",
+          "조문": "소득세법 제59조의3 제1항",
+          "시행일": "2026-07-01",
+          "collectedAt": "2026-11-17T14:29:08.894+09:00"
+        },
+        {
+          "sourceUrl": "https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1021964939",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "그 공제ㆍ감면되는 금액(「조세특례제한법」 제127조부터 제129조까지, 제132조 및 제133조가 적용되는 경우에는 이를 적용한 최종 금액을 말한다)의 100분의 10에 해당하는 개인지방소득세를 공제ㆍ감면한다.",
+          "조문": "지방세특례제한법 제167조의2 제1항",
+          "시행일": "2026-06-02",
+          "collectedAt": "2026-11-17T14:29:08.894+09:00"
+        },
+        {
+          "sourceUrl": "https://law.go.kr/lsLinkProc.do?joNo=009200000&lsNm=지방세법&mode=11",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "제92조(세율) ①거주자의 종합소득에 대한 개인지방소득세의 표준세율은 다음 표와 같다.\n과세표준 | 세율\n1천400만원 이하 | 과세표준의 1천분의 6",
+          "조문": "지방세법 제92조 제1항",
+          "시행일": "2026-01-01",
+          "collectedAt": "2026-11-17T14:29:08.894+09:00",
+          "note": "조문 페이지 시행 표시는 2026-01-01, 법률 제21308호. 표 첫 행은 본문 연결 이미지 flSeq=125883797를 직접 열어 전사. 공제액 10%의 직접 근거는 지방세특례제한법 제167조의2이며 기본세율표로 공제율을 추론하지 않음."
+        },
+        {
+          "sourceUrl": "https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1021964939",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "이 조 제1항 및 제2항은 2026년 12월 31일까지 적용함",
+          "조문": "지방세특례제한법 제167조의2 적용기한 주석(법률 제12955호 부칙 제2조)",
+          "시행일": "2026-06-02",
+          "collectedAt": "2026-11-17T14:29:08.894+09:00"
+        }
       ],
       "history": [
         {
@@ -293,6 +430,21 @@
           "newSunsetDate": "2026-12-31",
           "evidenceUrls": [
             "https://law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1030454707",
+            "https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1021964939"
+          ]
+        },
+        {
+          "date": "2026-11-17",
+          "action": "refreshed_ok",
+          "note": "현행 공식 본문과 시행일 직접 재확인. EXACT 일치: 15 + 15 × 10/100 = 16.5. 값과 기존 검증등급은 tax-law-updater 규칙에 따라 유지. 독립 공식출처 3개로 검증등급 승격한 것이 아니므로 seed/unverified에 따른 확정 계산 보류 유지.",
+          "oldValue": 16.5,
+          "oldVerificationStatus": "seed",
+          "oldRefreshStatus": "ok",
+          "oldLastVerifiedAt": "2026-11-16T21:45:52.665+09:00",
+          "evidenceUrls": [
+            "https://law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1030454707",
+            "https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1021964939",
+            "https://law.go.kr/lsLinkProc.do?joNo=009200000&lsNm=지방세법&mode=11",
             "https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1021964939"
           ]
         }
@@ -487,14 +639,61 @@
       "effectiveDate": "2013-01-01",
       "sunsetDate": null,
       "verificationStatus": "unverified",
-      "lastVerifiedAt": "2026-11-16T21:45:52.665+09:00",
+      "lastVerifiedAt": "2026-11-17T14:29:08.894+09:00",
       "refreshStatus": "ok",
       "proposed": null,
       "evidence": [
-        {"sourceUrl":"https://taxlaw.nts.go.kr/","sourceTier":"law-text","original_text":"연금수령 시 70세 미만 지방세 포함 5.5%로 안내되는 자료가 있으나 현행 law.go.kr 조문 직접 앵커는 미확인이다.","조문":"소득세법 제20조의3","시행일":"2013-01-01","collectedAt":"2026-07-01T00:00:00+09:00"},
-        {"sourceUrl":"https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1029626703","sourceTier":"law-primary-anchor","original_text":"나이(연금수령일 현재) 세율\n70세 미만 100분의 5\n70세 이상 80세 미만 100분의 4\n80세 이상 100분의 3","조문":"소득세법 제129조 제1항 제5호의2 가목","시행일":"2026-07-01","collectedAt":"2026-11-16T21:45:52.665+09:00","note":"법령 세율표 이미지 대체텍스트 원문."},
-        {"sourceUrl":"https://law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1031176375","sourceTier":"law-primary-anchor","original_text":"100분의 10에 해당하는 금액을 소득세 원천징수와 동시에 개인지방소득세로 특별징수하여야 한다.","조문":"지방세법 제103조의13 제1항","시행일":"2026-07-01","collectedAt":"2026-11-16T21:45:52.665+09:00"},
-        {"sourceUrl":"https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?cntntsId=7888&mi=2312","sourceTier":"corroborating","original_text":"70세 미만 | 5%","조문":"국세청 사적연금 연령별 세율","시행일":"2013-01-01","collectedAt":"2026-11-16T21:45:52.665+09:00","note":"표의 관련 셀 전사. 국세기준이며 지방세 포함값은 별도 산출."}
+        {
+          "sourceUrl": "https://taxlaw.nts.go.kr/",
+          "sourceTier": "law-text",
+          "original_text": "연금수령 시 70세 미만 지방세 포함 5.5%로 안내되는 자료가 있으나 현행 law.go.kr 조문 직접 앵커는 미확인이다.",
+          "조문": "소득세법 제20조의3",
+          "시행일": "2013-01-01",
+          "collectedAt": "2026-07-01T00:00:00+09:00"
+        },
+        {
+          "sourceUrl": "https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1029626703",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "나이(연금수령일 현재) 세율\n70세 미만 100분의 5\n70세 이상 80세 미만 100분의 4\n80세 이상 100분의 3",
+          "조문": "소득세법 제129조 제1항 제5호의2 가목",
+          "시행일": "2026-07-01",
+          "collectedAt": "2026-11-16T21:45:52.665+09:00",
+          "note": "법령 세율표 이미지 대체텍스트 원문."
+        },
+        {
+          "sourceUrl": "https://law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1031176375",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "100분의 10에 해당하는 금액을 소득세 원천징수와 동시에 개인지방소득세로 특별징수하여야 한다.",
+          "조문": "지방세법 제103조의13 제1항",
+          "시행일": "2026-07-01",
+          "collectedAt": "2026-11-16T21:45:52.665+09:00"
+        },
+        {
+          "sourceUrl": "https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?cntntsId=7888&mi=2312",
+          "sourceTier": "corroborating",
+          "original_text": "70세 미만 | 5%",
+          "조문": "국세청 사적연금 연령별 세율",
+          "시행일": "2013-01-01",
+          "collectedAt": "2026-11-16T21:45:52.665+09:00",
+          "note": "표의 관련 셀 전사. 국세기준이며 지방세 포함값은 별도 산출."
+        },
+        {
+          "sourceUrl": "https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1019373323",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "나이(연금수령일 현재) 세율\n70세 미만 100분의 5\n70세 이상 80세 미만 100분의 4\n80세 이상 100분의 3",
+          "조문": "소득세법 제129조 제1항 제5호의2 가목",
+          "시행일": "2026-07-01",
+          "collectedAt": "2026-11-17T14:29:08.894+09:00",
+          "note": "본문 세율표 이미지 대체텍스트 원문. 각 목의 요건을 동시에 충족하면 낮은 세율 적용."
+        },
+        {
+          "sourceUrl": "https://law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1031176375",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "원천징수하는 소득세(「조세특례제한법」 및 다른 법률에 따라 조세감면 또는 중과세 등의 조세특례가 적용되는 경우에는 이를 적용한 소득세)의 100분의 10에 해당하는 금액을 소득세 원천징수와 동시에 개인지방소득세로 특별징수하여야 한다.",
+          "조문": "지방세법 제103조의13 제1항",
+          "시행일": "2026-07-01",
+          "collectedAt": "2026-11-17T14:29:08.894+09:00"
+        }
       ],
       "history": [
         {
@@ -512,6 +711,19 @@
             "https://law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1031176375",
             "https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?cntntsId=7888&mi=2312"
           ]
+        },
+        {
+          "date": "2026-11-17",
+          "action": "refreshed_ok",
+          "note": "현행 공식 본문과 시행일 직접 재확인. EXACT 일치: 5 + 5 × 10/100 = 5.5. 값과 기존 검증등급은 tax-law-updater 규칙에 따라 유지. 독립 공식출처 3개로 검증등급 승격한 것이 아니므로 seed/unverified에 따른 확정 계산 보류 유지.",
+          "oldValue": 5.5,
+          "oldVerificationStatus": "unverified",
+          "oldRefreshStatus": "ok",
+          "oldLastVerifiedAt": "2026-11-16T21:45:52.665+09:00",
+          "evidenceUrls": [
+            "https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1019373323",
+            "https://law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1031176375"
+          ]
         }
       ]
     },
@@ -523,14 +735,61 @@
       "effectiveDate": "2013-01-01",
       "sunsetDate": null,
       "verificationStatus": "unverified",
-      "lastVerifiedAt": "2026-11-16T21:45:52.665+09:00",
+      "lastVerifiedAt": "2026-11-17T14:29:08.894+09:00",
       "refreshStatus": "ok",
       "proposed": null,
       "evidence": [
-        {"sourceUrl":"https://taxlaw.nts.go.kr/","sourceTier":"law-text","original_text":"연금수령 시 70세 이상 80세 미만 지방세 포함 4.4%로 안내되는 자료가 있으나 현행 law.go.kr 조문 직접 앵커는 미확인이다.","조문":"소득세법 제20조의3","시행일":"2013-01-01","collectedAt":"2026-07-01T00:00:00+09:00"},
-        {"sourceUrl":"https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1029626703","sourceTier":"law-primary-anchor","original_text":"나이(연금수령일 현재) 세율\n70세 미만 100분의 5\n70세 이상 80세 미만 100분의 4\n80세 이상 100분의 3","조문":"소득세법 제129조 제1항 제5호의2 가목","시행일":"2026-07-01","collectedAt":"2026-11-16T21:45:52.665+09:00","note":"법령 세율표 이미지 대체텍스트 원문."},
-        {"sourceUrl":"https://law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1031176375","sourceTier":"law-primary-anchor","original_text":"100분의 10에 해당하는 금액을 소득세 원천징수와 동시에 개인지방소득세로 특별징수하여야 한다.","조문":"지방세법 제103조의13 제1항","시행일":"2026-07-01","collectedAt":"2026-11-16T21:45:52.665+09:00"},
-        {"sourceUrl":"https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?cntntsId=7888&mi=2312","sourceTier":"corroborating","original_text":"70세 이상 80세 미만 | 4%","조문":"국세청 사적연금 연령별 세율","시행일":"2013-01-01","collectedAt":"2026-11-16T21:45:52.665+09:00","note":"표의 관련 셀 전사. 국세기준이며 지방세 포함값은 별도 산출."}
+        {
+          "sourceUrl": "https://taxlaw.nts.go.kr/",
+          "sourceTier": "law-text",
+          "original_text": "연금수령 시 70세 이상 80세 미만 지방세 포함 4.4%로 안내되는 자료가 있으나 현행 law.go.kr 조문 직접 앵커는 미확인이다.",
+          "조문": "소득세법 제20조의3",
+          "시행일": "2013-01-01",
+          "collectedAt": "2026-07-01T00:00:00+09:00"
+        },
+        {
+          "sourceUrl": "https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1029626703",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "나이(연금수령일 현재) 세율\n70세 미만 100분의 5\n70세 이상 80세 미만 100분의 4\n80세 이상 100분의 3",
+          "조문": "소득세법 제129조 제1항 제5호의2 가목",
+          "시행일": "2026-07-01",
+          "collectedAt": "2026-11-16T21:45:52.665+09:00",
+          "note": "법령 세율표 이미지 대체텍스트 원문."
+        },
+        {
+          "sourceUrl": "https://law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1031176375",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "100분의 10에 해당하는 금액을 소득세 원천징수와 동시에 개인지방소득세로 특별징수하여야 한다.",
+          "조문": "지방세법 제103조의13 제1항",
+          "시행일": "2026-07-01",
+          "collectedAt": "2026-11-16T21:45:52.665+09:00"
+        },
+        {
+          "sourceUrl": "https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?cntntsId=7888&mi=2312",
+          "sourceTier": "corroborating",
+          "original_text": "70세 이상 80세 미만 | 4%",
+          "조문": "국세청 사적연금 연령별 세율",
+          "시행일": "2013-01-01",
+          "collectedAt": "2026-11-16T21:45:52.665+09:00",
+          "note": "표의 관련 셀 전사. 국세기준이며 지방세 포함값은 별도 산출."
+        },
+        {
+          "sourceUrl": "https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1019373323",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "나이(연금수령일 현재) 세율\n70세 미만 100분의 5\n70세 이상 80세 미만 100분의 4\n80세 이상 100분의 3",
+          "조문": "소득세법 제129조 제1항 제5호의2 가목",
+          "시행일": "2026-07-01",
+          "collectedAt": "2026-11-17T14:29:08.894+09:00",
+          "note": "본문 세율표 이미지 대체텍스트 원문. 각 목의 요건을 동시에 충족하면 낮은 세율 적용."
+        },
+        {
+          "sourceUrl": "https://law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1031176375",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "원천징수하는 소득세(「조세특례제한법」 및 다른 법률에 따라 조세감면 또는 중과세 등의 조세특례가 적용되는 경우에는 이를 적용한 소득세)의 100분의 10에 해당하는 금액을 소득세 원천징수와 동시에 개인지방소득세로 특별징수하여야 한다.",
+          "조문": "지방세법 제103조의13 제1항",
+          "시행일": "2026-07-01",
+          "collectedAt": "2026-11-17T14:29:08.894+09:00"
+        }
       ],
       "history": [
         {
@@ -548,6 +807,19 @@
             "https://law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1031176375",
             "https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?cntntsId=7888&mi=2312"
           ]
+        },
+        {
+          "date": "2026-11-17",
+          "action": "refreshed_ok",
+          "note": "현행 공식 본문과 시행일 직접 재확인. EXACT 일치: 4 + 4 × 10/100 = 4.4. 값과 기존 검증등급은 tax-law-updater 규칙에 따라 유지. 독립 공식출처 3개로 검증등급 승격한 것이 아니므로 seed/unverified에 따른 확정 계산 보류 유지.",
+          "oldValue": 4.4,
+          "oldVerificationStatus": "unverified",
+          "oldRefreshStatus": "ok",
+          "oldLastVerifiedAt": "2026-11-16T21:45:52.665+09:00",
+          "evidenceUrls": [
+            "https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1019373323",
+            "https://law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1031176375"
+          ]
         }
       ]
     },
@@ -559,14 +831,61 @@
       "effectiveDate": "2013-01-01",
       "sunsetDate": null,
       "verificationStatus": "unverified",
-      "lastVerifiedAt": "2026-11-16T21:45:52.665+09:00",
+      "lastVerifiedAt": "2026-11-17T14:29:08.894+09:00",
       "refreshStatus": "ok",
       "proposed": null,
       "evidence": [
-        {"sourceUrl":"https://taxlaw.nts.go.kr/","sourceTier":"law-text","original_text":"연금수령 시 80세 이상 지방세 포함 3.3%로 안내되는 자료가 있으나 현행 law.go.kr 조문 직접 앵커는 미확인이다.","조문":"소득세법 제20조의3","시행일":"2013-01-01","collectedAt":"2026-07-01T00:00:00+09:00"},
-        {"sourceUrl":"https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1029626703","sourceTier":"law-primary-anchor","original_text":"나이(연금수령일 현재) 세율\n70세 미만 100분의 5\n70세 이상 80세 미만 100분의 4\n80세 이상 100분의 3","조문":"소득세법 제129조 제1항 제5호의2 가목","시행일":"2026-07-01","collectedAt":"2026-11-16T21:45:52.665+09:00","note":"법령 세율표 이미지 대체텍스트 원문."},
-        {"sourceUrl":"https://law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1031176375","sourceTier":"law-primary-anchor","original_text":"100분의 10에 해당하는 금액을 소득세 원천징수와 동시에 개인지방소득세로 특별징수하여야 한다.","조문":"지방세법 제103조의13 제1항","시행일":"2026-07-01","collectedAt":"2026-11-16T21:45:52.665+09:00"},
-        {"sourceUrl":"https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?cntntsId=7888&mi=2312","sourceTier":"corroborating","original_text":"80세 이상 | 3%","조문":"국세청 사적연금 연령별 세율","시행일":"2013-01-01","collectedAt":"2026-11-16T21:45:52.665+09:00","note":"표의 관련 셀 전사. 국세기준이며 지방세 포함값은 별도 산출."}
+        {
+          "sourceUrl": "https://taxlaw.nts.go.kr/",
+          "sourceTier": "law-text",
+          "original_text": "연금수령 시 80세 이상 지방세 포함 3.3%로 안내되는 자료가 있으나 현행 law.go.kr 조문 직접 앵커는 미확인이다.",
+          "조문": "소득세법 제20조의3",
+          "시행일": "2013-01-01",
+          "collectedAt": "2026-07-01T00:00:00+09:00"
+        },
+        {
+          "sourceUrl": "https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1029626703",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "나이(연금수령일 현재) 세율\n70세 미만 100분의 5\n70세 이상 80세 미만 100분의 4\n80세 이상 100분의 3",
+          "조문": "소득세법 제129조 제1항 제5호의2 가목",
+          "시행일": "2026-07-01",
+          "collectedAt": "2026-11-16T21:45:52.665+09:00",
+          "note": "법령 세율표 이미지 대체텍스트 원문."
+        },
+        {
+          "sourceUrl": "https://law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1031176375",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "100분의 10에 해당하는 금액을 소득세 원천징수와 동시에 개인지방소득세로 특별징수하여야 한다.",
+          "조문": "지방세법 제103조의13 제1항",
+          "시행일": "2026-07-01",
+          "collectedAt": "2026-11-16T21:45:52.665+09:00"
+        },
+        {
+          "sourceUrl": "https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?cntntsId=7888&mi=2312",
+          "sourceTier": "corroborating",
+          "original_text": "80세 이상 | 3%",
+          "조문": "국세청 사적연금 연령별 세율",
+          "시행일": "2013-01-01",
+          "collectedAt": "2026-11-16T21:45:52.665+09:00",
+          "note": "표의 관련 셀 전사. 국세기준이며 지방세 포함값은 별도 산출."
+        },
+        {
+          "sourceUrl": "https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1019373323",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "나이(연금수령일 현재) 세율\n70세 미만 100분의 5\n70세 이상 80세 미만 100분의 4\n80세 이상 100분의 3",
+          "조문": "소득세법 제129조 제1항 제5호의2 가목",
+          "시행일": "2026-07-01",
+          "collectedAt": "2026-11-17T14:29:08.894+09:00",
+          "note": "본문 세율표 이미지 대체텍스트 원문. 각 목의 요건을 동시에 충족하면 낮은 세율 적용."
+        },
+        {
+          "sourceUrl": "https://law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1031176375",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "원천징수하는 소득세(「조세특례제한법」 및 다른 법률에 따라 조세감면 또는 중과세 등의 조세특례가 적용되는 경우에는 이를 적용한 소득세)의 100분의 10에 해당하는 금액을 소득세 원천징수와 동시에 개인지방소득세로 특별징수하여야 한다.",
+          "조문": "지방세법 제103조의13 제1항",
+          "시행일": "2026-07-01",
+          "collectedAt": "2026-11-17T14:29:08.894+09:00"
+        }
       ],
       "history": [
         {
@@ -583,6 +902,19 @@
             "https://law.go.kr/LSW/lsLinkCommonInfo.do?lsJoLnkSeq=1029626703",
             "https://law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1031176375",
             "https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?cntntsId=7888&mi=2312"
+          ]
+        },
+        {
+          "date": "2026-11-17",
+          "action": "refreshed_ok",
+          "note": "현행 공식 본문과 시행일 직접 재확인. EXACT 일치: 3 + 3 × 10/100 = 3.3. 값과 기존 검증등급은 tax-law-updater 규칙에 따라 유지. 독립 공식출처 3개로 검증등급 승격한 것이 아니므로 seed/unverified에 따른 확정 계산 보류 유지.",
+          "oldValue": 3.3,
+          "oldVerificationStatus": "unverified",
+          "oldRefreshStatus": "ok",
+          "oldLastVerifiedAt": "2026-11-16T21:45:52.665+09:00",
+          "evidenceUrls": [
+            "https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1019373323",
+            "https://law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1031176375"
           ]
         }
       ]
@@ -1088,12 +1420,43 @@
       "effectiveDate": "2026-10-01",
       "sunsetDate": null,
       "verificationStatus": "seed",
-      "lastVerifiedAt": "2026-11-16T22:03:26.257+09:00",
+      "lastVerifiedAt": "2026-11-17T14:29:08.894+09:00",
       "refreshStatus": "ok",
       "proposed": null,
       "evidence": [
-        {"sourceUrl":"https://law.go.kr/lsLinkProc.do?joNo=011802000&lsNm=소득세법시행령&mode=11","sourceTier":"law-primary-anchor","original_text":"③ 법 제59조의3제3항에서 \"대통령령으로 정하는 방법으로 연금계좌로 납입한 경우\"란 개인종합자산관리계좌의 계약기간이 만료된 날부터 60일 이내에 해당 계좌 잔액의 전부 또는 일부를 연금계좌로 납입한 경우를 말한다.","조문":"소득세법 시행령 제118조의2 제3항","시행일":"2026-10-01","collectedAt":"2026-11-16T22:03:26.257+09:00"},
-        {"sourceUrl":"https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?cntntsId=7885&mi=6605","sourceTier":"corroborating","original_text":"ISA계좌 만기일로부터 60일이내 연금계좌로 납입","조문":"국세청 연금계좌 납입요건","시행일":"2026-10-01","collectedAt":"2026-11-16T22:03:26.257+09:00"}
+        {
+          "sourceUrl": "https://law.go.kr/lsLinkProc.do?joNo=011802000&lsNm=소득세법시행령&mode=11",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "③ 법 제59조의3제3항에서 \"대통령령으로 정하는 방법으로 연금계좌로 납입한 경우\"란 개인종합자산관리계좌의 계약기간이 만료된 날부터 60일 이내에 해당 계좌 잔액의 전부 또는 일부를 연금계좌로 납입한 경우를 말한다.",
+          "조문": "소득세법 시행령 제118조의2 제3항",
+          "시행일": "2026-10-01",
+          "collectedAt": "2026-11-16T22:03:26.257+09:00"
+        },
+        {
+          "sourceUrl": "https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?cntntsId=7885&mi=6605",
+          "sourceTier": "corroborating",
+          "original_text": "ISA계좌 만기일로부터 60일이내 연금계좌로 납입",
+          "조문": "국세청 연금계좌 납입요건",
+          "시행일": "2026-10-01",
+          "collectedAt": "2026-11-16T22:03:26.257+09:00"
+        },
+        {
+          "sourceUrl": "https://law.go.kr/lsLinkProc.do?joNo=011802000&lsNm=소득세법시행령&mode=11",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "③ 법 제59조의3제3항에서 \"대통령령으로 정하는 방법으로 연금계좌로 납입한 경우\"란 개인종합자산관리계좌의 계약기간이 만료된 날부터 60일 이내에 해당 계좌 잔액의 전부 또는 일부를 연금계좌로 납입한 경우를 말한다.",
+          "조문": "소득세법 시행령 제118조의2 제3항",
+          "시행일": "2026-10-01",
+          "collectedAt": "2026-11-17T14:29:08.894+09:00"
+        },
+        {
+          "sourceUrl": "https://www.law.go.kr/LSW/lsLinkProc.do?joNo=009118&lsNm=조세특례제한법&mode=10",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "⑪ 개인종합자산관리계좌의 계좌보유자가 최초로 계약을 체결한 날부터 3년이 되는 날 이후에 「소득세법」 제59조의3제3항에 따라 해당 계좌 잔액의 전부 또는 일부를 연금계좌로 납입한 경우에는 해당 개인종합자산관리계좌의 계약기간이 만료된 것으로 본다.",
+          "조문": "조세특례제한법 제91조의18 제11항",
+          "시행일": "2026-09-18",
+          "collectedAt": "2026-11-17T14:29:08.894+09:00",
+          "note": "ISA 만료 간주 규정의 보충 근거이며 60일의 직접 근거는 소득세법 시행령 제118조의2 제3항."
+        }
       ],
       "history": [
         {
@@ -1105,6 +1468,19 @@
           "evidenceUrls": [
             "https://law.go.kr/lsLinkProc.do?joNo=011802000&lsNm=소득세법시행령&mode=11",
             "https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?cntntsId=7885&mi=6605"
+          ]
+        },
+        {
+          "date": "2026-11-17",
+          "action": "refreshed_ok",
+          "note": "현행 공식 본문과 시행일 직접 재확인. EXACT 일치: 계약기간 만료일부터 60일 이내. 값과 기존 검증등급은 tax-law-updater 규칙에 따라 유지. 독립 공식출처 3개로 검증등급 승격한 것이 아니므로 seed/unverified에 따른 확정 계산 보류 유지.",
+          "oldValue": 60,
+          "oldVerificationStatus": "seed",
+          "oldRefreshStatus": "ok",
+          "oldLastVerifiedAt": "2026-11-16T22:03:26.257+09:00",
+          "evidenceUrls": [
+            "https://law.go.kr/lsLinkProc.do?joNo=011802000&lsNm=소득세법시행령&mode=11",
+            "https://www.law.go.kr/LSW/lsLinkProc.do?joNo=009118&lsNm=조세특례제한법&mode=10"
           ]
         }
       ],
@@ -1158,13 +1534,51 @@
       "effectiveDate": "2026-07-01",
       "sunsetDate": null,
       "verificationStatus": "seed",
-      "lastVerifiedAt": "2026-11-16T22:03:26.257+09:00",
+      "lastVerifiedAt": "2026-11-17T14:29:08.894+09:00",
       "refreshStatus": "ok",
       "proposed": null,
       "evidence": [
-        {"sourceUrl":"https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1019373323","sourceTier":"law-primary-anchor","original_text":"나. 제21조제1항제18호 및 제21호에 따른 기타소득에 대해서는 100분의 15","조문":"소득세법 제129조 제1항 제6호 나목","시행일":"2026-07-01","collectedAt":"2026-11-16T22:03:26.257+09:00"},
-        {"sourceUrl":"https://law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1031176375","sourceTier":"law-primary-anchor","original_text":"원천징수하는 소득세(「조세특례제한법」 및 다른 법률에 따라 조세감면 또는 중과세 등의 조세특례가 적용되는 경우에는 이를 적용한 소득세)의 100분의 10에 해당하는 금액을 소득세 원천징수와 동시에 개인지방소득세로 특별징수하여야 한다.","조문":"지방세법 제103조의13 제1항","시행일":"2026-07-01","collectedAt":"2026-11-16T22:03:26.257+09:00"},
-        {"sourceUrl":"https://easylaw.go.kr/CSP/common/CnpClsMain.laf?ccfNo=3&cciNo=1&cnpClsNo=1&csmSeq=2056&popMenu=ov","sourceTier":"corroborating","original_text":"다만, 연금수령한도를 초과하여 받는 금액은 16.5% 세율(지방소득세 포함)의 기타소득세(분리과세)를 납부해야 합니다","조문":"찾기쉬운 생활법령정보 퇴직연금, 소득세법 제14조 제3항 제8호 나목·제21조 제1항 제21호·제129조 제1항 제6호","시행일":"2026-07-01","collectedAt":"2026-11-16T22:03:26.257+09:00","note":"문장의 괄호 조문 인용 앞까지 발췌. 세액공제받은 납입액·운용수익에 한정."}
+        {
+          "sourceUrl": "https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1019373323",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "나. 제21조제1항제18호 및 제21호에 따른 기타소득에 대해서는 100분의 15",
+          "조문": "소득세법 제129조 제1항 제6호 나목",
+          "시행일": "2026-07-01",
+          "collectedAt": "2026-11-16T22:03:26.257+09:00"
+        },
+        {
+          "sourceUrl": "https://law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1031176375",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "원천징수하는 소득세(「조세특례제한법」 및 다른 법률에 따라 조세감면 또는 중과세 등의 조세특례가 적용되는 경우에는 이를 적용한 소득세)의 100분의 10에 해당하는 금액을 소득세 원천징수와 동시에 개인지방소득세로 특별징수하여야 한다.",
+          "조문": "지방세법 제103조의13 제1항",
+          "시행일": "2026-07-01",
+          "collectedAt": "2026-11-16T22:03:26.257+09:00"
+        },
+        {
+          "sourceUrl": "https://easylaw.go.kr/CSP/common/CnpClsMain.laf?ccfNo=3&cciNo=1&cnpClsNo=1&csmSeq=2056&popMenu=ov",
+          "sourceTier": "corroborating",
+          "original_text": "다만, 연금수령한도를 초과하여 받는 금액은 16.5% 세율(지방소득세 포함)의 기타소득세(분리과세)를 납부해야 합니다",
+          "조문": "찾기쉬운 생활법령정보 퇴직연금, 소득세법 제14조 제3항 제8호 나목·제21조 제1항 제21호·제129조 제1항 제6호",
+          "시행일": "2026-07-01",
+          "collectedAt": "2026-11-16T22:03:26.257+09:00",
+          "note": "문장의 괄호 조문 인용 앞까지 발췌. 세액공제받은 납입액·운용수익에 한정."
+        },
+        {
+          "sourceUrl": "https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1019373323",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "나. 제21조제1항제18호 및 제21호에 따른 기타소득에 대해서는 100분의 15",
+          "조문": "소득세법 제129조 제1항 제6호 나목",
+          "시행일": "2026-07-01",
+          "collectedAt": "2026-11-17T14:29:08.894+09:00"
+        },
+        {
+          "sourceUrl": "https://law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1031176375",
+          "sourceTier": "law-primary-anchor",
+          "original_text": "원천징수하는 소득세(「조세특례제한법」 및 다른 법률에 따라 조세감면 또는 중과세 등의 조세특례가 적용되는 경우에는 이를 적용한 소득세)의 100분의 10에 해당하는 금액을 소득세 원천징수와 동시에 개인지방소득세로 특별징수하여야 한다.",
+          "조문": "지방세법 제103조의13 제1항",
+          "시행일": "2026-07-01",
+          "collectedAt": "2026-11-17T14:29:08.894+09:00"
+        }
       ],
       "history": [
         {
@@ -1177,6 +1591,19 @@
             "https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1019373323",
             "https://law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1031176375",
             "https://easylaw.go.kr/CSP/common/CnpClsMain.laf?ccfNo=3&cciNo=1&cnpClsNo=1&csmSeq=2056&popMenu=ov"
+          ]
+        },
+        {
+          "date": "2026-11-17",
+          "action": "refreshed_ok",
+          "note": "현행 공식 본문과 시행일 직접 재확인. EXACT 일치: 15 + 15 × 10/100 = 16.5. 값과 기존 검증등급은 tax-law-updater 규칙에 따라 유지. 독립 공식출처 3개로 검증등급 승격한 것이 아니므로 seed/unverified에 따른 확정 계산 보류 유지.",
+          "oldValue": 16.5,
+          "oldVerificationStatus": "seed",
+          "oldRefreshStatus": "ok",
+          "oldLastVerifiedAt": "2026-11-16T22:03:26.257+09:00",
+          "evidenceUrls": [
+            "https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1019373323",
+            "https://law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1031176375"
           ]
         }
       ],
