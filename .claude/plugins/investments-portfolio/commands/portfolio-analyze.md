@@ -144,6 +144,14 @@ mkdir -p confidentialData/portfolios/YYYY-MM-DD-{risk_profile}-{SESSION_ID}
 > **개선 배경**: 기존에는 `fund_data.json` 단일 파일만 검사했으나, TDF 선택지(tdf_data/tdf_fees)와
 > 수수료(fund_fees)가 stale하면 잘못된 추천/비용 분석으로 이어질 수 있어 4종 전수 검증으로 강화합니다.
 
+#### 2.3.0 정합성 게이트 신선도 (필수, 가장 먼저)
+
+```bash
+python3 scripts/verify_consistency.py --only freshness
+```
+
+원천 기준일(펀드·TDF 45일), 예금 기준일 30일과 적용기간·가산기간 만료, 세법 파라미터별 확인일을 본다(커밋 때와 같은 규칙). **exit ≠ 0이면 아래 표와 관계없이 🔴 OUTDATED**로 보고 위반 줄을 그대로 보여 주며 사용자 확인 없이 진행하지 않는다. 진행하면 04 요약 맨 위에 만료 항목을 적는다.
+
 #### 2.3.1 검증 대상 파일 (4종 필수)
 
 | 파일 | 기준일 필드 | 임계값 필드 | 기본 임계값 |

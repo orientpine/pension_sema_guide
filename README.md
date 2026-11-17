@@ -135,7 +135,7 @@ python3 "$DC" portal --holdings tests/fixtures/dc_limits/holdings.json \
 
 ### JSON 입력 계약
 
-배분(`check --allocation`, `portal --target`)은 객체 배열입니다. 펀드 참조는 `fundCode` 또는 **정확한** `name`이며 둘 다 주면 일치해야 합니다. 원리금보장 상품은 `kind: "principalGuaranteed"`와 `name`으로 지정합니다. `weight`는 음수 없는 십진수 또는 십진 문자열(단위 %)이며 합계가 정확히 100이어야 합니다. 같은 펀드를 코드와 이름으로 나눠 적어도 합산하여 집중도를 검사합니다.
+배분(`check --allocation`, `portal --target`)은 객체 배열입니다. 펀드 참조는 `fundCode` 또는 **정확한** `name`이며 둘 다 주면 일치해야 합니다. 원리금보장 상품은 `kind: "principalGuaranteed"`와 `name`으로 지정하며, `name`은 `--funds-dir`의 `deposit_rates.json`에 있는 `productName` 또는 `id`여야 합니다(목록에 없거나 펀드명이면 exit 2 — 위험펀드를 예금으로 적어 한도를 피하는 입력 차단). 예시의 `"예금"`은 테스트 픽스처 이름이고, 실제 데이터에서는 `"과학기술인공제회 퇴직연금 운용방법 (1년)"`처럼 씁니다. 포털 환산은 정수 매도(내림·올림)로 입력했을 때 한도를 넘는 방식이 있으면 전체 판정을 FAIL로 내고 `unsafeIntegerSell`에 그 방식을 적습니다. `weight`는 음수 없는 십진수 또는 십진 문자열(단위 %)이며 합계가 정확히 100이어야 합니다. 같은 펀드를 코드와 이름으로 나눠 적어도 합산하여 집중도를 검사합니다.
 
 ```json
 [

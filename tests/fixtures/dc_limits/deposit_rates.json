@@ -1,0 +1,6 @@
+{
+  "_meta": {"version": "2026-10-31"},
+  "rates": [
+    {"id": "dep-1y", "productName": "예금", "type": "원리금보장형운용방법"}
+  ]
+}

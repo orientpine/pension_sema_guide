@@ -149,7 +149,8 @@ def test_portal_sell_math_and_new_target(tmp_path):
     # 내림 33% -> 19,800(-200), 올림 34% -> 20,400(+400).
     # 예금 40,000 -> 30,000: 10,000 매도. 30,000 전액 위험나 신규 매수.
     sell = next(row for row in result["sells"] if row["name"] == "위험가")
-    assert rc == 0
+    # 내림 33% 매도면 위험가가 40.2%가 되어 단일 펀드 한도 위반 -> 전체 판정도 FAIL(입력 금지 방식 표시)
+    assert (rc, result["verdict"], result["unsafeIntegerSell"]) == (1, "FAIL", ["floor"])
     assert Decimal(sell["exactPct"]) == Decimal(100) / 3
     assert (sell["floorPct"], sell["ceilPct"], sell["floorErrorKRW"], sell["ceilErrorKRW"]) == (33, 34, "-200", "400")
     assert result["buys"] == [{"name": "위험나", "shortfall": "30000", "integerPct": 100}]
@@ -157,6 +158,14 @@ def test_portal_sell_math_and_new_target(tmp_path):
     assert result["postTradeCheck"]["verdict"] == "PASS"
     assert all(Decimal(row["errorKRW"]) == 0 for row in result["roundingErrors"])
     assert result["integerSellScenarios"]["floor"]["check"]["verdict"] == "ERROR"
+
+
+@pytest.mark.parametrize("name", ["위험가", "목록에없는예금"])
+def test_check_principal_guaranteed_must_be_listed_deposit(tmp_path, name):
+    rc, result = invoke(tmp_path, "check", allocation=[
+        {"kind": "principalGuaranteed", "name": name, "weight": 100}
+    ])
+    assert (rc, result["verdict"], result["unknownFunds"]) == (2, "ERROR", [name])
 
 
 def test_portal_integer_buy_rounding_is_rechecked(tmp_path):

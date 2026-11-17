@@ -100,6 +100,9 @@ class Catalog:
                     raise InputError(f"{name}: needsConfirmation은 boolean 필요")
                 basis = source.get("riskBasis", "구분류 riskAsset 기준, 법적 분류 확인 필요"
                                    if status != "unverified" else "위험 분류 근거 미확인")
+                if is_tdf and row.get("tdfQualified") is True:
+                    basis = ("적격TDF 면제(감독규정 제11조①9호, 70% 분자 제외): "
+                             + str(row.get("tdfQualifiedBasis", "tdfQualified=true")))
                 self.by_code[code] = Fund(
                     code, code, name, status, text(basis, "riskBasis"),
                     legacy_nonrisk or confirmation,
@@ -108,12 +111,19 @@ class Catalog:
                 )
         for fund in self.by_code.values():
             self.by_name.setdefault(fund.name, []).append(fund)
+        deposits_path = directory / "deposit_rates.json"
+        deposits = (rows(mapping(load_json(deposits_path), "deposit_rates.json").get("rates"), "rates")
+                    if deposits_path.exists() else [])
+        self.principal_names = {str(r[k]) for r in deposits for k in ("productName", "id") if r.get(k)}
 
     def resolve(self, row: dict) -> Fund:
         if row.get("kind") == "principalGuaranteed":
             name = text(row.get("name"), "원리금보장 상품명")
             if row.get("fundCode") is not None:
                 raise InputError("원리금보장 상품은 fundCode 대신 kind와 name으로 지정")
+            if name in self.by_name or name not in self.principal_names:
+                raise InputError(
+                    f"원리금보장 목록(deposit_rates.json productName·id)에 없는 상품: {name}", (name,))
             return Fund("principal:" + name, None, name, "nonRisk",
                         "근로자퇴직급여보장법 시행령 제25조① 원리금보장", False, None,
                         principal=True)
@@ -307,7 +317,8 @@ def portal(holdings: Positions, target: Positions, contributions: object,
             columns[name] = {
                 "allocation": [{**ref(f), "name": f.name, "integerPct": integers[f.name]} for f in weights],
                 "inputCheck": input_check, "check": check(rounded, config)}
-    checks = [target_check, post_check] + [
+    unsafe_rounding = [v for v, s in scenarios.items() if sells and failed(s["check"])]
+    checks = [target_check, post_check] + [s["check"] for s in scenarios.values() if sells] + [
         c[k] for c in columns.values() for k in ("inputCheck", "check")]
     verdict = ("FAIL" if any(failed(c) for c in checks) else
                "PASS_PENDING_CONFIRMATION" if any(c["verdict"] == "PASS_PENDING_CONFIRMATION" for c in checks)
@@ -315,6 +326,9 @@ def portal(holdings: Positions, target: Positions, contributions: object,
     new_funds = [f.name for f in target if f not in holdings and target[f] > 0]
     messages = ["평가금액 고정·수수료 없음 가정. 원 미만 계산값을 유지하며 실제 결제금액·좌수는 포털 확인 필요",
                 "주 시뮬레이션은 정확한 매도비율 기준. 정수 매도는 floor/ceil 결과를 별도 확인"]
+    if unsafe_rounding:
+        messages.append("정수 매도 " + "·".join(unsafe_rounding) + " 입력은 한도 위반 — 그 방식으로 입력하지 말 것 (안전한 방식: "
+                        + ("·".join(v for v in scenarios if v not in unsafe_rounding) or "없음, 목표 비중 조정 필요") + ")")
     if not proceeds:
         messages.append("매도할 금액 없음")
     if new_funds:
@@ -322,6 +336,7 @@ def portal(holdings: Positions, target: Positions, contributions: object,
     return {"verdict": verdict, "totalEvalAmount": total, "targetCheck": target_check,
             "sellProceeds": proceeds, "sells": sells, "buys": buys,
             "newTargetFunds": new_funds, "roundingErrors": errors, "postTradeCheck": post_check,
+            "unsafeIntegerSell": unsafe_rounding,
             "integerSellScenarios": scenarios, "contributions": columns, "messages": messages}
 
 
