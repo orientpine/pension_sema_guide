@@ -48,3 +48,13 @@ def test_index_or_general_labels_are_not_treated_as_sector_concentration() -> No
     sector = fund_score.score(row, {"region": "europe", "themes": ["semiconductor"]}, D("1.0"), 2)
     single = fund_score.score(row, {"region": "vietnam", "themes": ["index"]}, D("1.0"), 2)
     assert broad["parts"]["diversification"] > single["parts"]["diversification"] > sector["parts"]["diversification"]
+
+
+def test_bigger_but_costlier_fund_does_not_beat_a_cheaper_one_above_the_size_floor() -> None:
+    cheap_small = fund_score.score(fund("E유럽인덱스", "0", "10000000"), CLASSIFICATION, D("0.49"), 2)
+    costly_big = fund_score.score(fund("F유럽인덱스", "0", "50000000"), CLASSIFICATION, D("0.69"), 2)
+    assert cheap_small["total"] > costly_big["total"]
+
+
+def test_cost_points_separate_funds_inside_the_old_buckets() -> None:
+    assert fund_score.cost_points(D("1.06")) > fund_score.cost_points(D("1.23"))

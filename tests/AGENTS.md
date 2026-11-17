@@ -21,7 +21,7 @@
 | test_dc_limits.py | `dc_limits.py` 70%·40%·합계 판정과 포털 매도·매수·부담금 3칸 환산, 환헤지 `hedgeMix`(참고 목표, 판정 무관) |
 | test_index_status.py | `index_status.py` 지수 수집 full/partial/none·7일 신선도 |
 | test_claim_status.py | `claim_status.py` 주장 종류별 출처 기준(공식 사실=발표 기관 1차 출처, 재게시·비발표기관·오래된 조회·값 충돌은 실패, 해석은 방향만, 표시 금리=검증 값)과 리더십 `decision_usable` |
-| test_fund_score.py | `fund_score.py` 펀드 점수: 과거 수익률은 점수에 없음(같은 지수면 싼 펀드가 이김, 수익률을 바꿔도 점수 불변), 섹터 테마만 분산 감점 |
+| test_fund_score.py | `fund_score.py` 펀드 점수: 과거 수익률은 점수에 없음(같은 지수면 싼 펀드가 이김, 수익률을 바꿔도 점수 불변), 섹터 테마만 분산 감점, 규모는 청산 위험 문턱만이라 더 크고 비싼 펀드가 싼 펀드를 이기지 못함, 보수는 구간 없이 연속 |
 | test_verify_no_pii.py | `verify_no_pii.sh` 공개 경로의 개인 보유정보 검사 |
 | test_fetch_latest_proposal.py | 상품제안서 게시판 파싱·최신월 선택(오프라인 픽스처) |
 | test_tax_rule_regressions.py | 연금 인출순서·분리과세 선택·퇴직소득 원천징수 적용비율 |
@@ -29,7 +29,7 @@
 
 ## RUN
 
-`python3 -m pytest` (repo root) → 303 passed (2026-11-17 기준, 세법 테스트 포함).
+`python3 -m pytest` (repo root) → 305 passed (2026-11-17 기준, 세법 테스트 포함).
 
 ## PATH CONFIGURATION
 

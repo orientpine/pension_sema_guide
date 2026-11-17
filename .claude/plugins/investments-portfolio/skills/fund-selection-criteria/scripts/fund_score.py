@@ -18,7 +18,7 @@ RETURN_FIELDS = ("return6m", "return1y", "return3y", "return5y")
 
 
 def cost_points(fee: D) -> int:
-    return 45 if fee <= D("0.5") else 39 if fee <= D("0.7") else 28 if fee <= D("1.0") else 17 if fee <= D("1.3") else 8
+    return max(0, int((D(45) * (1 - fee / 2)).to_integral_value()))
 
 
 def index_points(name: str) -> int:
@@ -32,8 +32,7 @@ def diversification_points(classification: dict) -> int:
 
 
 def size_points(net_assets_thousand_krw: D) -> int:
-    eok = net_assets_thousand_krw / 100_000
-    return 15 if eok >= 500 else 10 if eok >= 200 else 5 if eok >= 100 else 0
+    return 15 if net_assets_thousand_krw / 100_000 >= 100 else 0
 
 
 def risk_points(fund_risk: int, profile_risk: int) -> int:
