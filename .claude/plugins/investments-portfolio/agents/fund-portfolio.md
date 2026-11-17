@@ -298,7 +298,7 @@ ELSE:
 |------|----------|------------|
 | vintage 매칭 | targetYear가 targetVintage에 가장 근접 | `tdf_data.json` |
 | 설정금액 | 소규모 펀드 청산리스크 고려. 임계값은 `fund-selection-criteria` 파라미터를 따르고 하드코딩 금지 | `tdf_data.json:netAssets` |
-| 수익률 | 1Y/3Y 성과. 3Y 결측은 트랙레코드 감점 | `tdf_data.json:return1y/return3y` |
+| 수익률 | 1Y/3Y 성과는 **맥락으로만** 표에 적는다(미래 근거 아님, 점수·선택 근거로 쓰지 않음, 소유자 지침 no-performance-chasing). 3Y 결측은 정보 표기만 | `tdf_data.json:return1y/return3y` |
 | 총보수 | 낮은 총보수 우선(Bogle 원칙). 결측/agree:false 제외 | `tdf_fees.json:totalFee, feeVerification.agree` |
 | UH/H 정합성 | 장기투자자는 UH 선호, 환율 안정성 중시 시 H 근거 필요 | `tdf_data.json:hedge` |
 | 위험등급-성향 일치 | 투자성향 대비 과도/과소 위험등급 감점 | `tdf_data.json:riskLevel` |
@@ -550,7 +550,7 @@ Read("{output_path}/00-macro-outlook.md")
 4. **지수형**: 같은 노출이면 인덱스형.
 5. **환헤지 참고 목표**: macro 섹션 8의 환노출/환헤지 비중은 **참고 목표, 허용 오차 ±15%p**(해외 펀드 중 H 몫 기준). 헤지 미상(`hedged=null`) 펀드는 탈락 사유가 아니다. `python3 .claude/plugins/investments-portfolio/skills/dc-pension-rules/scripts/dc_limits.py check --allocation <file> --hedge-target <H%> --hedge-tolerance 15 --json`의 `hedgeMix`로 미상을 전부 UH~전부 H로 본 범위를 적는다. `OUTSIDE_REFERENCE`여도 FAIL이 아니며 이유만 적는다.
 
-앞 순위를 어기고 뒤 순위(특히 헤지 표기) 때문에 고르면 그 대가(보수 차이 %p, 잃는 분산)를 미선택 사유 표에 숫자로 적는다.
+**과거 수익률(6M·1Y·3Y)은 어느 순위에도 없다** — 표에는 맥락으로만 적고 "미래 근거 아님"을 붙인다(소유자 지침 no-performance-chasing, 점수는 fund_score.py). 앞 순위를 어기고 뒤 순위(특히 헤지 표기) 때문에 고르면 그 대가(보수 차이 %p, 잃는 분산)를 미선택 사유 표에 숫자로 적는다.
 
 **역할 경계**: 보수 비교는 같은 역할(같은 지역 노출) 후보끼리만 한다. 미국을 포함한 전세계 지수(MSCI ACWI·World 등)는 국가 비중을 입력 자료로 입증하지 못하면 '미국 밖(선진국 제외 미국·신흥국)' 몫의 후보가 아니다. 이미 정한 미국 비중을 이런 지수로 뒤에서 늘리지 않는다. 거시 지역 방향이 모두 '유지'이고 수치 지역 배분이 결측이면 이전 지역 비율을 기본값으로 두고, 바꿀 때는 입력에 있는 이유를 적는다.
 
@@ -676,8 +676,8 @@ IF SAFE_ASSET_DECISION == "예금":
 > ⚠️ **SAFE_ASSET_DECISION="예금"이면 채권형 펀드 검색/편입 금지 (0% 강제)**
 
 1. 섹터별 검색 (인덱스 펀드 우선)
-2. name/수익률 직접 추출
-3. 정렬 (총보수 → 수익률)
+2. name/수익률 직접 추출(수익률은 맥락 표기용)
+3. 정렬: `python3 .claude/plugins/investments-portfolio/skills/fund-selection-criteria/scripts/fund_score.py --codes <후보 코드…> --profile-risk <N>` 점수(보수·지수형·분산·규모·위험등급·운용 기간) 순. 과거 수익률로 정렬하지 않는다
 4. 검증 (펀드명 일치, "데이터 미확인" 0개)
 
 ### Step 4.5: 웹검색 (macro-outlook 미제공 시)
@@ -768,7 +768,7 @@ Step C: 두 방법의 합집합을 비교 대상으로 설정
 | # | 펀드명 | 1Y | 3Y | 6M | 총보수 | 환헤지 | 선택 | 미선택 사유 |
 |:-:|--------|---:|---:|---:|------:|:------:|:----:|------------|
 | 1 | [선택된 펀드] | X% | X% | X% | X% | H/UH | ✅ | — |
-| 2 | [경쟁 펀드A] | X% | X% | X% | X% | H/UH | — | 1Y 수익률 열위 (X% vs Y%) |
+| 2 | [경쟁 펀드A] | X% | X% | X% | X% | H/UH | — | fund_score 점수 열위 (X점 vs Y점: 보수·분산 등) |
 | 3 | [경쟁 펀드B] | X% | X% | X% | X% | H/UH | — | 총보수 과다 (X% vs Y%) |
 ```
 
@@ -776,11 +776,11 @@ Step C: 두 방법의 합집합을 비교 대상으로 설정
 
 | 사유 유형 | 표기 형식 | 예시 |
 |----------|----------|------|
-| 수익률 열위 | "1Y 수익률 열위 (X% vs Y%)" | "1Y 수익률 열위 (17.15% vs 57.90%)" |
+| 점수 열위 | "fund_score 점수 열위 (X점 vs Y점, 항목)" | 과거 수익률(1Y/3Y/6M)은 **미선택 사유로 쓰지 않는다**(맥락 열로만, 미래 근거 아님 — 소유자 지침 no-performance-chasing) |
 | 비용 과다 | "총보수 과다 (X% vs Y%)" | "총보수 과다 (1.5% vs 0.7%)" |
 | 환헤지 불일치 | "환헤지 참고 목표 밖 (H 몫 X~Y% vs 목표 Z±15%p)" | 보수·분산·지수형이 같거나 나쁠 때만 쓴다. 헤지 미상만으로는 쓰지 않는다 |
 | 위험등급 부적합 | "riskLevel X (투자성향 대비 과다)" | "riskLevel 1 (중립형 대비 과다)" |
-| 데이터 부족 | "3Y 수익률 없음 (신규 펀드)" | 장기 성과 검증 불가 |
+| 데이터 부족 | "총보수·순자산 자료 없음" | 점수에 필요한 자료 결측. 3Y 수익률이 없는 것 자체는 미선택 사유가 아니다 |
 | UH/H 대안 존재 | "동일 펀드 H 버전 선택됨" | 환헤지 전략상 H 버전 우선 |
 
 #### 4.7.4 위반 시
@@ -1024,8 +1024,8 @@ TDF 항목(`category="TDF"`, `role="riskExempt"`, 또는 `selectionRationale.ref
       "category": "해외주식형", 
       "role": "core",
       "selectionRationale": {
-        "reason": "macro-outlook 주목 섹터(반도체) + 3년 수익률 상위 10%",
-        "references": ["fund_data.json:return3y=85.2%", "00-macro-outlook.md:섹션4"]
+        "reason": "macro-outlook 주목 섹터(반도체) + 같은 역할 후보 중 fund_score 최고점(저보수 지수형)",
+        "references": ["fund_score.py 출력", "fund_fees.json:totalFee", "00-macro-outlook.md:섹션4"]
       }
     }
   ],
@@ -1066,7 +1066,7 @@ TDF 항목(`category="TDF"`, `role="riskExempt"`, 또는 `selectionRationale.ref
 | # | 펀드명 | 비중 | 선택 근거 | 참조 출처 |
 |:-:|--------|:----:|----------|----------|
 | 1 | [펀드명] | 20% | macro-outlook 주목 섹터(반도체) 반영 | `00-macro-outlook.md` 섹션 4 |
-| 2 | [펀드명] | 15% | 3년 수익률 85.2% (카테고리 상위 5%) | `fund_data.json` return3y |
+| 2 | [펀드명] | 15% | 같은 지수 후보 중 총보수 최저·순자산 충분 (fund_score 점수) | `fund_score.py`, `fund_fees.json` |
 | 3 | [펀드명] | 15% | 총보수 0.15% (저비용 인덱스) | `fund_fees.json` totalFee |
 | 4 | [펀드명] | 10% | 환노출 전략 (macro-outlook 권고) | `00-macro-outlook.md` 섹션 7 |
 | 5 | 예금 | 30% | 채권 실질수익률 < 예금+0.5%p | `deposit_rates.json`, `fund_fees.json` |
@@ -1118,9 +1118,10 @@ TDF 항목(`category="TDF"`, `role="riskExempt"`, 또는 `selectionRationale.ref
 ## 6. 메타 정보
 
 ```yaml
-version: "5.2"
-updated: "2026-11-17"
+version: "5.3"
+updated: "2026-11-18"
 changelog:
+  - "5.3: 과거 수익률은 맥락으로만(소유자 지침 no-performance-chasing): 정렬·미선택 사유·예시에서 수익률 근거 제거, 후보 점수는 fund_score.py"
   - "5.2: 환헤지 비율을 참고 목표(±15%p)로, 같은 역할 후보 선택 우선순위(하드 한도 > 총보수 > 분산 > 지수형 > 환헤지) 2.3.1 추가. 헤지 미상은 탈락 사유 아님(dc_limits hedgeMix 범위)"
   - "5.1: [MUST] Step 3 안전자산 Gate를 예금/TDF/채권 3지선다로 확장 — 사용자 질문 없이는 진행 금지"
   - "5.1: [MUST] ALL_IN_ONE_TDF / HYBRID_TDF_SLEEVE 모드 및 nonExemptRiskWeight 수식 반영"
