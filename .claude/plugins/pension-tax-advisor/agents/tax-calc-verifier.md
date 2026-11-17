@@ -113,6 +113,15 @@ def compare_amount(report_value, computed_value, status):
 - 차이가 허용 범위를 넘으면 `MISMATCH`로 처리하고 차액을 보고합니다.
 - `verificationStatus≠verified`, `effectiveDate>today`, 파라미터 누락 중 하나라도 있으면 `SUSPEND`이며 결과 문구는 **"검증 불가/보류"**입니다.
 
+## 재원·선택권·원천징수 비율 검증
+
+- `rules.withdrawalOrder.value` 순서로 일부 인출을 배분한다. 과세제외 재원을 먼저 소진하고 이연퇴직소득, 그 밖의 과세금액으로 진행한다.
+- `rules.separateTaxation`의 대상 재원만 합산한다. 경계 초과도 종합과세 강제가 아니라 `{id:사적연금_경계초과_분리과세율_국세}`에 의한 분리과세 선택이다. 대상 연금 전체를 사용하며 초과분만 과세하지 않는다.
+- 비교는 종합과세 전체 국세 결정세액 대 (다른 종합소득 국세 결정세액 + 연금 분리세액)이다. 기납부세액을 공제한 추가납부액이나 서로 다른 basis를 비교하지 않는다. 필요한 종합세액 자료가 없으면 유불리 판정은 보류한다.
+- 이연퇴직소득 원천징수 국세 = 해당 수령액 × (이연퇴직소득세 / 이연퇴직소득) × 해당 구간의 원천징수 적용비율(%). 마지막에만 원 단위 절사한다. 비율은 `yearFrom`·`yearThrough`와 실제 수령연차로 고르고 직접 곱한다. 시행령 §187조의3의 실제 수령연차와 수령한도용 연차를 구별한다.
+- 규칙도 verificationStatus·effectiveDate·refreshStatus를 확인하며, 수령일 전 시행 여부와 미검증 보류를 적용한다. 근거 URL·KST 확인일은 SSOT evidence를 따른다.
+- 위 계약의 실행 가능한 합성 검산은 `tests/test_tax_rule_regressions.py`의 계산 함수와 회귀 사례를 참조한다. 테스트의 검증완료 가정 복사본은 실제 미검증 파라미터를 승격하지 않는다.
+
 ## Deterministic Scenario Table
 
 | 계산 | 의존 파라미터 | 상태 | 재계산 가능? |
@@ -122,7 +131,7 @@ def compare_amount(report_value, computed_value, status):
 | 연금수령한도 | `연금수령한도_분모상수`, `연금수령한도_배수` | verified | ✅ |
 | 분리과세 판정 | `사적연금_분리과세_경계` | verified | ✅ 판정만 |
 | 연금소득세 | `연금소득세율_*` | unverified | 🚫 보류 |
-| 퇴직소득세 감면 | `퇴직소득세_감면율_*` | unverified | 🚫 보류 |
+| 퇴직소득 원천징수 | `퇴직소득세_원천징수적용비율_*` | unverified | 🚫 보류 |
 
 ## Output Contract
 

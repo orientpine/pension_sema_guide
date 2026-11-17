@@ -19,6 +19,11 @@ IncomeLevel = Literal["high", "low"]
 class TaxParam(TypedDict, total=False):
     value: int | float
     verificationStatus: str
+    effectiveDate: str
+    refreshStatus: str
+    semantics: str
+    yearFrom: int
+    yearThrough: int | None
 
 
 TaxParams = Mapping[str, TaxParam]
@@ -141,7 +146,7 @@ def check_separate_taxation(
     assert boundary_val is not None
     if annual_pension_income <= boundary_val:
         return "available", boundary_val
-    return "required", boundary_val
+    return "choice", boundary_val
 
 
 def param_ids_by_prefix(params: TaxParams, prefix: str) -> list[str]:
@@ -265,10 +270,10 @@ class TestWithdrawalLimit:
         assert limit is None
         assert status == "NO_LIMIT"
 
-    def test_retirement_tax_reduction_unverified_suspended(self):
-        """Given unverified retirement-tax reduction parameters, access is held."""
+    def test_retirement_withholding_ratio_unverified_suspended(self):
+        """미검증 원천징수 적용비율은 확정 계산을 보류한다."""
         params = load_params()
-        reduction_ids = param_ids_by_prefix(params, "퇴직소득세_감면율_")
+        reduction_ids = param_ids_by_prefix(params, "퇴직소득세_원천징수적용비율_")
 
         assert reduction_ids
         for param_id in reduction_ids:
@@ -308,12 +313,12 @@ class TestSeparateTaxation:
         assert result == "available"
         assert val == boundary
 
-    def test_separate_taxation_above_boundary_is_required(self):
-        """Given income above boundary, comprehensive taxation is required."""
+    def test_review02_above_boundary_allows_taxpayer_choice(self):
+        """제64조의4: 경계를 넘겨도 종합과세 강제가 아니다."""
         params = load_params()
         boundary = params["사적연금_분리과세_경계"]["value"]
 
         result, val = check_separate_taxation(params, boundary + 1)
 
-        assert result == "required"
+        assert result == "choice"
         assert val == boundary

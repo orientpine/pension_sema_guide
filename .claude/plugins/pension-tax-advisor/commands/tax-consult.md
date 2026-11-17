@@ -56,34 +56,51 @@ mkdir -p "confidentialData/tax/{세션슬러그}"
 
 ## 2. Read-Time 신선도 체크 (MANDATORY, BLOCKING)
 
-> **목적**: 상담 실행 시점마다 `funds/pension_tax_params.json`의 신선도(freshness)를 확인하고, 오래된 세법 파라미터로 계산이 진행되는 것을 방지합니다.
+> **목적**: 상담 실행 시점마다 각 파라미터의 `lastVerifiedAt`을 확인합니다. 파일 전체의 `_meta.updatedAt`은 신선도 판정에 사용하지 않습니다. 기준 기간은 `_meta.freshnessThresholdDays`(90일)입니다.
 
 ### 2.1 필수 로드 대상
 
 ```python
 import json
+from datetime import datetime, timedelta, timezone
 
-data = json.load(open("funds/pension_tax_params.json", encoding="utf-8"))
-meta = data["_meta"]
-updated_at = meta["updatedAt"]
-threshold = meta["freshnessThresholdDays"]  # = 90
-# age = 현재 실행일 - updated_at
+with open("funds/pension_tax_params.json", encoding="utf-8") as source:
+    data = json.load(source)
+now = datetime.now(timezone(timedelta(hours=9)))
+threshold = timedelta(days=data["_meta"]["freshnessThresholdDays"])
+stale_ids = []
+# 모든 파라미터를 검사한다. 새 기계 판독 규칙에도 같은 기준을 적용한다.
+entries = {**data["parameters"], **data.get("rules", {})}
+for param_id, param in entries.items():
+    verified_at = param.get("lastVerifiedAt")
+    if not verified_at:
+        stale_ids.append(param_id)
+        continue
+    try:
+        checked = datetime.fromisoformat(verified_at)
+    except ValueError:
+        stale_ids.append(param_id)
+        continue
+    if checked.tzinfo is None or checked > now or now - checked > threshold:
+        stale_ids.append(param_id)
 ```
 
 ### 2.2 차단형 판정 규칙
 
 ```
-IF age <= threshold:
+IF stale_ids가 비어 있음:
     ✅ FRESH → Step 0 진행
 
-IF age > threshold:
+IF stale_ids가 하나라도 있음(확인일 누락·잘못된 날짜·미래 확인일 포함):
     🔴 STALE → tax-law-updater Task 자동 호출 (BLOCKING)
     1. tax-law-updater 결과를 기다림
     2. updater 경고를 수집
-    3. pending 파라미터 → "X일 미확인" 경고 목록 작성
+    3. 각 파라미터의 확인일과 경과일을 다시 판정하고 pending → "X일 미확인" 경고 목록 작성
     4. disproven 파라미터 → 해당 파라미터 의존 계산 보류 표시
     5. 갱신 결과와 보류 목록을 Step 0 이후 모든 Task에 전달
 ```
+
+`lastVerifiedAt`은 실제 공식 본문 재확인에 성공했을 때만 변경합니다. 파일 저장이나 실패한 재조회로 확인일을 덮어쓰지 않습니다. `pending`만으로 기존 유효한 `verified` 값을 폐기하지 않되, 미확인 경고를 유지합니다. `unverified`·`seed`·미래 시행·`disproven` 값의 의존 계산은 기존 SUSPEND 규칙을 따릅니다.
 
 ### 2.3 `tax-law-updater` 자동 호출
 
@@ -95,11 +112,12 @@ Task(
 
 ### 입력
 - params_path: funds/pension_tax_params.json
+- stale_ids: {개별 lastVerifiedAt 기준으로 수집한 파라미터·규칙 목록}
 - output_path: {output_path}
 - trigger: tax-consult read-time freshness check
 
 ### 요구사항
-- freshnessThresholdDays 초과 시 최신 공식 출처 확인
+- 개별 lastVerifiedAt의 freshnessThresholdDays 초과 또는 확인일 누락·오류 시 최신 공식 출처 확인
 - refreshStatus를 ok / pending / disproven으로 분류
 - pending은 경고만 생성하고 계산 전체를 중단하지 않음
 - disproven은 해당 parameter_id 의존 계산만 보류
@@ -285,11 +303,18 @@ critic 등급 D/E/F  OR  devil-advocate 중대 이슈:
 - **검증 통과(A/B 등급) 산출물만 인용** — educator(00) + planner(01) + calc(02) + critic(03) 참조
 - **새 금액 절대 금지** — 이미 검증된 수치만 사용
 - HOLD/FAIL·pending/disproven 항목은 추정·평균값으로 대체하지 않고 경고를 유지
+- **결론 맨 위에 검증 실패·미검증·미확인 값의 parameter_id와 사유를 표시**하고, 의존 계산의 SUSPEND 및 기존 유효 verified 값의 pending 경고를 구별
 - 검증 부록 포함: 각 금액 → parameter_id·조문·재계산값·critic 등급 1:1 매핑 테이블
 
 | 요약 내 금액 | 출처 파일 | parameter_id | 조문 | 재계산 결과 | critic 등급 |
 |--------------|-----------|--------------|------|-------------|-------------|
 | 검증 통과 금액만 기재 | 02/03 산출물 | 필수 | 필수 | 필수 | A/B만 |
+
+요약에서 사용한 **모든 파라미터와 규칙을 각각 한 행**으로 기록합니다. 시행일과 확인일을 파일 전체 날짜로 대신하지 않습니다.
+
+| parameter_id 또는 규칙 ID | 사용값·basis | 시행일 effectiveDate | 확인일 lastVerifiedAt (KST) | verificationStatus / refreshStatus | 근거 URL·수집시각 | 의존 계산·경고 |
+|--------------------------|-------------|---------------------|----------------------------|------------------------------------|------------------|---------------|
+| 사용한 항목마다 필수 | SSOT 값 | 해당 항목 값 | 해당 항목 값, 누락 시 미확인 | 해당 항목 값 | 해당 evidence | 검증 통과 또는 보류 사유 |
 
 #### 3.2 04-summary 재검증 (MANDATORY, BLOCKING)
 

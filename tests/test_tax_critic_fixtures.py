@@ -29,7 +29,10 @@ def actionable_report_lines(report: str) -> list[str]:
 
 def critic_detects_unverified(report: str) -> bool:
     for line in actionable_report_lines(report):
-        has_unverified_param = "연금소득세율_" in line or "퇴직소득세_감면율_" in line
+        has_unverified_param = any(prefix in line for prefix in (
+            "연금소득세율_", "퇴직소득세_원천징수적용비율_",
+            "퇴직소득세_감면율_",  # 과거 보고서/기존 fixture도 미검증 단정을 탐지한다.
+        ))
         has_definitive = "정확히" in line or "됩니다" in line or "입니다" in line
         has_hold_caveat = "보류" in line or "참고용" in line or "미검증" in line
         if has_unverified_param and has_definitive and not has_hold_caveat:

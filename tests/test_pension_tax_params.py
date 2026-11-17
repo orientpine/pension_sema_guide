@@ -26,7 +26,7 @@ def test_meta_freshness_threshold():
 def test_verified_params_have_lawgokr_anchor():
     """Every 'verified' parameter must have at least 1 law.go.kr evidence entry"""
     data = load_params()
-    params = data["parameters"]
+    params = {**data["parameters"], **data["rules"]}
     for param_id, param in params.items():
         if param["verificationStatus"] == "verified":
             evidence = param.get("evidence", [])
@@ -52,9 +52,9 @@ def test_structural_constants_present():
     required = [
         "연금수령한도_분모상수",
         "연금수령한도_배수",
-        "퇴직소득세_감면율_10년이하",
-        "퇴직소득세_감면율_11년_20년",
-        "퇴직소득세_감면율_21년이상",
+        "퇴직소득세_원천징수적용비율_10년이하",
+        "퇴직소득세_원천징수적용비율_11년_20년",
+        "퇴직소득세_원천징수적용비율_21년이상",
     ]
     for param_id in required:
         assert param_id in params, f"Structural constant {param_id} must be a parameter"
@@ -64,7 +64,7 @@ def test_evidence_has_required_fields():
     """Each evidence record must have required fields"""
     data = load_params()
     required_fields = {"sourceUrl", "sourceTier", "original_text", "조문", "시행일", "collectedAt"}
-    for param_id, param in data["parameters"].items():
+    for param_id, param in {**data["parameters"], **data["rules"]}.items():
         for i, ev in enumerate(param.get("evidence", [])):
             for field in required_fields:
                 assert field in ev, f"{param_id}.evidence[{i}] missing field: {field}"

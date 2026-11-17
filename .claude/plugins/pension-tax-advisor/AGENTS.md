@@ -18,7 +18,7 @@ pension-tax-advisor/
 > 오케스트레이터는 **반드시 Task 도구로만** 하위 에이전트 호출. 직접 분석·계산·검증 금지.
 
 ```
-0  read-time 신선도 체크 (pension_tax_params.json 90일 초과 시 tax-law-updater BLOCKING)
+0  read-time 신선도 체크 (각 lastVerifiedAt 기준 90일 초과·누락 시 tax-law-updater BLOCKING)
 1  tax-knowledge-educator (BLOCKING) → 00-educator.md
 2  tax-strategy-planner (BLOCKING)   → 01-strategy.md
 C4 tax-calc-verifier → tax-critic (calc consume) → devil-advocate (BLOCKING 3중 게이팅)
@@ -46,7 +46,7 @@ C4 tax-calc-verifier → tax-critic (calc consume) → devil-advocate (BLOCKING 
 
 ## DATA SSOT
 
-- **파라미터**: `funds/pension_tax_params.json` (19개, law.go.kr 앵커 기반 verified, 90일 신선도)
+- **파라미터·재원 규칙**: `funds/pension_tax_params.json` (`parameters` 및 `rules`, law.go.kr 앵커·항목별 evidence와 검증 상태, 각 lastVerifiedAt 기준 90일 신선도)
 - **계산**: pension-tax-rules §9 (모든 수치 parameter_id 참조)
 - **검증**: tax-calc-verifier python3 재계산 + tax-critic A~F 채점
 
