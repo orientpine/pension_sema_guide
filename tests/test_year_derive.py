@@ -30,11 +30,9 @@ def test_falls_back_to_system_year_on_malformed_version():
 
 
 def test_module_current_year_is_not_hardcoded_literal():
-    # CURRENT_YEAR must equal the value derived from the active data version,
-    # not a frozen 2026 literal.
-    from update_tdf_data import TDF_VERSION
-
-    assert CURRENT_YEAR == _derive_current_year(TDF_VERSION)
+    # No frozen data version in the module: the fallback reference year is the system year;
+    # table input passes the year derived from --base-date instead.
+    assert CURRENT_YEAR == _derive_current_year(None)
 
 
 def test_age_band_uses_derived_reference_year():

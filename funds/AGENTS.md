@@ -19,8 +19,9 @@
 - **수익률 단위**(제로인 상품제안서 관행, all_fund_data 동일): `return6m`/`return1y` = **누적(cumulative)**, `return3y`/`return5y`/`return7y`/`return10y` = **연환산(annualized %/yr)**. tdf_data는 전 구간 누적이므로 직접 교차비교 금지(단위 정규화 후 비교).
 - **JOIN KEYS**: `fund_fees`는 `fundCode`로, `fund_classification`은 **펀드명(name)**으로 조인
 
-**fund_classification.json** = `{ "펀드명": { category, riskAsset, assetClass, region, themes, hedged, riskLevel, source, generatedAt } }`
-- 205 entries, 9 categories: 기타/주식형/주식혼합형/채권형/채권혼합형/해외주식형/해외주식혼합형/해외채권형/해외채권혼합형
+**fund_classification.json** = `{ "펀드명": { category, riskAsset, riskStatus, riskBasis, needsConfirmation, typeTag, assetClass, region, themes, hedged, riskLevel, source, generatedAt } }`
+- 204 entries, 9 categories: 기타/주식형/주식혼합형/채권형/채권혼합형/해외주식형/해외주식혼합형/해외채권형/해외채권혼합형
+- `riskStatus`: `risk` | `nonRisk` | `unverified` — 펀드명 유형 표기 + 퇴직연금감독규정 제11조①(시행 2023-11-16). `riskAsset = riskStatus != nonRisk`(unverified는 70% 한도 산입). `needsConfirmation=true`는 5호(채권형·채권혼합형)의 투자부적격 30% 조건을 포털·규약으로 확인해야 함. `hedged`: true(H)/false(UH)/null(표기 없음). 규칙 코드: data-updater `scripts/fund_name_rules.py`
 
 **fund_fees.json** = `{ _meta, fees: { fundCode: { fundCode, fundName, totalFee, annualCost } } }`
 
@@ -68,7 +69,8 @@ TDF(Target Date Fund)는 생애주기별 자산배분을 수행하는 펀드로,
     - `targetYear`: 목표 연도 (int, 예: 2055)
     - `recommendedAgeBand`: 추천 연령대 (list [min, max], 예: [20, 35])
     - `hedge`: 환헤지 여부 (`"UH"`, `"H"`, `null`)
-    - `tdfQualified`: 적격 TDF 여부 (bool) - DC/IRP 위험자산 70% 한도 예외(100% 편입 가능) 상품
+    - `tdfQualified`: 적격 TDF 여부 (bool) - DC/IRP 위험자산 70% 한도 예외(100% 편입 가능) 상품. **근거(펀드명 '적격' 표기)가 있을 때만 true**, 기본 true 없음. 근거는 `tdfQualifiedBasis`, 검토 필요는 `tdfNeedsReview`
+    - `riskStatus`/`riskBasis`/`needsConfirmation`: 적격이 아닐 때 쓰는 유형 기준 70% 한도 판정(fund_classification.json과 같은 규칙)
     - `riskName`: 위험등급명 (str)
     - `riskLevel`: 위험등급 (int, 1~6)
     - `return1m`, `return3m`, `return6m`, `return1y`, `return2y`, `return3y`, `returnSinceInception`: 수익률 (str, %, 결측 시 `""`). **전 구간 누적(cumulative)** — all_fund_data의 3Y/5Y/7Y/10Y(연환산)와 단위가 다르므로 교차검증은 단위 정규화 후 비교(`cross_validate_tdf_row`). `returnSinceInception`은 설정후 수익률을 의미함.
@@ -92,7 +94,7 @@ TDF(Target Date Fund)는 생애주기별 자산배분을 수행하는 펀드로,
 
 ### 관리 규칙
 
-1. **갱신 경로**: 데이터 갱신은 반드시 `update_tdf_data.py --fees` 스크립트를 통한 결정적 로컬 보강(enrichment)을 우선한다. 월간 상품제안서 갱신 뒤에는 `update_tdf_data.py --from-proposal --fees`로 TDF 행의 6M/1Y(누적)·3Y(연환산→누적)·위험등급·순자산(천원)을 상품제안서 기준일로 다시 맞추고, 상품제안서에 없는 1M/3M/2Y/설정후는 빈 값으로 둔다(옛 붙여넣기 값과 새 기준일을 섞지 않음, `_meta.returnsBasis`·`_meta.notInProposal`). SEMA 포털 TDF 표가 있으면 `--input`으로 채운다. 웹 크롤링은 CSV에 없는 필드(1m/3m/2y/설정후 등)에만 제한적으로 사용한다.
+1. **갱신 경로**: 데이터 갱신은 반드시 `update_tdf_data.py --fees` 스크립트를 통한 결정적 로컬 보강(enrichment)을 우선한다. 월간 상품제안서 갱신 뒤에는 `update_tdf_data.py --from-proposal --fees`로 TDF 행의 6M/1Y(누적)·3Y(연환산→누적)·위험등급·순자산(천원)을 상품제안서 기준일로 다시 맞추고, 상품제안서에 없는 1M/3M/2Y/설정후는 빈 값으로 둔다(옛 붙여넣기 값과 새 기준일을 섞지 않음, `_meta.returnsBasis`·`_meta.notInProposal`). SEMA 포털 TDF 표가 있으면 `--input <표> --base-date <표의 기준일>`로 채운다(기준일 없으면 저장 안 함). 웹 크롤링은 CSV에 없는 필드(1m/3m/2y/설정후 등)에만 제한적으로 사용한다.
 2. **미해결 처리**: 미해결(`unresolved`) 또는 누락(`missing`) 데이터 존재 시 스크립트는 stderr 경고와 함께 종료 코드 2를 반환한다. (`--allow-unresolved` 옵션 사용 시 0 반환)
 3. **수동 트리거**: 제로인 등 외부 데이터를 붙여넣어 수동으로 트리거할 수 있다.
 4. **신선도 유지**: `freshnessThresholdDays: 30`을 준수하며, 30일 경과 시 경고를 발생시킨다.

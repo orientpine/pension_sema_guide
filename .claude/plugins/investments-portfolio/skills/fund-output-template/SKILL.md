@@ -148,16 +148,13 @@ TDF_MODE = "[ALL_IN_ONE_TDF / HYBRID_TDF_SLEEVE]"
 
 ## 데이터 정합성 검증 결과 (v5.0 신규 - MANDATORY)
 
-### ⚠️ 데이터 정합성 검증 결과
+### ⚠️ 위험자산 분류 확인 (fund_classification.json 기준, 재판정 없음)
 
-**검증 범위**: fund_classification.json 전체 ({N}개 펀드)
-**위반 건수**: {M}건
+| 펀드명 | riskStatus | riskBasis(요약) | needsConfirmation | riskLevel | 비고 |
+|--------|:----------:|-----------------|:-----------------:|:---------:|------|
+| [펀드명] | nonRisk | 제11조①5호 | 예 | 3 | 포털 표시 확인 필요 |
 
-| 펀드명 | riskLevel | riskAsset(원본) | category | 위반 규칙 | 에이전트 재판정 |
-|--------|:---------:|:---------------:|:--------:|:---------:|:--------------:|
-| [펀드명] | 1 | false | 기타 | Rule 1 | → riskAsset=**true** |
-
-**재판정 근거**: [riskLevel 기준 우선 원칙 설명]
+위험등급으로 riskAsset을 바꾸지 않는다(fund-portfolio §3.5, dc-pension-rules §2).
 
 ## 안전자산 다각화 검토 (v5.0 신규 - SHOULD, SAFE_ASSET_DECISION="예금" 시)
 
@@ -365,8 +362,8 @@ confidentialData/portfolios/YYYY-MM-DD-{profile}-{session}/01-fund-analysis.md
 ### 규제 준수 체크 (DC형 필수)
 
 - [ ] **위험자산 합계**: 정확히 계산되어 70% 이하 확인
-- [ ] **위험자산 분류**: 주식형+주식혼합형+채권혼합형 = 위험자산
-- [ ] **안전자산 분류**: 채권형+예금+MMF = 안전자산
+- [ ] **위험자산 분류**: `fund_classification.json`의 riskStatus risk·unverified = 위험자산(비적격TDF 포함)
+- [ ] **비위험자산 분류**: riskStatus nonRisk(채권형·채권혼합형 제11조①5호, MMF) + 예금, needsConfirmation 표시 포함
 - [ ] **합계 검증**: 전체 비중 합계 = 100%
 - [ ] **단일 펀드 한도**: 40% 초과 펀드 없음
 

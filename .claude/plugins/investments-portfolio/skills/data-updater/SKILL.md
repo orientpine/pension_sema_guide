@@ -166,7 +166,9 @@ tools: Bash, Read, Write, mcp_question
     |   +-- 임시 파일 저장 (예: resource/tdf-raw.md)
     |
     +-- Step 6-2. update_tdf_data.py 실행
-    |   +-- python scripts/update_tdf_data.py --input resource/tdf-raw.md
+    |   +-- python scripts/update_tdf_data.py --input resource/tdf-raw.md --base-date YYYY-MM-DD
+    |   +-- --base-date = 포털 TDF 표에 적힌 수익률 기준일(필수). 모르면 형에게 묻고, 없으면 저장하지 않는다(exit 2)
+    |   +-- tdfQualified는 펀드명 '적격' 표기가 있을 때만 true (근거 없으면 false→유형 기준 70% 판정)
     |   +-- tdf_data.json 생성 확인
     |
     +-- Step 6-3. 총보수 3출처 더블체크 (수동)
@@ -196,8 +198,8 @@ scripts/update_tdf_data.py
 **Step 1. 상대경로로 실행** (최우선)
 ```bash
 python scripts/update_fund_data.py --file [csv_file_path]
-python scripts/classify_funds.py --fund-data "funds/fund_data.json"
-python scripts/update_tdf_data.py --input [tdf_table_path]
+python scripts/classify_funds.py funds
+python scripts/update_tdf_data.py --input [tdf_table_path] --base-date YYYY-MM-DD
 ```
 
 **Step 2. 상대경로 실패 시 Glob 폴백**
@@ -236,9 +238,10 @@ python scripts/update_fund_data.py \
 ### 분류만 재실행 (선택)
 
 ```bash
-python scripts/classify_funds.py \
-  --fund-data "funds/fund_data.json"
+python scripts/classify_funds.py funds   # funds/fund_data.json → funds/fund_classification.json
 ```
+
+분류 규칙(위험자산 riskStatus·환헤지)은 `scripts/fund_name_rules.py` 하나에 있고 `update_tdf_data.py`도 같은 규칙을 쓴다. 근거는 `dc-pension-rules` 스킬 §2.
 
 ### 스크립트 옵션
 
@@ -247,9 +250,9 @@ python scripts/classify_funds.py \
 | update_fund_data.py | `--file` | O | CSV 파일 경로 |
 | update_fund_data.py | `--output-dir` | X | 출력 디렉토리 (기본: 자동 감지) |
 | update_fund_data.py | `--dry-run` | X | 미리보기 모드 |
-| classify_funds.py | `--fund-data` | O | fund_data.json 파일 경로 |
-| classify_funds.py | `--output` | X | 출력 파일 경로 |
-| update_tdf_data.py | `--input` | O | TDF 표 파일 경로 |
+| classify_funds.py | (위치 인자) | X | funds 디렉터리 (기본: 자동 감지). fund_data.json을 읽고 같은 곳에 fund_classification.json을 쓴다 |
+| update_tdf_data.py | `--input` | 표 모드 O | TDF 표 파일 경로 |
+| update_tdf_data.py | `--base-date` | 표 모드 O | 표의 수익률 기준일 YYYY-MM-DD (`_meta.version`과 연령대 기준년도가 된다) |
 | update_tdf_data.py | `--output` | X | 출력 JSON 경로 |
 | update_tdf_data.py | `--from-proposal` | X | 기존 tdf_data.json 행을 상품제안서(all_fund_data) 기준일로 갱신 |
 | update_tdf_data.py | `--fees` | X | all_fund_fees 기준 fundCode·총보수 결정적 보강 (tdf_fees 기준일도 따라감) |

@@ -14,8 +14,9 @@ from difflib import SequenceMatcher
 from pathlib import Path
 from typing import TextIO, cast
 
+from fund_name_rules import classify_risk, derive_hedge
 
-TDF_VERSION = "2026-06-04"
+
 TDF_SOURCE = "펀드평가사 제로인"
 BASE_DATE_NOTE = (
     "all_fund_data.json 기준일과 상이할 수 있음(기준일 drift). "
@@ -38,7 +39,8 @@ def _derive_current_year(data_version: str | None = None) -> int:
     return date.today().year
 
 
-CURRENT_YEAR = _derive_current_year(TDF_VERSION)
+CURRENT_YEAR = _derive_current_year(None)
+BASE_DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
 ROW_RE = re.compile(r"^\s*(\d+)\.\s*(.+)$")
 RISK_RE = re.compile(r"^(.+?)([1-6])$")
@@ -53,6 +55,7 @@ class CliArgs:
     all_dir: str
     allow_unresolved: bool
     from_proposal: bool
+    base_date: str
 
 
 JsonValue = str | int | bool | None | list[int]
@@ -91,6 +94,11 @@ def parse_args() -> CliArgs:
         ),
     )
     _ = parser.add_argument(
+        "--base-date",
+        default="",
+        help="--input 표의 수익률 기준일 YYYY-MM-DD (포털 화면에 적힌 날짜, --input 모드 필수)",
+    )
+    _ = parser.add_argument(
         "--allow-unresolved",
         action="store_true",
         help="Exit 0 (warn only) even when unresolved/missing rows remain",
@@ -104,6 +112,7 @@ def parse_args() -> CliArgs:
         all_dir=str(parsed["all_dir"]),
         allow_unresolved=bool(parsed["allow_unresolved"]),
         from_proposal=bool(parsed["from_proposal"]),
+        base_date=str(parsed["base_date"]),
     )
 
 
@@ -126,15 +135,6 @@ def derive_target_year(name: str) -> int | None:
     return None
 
 
-def derive_hedge(name: str) -> str | None:
-    upper_name = name.upper()
-    if "(UH)" in upper_name or re.search(r"(?<![A-Z])UH(?![A-Z])", upper_name):
-        return "UH"
-    if "(H)" in upper_name or "H[" in upper_name:
-        return "H"
-    return None
-
-
 def round_to_nearest_five(value: int) -> int:
     return int((value + 2) // 5 * 5)
 
@@ -151,10 +151,28 @@ def derive_recommended_age_band(
 
 def derive_tdf_qualified(name: str) -> dict[str, bool]:
     has_qualified_token = "적격" in name
-    return {"qualified": True, "needsReview": not has_qualified_token}
+    return {"qualified": has_qualified_token, "needsReview": not has_qualified_token}
 
 
-def parse_tdf_table(text: str) -> list[FundRecord]:
+def derive_limit_fields(name: str) -> dict[str, JsonValue]:
+    """70% 한도 계산에 쓰는 TDF 필드. 적격 근거('적격' 표기)가 없으면 면제하지 않고 유형으로 판정한다."""
+    qualified = derive_tdf_qualified(name)
+    risk = classify_risk(name)
+    return {
+        "tdfQualified": qualified["qualified"],
+        "tdfQualifiedBasis": (
+            "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)"
+            if qualified["qualified"]
+            else "적격 근거 없음 — 면제 안 함, 유형(riskStatus)으로 70% 한도 판정"
+        ),
+        "tdfNeedsReview": qualified["needsReview"],
+        "riskStatus": cast(str, risk["riskStatus"]),
+        "riskBasis": cast(str, risk["riskBasis"]),
+        "needsConfirmation": cast(bool, risk["needsConfirmation"]),
+    }
+
+
+def parse_tdf_table(text: str, current_year: int = CURRENT_YEAR) -> list[FundRecord]:
     funds: list[FundRecord] = []
     for line in text.splitlines():
         stripped = line.strip()
@@ -188,16 +206,17 @@ def parse_tdf_table(text: str) -> list[FundRecord]:
 
         risk_name, risk_level = parse_risk(risk_value)
         target_year = derive_target_year(name)
-        tdf_qualified = derive_tdf_qualified(name)
 
         fund: FundRecord = {
             "fundCode": "",
             "name": name,
             "company": company,
             "targetYear": target_year,
-            "recommendedAgeBand": derive_recommended_age_band(target_year) if target_year else [],
+            "recommendedAgeBand": (
+                derive_recommended_age_band(target_year, current_year) if target_year else []
+            ),
             "hedge": derive_hedge(name),
-            "tdfQualified": tdf_qualified["qualified"],
+            **derive_limit_fields(name),
             "riskName": risk_name,
             "riskLevel": risk_level,
             "return1m": return1m,
@@ -217,10 +236,11 @@ def parse_tdf_table(text: str) -> list[FundRecord]:
 def write_json(
     funds: list[FundRecord],
     output_path: str | Path,
+    base_date: str,
     meta_override: dict[str, object] | None = None,
 ) -> JsonObject:
     meta: JsonObject = {
-        "version": TDF_VERSION,
+        "version": base_date,
         "source": TDF_SOURCE,
         "updatedAt": datetime.now().astimezone().isoformat(),
         "recordCount": len(funds),
@@ -431,6 +451,7 @@ def refresh_from_proposal(tdf_data: JsonObject, all_fund_data: JsonObject) -> Js
     not_in_proposal: list[str] = []
     for row in cast(list[JsonObject], tdf_data.get("funds", [])):
         fund = dict(row)
+        fund.update(derive_limit_fields(str(row.get("name", ""))))
         for field in PROPOSAL_ABSENT_FIELDS:
             fund[field] = ""
         code = str(row.get("fundCode", ""))
@@ -819,9 +840,16 @@ def main() -> int:
     if not args.input:
         print("Error: --input is required in table-parse mode (or use --fees).", file=sys.stderr)
         return 2
+    if not BASE_DATE_RE.match(args.base_date):
+        print(
+            "Error: --input 모드는 --base-date YYYY-MM-DD(포털 TDF 표의 수익률 기준일)가 필수다. "
+            "기준일을 모르면 저장하지 않는다.",
+            file=sys.stderr,
+        )
+        return 2
     text = Path(args.input).read_text(encoding="utf-8")
-    funds = parse_tdf_table(text)
-    _ = write_json(funds, args.output)
+    funds = parse_tdf_table(text, _derive_current_year(args.base_date))
+    _ = write_json(funds, args.output, args.base_date)
     print(f"Parsed {len(funds)} TDF funds")
     print(f"Wrote {args.output}")
     return 0

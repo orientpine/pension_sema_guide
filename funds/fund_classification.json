@@ -2,6 +2,10 @@
   "하나IT코리아증권자투자신탁 1[주식]ClassC-P2E": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -10,24 +14,32 @@
     "hedged": null,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "삼성글로벌반도체증권자투자신탁H[주식]_Cpe(퇴직)": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "global",
     "themes": [
       "semiconductor"
     ],
-    "hedged": null,
+    "hedged": true,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "NH-Amundi필승코리아증권투자신탁[주식]ClassC-P2e(퇴직연금)": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -36,11 +48,15 @@
     "hedged": null,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋코어테크증권자투자신탁(주식)종류C-P2e": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -49,11 +65,15 @@
     "hedged": null,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋아시아테크증권투자신탁(주식)종류C-P2e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "asia",
     "themes": [
@@ -62,11 +82,15 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "삼성퇴직연금KOSPI200증권자투자신탁 1[주식]_Ce": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -76,11 +100,15 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "대신KOSPI200인덱스증권자투자신탁[주식]ClassC-Pe": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -89,24 +117,32 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "삼성글로벌반도체증권자투자신탁UH[주식]_Cpe(퇴직)": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "global",
     "themes": [
       "semiconductor"
     ],
-    "hedged": null,
+    "hedged": false,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋KRX300인덱스증권투자신탁(주식-파생형)종류C-P2e": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-파생형",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -115,11 +151,15 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "한국투자퇴직연금한국의힘증권자투자신탁 1(주식)(C-e)": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -128,11 +168,15 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋퇴직연금고배당포커스증권자투자신탁 1(주식)종류C-P2e": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -142,25 +186,33 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "유리필라델피아반도체인덱스증권자투자신탁H[주식]ClassC-P1e": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
       "semiconductor",
       "index"
     ],
-    "hedged": null,
+    "hedged": true,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "KB액티브배당증권자투자신탁(주식)C-퇴직e": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -169,11 +221,15 @@
     "hedged": null,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "마이다스액티브가치증권투자회사(주식)C-Pe2": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -182,11 +238,15 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "한화한국오퍼튜니티증권자투자신탁(주식)종류P-E": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -195,25 +255,33 @@
     "hedged": null,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "유리필라델피아반도체인덱스증권자투자신탁UH[주식]ClassC-P1e": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
       "semiconductor",
       "index"
     ],
-    "hedged": null,
+    "hedged": false,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "iM에셋월드에너지증권자투자신탁(주식-재간접형)(H)(C-Rpe)": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
     "assetClass": "equity",
     "region": "global",
     "themes": [
@@ -222,11 +290,15 @@
     "hedged": true,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "삼성배당주장기증권투자신탁 1[주식](Cpe(퇴직연금))": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -236,11 +308,15 @@
     "hedged": null,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "신영퇴직연금배당주식증권자투자신탁(주식)C-E형": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -250,11 +326,15 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "마이다스신성장기업포커스증권자투자신탁(주식)C-Pe2": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -263,11 +343,15 @@
     "hedged": null,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "신영밸류고배당증권자투자신탁(주식)C-P2e형": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -277,11 +361,15 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋퇴직연금배당커버드콜액티브증권자투자신탁 1(주식혼합)종류C-P2e": {
     "category": "주식혼합형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식혼합",
     "assetClass": "mixed",
     "region": "korea",
     "themes": [
@@ -291,11 +379,15 @@
     "hedged": null,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "마이다스책임투자증권투자신탁(주식)C-Pe2": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -304,11 +396,15 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "베어링고배당증권자투자신탁(주식)ClassC-P2e": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -317,24 +413,32 @@
     "hedged": null,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "iM에셋월드에너지증권자투자신탁(주식-재간접형)(UH)(C-Rpe)": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
     "assetClass": "equity",
     "region": "global",
     "themes": [
       "energy"
     ],
-    "hedged": true,
+    "hedged": false,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "트러스톤ESG지배구조레벨업증권자투자신탁[주식]Cp2-E클래스": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -343,11 +447,15 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋퇴직연금코어밸류증권자투자신탁 1(주식)종류C-P2e": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -357,11 +465,15 @@
     "hedged": null,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "키움글로벌차세대IT&네트워크증권자투자신탁(H)[주식]ClassC-P2e(퇴직연금)": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "global",
     "themes": [
@@ -370,11 +482,15 @@
     "hedged": true,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "한화그린히어로증권자투자신탁(주식) C-RPe(퇴직연금)": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -384,25 +500,33 @@
     "hedged": null,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "삼성글로벌메타버스증권자투자신탁H[주식]_Cpe(퇴직연금)": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "global",
     "themes": [
       "ai",
       "gold"
     ],
-    "hedged": null,
+    "hedged": true,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "신한스노우볼인컴증권투자신탁[채권혼합](종류C-re)": {
     "category": "채권혼합형",
-    "riskAsset": true,
+    "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권혼합",
     "assetClass": "mixed",
     "region": "korea",
     "themes": [
@@ -411,11 +535,15 @@
     "hedged": null,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "신한삼성전자알파증권자투자신탁 1[채권혼합](종류C-re)": {
     "category": "채권혼합형",
-    "riskAsset": true,
+    "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권혼합",
     "assetClass": "mixed",
     "region": "korea",
     "themes": [
@@ -424,11 +552,15 @@
     "hedged": null,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "마이다스아시아리더스성장주증권자투자신탁(H)(주식)C-Pe2": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "asia",
     "themes": [
@@ -437,11 +569,15 @@
     "hedged": true,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋퇴직연금다이와일본밸류중소형증권자투자신탁 1(주식)종류C-P2e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "japan",
     "themes": [
@@ -451,11 +587,15 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "피델리티재팬증권자투자신탁(주식-재간접형)CP-e": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
     "assetClass": "equity",
     "region": "japan",
     "themes": [
@@ -464,38 +604,50 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "삼성픽테로보틱스증권자투자신탁H[주식-재간접형]Cpe(퇴직연금)": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
       "robot",
       "gold"
     ],
-    "hedged": null,
+    "hedged": true,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "키움글로벌차세대IT&네트워크증권자투자신탁(UH)[주식]C-P2e(퇴직연금)": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "global",
     "themes": [
       "gold"
     ],
-    "hedged": true,
+    "hedged": false,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "iM에셋월드광업주증권자투자신탁(주식-재간접형)(H)(C-Rpe)": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
     "assetClass": "equity",
     "region": "global",
     "themes": [
@@ -504,11 +656,15 @@
     "hedged": true,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋퇴직플랜KRX100인덱스안정형40증권자투자신탁 1(채권혼합) 종류C-P2e": {
     "category": "채권혼합형",
-    "riskAsset": true,
+    "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권혼합",
     "assetClass": "mixed",
     "region": "korea",
     "themes": [
@@ -517,11 +673,15 @@
     "hedged": null,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "마이다스퇴직연금배당40증권자투자신탁 1(채권혼합)Ce": {
     "category": "채권혼합형",
-    "riskAsset": true,
+    "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권혼합",
     "assetClass": "mixed",
     "region": "korea",
     "themes": [
@@ -531,11 +691,15 @@
     "hedged": null,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "한국투자퇴직연금한국의힘40증권자투자신탁 1(채권혼합)(C-e)": {
     "category": "채권혼합형",
-    "riskAsset": true,
+    "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권혼합",
     "assetClass": "mixed",
     "region": "korea",
     "themes": [
@@ -544,11 +708,15 @@
     "hedged": null,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "신한누버거버먼미국가치주증권투자신탁(H)[주식-재간접형](종류C-re)": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
     "assetClass": "equity",
     "region": "us",
     "themes": [
@@ -557,38 +725,50 @@
     "hedged": true,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "삼성일본중소형FOCUS증권자투자신탁H[주식]Cpe(퇴직연금)": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "japan",
     "themes": [
       "gold"
     ],
-    "hedged": null,
+    "hedged": true,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "삼성글로벌메타버스증권자투자신탁UH[주식]_Cpe(퇴직연금)": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "global",
     "themes": [
       "ai",
       "gold"
     ],
-    "hedged": null,
+    "hedged": false,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋K에너지인프라인덱스증권자투자신탁(주식)종류C-P2e": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -598,25 +778,33 @@
     "hedged": null,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "마이다스아시아리더스성장주연금증권자투자신탁(UH)(주식)C-Pe2": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "asia",
     "themes": [
       "growth",
       "gold"
     ],
-    "hedged": true,
+    "hedged": false,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "트러스톤장기성장40퇴직연금증권자투자신탁[채권혼합]Ce클래스": {
     "category": "채권혼합형",
-    "riskAsset": true,
+    "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권혼합",
     "assetClass": "mixed",
     "region": "korea",
     "themes": [
@@ -626,25 +814,33 @@
     "hedged": null,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "삼성픽테로보틱스증권자투자신탁UH[주식-재간접형]_Cpe(퇴직연금)": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
       "robot",
       "gold"
     ],
-    "hedged": null,
+    "hedged": false,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "카디안퇴직연금업종일등40증권자투자신탁[채권혼합]클래스C-E": {
     "category": "채권혼합형",
-    "riskAsset": true,
+    "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권혼합",
     "assetClass": "mixed",
     "region": "korea",
     "themes": [
@@ -653,11 +849,15 @@
     "hedged": null,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "에셋플러스코리아리치투게더퇴직연금증권자투자신탁 1[주식]종류Ce": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -666,12 +866,16 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "iM에셋월드골드증권자투자신탁(주식-재간접형)(H)(C-Rpe)": {
-    "category": "기타",
-    "riskAsset": false,
-    "assetClass": "other",
+    "category": "주식형",
+    "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
+    "assetClass": "equity",
     "region": "global",
     "themes": [
       "gold"
@@ -679,11 +883,15 @@
     "hedged": true,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "신영퇴직연금가치40증권자투자신탁(채권혼합)C-E형": {
     "category": "채권혼합형",
-    "riskAsset": true,
+    "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권혼합",
     "assetClass": "mixed",
     "region": "korea",
     "themes": [
@@ -693,11 +901,15 @@
     "hedged": null,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "KB퇴직연금스타펀드셀렉션증권자투자신탁(채권혼합-재간접형)C-E": {
     "category": "채권혼합형",
-    "riskAsset": true,
+    "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권혼합-재간접형",
     "assetClass": "mixed",
     "region": "korea",
     "themes": [
@@ -706,11 +918,15 @@
     "hedged": null,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋퇴직플랜40증권자투자신탁 1(채권혼합)종류C-P2e": {
     "category": "채권혼합형",
-    "riskAsset": true,
+    "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권혼합",
     "assetClass": "mixed",
     "region": "korea",
     "themes": [
@@ -719,11 +935,15 @@
     "hedged": null,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "KB퇴직연금배당40증권자투자신탁(채권혼합)C-E": {
     "category": "채권혼합형",
-    "riskAsset": true,
+    "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권혼합",
     "assetClass": "mixed",
     "region": "korea",
     "themes": [
@@ -733,11 +953,15 @@
     "hedged": null,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "마이다스미소중소형주증권자투자신탁(주식)C-Pe2": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -746,11 +970,15 @@
     "hedged": null,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋퇴직연금베스트펀드컬렉션증권자투자신탁 1(채권혼합-재간접형)종류C-P2e": {
     "category": "채권혼합형",
-    "riskAsset": true,
+    "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권혼합-재간접형",
     "assetClass": "mixed",
     "region": "korea",
     "themes": [
@@ -759,24 +987,32 @@
     "hedged": null,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "iM에셋월드광업주증권자투자신탁(주식-재간접형)(UH)(C-Rpe)": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
     "assetClass": "equity",
     "region": "global",
     "themes": [
       "general"
     ],
-    "hedged": true,
+    "hedged": false,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "신영퇴직연금배당40증권자투자신탁(채권혼합)C-E형": {
     "category": "채권혼합형",
-    "riskAsset": true,
+    "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권혼합",
     "assetClass": "mixed",
     "region": "korea",
     "themes": [
@@ -786,11 +1022,15 @@
     "hedged": null,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "한국투자글로벌AI&반도체TOP10증권자투자신탁H(주식)(C-Re)": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "global",
     "themes": [
@@ -800,11 +1040,15 @@
     "hedged": null,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "키움슈로더이머징위너스증권자투자신탁(주식혼합-재간접형)ClassC-Cpe(퇴직연금)": {
     "category": "해외주식혼합형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식혼합-재간접형",
     "assetClass": "mixed",
     "region": "emerging",
     "themes": [
@@ -813,11 +1057,15 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋코스닥혁신성장증권자투자신탁(주식)종류C-P2e": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -826,12 +1074,16 @@
     "hedged": null,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "키움슈로더글로벌가치주인컴증권자투자신탁(주식-재간접형)ClassC-CPe(퇴직연금)": {
-    "category": "해외채권형",
-    "riskAsset": false,
-    "assetClass": "bond",
+    "category": "해외주식형",
+    "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
+    "assetClass": "equity",
     "region": "global",
     "themes": [
       "dividend",
@@ -841,11 +1093,15 @@
     "hedged": null,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋퇴직플랜G40증권자투자신탁 1(채권혼합)종류C-P2e": {
     "category": "채권혼합형",
-    "riskAsset": true,
+    "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권혼합",
     "assetClass": "mixed",
     "region": "korea",
     "themes": [
@@ -854,12 +1110,16 @@
     "hedged": null,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "피델리티글로벌배당인컴증권자투자신탁(주식-재간접형)종류CP-e": {
-    "category": "해외채권형",
-    "riskAsset": false,
-    "assetClass": "bond",
+    "category": "해외주식형",
+    "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
+    "assetClass": "equity",
     "region": "global",
     "themes": [
       "dividend"
@@ -867,11 +1127,15 @@
     "hedged": null,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "iM에셋월드헬스사이언스증권투자신탁(주식-재간접형)(C-Rpe)": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
     "assetClass": "equity",
     "region": "global",
     "themes": [
@@ -880,24 +1144,15 @@
     "hedged": null,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "KB글로벌테크놀로지EMP증권자투자신탁(주식-재간접형)C-퇴직e": {
-    "category": "기타",
-    "riskAsset": false,
-    "assetClass": "other",
-    "region": "global",
-    "themes": [
-      "general"
-    ],
-    "hedged": null,
-    "riskLevel": 2,
-    "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
-  },
-  "피델리티글로벌테크놀로지증권자투자신탁(주식-재간접형)종류CP-e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
     "assetClass": "equity",
     "region": "global",
     "themes": [
@@ -906,11 +1161,32 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
+  },
+  "피델리티글로벌테크놀로지증권자투자신탁(주식-재간접형)종류CP-e": {
+    "category": "해외주식형",
+    "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
+    "assetClass": "equity",
+    "region": "global",
+    "themes": [
+      "general"
+    ],
+    "hedged": null,
+    "riskLevel": 2,
+    "source": "fund_data.json + keyword classification",
+    "generatedAt": "2026-11-17"
   },
   "미래에셋퇴직연금코어밸류40증권자투자신탁 1(채권혼합)종류C-P2e": {
     "category": "채권혼합형",
-    "riskAsset": true,
+    "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권혼합",
     "assetClass": "mixed",
     "region": "korea",
     "themes": [
@@ -920,11 +1196,15 @@
     "hedged": null,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "한국투자미국배당귀족증권자투자신탁H(주식)(C-Re)": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "us",
     "themes": [
@@ -933,11 +1213,15 @@
     "hedged": null,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "유리글로벌Top10주식과단기채증권자투자신탁[채권혼합]_ClassC-P1e": {
     "category": "해외채권혼합형",
-    "riskAsset": true,
+    "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권혼합",
     "assetClass": "mixed",
     "region": "global",
     "themes": [
@@ -946,11 +1230,15 @@
     "hedged": null,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "에셋플러스글로벌리치투게더증권자투자신탁 1(주식)종류C-P2e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "global",
     "themes": [
@@ -959,11 +1247,15 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "KB스타미국나스닥100인덱스증권자투자신탁(주식-파생형)(H)C-퇴직e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-파생형",
     "assetClass": "equity",
     "region": "us",
     "themes": [
@@ -972,11 +1264,15 @@
     "hedged": true,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋미국나스닥100인덱스증권자투자신탁(주식)(H)종류C-P2e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "us",
     "themes": [
@@ -985,24 +1281,32 @@
     "hedged": true,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "iM에셋월드골드증권자투자신탁(주식-재간접형)(UH)(C-Rpe)": {
-    "category": "기타",
-    "riskAsset": false,
-    "assetClass": "other",
+    "category": "주식형",
+    "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
+    "assetClass": "equity",
     "region": "global",
     "themes": [
       "gold"
     ],
-    "hedged": true,
+    "hedged": false,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋유럽블루칩인덱스증권자투자신탁 1(주식)종류C-P2e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "europe",
     "themes": [
@@ -1011,11 +1315,15 @@
     "hedged": null,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋글로벌솔루션증권자투자신탁(주식-재간접형)종류C-P2e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
     "assetClass": "equity",
     "region": "global",
     "themes": [
@@ -1024,25 +1332,33 @@
     "hedged": null,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "한국투자글로벌AI&반도체TOP10증권자투자신탁UH(주식)(C-Re)": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "global",
     "themes": [
       "semiconductor",
       "ai"
     ],
-    "hedged": null,
+    "hedged": false,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "신한미국S&P500인덱스증권자투자신탁(H)[주식-파생형](종류C-re)": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-파생형",
     "assetClass": "equity",
     "region": "us",
     "themes": [
@@ -1051,24 +1367,32 @@
     "hedged": true,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "삼성일본중소형FOCUS증권자투자신탁UH[주식]Cpe(퇴직연금)": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "japan",
     "themes": [
       "gold"
     ],
-    "hedged": null,
+    "hedged": false,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋연금선진시장증권자투자신탁 1(주식-재간접형)종류C-P2e": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -1077,11 +1401,15 @@
     "hedged": null,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "AB셀렉트미국증권투자신탁(주식-재간접형)종류Ce-P2": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
     "assetClass": "equity",
     "region": "us",
     "themes": [
@@ -1090,11 +1418,15 @@
     "hedged": null,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "교보로보테크증권자투자신탁 1(H)[주식]ClassC-Re": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -1103,11 +1435,15 @@
     "hedged": true,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "DB글로벌차세대모빌리티증권자투자신탁(H)[주식]C/C-P2E": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "global",
     "themes": [
@@ -1116,11 +1452,15 @@
     "hedged": true,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋미국배당커버드콜액티브증권자투자신탁(주식)(H)종류C-P2e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "us",
     "themes": [
@@ -1129,11 +1469,15 @@
     "hedged": true,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "피델리티글로벌금융주증권자투자신탁(주식-재간접형)CP-e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
     "assetClass": "equity",
     "region": "global",
     "themes": [
@@ -1142,11 +1486,15 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "키움슈로더유로증권자투자신탁(주식-재간접형)ClassC-CPe(퇴직연금)": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
     "assetClass": "equity",
     "region": "europe",
     "themes": [
@@ -1155,24 +1503,15 @@
     "hedged": null,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋미국인덱스EMP증권자투자신탁(주식-재간접형)종류C-P2e": {
-    "category": "기타",
-    "riskAsset": false,
-    "assetClass": "other",
-    "region": "us",
-    "themes": [
-      "index"
-    ],
-    "hedged": null,
-    "riskLevel": 3,
-    "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
-  },
-  "미래에셋미국블루칩인덱스증권투자신탁 1(주식)종류C-P2e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
     "assetClass": "equity",
     "region": "us",
     "themes": [
@@ -1181,11 +1520,32 @@
     "hedged": null,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
+  },
+  "미래에셋미국블루칩인덱스증권투자신탁 1(주식)종류C-P2e": {
+    "category": "해외주식형",
+    "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
+    "assetClass": "equity",
+    "region": "us",
+    "themes": [
+      "index"
+    ],
+    "hedged": null,
+    "riskLevel": 3,
+    "source": "fund_data.json + keyword classification",
+    "generatedAt": "2026-11-17"
   },
   "키움슈로더글로벌지속가능성장주증권투자신탁(주식-재간접형)ClassC-CPe(퇴직연금)": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
     "assetClass": "equity",
     "region": "global",
     "themes": [
@@ -1195,25 +1555,33 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "삼성글로벌AI에이전트증권자투자신탁H[주식]_Cpe(퇴직연금)": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "global",
     "themes": [
       "ai",
       "gold"
     ],
-    "hedged": null,
+    "hedged": true,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "다올VIP스타셀렉션증권자투자신탁[주식]종류CPe": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -1222,24 +1590,32 @@
     "hedged": null,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "한국투자미국배당귀족증권자투자신탁UH(주식)(C-Re)": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "us",
     "themes": [
       "dividend"
     ],
-    "hedged": null,
+    "hedged": false,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "다올VIP밸류퇴직연금증권자투자신탁[주식]종류Ce": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -1249,24 +1625,32 @@
     "hedged": null,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋미국나스닥100인덱스증권자투자신탁(주식)(UH)종류C-P2e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "us",
     "themes": [
       "index"
     ],
-    "hedged": true,
+    "hedged": false,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "IBK플레인바닐라EMP증권투자신탁[혼합-재간접형]종류C-Re": {
     "category": "기타",
-    "riskAsset": false,
+    "riskAsset": true,
+    "riskStatus": "unverified",
+    "riskBasis": "유형 표기로 주식 편입 한도를 알 수 없음 → 미확인으로 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "혼합-재간접형",
     "assetClass": "other",
     "region": "korea",
     "themes": [
@@ -1275,11 +1659,15 @@
     "hedged": null,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "유리글로벌거래소증권자투자신탁 1[주식]C/C-P1e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "global",
     "themes": [
@@ -1288,11 +1676,15 @@
     "hedged": null,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "삼성퇴직연금코리아중소형채권혼합증권자투자신탁 1[채권혼합]_Ce": {
     "category": "채권혼합형",
-    "riskAsset": true,
+    "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권혼합",
     "assetClass": "mixed",
     "region": "korea",
     "themes": [
@@ -1301,11 +1693,15 @@
     "hedged": null,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "에셋플러스글로벌리치투게더40증권자투자신탁 1[채권혼합]종류C-P2e": {
     "category": "해외채권혼합형",
-    "riskAsset": true,
+    "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권혼합",
     "assetClass": "mixed",
     "region": "global",
     "themes": [
@@ -1314,11 +1710,15 @@
     "hedged": null,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "VIP한국형가치투자증권자투자신탁[주식]C-P2e클래스": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -1327,37 +1727,49 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "신한미국S&P500인덱스증권자투자신탁(UH)[주식-파생형](종류C-re)": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-파생형",
     "assetClass": "equity",
     "region": "us",
     "themes": [
       "index"
     ],
-    "hedged": true,
+    "hedged": false,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋미국배당커버드콜액티브증권자투자신탁(주식)(UH)종류C-P2e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "us",
     "themes": [
       "dividend"
     ],
-    "hedged": true,
+    "hedged": false,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋글로벌솔루션40증권자투자신탁 1(채권혼합)종류C-P2e": {
     "category": "해외채권혼합형",
-    "riskAsset": true,
+    "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권혼합",
     "assetClass": "mixed",
     "region": "global",
     "themes": [
@@ -1366,11 +1778,15 @@
     "hedged": null,
     "riskLevel": 5,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "한국투자웰링턴글로벌퀄리티증권자투자신탁H(주식)(C-Re)": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "global",
     "themes": [
@@ -1379,39 +1795,51 @@
     "hedged": null,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋MSCIAC월드인덱스증권자투자신탁(주식)(UH)종류C-P2e": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "global",
     "themes": [
       "index"
     ],
-    "hedged": true,
+    "hedged": false,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "삼성미국S&P500인덱스증권자투자신탁UH[주식]_Cpe(퇴직연금)": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "us",
     "themes": [
       "index",
       "gold"
     ],
-    "hedged": null,
+    "hedged": false,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋글로벌코어테크EMP증권자투자신탁(주식-재간접형)종류C-P2e": {
-    "category": "기타",
-    "riskAsset": false,
-    "assetClass": "other",
+    "category": "해외주식형",
+    "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
+    "assetClass": "equity",
     "region": "global",
     "themes": [
       "general"
@@ -1419,11 +1847,15 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋평생소득TIF혼합자산자투자신탁종류C-P2e": {
     "category": "기타",
-    "riskAsset": false,
+    "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "증권형이 아닌 집합투자기구(혼합자산·특별자산·부동산) → 감독규정 제11조①5호 비해당, 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "혼합자산",
     "assetClass": "other",
     "region": "korea",
     "themes": [
@@ -1432,24 +1864,32 @@
     "hedged": null,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "KB글로벌주식솔루션EMP증권자투자신탁(주식-재간접형)(UH)C-퇴직e": {
-    "category": "기타",
-    "riskAsset": false,
-    "assetClass": "other",
+    "category": "해외주식형",
+    "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
+    "assetClass": "equity",
     "region": "global",
     "themes": [
       "general"
     ],
-    "hedged": true,
+    "hedged": false,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋클린테크증권자투자신탁(주식)종류C-P2e": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -1458,11 +1898,15 @@
     "hedged": null,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋연금글로벌헬스케어증권자투자신탁 1(주식)종류C-P2e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "global",
     "themes": [
@@ -1472,11 +1916,15 @@
     "hedged": null,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "피델리티글로벌배당인컴40증권자투자신탁(채권혼합-재간접형)종류CP-e": {
     "category": "해외채권혼합형",
-    "riskAsset": true,
+    "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권혼합-재간접형",
     "assetClass": "mixed",
     "region": "global",
     "themes": [
@@ -1485,11 +1933,15 @@
     "hedged": null,
     "riskLevel": 5,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "iM에셋다이나믹하이인컴증권투자신탁(주식혼합-재간접형)(C-Rpe)": {
     "category": "주식혼합형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식혼합-재간접형",
     "assetClass": "mixed",
     "region": "korea",
     "themes": [
@@ -1498,11 +1950,15 @@
     "hedged": null,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋퇴직연금스마트롱숏30증권자투자신탁 1(채권혼합) 종류C-P2e": {
     "category": "채권혼합형",
-    "riskAsset": true,
+    "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권혼합",
     "assetClass": "mixed",
     "region": "korea",
     "themes": [
@@ -1511,25 +1967,33 @@
     "hedged": null,
     "riskLevel": 5,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "삼성글로벌AI에이전트증권자투자신탁UH[주식]_Cpe(퇴직연금)": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "global",
     "themes": [
       "ai",
       "gold"
     ],
-    "hedged": null,
+    "hedged": false,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "키움슈로더글로벌타겟리턴증권투자신탁(주식혼합-재간접형)ClassC-CPe(퇴직연금)": {
     "category": "해외주식혼합형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식혼합-재간접형",
     "assetClass": "mixed",
     "region": "global",
     "themes": [
@@ -1538,11 +2002,15 @@
     "hedged": null,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "iM에셋글로벌자산배분증권투자신탁(주식혼합-재간접형)(H)(C-Rpe)": {
     "category": "해외주식혼합형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식혼합-재간접형",
     "assetClass": "mixed",
     "region": "global",
     "themes": [
@@ -1551,11 +2019,15 @@
     "hedged": true,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "피델리티월드Big4증권자투자신탁(주식-재간접형)CP-e": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
     "assetClass": "equity",
     "region": "global",
     "themes": [
@@ -1564,11 +2036,15 @@
     "hedged": null,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "베어링독일증권자투자신탁[H](주식-재간접형)ClassC-P2e": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -1577,11 +2053,15 @@
     "hedged": true,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "KB스타베트남VN30인덱스증권자투자신탁(주식-파생형)C-퇴직e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-파생형",
     "assetClass": "equity",
     "region": "vietnam",
     "themes": [
@@ -1590,11 +2070,15 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "키움더드림단기채증권투자신탁[채권]C-P2e(퇴직연금)": {
     "category": "채권형",
     "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권",
     "assetClass": "bond",
     "region": "korea",
     "themes": [
@@ -1603,11 +2087,15 @@
     "hedged": null,
     "riskLevel": 6,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "우리단기채권증권투자신탁(채권)ClassC-Pe": {
     "category": "채권형",
     "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권",
     "assetClass": "bond",
     "region": "korea",
     "themes": [
@@ -1616,11 +2104,15 @@
     "hedged": null,
     "riskLevel": 6,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "한화내일받는단기국공채증권자투자신탁(채권)C-RPe(퇴직연금)": {
     "category": "채권형",
     "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권",
     "assetClass": "bond",
     "region": "korea",
     "themes": [
@@ -1629,11 +2121,15 @@
     "hedged": null,
     "riskLevel": 6,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "우리중소형고배당증권자투자신탁 1(주식)ClassC-Pe": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -1642,11 +2138,15 @@
     "hedged": null,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋연금브라질업종대표증권자투자신탁 1(주식)종류C-P2e": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "brazil",
     "themes": [
@@ -1655,11 +2155,15 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "유진챔피언단기채증권자투자신탁(채권) Class C-Pe2": {
     "category": "채권형",
     "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권",
     "assetClass": "bond",
     "region": "korea",
     "themes": [
@@ -1668,11 +2172,15 @@
     "hedged": null,
     "riskLevel": 6,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "키움단기국공채증권자투자신탁 1[채권]C-P2e(퇴직연금)": {
     "category": "채권형",
     "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권",
     "assetClass": "bond",
     "region": "korea",
     "themes": [
@@ -1681,11 +2189,15 @@
     "hedged": null,
     "riskLevel": 6,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "IBK내일출금단기국공채증권자투자신탁[채권]종류C-Re": {
     "category": "채권형",
     "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권",
     "assetClass": "bond",
     "region": "korea",
     "themes": [
@@ -1694,11 +2206,15 @@
     "hedged": null,
     "riskLevel": 6,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "DB정통크레딧증권자투자신탁[채권]종류C-P2E": {
     "category": "채권형",
     "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권",
     "assetClass": "bond",
     "region": "korea",
     "themes": [
@@ -1707,11 +2223,15 @@
     "hedged": null,
     "riskLevel": 5,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "신한베스트크레딧단기증권자투자신탁[채권](종류C-re)": {
     "category": "채권형",
     "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권",
     "assetClass": "bond",
     "region": "korea",
     "themes": [
@@ -1720,11 +2240,15 @@
     "hedged": null,
     "riskLevel": 6,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "한국투자크레딧포커스ESG증권자투자신탁 1(채권)(C-Re)": {
     "category": "채권형",
     "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권",
     "assetClass": "bond",
     "region": "korea",
     "themes": [
@@ -1733,11 +2257,15 @@
     "hedged": null,
     "riskLevel": 5,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "흥국퇴직연금멀티크레딧증권자투자신탁[채권]C-e": {
     "category": "채권형",
     "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권",
     "assetClass": "bond",
     "region": "korea",
     "themes": [
@@ -1746,11 +2274,15 @@
     "hedged": null,
     "riskLevel": 6,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "마이다스우량채권증권자투자신탁 1(채권)C-Pe2": {
     "category": "채권형",
     "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권",
     "assetClass": "bond",
     "region": "korea",
     "themes": [
@@ -1759,11 +2291,15 @@
     "hedged": null,
     "riskLevel": 5,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "피델리티글로벌멀티에셋인컴증권자투자신탁(채권혼합-재간접형)종류CP-e": {
     "category": "해외채권혼합형",
-    "riskAsset": true,
+    "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권혼합-재간접형",
     "assetClass": "mixed",
     "region": "global",
     "themes": [
@@ -1772,11 +2308,15 @@
     "hedged": null,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋솔로몬단기국공채증권자투자신탁 1(채권)종류C-P2e": {
     "category": "채권형",
     "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권",
     "assetClass": "bond",
     "region": "korea",
     "themes": [
@@ -1785,11 +2325,15 @@
     "hedged": null,
     "riskLevel": 5,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "교보공모주하이일드플러스증권투자신탁[채권혼합]ClassC-Re(퇴직연금)": {
     "category": "채권혼합형",
     "riskAsset": true,
+    "riskStatus": "unverified",
+    "riskBasis": "투자부적격 채권 위주(하이일드) 표기 → 감독규정 제11조①5호 괄호 제외 대상일 수 있음, 미확인으로 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "채권혼합",
     "assetClass": "mixed",
     "region": "korea",
     "themes": [
@@ -1798,11 +2342,15 @@
     "hedged": null,
     "riskLevel": 5,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋단기채알파증권자투자신탁(채권혼합)종류C-P2e": {
     "category": "채권혼합형",
-    "riskAsset": true,
+    "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권혼합",
     "assetClass": "mixed",
     "region": "korea",
     "themes": [
@@ -1811,37 +2359,49 @@
     "hedged": null,
     "riskLevel": 5,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "삼성글로벌다이나믹자산배분증권자투자신탁H[주식혼합-재간접형]_Cpe(퇴직연금)": {
     "category": "해외주식혼합형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식혼합-재간접형",
     "assetClass": "mixed",
     "region": "global",
     "themes": [
       "gold"
     ],
-    "hedged": null,
+    "hedged": true,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "삼성누버거버먼이머징단기채권증권자투자신탁H[채권-재간접형]Cpe(퇴직연금)": {
     "category": "해외채권형",
     "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권-재간접형",
     "assetClass": "bond",
     "region": "emerging",
     "themes": [
       "gold"
     ],
-    "hedged": null,
+    "hedged": true,
     "riskLevel": 5,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋퇴직플랜아시아그레이트컨슈머증권자투자신탁 1(주식-재간접형)종류C-e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
     "assetClass": "equity",
     "region": "asia",
     "themes": [
@@ -1850,11 +2410,15 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋연금글로벌그로스증권자투자신탁 1(주식)종류C-P2e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "global",
     "themes": [
@@ -1864,11 +2428,15 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "피델리티유럽증권자투자신탁(주식-재간접형)CP-e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
     "assetClass": "equity",
     "region": "europe",
     "themes": [
@@ -1877,11 +2445,15 @@
     "hedged": null,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋퇴직연금성장유망중소형주증권자투자신탁 1(주식)종류C-e": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -1891,11 +2463,15 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "하나글로벌리츠부동산자투자신탁[재간접형]ClassC-P2E": {
     "category": "기타",
-    "riskAsset": false,
+    "riskAsset": true,
+    "riskStatus": "unverified",
+    "riskBasis": "유형 표기로 주식 편입 한도를 알 수 없음 → 미확인으로 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "재간접형",
     "assetClass": "other",
     "region": "global",
     "themes": [
@@ -1904,11 +2480,15 @@
     "hedged": null,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "AB미국그로스증권투자신탁(주식-재간접형)종류형Ce-P2": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
     "assetClass": "equity",
     "region": "us",
     "themes": [
@@ -1917,11 +2497,15 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "KB글로벌ESG성장리더스증권자투자신탁(주식)(H)C-퇴직e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "global",
     "themes": [
@@ -1930,11 +2514,15 @@
     "hedged": true,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "AB글로벌고수익증권투자신탁(채권-재간접형)종류형Ce-P2": {
     "category": "해외채권형",
     "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권-재간접형",
     "assetClass": "bond",
     "region": "global",
     "themes": [
@@ -1943,11 +2531,15 @@
     "hedged": null,
     "riskLevel": 5,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋퇴직플랜글로벌다이나믹증권자투자신탁 1(채권)종류C-P2e": {
     "category": "해외채권형",
     "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권",
     "assetClass": "bond",
     "region": "global",
     "themes": [
@@ -1956,12 +2548,16 @@
     "hedged": null,
     "riskLevel": 5,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "키움디딤더높이EMP증권투자신탁[채권혼합-재간접형]C-P2e(퇴직연금)": {
-    "category": "기타",
+    "category": "채권혼합형",
     "riskAsset": false,
-    "assetClass": "other",
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권혼합-재간접형",
+    "assetClass": "mixed",
     "region": "korea",
     "themes": [
       "gold"
@@ -1969,11 +2565,15 @@
     "hedged": null,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "신영마라톤중소형주증권자투자신탁(주식)C-P2e형": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -1982,11 +2582,15 @@
     "hedged": null,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋글로벌다이나믹플러스증권자투자신탁 1(채권)종류C-P2e": {
     "category": "해외채권형",
     "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권",
     "assetClass": "bond",
     "region": "global",
     "themes": [
@@ -1995,11 +2599,15 @@
     "hedged": null,
     "riskLevel": 5,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋글로벌혁신기업ESG증권자투자신탁(주식) 종류C-P2e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "global",
     "themes": [
@@ -2008,24 +2616,32 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "삼성글로벌채권증권자투자신탁H[채권]_Cpe(퇴직연금)": {
     "category": "해외채권형",
     "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권",
     "assetClass": "bond",
     "region": "global",
     "themes": [
       "gold"
     ],
-    "hedged": null,
+    "hedged": true,
     "riskLevel": 5,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋골드특별자산자투자신탁(금-재간접형)종류C-P2e": {
     "category": "기타",
-    "riskAsset": false,
+    "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "증권형이 아닌 집합투자기구(혼합자산·특별자산·부동산) → 감독규정 제11조①5호 비해당, 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "금-재간접형",
     "assetClass": "other",
     "region": "korea",
     "themes": [
@@ -2034,11 +2650,15 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋솔로몬중장기국공채증권자투자신탁 1(채권)종류C-P2e": {
     "category": "채권형",
     "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권",
     "assetClass": "bond",
     "region": "korea",
     "themes": [
@@ -2047,11 +2667,15 @@
     "hedged": null,
     "riskLevel": 5,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋퇴직플랜글로벌그로스40증권자투자신탁 1(채권혼합)종류C-P2e": {
     "category": "해외채권혼합형",
-    "riskAsset": true,
+    "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권혼합",
     "assetClass": "mixed",
     "region": "global",
     "themes": [
@@ -2060,11 +2684,15 @@
     "hedged": null,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋퇴직플랜글로벌다이나믹50증권자투자신탁 1(채권)종류C-P2e": {
     "category": "해외채권형",
     "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권",
     "assetClass": "bond",
     "region": "global",
     "themes": [
@@ -2073,11 +2701,15 @@
     "hedged": null,
     "riskLevel": 5,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋G2이노베이터증권자투자신탁(주식)종류C-P2e": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -2086,12 +2718,16 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "삼성디딤밀당다람쥐글로벌EMP증권자투자신탁[채권혼합-재간접형]_Cpe(퇴직연금)": {
-    "category": "기타",
+    "category": "해외채권혼합형",
     "riskAsset": false,
-    "assetClass": "other",
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권혼합-재간접형",
+    "assetClass": "mixed",
     "region": "global",
     "themes": [
       "gold"
@@ -2099,11 +2735,15 @@
     "hedged": null,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋이머징달러우량국공채증권자투자신탁(H)(채권)종류C-P2e": {
     "category": "해외채권형",
     "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권",
     "assetClass": "bond",
     "region": "emerging",
     "themes": [
@@ -2112,11 +2752,15 @@
     "hedged": true,
     "riskLevel": 5,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "한국투자연금베트남그로스증권자투자신탁(주식)(C-Re)": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "vietnam",
     "themes": [
@@ -2126,11 +2770,15 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "카디안차이나드래곤AShare40증권자투자신탁(H)[채권혼합]클래스C-P(퇴직연금)E": {
     "category": "해외채권혼합형",
-    "riskAsset": true,
+    "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권혼합",
     "assetClass": "mixed",
     "region": "china",
     "themes": [
@@ -2139,11 +2787,15 @@
     "hedged": true,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋아시아그로스증권자투자신탁(H)(주식-재간접형)종류C-P2e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
     "assetClass": "equity",
     "region": "asia",
     "themes": [
@@ -2152,11 +2804,15 @@
     "hedged": true,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋달러우량중장기채권증권자투자신탁(H)(채권)종류C-P2e": {
     "category": "채권형",
     "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권",
     "assetClass": "bond",
     "region": "korea",
     "themes": [
@@ -2165,12 +2821,16 @@
     "hedged": true,
     "riskLevel": 5,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "한국밸류글로벌배당인컴증권자투자신탁(주식)(C-Re)": {
-    "category": "해외채권형",
-    "riskAsset": false,
-    "assetClass": "bond",
+    "category": "해외주식형",
+    "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
+    "assetClass": "equity",
     "region": "global",
     "themes": [
       "dividend",
@@ -2179,11 +2839,15 @@
     "hedged": null,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "우리PIMCO글로벌투자등급자투자신탁[채권_재간접형](H)ClassPe1": {
     "category": "해외채권형",
     "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권-재간접형",
     "assetClass": "bond",
     "region": "global",
     "themes": [
@@ -2192,25 +2856,33 @@
     "hedged": true,
     "riskLevel": 5,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "삼성누버거버먼글로벌인컴증권자투자신탁H[채권-재간접형]Cpe(퇴직연금)": {
     "category": "해외채권형",
     "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권-재간접형",
     "assetClass": "bond",
     "region": "global",
     "themes": [
       "dividend",
       "gold"
     ],
-    "hedged": null,
+    "hedged": true,
     "riskLevel": 5,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋퇴직플랜글로벌그레이트컨슈머40증권자투자신탁 1(채권혼합)종류C-P2e": {
     "category": "해외채권혼합형",
-    "riskAsset": true,
+    "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권혼합",
     "assetClass": "mixed",
     "region": "global",
     "themes": [
@@ -2219,11 +2891,15 @@
     "hedged": null,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "삼성아세안증권자투자신탁 2[주식](Cpe(퇴직연금))": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "asean",
     "themes": [
@@ -2232,11 +2908,15 @@
     "hedged": null,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "우리PIMCO토탈리턴증권자투자신탁[채권_재간접형](H)ClassPe1": {
     "category": "채권형",
     "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권-재간접형",
     "assetClass": "bond",
     "region": "korea",
     "themes": [
@@ -2245,11 +2925,15 @@
     "hedged": true,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "AB미국인컴증권투자신탁(채권-재간접형)종류Ce-P2": {
     "category": "해외채권형",
     "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권-재간접형",
     "assetClass": "bond",
     "region": "us",
     "themes": [
@@ -2258,11 +2942,15 @@
     "hedged": null,
     "riskLevel": 5,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋퇴직플랜글로벌그레이트컨슈머증권자투자신탁 1(주식) 종류C-P2e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "global",
     "themes": [
@@ -2271,11 +2959,15 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "우리아티잰글로벌그로스증권자투자신탁[주식_재간접형](H)_ClassPe1": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
     "assetClass": "equity",
     "region": "global",
     "themes": [
@@ -2284,24 +2976,32 @@
     "hedged": true,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "AB미국그로스UH증권투자신탁(주식-재간접형)종류Ce-P2": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
     "assetClass": "equity",
     "region": "us",
     "themes": [
       "growth"
     ],
-    "hedged": null,
+    "hedged": false,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋솔로몬장기국공채증권자투자신탁 1(채권)종류C-P2e": {
     "category": "채권형",
     "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권",
     "assetClass": "bond",
     "region": "korea",
     "themes": [
@@ -2310,11 +3010,15 @@
     "hedged": null,
     "riskLevel": 5,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "카디안차이나드래곤AShare증권자투자신탁(H)[주식]클래스C-P(퇴직연금)E": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "china",
     "themes": [
@@ -2323,11 +3027,15 @@
     "hedged": true,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "KB글로벌AI메타버스테크증권자투자신탁(주식)(H)C-퇴직e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "global",
     "themes": [
@@ -2336,11 +3044,15 @@
     "hedged": true,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "삼성ABF코리아장기채권인덱스증권투자신탁[채권]Cpe(퇴직연금)": {
     "category": "채권형",
     "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권",
     "assetClass": "bond",
     "region": "korea",
     "themes": [
@@ -2350,37 +3062,49 @@
     "hedged": null,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋베트남증권자투자신탁 1(UH)(주식)종류C-P2e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "vietnam",
     "themes": [
       "general"
     ],
-    "hedged": true,
+    "hedged": false,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋달러우량중장기채권증권자투자신탁(UH)(채권)종류C-P2e": {
     "category": "채권형",
     "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권",
     "assetClass": "bond",
     "region": "korea",
     "themes": [
       "general"
     ],
-    "hedged": true,
+    "hedged": false,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "KB중국본토A주증권자투자신탁(주식)C-퇴직e": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "china",
     "themes": [
@@ -2389,11 +3113,15 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "NH-Amundi글로벌우주항공증권자투자신탁(H)[주식]ClassC-P2e(퇴직연금)": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "global",
     "themes": [
@@ -2403,11 +3131,15 @@
     "hedged": true,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "한국투자글로벌전기차&자율주행증권투자신탁(주식)(C-Re)": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "global",
     "themes": [
@@ -2416,24 +3148,32 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "KB글로벌AI메타버스테크증권자투자신탁(주식)(UH)C-퇴직e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "global",
     "themes": [
       "ai"
     ],
-    "hedged": true,
+    "hedged": false,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "피델리티아시아증권자투자신탁(주식)CP-e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "asia",
     "themes": [
@@ -2442,11 +3182,15 @@
     "hedged": null,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "IBK퇴직연금럭셔리라이프스타일증권자투자신탁[주식]C-e": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -2455,11 +3199,15 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋퇴직플랜친디아업종대표40증권자투자신탁 1(채권혼합)종류C-P2e": {
     "category": "채권혼합형",
-    "riskAsset": true,
+    "riskAsset": false,
+    "riskStatus": "nonRisk",
+    "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+    "needsConfirmation": true,
+    "typeTag": "채권혼합",
     "assetClass": "mixed",
     "region": "korea",
     "themes": [
@@ -2468,11 +3216,15 @@
     "hedged": null,
     "riskLevel": 4,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "KB차이나AI테크증권자투자신탁(주식)C-퇴직e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "china",
     "themes": [
@@ -2481,11 +3233,15 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋차이나과창판증권투자신탁(주식) 종류 C-P2e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "china",
     "themes": [
@@ -2494,11 +3250,15 @@
     "hedged": null,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋연금인디아인프라증권자투자신탁 1(주식)종류C-P2e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "india",
     "themes": [
@@ -2507,25 +3267,33 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "NH-Amundi글로벌우주항공증권자투자신탁(UH)[주식]ClassC-P2e(퇴직연금)": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "global",
     "themes": [
       "gold",
       "space"
     ],
-    "hedged": true,
+    "hedged": false,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "DB바이오헬스케어증권자투자신탁 1[주식]ClassC-P2E": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -2534,11 +3302,15 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "KB스타코스닥150인덱스증권자투자신탁(주식-파생형)C-퇴직e": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-파생형",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -2547,11 +3319,15 @@
     "hedged": null,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "피델리티인디아증권자투자신탁(주식-재간접형)종류CP-e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식-재간접형",
     "assetClass": "equity",
     "region": "india",
     "themes": [
@@ -2560,11 +3336,15 @@
     "hedged": null,
     "riskLevel": 3,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋연금인디아업종대표증권자투자신탁 1(주식)종류C-P2e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "india",
     "themes": [
@@ -2573,25 +3353,33 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "삼성글로벌휴머노이드로봇증권자투자신탁H[주식]_Cpe(퇴직연금)": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "global",
     "themes": [
       "robot",
       "gold"
     ],
-    "hedged": null,
+    "hedged": true,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "에셋플러스차이나리치투게더퇴직연금증권자투자신탁 1[주식]종류Ce": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "china",
     "themes": [
@@ -2600,11 +3388,15 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋인도중소형포커스증권자투자신탁 1(주식)종류C-P2e": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "india",
     "themes": [
@@ -2613,11 +3405,15 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "삼성인디아증권자투자신탁 2[주식]Cpe(퇴직연금)": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "india",
     "themes": [
@@ -2626,25 +3422,33 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "삼성글로벌휴머노이드로봇증권자투자신탁UH[주식]_Cpe(퇴직연금)": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "global",
     "themes": [
       "robot",
       "gold"
     ],
-    "hedged": null,
+    "hedged": false,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "KCGI차이나증권투자신탁[주식]종류C-Pe2": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "china",
     "themes": [
@@ -2653,11 +3457,15 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋연금한국헬스케어증권자투자신탁 1(주식)종류C-P2e": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -2667,11 +3475,15 @@
     "hedged": null,
     "riskLevel": 1,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋친디아컨슈머증권투자신탁 1(주식)종류C-P2e": {
     "category": "주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "korea",
     "themes": [
@@ -2680,11 +3492,15 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   },
   "미래에셋차이나그로스증권자투자신탁 1(주식)종류C-P2e": {
     "category": "해외주식형",
     "riskAsset": true,
+    "riskStatus": "risk",
+    "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+    "needsConfirmation": false,
+    "typeTag": "주식",
     "assetClass": "equity",
     "region": "china",
     "themes": [
@@ -2693,6 +3509,6 @@
     "hedged": null,
     "riskLevel": 2,
     "source": "fund_data.json + keyword classification",
-    "generatedAt": "2026-11-16"
+    "generatedAt": "2026-11-17"
   }
 }

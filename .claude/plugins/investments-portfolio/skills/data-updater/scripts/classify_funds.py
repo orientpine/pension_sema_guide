@@ -5,8 +5,8 @@ Fund Classification Generator (Python Version)
 DC형 70% 위험자산 한도 자동 검증을 위한 펀드 분류 데이터 생성
 Converted from classify_funds.js to remove Node.js dependency
 
-위험자산: 주식형, 해외주식형, 주식혼합형, 해외주식혼합형, 채권혼합형, 해외채권혼합형
-안전자산: 채권형, 해외채권형, 기타 (MMF, 예금, 골드, TDF 등)
+위험자산 여부(riskAsset)는 펀드명의 유형 표기로 fund_name_rules.classify_risk가 정한다
+(퇴직연금감독규정 제11조 제1항, 시행 2023-11-16). riskStatus가 nonRisk가 아니면 모두 70% 한도에 산입한다.
 
 Usage:
     python classify_funds.py [output_dir]
@@ -20,19 +20,7 @@ from pathlib import Path
 from datetime import datetime
 import sys
 
-
-# 위험자산 카테고리
-RISK_ASSET_CATEGORIES = [
-    "주식형",
-    "해외주식형",
-    "주식혼합형",
-    "해외주식혼합형",
-    "채권혼합형",
-    "해외채권혼합형",
-]
-
-# 안전자산 카테고리
-SAFE_ASSET_CATEGORIES = ["채권형", "해외채권형", "기타"]
+from fund_name_rules import NON_RISK, classify_risk, derive_hedge, extract_type_tag
 
 
 def get_fund_category(fund_name: str) -> str:
@@ -50,7 +38,17 @@ def get_fund_category(fund_name: str) -> str:
     overseas_pattern = r"해외|글로벌|미국|차이나|인디아|베트남|일본|유럽|아시아|이머징|Global|USA|China|India|Japan|Europe|Asia|Emerging"
     is_overseas = bool(re.search(overseas_pattern, name, re.IGNORECASE))
 
-    # 2. 자산 유형 확인
+    # 2. 자산 유형 확인: 이름의 유형 표기([주식], (주식-재간접형) 등)가 테마 단어(골드·EMP·인컴)보다 우선
+    tag = extract_type_tag(name) or ""
+    if tag.startswith("채권혼합"):
+        return "해외채권혼합형" if is_overseas else "채권혼합형"
+    if tag.startswith("주식혼합"):
+        return "해외주식혼합형" if is_overseas else "주식혼합형"
+    if tag.startswith("채권"):
+        return "해외채권형" if is_overseas else "채권형"
+    if tag.startswith("주식"):
+        return "해외주식형" if is_overseas else "주식형"
+
     has_bond_mixed = bool(re.search(r"채권혼합|채권 혼합", name))
     has_stock_mixed = bool(re.search(r"주식혼합|주식 혼합", name))
     has_bond = (
@@ -166,11 +164,10 @@ def is_hedged(fund_name: str):
     Returns:
         bool or None: True(환헤지), False(환노출), None(명시되지 않음)
     """
-    if re.search(r"\(H\)|\[H\]|H[)]|\(환헤지\)", fund_name, re.IGNORECASE):
-        return True
-    if re.search(r"\(UH\)|\[UH\]|UH[)]|\(환노출\)", fund_name, re.IGNORECASE):
-        return False
-    return None  # 명시되지 않음
+    hedge = derive_hedge(fund_name)
+    if hedge is None:
+        return None
+    return hedge == "H"
 
 
 def find_investments_repo():
@@ -249,7 +246,8 @@ def main(output_dir=None, all_dir=None):
     for fund in funds:
         fund_name = fund.get("name", "")
         category = get_fund_category(fund_name)
-        is_risk_asset = category in RISK_ASSET_CATEGORIES
+        risk = classify_risk(fund_name)
+        is_risk_asset = risk["riskStatus"] != NON_RISK
 
         # Determine asset class
         if "채권" in category and "혼합" not in category:
@@ -264,6 +262,10 @@ def main(output_dir=None, all_dir=None):
         classification[fund_name] = {
             "category": category,
             "riskAsset": is_risk_asset,
+            "riskStatus": risk["riskStatus"],
+            "riskBasis": risk["riskBasis"],
+            "needsConfirmation": risk["needsConfirmation"],
+            "typeTag": risk["typeTag"],
             "assetClass": asset_class,
             "region": extract_region(fund_name),
             "themes": extract_theme(fund_name),
@@ -290,8 +292,13 @@ def main(output_dir=None, all_dir=None):
     print("\nBy category:")
 
     for cat, count in sorted(by_category.items(), key=lambda x: -x[1]):
-        risk_label = "[RISK]" if cat in RISK_ASSET_CATEGORIES else "[SAFE]"
-        print(f"  {cat}: {count} {risk_label}")
+        print(f"  {cat}: {count}")
+
+    by_status = {}
+    for c in classification.values():
+        by_status[c["riskStatus"]] = by_status.get(c["riskStatus"], 0) + 1
+    needs_confirmation = sum(1 for c in classification.values() if c["needsConfirmation"])
+    print(f"\nBy riskStatus: {by_status} (needsConfirmation: {needs_confirmation})")
 
     # 파일 저장
     if all_dir:

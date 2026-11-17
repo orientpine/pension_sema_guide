@@ -393,7 +393,7 @@ confidentialData/tax/{YYYY-MM-DD}-{slug}-{6자리}/
 | `funds/all/all_fund_fees.json`           | 전체 펀드 수수료                       |   2169   |        2026-10-30        | `fundCode`                        |
 | `funds/all/all_fund_classification.json` | 전체 펀드 분류                         |   2169   |     (생성 시각 기준)     | `펀드명`                          |
 
-> ⚠️ **TDF는 별도 파일·단위**입니다. `update_tdf_data.py --from-proposal`로 갱신하면 상품제안서와 같은 기준일이지만, SEMA 포털 표(`--input`)로 갱신하면 기준일이 달라지고 수익률이 전 구간 누적이므로 `fund_data.json`(204개)과 **직접 교차비교하지 마세요.**
+> ⚠️ **TDF는 별도 파일·단위**입니다. `update_tdf_data.py --from-proposal`로 갱신하면 상품제안서와 같은 기준일이지만, SEMA 포털 표(`--input <표> --base-date <표의 기준일>`, 기준일 없으면 저장 안 함)로 갱신하면 기준일이 달라지고 수익률이 전 구간 누적이므로 `fund_data.json`(204개)과 **직접 교차비교하지 마세요.**
 > `tdf_data.json`의 `baseDateNote`에도 명시되어 있습니다.
 >
 > ⚠️ `funds/README.md`는 **구버전(STALE)** 문서입니다. 펀드 수·분류 기준은 항상 각 JSON의 `_meta`를 따르세요.
@@ -434,7 +434,7 @@ TDF 업데이트 (별도 흐름):
 ```bash
 # 1) TDF 표를 resource/tdf-raw.md 에 붙여넣기
 # 2) 파싱 → tdf_data.json 생성 (요율 enrichment는 --fees)
-python $SCRIPTS/update_tdf_data.py --input resource/tdf-raw.md --fees
+python $SCRIPTS/update_tdf_data.py --input resource/tdf-raw.md --base-date YYYY-MM-DD --fees
 ```
 
 > ⚠️ **유지보수 주의 (게시판/양식 변경 시)**

@@ -161,61 +161,28 @@ Read("funds/deposit_rates.json")
 
 ## 3.5 데이터 정합성 교차 검증 Gate ⚠️ MANDATORY
 
-> **목적**: `fund_classification.json`의 자동 분류 데이터에서 `riskLevel`과 `riskAsset` 간 논리적 모순을 사전 감지하여 잘못된 의사결정을 방지합니다.
+> **목적**: 위험자산 여부를 펀드별로 **다시 판정하지 않고**, `fund_classification.json`의 규정 기준 값(`riskStatus`·`riskBasis`·`needsConfirmation`)을 그대로 쓰면서 확인이 필요한 펀드를 드러낸다.
 > **실행 시점**: Step 0 (파일 존재 검증) 완료 직후, 펀드 검색 **이전에** 실행
-> **근본 원인**: `fund_classification.json`의 자동 분류(`source: "fund_data.json + keyword classification"`)가 일부 펀드를 잘못 분류할 수 있음 (예: 골드 펀드를 riskAsset=false로 분류하면서 riskLevel=1 부여)
+> **기준**: `riskStatus`는 `classify_funds.py`가 펀드명의 유형 표기와 퇴직연금감독규정 제11조 제1항(시행 2023. 11. 16.)으로 정한다(`skills/dc-pension-rules/SKILL.md` §2). 위험등급(`riskLevel`)은 투자 위험 설명용이고 70% 한도 대상 여부의 법적 기준이 아니다. **위험등급으로 `riskAsset`을 false로 바꾸는 재판정은 금지**(2026. 11. 17. 정정 — 예전 규칙은 위험등급 4-6이면 안전자산으로 재판정해 한도를 낮게 계산할 수 있었다).
 
 ### 3.5.1 검증 규칙
 
-| # | 규칙 | 조건 | 위반 시 조치 |
-|:-:|------|------|-------------|
-| 1 | riskLevel ↔ riskAsset 일치 | riskLevel 1-3 → riskAsset=true 필수 | ⚠️ ALERT, 해당 펀드 수동 재판정 |
-| 2 | riskLevel ↔ riskAsset 일치 | riskLevel 4-6 → riskAsset=false 필수 | ⚠️ ALERT, 해당 펀드 수동 재판정 |
-| 3 | category ↔ riskAsset 일치 | category="주식형"/"해외주식형" → riskAsset=true | ⚠️ ALERT |
-| 4 | category ↔ riskAsset 일치 | category="채권형"/"MMF" → riskAsset=false | ⚠️ ALERT |
+| # | 규칙 | 조건 | 처리 |
+|:-:|------|------|------|
+| 1 | 분류 누락 | 후보 펀드가 `fund_classification.json`에 없거나 `riskStatus` 없음 | unverified로 보고 70% 한도에 산입 + ⚠️ ALERT |
+| 2 | 확인 필요 비위험 | `riskStatus=nonRisk` AND `needsConfirmation=true` | 비위험으로 쓰되 "포털 위험자산 표시·규약 확인 필요" 표시. 70% 판정은 `dc_limits.py`의 PASS_PENDING_CONFIRMATION 규칙을 따른다 |
+| 3 | 위험등급과 어긋남 | `riskStatus=nonRisk`인데 `riskLevel` 1-3 | 값은 바꾸지 않고 INFO로 보고(확인 필요 목록에 추가) |
+| 4 | unverified | `riskStatus=unverified` | 위험자산으로 취급(한도 산입), 이유(`riskBasis`)를 표에 적음 |
 
-### 3.5.2 검증 프로세스
-
-```
-Step A: fund_classification.json 전체 로드
-   └─ 모든 펀드의 riskLevel, riskAsset, category 추출
-
-Step B: 규칙 1-4 교차 검증
-   └─ 각 펀드에 대해 4개 규칙 검사
-   └─ 위반 펀드 목록 생성
-
-Step C: 위반 펀드 수동 재판정
-   └─ riskLevel 기준으로 riskAsset 재판정
-   └─ riskLevel은 원본 CSV에서 직접 추출, riskAsset은 키워드 자동분류
-   └─ → riskLevel이 신뢰도 높으므로 riskLevel 기준 우선
-
-Step D: 재판정 결과를 이후 모든 분석에 적용
-   └─ 안전자산 Gate, 펀드 선택 모두에 재판정 결과 사용
-   └─ 재판정된 펀드는 원래 분류와 재판정 결과를 모두 보고서에 기록
-```
-
-### 3.5.3 필수 출력 형식
+### 3.5.2 필수 출력 형식
 
 ```markdown
-### ⚠️ 데이터 정합성 검증 결과
+### ⚠️ 위험자산 분류 확인 (fund_classification.json 기준, 재판정 없음)
 
-**검증 범위**: fund_classification.json 전체 ({N}개 펀드)
-**위반 건수**: {M}건
-
-| 펀드명 | riskLevel | riskAsset(원본) | category | 위반 규칙 | 에이전트 재판정 |
-|--------|:---------:|:---------------:|:--------:|:---------:|:--------------:|
-| [펀드명] | 1 | false | 기타 | Rule 1: riskLevel 1-3인데 riskAsset=false | → riskAsset=**true** (위험자산) |
-
-**재판정 근거**: fund_data.json의 riskLevel이 fund_classification.json의 riskAsset보다 신뢰도 높음
-(riskLevel은 원본 CSV에서 직접 추출, riskAsset은 키워드 자동분류)
+| 펀드명 | riskStatus | riskBasis(요약) | needsConfirmation | riskLevel | 비고 |
+|--------|:----------:|-----------------|:-----------------:|:---------:|------|
+| [펀드명] | nonRisk | 제11조①5호 | 예 | 3 | 포털 표시 확인 필요 |
 ```
-
-### 3.5.4 위반 시 처리 매트릭스
-
-| 오분류 유형 | 영향 범위 | 조치 |
-|-----------|----------|------|
-| 위험자산 → 안전자산 오분류 (riskLevel 1-3, riskAsset=false) | 안전자산 Gate에서 잘못 기각, 위험자산 후보에서 누락 | riskLevel 기준 재판정 → 위험자산 후보로 재검토 |
-| 안전자산 → 위험자산 오분류 (riskLevel 4-6, riskAsset=true) | DC 70% 한도 계산 오류, 안전자산 후보 누락 | riskLevel 기준 재판정 → 안전자산 후보로 재검토 |
 
 **⚠️ 정합성 검증 테이블이 출력에 없으면 → 포트폴리오 FAIL**
 
@@ -661,9 +628,8 @@ SAFE_ASSET_DECISION="예금"이더라도, fund_classification.json에서 **riskA
 
 ```
 IF SAFE_ASSET_DECISION == "예금":
-    1. fund_classification.json에서 riskAsset=false 펀드 전체 추출
-    2. 단, Step 0.5 정합성 검증에서 재판정된 결과 반영
-       (riskLevel 1-3 → riskAsset=true로 재판정된 펀드 제외)
+    1. fund_classification.json에서 riskStatus=nonRisk 펀드 전체 추출
+    2. needsConfirmation=true 펀드는 "포털 표시 확인 필요"를 붙여 제시(재판정 없음, §3.5)
     3. 남은 펀드의 실질 수익률(return1y - totalFee) 계산
     4. 예금 금리보다 높은 펀드가 있으면 → 다각화 옵션 제시
     5. 없으면 → "예금 100%가 최적" 확인
@@ -902,7 +868,7 @@ UH/H 쌍이 존재하는데 비교 테이블이 없으면 → 해당 펀드의 �
 - [ ] 편차 발생 시 **근거가 명시**되었는가?
 - [ ] **펀드 선택 근거 테이블**이 출력에 포함되었는가? (섹션 5.4)
 - [ ] **모든 펀드/예금에 selectionRationale + 참조 출처**가 있는가?
-- [ ] **데이터 정합성 검증 테이블**이 출력에 포함되었는가? (Step 0.5)
+- [ ] **위험자산 분류 확인 테이블**(§3.5, 재판정 없음)이 출력에 포함되었는가? (Step 0.5)
 - [ ] **전수 비교 증적 테이블**이 모든 카테고리에 포함되었는가? (Step 4.7)
 - [ ] **UH/H 환헤지 비용 비교 테이블**이 모든 UH/H 쌍에 포함되었는가? (Step 4.8)
 - [ ] **안전자산 다각화 검토**가 수행되었는가? (Step 3.5, SAFE_ASSET_DECISION="예금" 시)

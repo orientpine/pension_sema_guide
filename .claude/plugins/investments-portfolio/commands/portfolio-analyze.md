@@ -428,7 +428,7 @@ fund-portfolio 호출 전에 사용자에게 안전자산 유형을 질문합니
 
   1. 예금 — 원리금보장 예금 상품 (확정금리, 최저 위험)
   2. TDF — Target Date Fund (생애주기 자동배분, DC/IRP 위험자산 한도 예외 적격 상품)
-  3. 채권 — 채권형/채권혼합형 펀드 (중간 위험, 금리 연동)
+  3. 채권 — 채권형/채권혼합형 펀드 (원리금 비보장, 금리 연동. 감독규정 제11조①5호로 70% 한도 밖이나 포털 표시 확인 필요)
 
 선택 (1/2/3 또는 예금/TDF/채권):"
 ```
@@ -473,7 +473,7 @@ Task(
 - 선택값: {safe_asset_decision}  ← deposit | tdf | bond
 - deposit: 원리금보장 예금 상품 우선 배분
 - tdf: TDF 적격 상품 우선 배분 (DC/IRP 위험자산 한도 예외 적용 가능; TDF는 안전자산이 아님에 유의)
-- bond: 채권형/채권혼합형 펀드 우선 배분
+- bond: 채권형/채권혼합형 펀드(fund_classification.json riskStatus=nonRisk) 우선 배분, needsConfirmation 표시를 그대로 적음
 - 은퇴예정연도: {retirement_year} (TDF targetYear 매칭 기준)
 
 ### 제약 조건

@@ -2,7 +2,7 @@
   "_meta": {
     "version": "2026-10-30",
     "source": "펀드평가사 제로인 (미래에셋증권 퇴직연금 상품제안서 26년11월_상품제안서_퇴직연금(DCIRP).csv)",
-    "updatedAt": "2026-11-16T12:42:40.115261+00:00",
+    "updatedAt": "2026-11-17T00:06:58.830346+00:00",
     "recordCount": 75,
     "freshnessThresholdDays": 30,
     "baseDateNote": "fund_data.json과 tdf_data.json은 각자 독립적인 기준일을 가진다. 두 소스의 날짜는 다를 수 있으므로 직접 교차비교 금지 (_meta.version 각각 참조)",
@@ -14,7 +14,7 @@
       "authoritativeFundData": "funds/all/all_fund_data.json",
       "authoritativeFeeData": "funds/all/all_fund_fees.json",
       "sourceCsv": "26년11월_상품제안서_퇴직연금(DCIRP).csv",
-      "checkedAt": "2026-11-16",
+      "checkedAt": "2026-11-17",
       "resolvedUnknownCount": 0,
       "unresolvedCount": 0,
       "missingCount": 0,
@@ -175,7 +175,12 @@
       "return2y": "",
       "return3y": "68.47",
       "returnSinceInception": "",
-      "netAssets": "717200000"
+      "netAssets": "717200000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55223DJ7549",
@@ -197,7 +202,12 @@
       "return2y": "",
       "return3y": "68.26",
       "returnSinceInception": "",
-      "netAssets": "270600000"
+      "netAssets": "270600000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55101DR7009",
@@ -219,7 +229,12 @@
       "return2y": "",
       "return3y": "59.67",
       "returnSinceInception": "",
-      "netAssets": "118400000"
+      "netAssets": "118400000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55101DR6605",
@@ -241,7 +256,12 @@
       "return2y": "",
       "return3y": "59.38",
       "returnSinceInception": "",
-      "netAssets": "44300000"
+      "netAssets": "44300000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55223DJ7382",
@@ -263,7 +283,12 @@
       "return2y": "",
       "return3y": "61.81",
       "returnSinceInception": "",
-      "netAssets": "134200000"
+      "netAssets": "134200000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55101CU1800",
@@ -285,7 +310,12 @@
       "return2y": "",
       "return3y": "59.79",
       "returnSinceInception": "",
-      "netAssets": "151300000"
+      "netAssets": "151300000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55210DT9761",
@@ -307,7 +337,12 @@
       "return2y": "",
       "return3y": "71.03",
       "returnSinceInception": "",
-      "netAssets": "281200000"
+      "netAssets": "281200000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55213D64958",
@@ -329,7 +364,12 @@
       "return2y": "",
       "return3y": "66.86",
       "returnSinceInception": "",
-      "netAssets": "288400000"
+      "netAssets": "288400000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55210CO3828",
@@ -351,7 +391,12 @@
       "return2y": "",
       "return3y": "70.05",
       "returnSinceInception": "",
-      "netAssets": "436500000"
+      "netAssets": "436500000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55101DX4743",
@@ -373,7 +418,12 @@
       "return2y": "",
       "return3y": "67.92",
       "returnSinceInception": "",
-      "netAssets": "352200000"
+      "netAssets": "352200000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55223BT1922",
@@ -395,7 +445,12 @@
       "return2y": "",
       "return3y": "62.43",
       "returnSinceInception": "",
-      "netAssets": "217100000"
+      "netAssets": "217100000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55223D26790",
@@ -417,7 +472,12 @@
       "return2y": "",
       "return3y": "61.89",
       "returnSinceInception": "",
-      "netAssets": "55000000"
+      "netAssets": "55000000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55101DX8025",
@@ -439,7 +499,12 @@
       "return2y": "",
       "return3y": "64.39",
       "returnSinceInception": "",
-      "netAssets": "88100000"
+      "netAssets": "88100000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55223BT1757",
@@ -461,7 +526,12 @@
       "return2y": "",
       "return3y": "61.15",
       "returnSinceInception": "",
-      "netAssets": "94500000"
+      "netAssets": "94500000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55210BU2450",
@@ -483,7 +553,12 @@
       "return2y": "",
       "return3y": "65.64",
       "returnSinceInception": "",
-      "netAssets": "227800000"
+      "netAssets": "227800000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55101DX7852",
@@ -505,7 +580,12 @@
       "return2y": "",
       "return3y": "61.15",
       "returnSinceInception": "",
-      "netAssets": "142700000"
+      "netAssets": "142700000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55301EB3060",
@@ -527,7 +607,12 @@
       "return2y": "",
       "return3y": "",
       "returnSinceInception": "",
-      "netAssets": "24800000"
+      "netAssets": "24800000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "unverified",
+      "riskBasis": "유형 표기로 주식 편입 한도를 알 수 없음 → 미확인으로 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55210D57370",
@@ -549,7 +634,12 @@
       "return2y": "",
       "return3y": "59.38",
       "returnSinceInception": "",
-      "netAssets": "47500000"
+      "netAssets": "47500000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55223DJ7150",
@@ -571,7 +661,12 @@
       "return2y": "",
       "return3y": "49.29",
       "returnSinceInception": "",
-      "netAssets": "110900000"
+      "netAssets": "110900000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55210D55473",
@@ -593,7 +688,12 @@
       "return2y": "",
       "return3y": "54.48",
       "returnSinceInception": "",
-      "netAssets": "230000000"
+      "netAssets": "230000000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55223BT1450",
@@ -615,7 +715,12 @@
       "return2y": "",
       "return3y": "56.09",
       "returnSinceInception": "",
-      "netAssets": "153300000"
+      "netAssets": "153300000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55301D49705",
@@ -637,7 +742,12 @@
       "return2y": "",
       "return3y": "65.35",
       "returnSinceInception": "",
-      "netAssets": "160900000"
+      "netAssets": "160900000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55301BU5479",
@@ -659,7 +769,12 @@
       "return2y": "",
       "return3y": "56.41",
       "returnSinceInception": "",
-      "netAssets": "989700000"
+      "netAssets": "989700000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "증권형이 아닌 집합투자기구(혼합자산·특별자산·부동산) → 감독규정 제11조①5호 비해당, 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55301EB2815",
@@ -681,7 +796,12 @@
       "return2y": "",
       "return3y": "",
       "returnSinceInception": "",
-      "netAssets": "42800000"
+      "netAssets": "42800000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "증권형이 아닌 집합투자기구(혼합자산·특별자산·부동산) → 감독규정 제11조①5호 비해당, 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55301BU6253",
@@ -703,7 +823,12 @@
       "return2y": "",
       "return3y": "55.40",
       "returnSinceInception": "",
-      "netAssets": "736500000"
+      "netAssets": "736500000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "증권형이 아닌 집합투자기구(혼합자산·특별자산·부동산) → 감독규정 제11조①5호 비해당, 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55210BU2435",
@@ -725,7 +850,12 @@
       "return2y": "",
       "return3y": "60.45",
       "returnSinceInception": "",
-      "netAssets": "162700000"
+      "netAssets": "162700000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55105CX9483",
@@ -747,7 +877,12 @@
       "return2y": "",
       "return3y": "55.44",
       "returnSinceInception": "",
-      "netAssets": "77500000"
+      "netAssets": "77500000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55210D58329",
@@ -769,7 +904,12 @@
       "return2y": "",
       "return3y": "55.32",
       "returnSinceInception": "",
-      "netAssets": "28000000"
+      "netAssets": "28000000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55301BT5183",
@@ -791,7 +931,12 @@
       "return2y": "",
       "return3y": "63.80",
       "returnSinceInception": "",
-      "netAssets": "102800000"
+      "netAssets": "102800000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55101DX7688",
@@ -813,7 +958,12 @@
       "return2y": "",
       "return3y": "57.87",
       "returnSinceInception": "",
-      "netAssets": "93400000"
+      "netAssets": "93400000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55105CK1592",
@@ -835,7 +985,12 @@
       "return2y": "",
       "return3y": "54.68",
       "returnSinceInception": "",
-      "netAssets": "115700000"
+      "netAssets": "115700000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55101DR6829",
@@ -857,7 +1012,12 @@
       "return2y": "",
       "return3y": "51.30",
       "returnSinceInception": "",
-      "netAssets": "16800000"
+      "netAssets": "16800000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55101DR6340",
@@ -879,7 +1039,12 @@
       "return2y": "",
       "return3y": "51.06",
       "returnSinceInception": "",
-      "netAssets": "9200000"
+      "netAssets": "9200000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55301BT4251",
@@ -901,7 +1066,12 @@
       "return2y": "",
       "return3y": "60.78",
       "returnSinceInception": "",
-      "netAssets": "82000000"
+      "netAssets": "82000000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55101CU1644",
@@ -923,7 +1093,12 @@
       "return2y": "",
       "return3y": "50.90",
       "returnSinceInception": "",
-      "netAssets": "50800000"
+      "netAssets": "50800000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55101BT4444",
@@ -945,7 +1120,12 @@
       "return2y": "",
       "return3y": "51.81",
       "returnSinceInception": "",
-      "netAssets": "159200000"
+      "netAssets": "159200000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55213C51718",
@@ -967,7 +1147,12 @@
       "return2y": "",
       "return3y": "53.36",
       "returnSinceInception": "",
-      "netAssets": "102400000"
+      "netAssets": "102400000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55210BU2419",
@@ -989,7 +1174,12 @@
       "return2y": "",
       "return3y": "54.76",
       "returnSinceInception": "",
-      "netAssets": "271700000"
+      "netAssets": "271700000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55101DX8652",
@@ -1011,7 +1201,12 @@
       "return2y": "",
       "return3y": "52.96",
       "returnSinceInception": "",
-      "netAssets": "79600000"
+      "netAssets": "79600000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55105BT9910",
@@ -1033,7 +1228,12 @@
       "return2y": "",
       "return3y": "50.94",
       "returnSinceInception": "",
-      "netAssets": "186400000"
+      "netAssets": "186400000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55223BT1278",
@@ -1055,7 +1255,12 @@
       "return2y": "",
       "return3y": "48.58",
       "returnSinceInception": "",
-      "netAssets": "115000000"
+      "netAssets": "115000000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55301BU6139",
@@ -1077,7 +1282,12 @@
       "return2y": "",
       "return3y": "49.44",
       "returnSinceInception": "",
-      "netAssets": "703700000"
+      "netAssets": "703700000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "증권형이 아닌 집합투자기구(혼합자산·특별자산·부동산) → 감독규정 제11조①5호 비해당, 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55105D43299",
@@ -1099,7 +1309,12 @@
       "return2y": "",
       "return3y": "56.78",
       "returnSinceInception": "",
-      "netAssets": "67600000"
+      "netAssets": "67600000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55101BT7397",
@@ -1121,7 +1336,12 @@
       "return2y": "",
       "return3y": "48.74",
       "returnSinceInception": "",
-      "netAssets": "133200000"
+      "netAssets": "133200000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55206C95974",
@@ -1143,7 +1363,12 @@
       "return2y": "",
       "return3y": "42.31",
       "returnSinceInception": "",
-      "netAssets": "33300000"
+      "netAssets": "33300000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55105D32763",
@@ -1165,7 +1390,12 @@
       "return2y": "",
       "return3y": "54.76",
       "returnSinceInception": "",
-      "netAssets": "32300000"
+      "netAssets": "32300000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55223BT1096",
@@ -1187,7 +1417,12 @@
       "return2y": "",
       "return3y": "45.13",
       "returnSinceInception": "",
-      "netAssets": "143400000"
+      "netAssets": "143400000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55105D43000",
@@ -1209,7 +1444,12 @@
       "return2y": "",
       "return3y": "51.65",
       "returnSinceInception": "",
-      "netAssets": "24300000"
+      "netAssets": "24300000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55105BT9928",
@@ -1231,7 +1471,12 @@
       "return2y": "",
       "return3y": "47.49",
       "returnSinceInception": "",
-      "netAssets": "131500000"
+      "netAssets": "131500000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55101BT4428",
@@ -1253,7 +1498,12 @@
       "return2y": "",
       "return3y": "44.83",
       "returnSinceInception": "",
-      "netAssets": "100000000"
+      "netAssets": "100000000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55301BU6113",
@@ -1275,7 +1525,12 @@
       "return2y": "",
       "return3y": "41.28",
       "returnSinceInception": "",
-      "netAssets": "790400000"
+      "netAssets": "790400000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "증권형이 아닌 집합투자기구(혼합자산·특별자산·부동산) → 감독규정 제11조①5호 비해당, 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55210BR6431",
@@ -1297,7 +1552,12 @@
       "return2y": "",
       "return3y": "45.79",
       "returnSinceInception": "",
-      "netAssets": "100300000"
+      "netAssets": "100300000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55105D42499",
@@ -1319,7 +1579,12 @@
       "return2y": "",
       "return3y": "48.00",
       "returnSinceInception": "",
-      "netAssets": "31500000"
+      "netAssets": "31500000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55105BT9936",
@@ -1341,7 +1606,12 @@
       "return2y": "",
       "return3y": "45.44",
       "returnSinceInception": "",
-      "netAssets": "141400000"
+      "netAssets": "141400000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55105D34223",
@@ -1363,7 +1633,12 @@
       "return2y": "",
       "return3y": "45.17",
       "returnSinceInception": "",
-      "netAssets": "115500000"
+      "netAssets": "115500000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55101BT4402",
@@ -1385,7 +1660,12 @@
       "return2y": "",
       "return3y": "39.22",
       "returnSinceInception": "",
-      "netAssets": "125400000"
+      "netAssets": "125400000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55301BT3022",
@@ -1407,7 +1687,12 @@
       "return2y": "",
       "return3y": "49.37",
       "returnSinceInception": "",
-      "netAssets": "97400000"
+      "netAssets": "97400000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55101DX8306",
@@ -1429,7 +1714,12 @@
       "return2y": "",
       "return3y": "43.33",
       "returnSinceInception": "",
-      "netAssets": "90600000"
+      "netAssets": "90600000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55105D41665",
@@ -1451,7 +1741,12 @@
       "return2y": "",
       "return3y": "41.25",
       "returnSinceInception": "",
-      "netAssets": "55600000"
+      "netAssets": "55600000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55301BT2933",
@@ -1473,7 +1768,12 @@
       "return2y": "",
       "return3y": "41.81",
       "returnSinceInception": "",
-      "netAssets": "75100000"
+      "netAssets": "75100000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "nonRisk",
+      "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+      "needsConfirmation": true
     },
     {
       "fundCode": "K55105BU1161",
@@ -1495,7 +1795,12 @@
       "return2y": "",
       "return3y": "42.08",
       "returnSinceInception": "",
-      "netAssets": "169100000"
+      "netAssets": "169100000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "주식 편입 한도 50% 이상 유형(약관) → 감독규정 제11조① 각 호 비해당, 시행령 제26조 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55301BS2942",
@@ -1517,7 +1822,12 @@
       "return2y": "",
       "return3y": "34.92",
       "returnSinceInception": "",
-      "netAssets": "386300000"
+      "netAssets": "386300000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "risk",
+      "riskBasis": "증권형이 아닌 집합투자기구(혼합자산·특별자산·부동산) → 감독규정 제11조①5호 비해당, 70% 한도 산입",
+      "needsConfirmation": false
     },
     {
       "fundCode": "K55223BT0940",
@@ -1539,7 +1849,12 @@
       "return2y": "",
       "return3y": "33.97",
       "returnSinceInception": "",
-      "netAssets": "99900000"
+      "netAssets": "99900000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "nonRisk",
+      "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+      "needsConfirmation": true
     },
     {
       "fundCode": "K55223BT0783",
@@ -1551,7 +1866,7 @@
         70
       ],
       "hedge": null,
-      "tdfQualified": true,
+      "tdfQualified": false,
       "riskName": "보통위험",
       "riskLevel": 4,
       "return1m": "",
@@ -1561,7 +1876,12 @@
       "return2y": "",
       "return3y": "32.81",
       "returnSinceInception": "",
-      "netAssets": "57600000"
+      "netAssets": "57600000",
+      "tdfQualifiedBasis": "적격 근거 없음 — 면제 안 함, 유형(riskStatus)으로 70% 한도 판정",
+      "tdfNeedsReview": true,
+      "riskStatus": "nonRisk",
+      "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+      "needsConfirmation": true
     },
     {
       "fundCode": "K55210BU2351",
@@ -1583,7 +1903,12 @@
       "return2y": "",
       "return3y": "35.11",
       "returnSinceInception": "",
-      "netAssets": "132100000"
+      "netAssets": "132100000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "nonRisk",
+      "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+      "needsConfirmation": true
     },
     {
       "fundCode": "K55301BS9947",
@@ -1605,7 +1930,12 @@
       "return2y": "",
       "return3y": "36.91",
       "returnSinceInception": "",
-      "netAssets": "32500000"
+      "netAssets": "32500000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "nonRisk",
+      "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+      "needsConfirmation": true
     },
     {
       "fundCode": "K55101BT7355",
@@ -1627,7 +1957,12 @@
       "return2y": "",
       "return3y": "31.62",
       "returnSinceInception": "",
-      "netAssets": "51100000"
+      "netAssets": "51100000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "nonRisk",
+      "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+      "needsConfirmation": true
     },
     {
       "fundCode": "K55101BT7314",
@@ -1639,7 +1974,7 @@
         70
       ],
       "hedge": null,
-      "tdfQualified": true,
+      "tdfQualified": false,
       "riskName": "보통위험",
       "riskLevel": 4,
       "return1m": "",
@@ -1649,7 +1984,12 @@
       "return2y": "",
       "return3y": "30.83",
       "returnSinceInception": "",
-      "netAssets": "25400000"
+      "netAssets": "25400000",
+      "tdfQualifiedBasis": "적격 근거 없음 — 면제 안 함, 유형(riskStatus)으로 70% 한도 판정",
+      "tdfNeedsReview": true,
+      "riskStatus": "nonRisk",
+      "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+      "needsConfirmation": true
     },
     {
       "fundCode": "K55101BT7439",
@@ -1661,7 +2001,7 @@
         75
       ],
       "hedge": null,
-      "tdfQualified": true,
+      "tdfQualified": false,
       "riskName": "보통위험",
       "riskLevel": 4,
       "return1m": "",
@@ -1671,7 +2011,12 @@
       "return2y": "",
       "return3y": "29.79",
       "returnSinceInception": "",
-      "netAssets": "39200000"
+      "netAssets": "39200000",
+      "tdfQualifiedBasis": "적격 근거 없음 — 면제 안 함, 유형(riskStatus)으로 70% 한도 판정",
+      "tdfNeedsReview": true,
+      "riskStatus": "nonRisk",
+      "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+      "needsConfirmation": true
     },
     {
       "fundCode": "K55206C95636",
@@ -1693,7 +2038,12 @@
       "return2y": "",
       "return3y": "29.90",
       "returnSinceInception": "",
-      "netAssets": "24900000"
+      "netAssets": "24900000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "nonRisk",
+      "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+      "needsConfirmation": true
     },
     {
       "fundCode": "K55105BU1062",
@@ -1715,7 +2065,12 @@
       "return2y": "",
       "return3y": "31.44",
       "returnSinceInception": "",
-      "netAssets": "72300000"
+      "netAssets": "72300000",
+      "tdfQualifiedBasis": "펀드명 '적격' 표기(감독규정 제11조①9호 적격TDF)",
+      "tdfNeedsReview": false,
+      "riskStatus": "nonRisk",
+      "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+      "needsConfirmation": true
     },
     {
       "fundCode": "K55105D38935",
@@ -1724,7 +2079,7 @@
       "targetYear": null,
       "recommendedAgeBand": [],
       "hedge": null,
-      "tdfQualified": true,
+      "tdfQualified": false,
       "riskName": "보통위험",
       "riskLevel": 4,
       "return1m": "",
@@ -1734,7 +2089,12 @@
       "return2y": "",
       "return3y": "28.15",
       "returnSinceInception": "",
-      "netAssets": "9100000"
+      "netAssets": "9100000",
+      "tdfQualifiedBasis": "적격 근거 없음 — 면제 안 함, 유형(riskStatus)으로 70% 한도 판정",
+      "tdfNeedsReview": true,
+      "riskStatus": "nonRisk",
+      "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+      "needsConfirmation": true
     },
     {
       "fundCode": "K55105BU1146",
@@ -1746,7 +2106,7 @@
         70
       ],
       "hedge": "H",
-      "tdfQualified": true,
+      "tdfQualified": false,
       "riskName": "보통위험",
       "riskLevel": 4,
       "return1m": "",
@@ -1756,7 +2116,12 @@
       "return2y": "",
       "return3y": "29.72",
       "returnSinceInception": "",
-      "netAssets": "63200000"
+      "netAssets": "63200000",
+      "tdfQualifiedBasis": "적격 근거 없음 — 면제 안 함, 유형(riskStatus)으로 70% 한도 판정",
+      "tdfNeedsReview": true,
+      "riskStatus": "nonRisk",
+      "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+      "needsConfirmation": true
     },
     {
       "fundCode": "K55105BU1153",
@@ -1768,7 +2133,7 @@
         75
       ],
       "hedge": "H",
-      "tdfQualified": true,
+      "tdfQualified": false,
       "riskName": "낮은위험",
       "riskLevel": 5,
       "return1m": "",
@@ -1778,7 +2143,12 @@
       "return2y": "",
       "return3y": "27.31",
       "returnSinceInception": "",
-      "netAssets": "27900000"
+      "netAssets": "27900000",
+      "tdfQualifiedBasis": "적격 근거 없음 — 면제 안 함, 유형(riskStatus)으로 70% 한도 판정",
+      "tdfNeedsReview": true,
+      "riskStatus": "nonRisk",
+      "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+      "needsConfirmation": true
     },
     {
       "fundCode": "K55223DV8616",
@@ -1787,7 +2157,7 @@
       "targetYear": null,
       "recommendedAgeBand": [],
       "hedge": null,
-      "tdfQualified": true,
+      "tdfQualified": false,
       "riskName": "낮은위험",
       "riskLevel": 5,
       "return1m": "",
@@ -1797,7 +2167,12 @@
       "return2y": "",
       "return3y": "12.58",
       "returnSinceInception": "",
-      "netAssets": "15700000"
+      "netAssets": "15700000",
+      "tdfQualifiedBasis": "적격 근거 없음 — 면제 안 함, 유형(riskStatus)으로 70% 한도 판정",
+      "tdfNeedsReview": true,
+      "riskStatus": "nonRisk",
+      "riskBasis": "감독규정 제11조①5호: 약관상 주식 한도 50% 미만 증권형 → 100% 가능 (투자부적격 채권 한도 30% 이하 조건은 펀드명으로 확인 불가 — 포털 표시·규약 확인 필요)",
+      "needsConfirmation": true
     }
   ]
 }
