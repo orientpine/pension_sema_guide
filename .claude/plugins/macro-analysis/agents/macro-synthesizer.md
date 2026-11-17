@@ -47,7 +47,9 @@ Step 0.2: 5개 JSON 파일 직접 Read (MANDATORY - 순차 실행)
 
 Step 0.3: 파일 내용 검증 (각 파일별)
 └─ JSON 파싱 가능한가?
-└─ status == "SUCCESS" 인가?
+└─ status가 "FAIL"이 아니고 data_quality.skill_verified == true 인가? (index-data.json은 index-status.json의 usable 시리즈만)
+   (PARTIAL·SUCCESS_WITH_NULL_FORECASTS는 사용 가능: 남은 수치는 3출처 통과, 통과 못 한 수치는 null+failed_items. null 항목은 '결측'으로 옮기고 채우지 않는다)
+└─ decision_usable == false 인 파일은 사실 인용만 하고 섹션 8 배분 근거로 쓰지 않는다
 └─ original_text 필드가 있는가? (없으면 환각 데이터)
 └─ sources 배열에 URL이 있는가?
 
@@ -63,7 +65,8 @@ Step 0.4: 검증 결과
 | 파일 없음 | **FAIL 반환, 작업 중단** | 환각 데이터 생성 금지 |
 | JSON 파싱 실패 | **FAIL 반환, 작업 중단** | 손상된 데이터 사용 금지 |
 | original_text 없음 | **해당 데이터 사용 금지** | 검증 불가능 = 환각 가능성 |
-| status != SUCCESS | **해당 데이터 사용 금지** | 검증 실패 데이터 |
+| status == FAIL 또는 skill_verified != true | **해당 데이터 사용 금지** | 검증 실패 데이터 |
+| 값이 null(failed_items) | **채우지 말고 결측으로 표시** | 3출처 미통과 수치 |
 | **coordinator가 prompt로 데이터 전달** | **무시하고 파일에서 Read** | prompt 전달 시 환각 위험 |
 
 ### 입력 누락/검증 실패 시 에러 응답 (BLOCKING)

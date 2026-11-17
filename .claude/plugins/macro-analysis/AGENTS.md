@@ -14,7 +14,7 @@ plugin.json: version 1.0.1.
 | risk-analyst | 지정학/경제/시장 리스크 + Bull/Base/Bear | `risk-analysis.json` |
 | leadership-analyst | 7개국 정치/중앙은행 동향 | `leadership-analysis.json` |
 | macro-synthesizer | 위 5개 JSON을 **직접 Read**해 종합 | `macro-outlook.json`, `00-macro-outlook.md` |
-| macro-critic | 독립 재검색으로 종합 결과 검증 (PASS/FAIL) | 검증 리포트 |
+| macro-critic | 1차 출처 독립 재조회로 종합 결과 검증 (PASS/FAIL) | 검증 리포트 |
 
 ## FLOW (caller가 오케스트레이션)
 
@@ -29,9 +29,9 @@ index-fetcher (blocking)
 
 ## CONVENTIONS
 
-- 각 analyst는 **웹검색 도구를 직접 호출** + 3출처 교차검증 + 원문(`original_text`) 인용.
+- 각 analyst는 `/investments-portfolio:web-search-verifier`의 '1차 출처 직접 조회' 표를 먼저 직접 조회(WebFetch)하고 모자라면 WebSearch + 3출처 교차검증 + 원문(`original_text`) 인용. 3출처를 못 채운 수치는 null + `failed_items`, `skill_verified`는 남은 수치 기준.
 - `macro-synthesizer`는 prompt 본문 데이터가 아니라 **하위 JSON 파일에서만** 수치를 가져옴. 재해석/재계산 금지.
-- `macro-critic`은 synthesizer 결과를 신뢰하지 않고 S&P500/KOSPI/Fed/BOK를 **독립 재검색**해 ±1% 대조.
+- `macro-critic`은 synthesizer 결과를 신뢰하지 않고 S&P500/KOSPI/Fed/BOK를 1차 출처 엔드포인트로 **독립 재조회**해 ±1% 대조.
 
 ## ANTI-PATTERNS
 
