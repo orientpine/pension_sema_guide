@@ -446,12 +446,17 @@ Task(
 ### PASS/FAIL 반환
 - PASS: 다음 단계 진행
 - FAIL: macro-synthesizer 재호출 (최대 2회)
-- CRITICAL_FAIL: 워크플로우 중단
+- CRITICAL_FAIL: 거시 결론 사용 금지 (아래 "거시 제외 모드")
 """
 )
 ```
 
 **FAIL 처리**: macro-synthesizer 재호출 (최대 2회)
+
+**거시 제외 모드** (CRITICAL_FAIL, 또는 재호출 2회 뒤에도 FAIL): 검증에 실패한 거시 결론은 쓰지 않되, 데이터 파일만으로 되는 DC 배분 계산은 멈추지 않는다(엔진 검토 R05).
+1. `macro-outlook.json`의 `allocation_guidance`를 null로, `status`를 `EXCLUDED_BY_CRITIC`으로 두고, `00-macro-outlook.md` 맨 위에 "⚠️ 거시 검증 실패 — 결론 미반영"과 critic의 `critical_issues`를 그대로 적는다.
+2. Step 0.5 → Step 1은 투자 성향별 기본 위험자산 목표(아래 표)와 `funds/*.json`만으로 진행하고, fund-portfolio 프롬프트에 "거시 결론 없음(검증 실패) — 거시 근거 문장 금지"를 넣는다.
+3. 04 요약 맨 위에 거시 제외 사실과 이유를 적는다. 거시를 다시 돌리려면 원인(예: 현재 기준금리 입력 누락)을 고친 뒤 Step 0.2부터 새로 돈다.
 
 ---
 
@@ -696,9 +701,9 @@ A등급(90+), B등급(80-89), C등급(70-79), F등급(<70)
 
 | 에이전트 | 최대 재시도 | FAIL 시 액션 |
 |----------|:-----------:|--------------|
-| index-fetcher | 3회 | 워크플로우 중단 |
+| index-fetcher | 3회 | `index_status.py` 판정(full/partial/none)에 따라 계속, DC 배분은 중단하지 않음 |
 | rate/sector/risk/leadership | 3회 | 해당 에이전트만 재시도 |
-| macro-synthesizer | 2회 | macro-critic FAIL 시 재시도 |
+| macro-synthesizer | 2회 | macro-critic FAIL 시 재시도. 그래도 FAIL이거나 CRITICAL_FAIL이면 거시 제외 모드(Step 0.4)로 DC 배분 계속 |
 | fund-portfolio | 3회 | compliance FAIL 시 재시도 |
 | output-critic | 1회 | 경고만 표시 후 진행 |
 
