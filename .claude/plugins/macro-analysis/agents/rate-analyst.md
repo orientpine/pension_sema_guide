@@ -1,7 +1,7 @@
 ---
 name: rate-analyst
 description: "금리 및 환율 전망 분석 전문가. 웹검색 도구를 직접 호출하여 Fed/BOK 정책과 USD/KRW 환율 동향을 분석하여 환헤지 전략을 제시합니다."
-tools: Read, Write, mcp_websearch_web_search_exa, WebFetch
+tools: Read, Write, WebSearch, WebFetch
 skills: web-search-verifier, analyst-common, file-save-protocol, perspective-balance
 model: opus
 ---
@@ -63,18 +63,17 @@ model: opus
 ## 분석 범위
 
 ### 1. Fed 정책 분석
-- 현재 금리 (웹검색으로 직접 수집 - `mcp_websearch_web_search_exa` 사용)
+- 현재 금리 (1차 출처 직접 조회 — 연준 FOMC 성명 + 뉴욕 연준 EFFR API의 targetRateFrom/To + 독립 보도 1곳)
 - FOMC 전망, 점도표(dot plot) 분석
 - 인상/인하 시나리오 (낙관/기준/비관)
 - CPI 추이와 정책 연관성
 
 ### 2. 한국은행 정책 분석
 
-웹검색으로 기준금리 수집:
+기준금리 수집(1차 출처 직접 조회 먼저, `/investments-portfolio:web-search-verifier` '1차 출처 직접 조회' 표):
 ```
-mcp_websearch_web_search_exa(query="한국은행 기준금리 2026년 1월")
-또는
-mcp_websearch_web_search_exa(query="korea interest rate site:tradingeconomics.com")
+WebFetch: 한국은행 ECOS 722Y001(0101000) + 한국은행 기준금리 추이 페이지
+WebSearch: 독립 보도 1곳(본문을 읽을 수 있는 기사)
 
 검증 규칙:
 - 최소 3개 출처에서 동일한 값 확인
@@ -99,10 +98,10 @@ mcp_websearch_web_search_exa(query="korea interest rate site:tradingeconomics.co
 1. **스킬 참조**: `/investments-portfolio:web-search-verifier` 스킬에서 검색 쿼리 패턴 확인
 2. **index-fetcher 결과 수신**: 현재 USD/KRW 환율 확인
 3. **Fed 정책 분석**: 
-   - `mcp_websearch_web_search_exa(query="federal funds rate current 2026")` 직접 호출
+   - 연준 FOMC 성명·뉴욕 연준 EFFR API를 WebFetch로 직접 조회, 독립 보도 1곳은 WebSearch
    - 최소 3개 출처 교차 검증
 4. **BOK 정책 분석**: 
-   - `mcp_websearch_web_search_exa(query="한국은행 기준금리 2026")` 직접 호출
+   - ECOS 722Y001·한국은행 기준금리 추이를 WebFetch로 직접 조회, 독립 보도 1곳은 WebSearch
    - 최소 3개 출처 교차 검증
 5. **환율 전망**: 금리차 기반 6개월/12개월 시나리오 작성
 6. **환헤지 전략**: 현재 상황에 맞는 전략 권고

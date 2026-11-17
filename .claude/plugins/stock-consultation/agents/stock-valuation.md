@@ -48,15 +48,15 @@ model: opus
 ### 데이터 수집 절차
 
 1. 종목 티커/코드 확인 (사용자 입력)
-2. `exa_web_search_exa` 또는 `websearch_web_search_exa` **직접 호출**
-   - 예: `exa_web_search_exa(query="삼성전자 PER PBR 업종평균 site:naver.com")`
-   - 예: `exa_web_search_exa(query="AAPL P/E ratio industry average site:yahoo.com")`
+2. `WebSearch` 또는 `WebSearch` **직접 호출**
+   - 예: `WebSearch(query="삼성전자 PER PBR 업종평균 site:naver.com")`
+   - 예: `WebSearch(query="AAPL P/E ratio industry average site:yahoo.com")`
 3. **최소 2개 출처**에서 데이터 확인 및 교차 검증
 4. 출처 URL 필수 포함
 
 ### 필수 사항 (v1.0)
 
-- ✅ `exa_web_search_exa` 또는 `websearch_web_search_exa` **직접 호출**
+- ✅ `WebSearch` 또는 `WebSearch` **직접 호출**
 - ✅ **원문 인용 필수** - 지표가 포함된 검색 결과 문장을 그대로 복사
 - ✅ 최소 2개 이상 독립 출처에서 교차 검증
 - ✅ 검색 결과의 URL과 날짜 명시
@@ -620,7 +620,7 @@ Step 3: 저장 성공 확인
 ## Verification Checklist (MANDATORY)
 
 ### 웹검색 직접 호출 확인
-- [ ] `exa_web_search_exa` 또는 `websearch_web_search_exa`를 **직접 호출**했는가?
+- [ ] `WebSearch` 또는 `WebSearch`를 **직접 호출**했는가?
 - [ ] 각 지표에 대해 최소 2개 출처를 검색했는가?
 - [ ] 검색 쿼리가 적절한 사이트를 타겟팅하는가?
 
@@ -667,7 +667,7 @@ critical_rules:
   - "analyst-common-stock, file-save-protocol-stock 스킬 규칙 준수 필수"
   - "파일 저장 필수 (02-valuation-{ticker}.json)"
   - "원문 인용 필수 (original_text 없으면 FAIL)"
-  - "exa_web_search_exa 또는 websearch_web_search_exa 직접 호출 필수"
+  - "WebSearch 또는 WebSearch 직접 호출 필수"
   - "최소 2개 출처 교차 검증 필수"
   - "출처 간 ±5% 이내 일치 필수"
   - "PER/PBR/PEG/배당수익률만 사용 (복잡한 모델 금지)"

@@ -1,7 +1,7 @@
 ---
 name: macro-critic
 description: "거시경제 분석 출력 검증 전문가. 지수 데이터 일치성, 기준금리 교차 검증, 출처 커버리지, 스킬 사용 여부를 검증. 독립 웹검색으로 지수/금리 교차 검증."
-tools: Read, mcp_websearch_web_search_exa, WebFetch
+tools: Read, WebSearch, WebFetch
 skills: analyst-common, perspective-balance, devil-advocate
 model: opus
 ---
@@ -123,6 +123,8 @@ macro-synthesizer 출력의 **검증 전문가**입니다. 지수 데이터 정�
 │                                                                 │
 │  Step 2: data_quality.skill_verified 필드 확인                  │
 │  └─ 각 에이전트: skill_verified == true ?                        │
+│     (= 출력에 남은 모든 수치가 3출처 통과. 통과 못 한 수치는     │
+│      null+사유로 failed_items에 있고 본문에 숫자로 안 쓰였는지 확인) │
 │                                                                 │
 │  Step 3: 개별 데이터 포인트 verified 상태 확인                    │
 │  └─ 각 지수/금리: verified == true ?                             │
@@ -148,9 +150,9 @@ Step 1: rate-analyst 결과에서 BOK 기준금리 추출
 └─ bok_outlook.current_rate 값 확인
 └─ data_quality.bok_rate_verified 필드 확인
 
-Step 2: 독립적으로 기준금리 검증 (웹검색 도구 직접 호출 필수!)
-└─ mcp_websearch_web_search_exa(query="한국은행 기준금리 site:tradingeconomics.com")
-└─ mcp_websearch_web_search_exa(query="korea interest rate current 2026")
+Step 2: 독립적으로 기준금리 검증 (직접 조회 필수!)
+└─ web-search-verifier '1차 출처 직접 조회' 표의 한국은행 기준금리 엔드포인트(ECOS 722Y001, 한국은행 기준금리 추이)를 WebFetch로 직접 열고, 독립 보도 1곳은 WebSearch로 찾아 본문을 연다
+└─ 검색 결과 요약·앱 셸 페이지는 출처로 세지 않는다
 └─ ⚠️ 스킬을 통한 검색 금지 (동일 오류 방지)
 └─ ⚠️ 최소 3개 독립 출처에서 값 확인
 
@@ -158,7 +160,7 @@ Step 3: 일치 여부 판단
 └─ rate-analyst 값 == 독립 검증 값 → PASS
 └─ 불일치 → CRITICAL_FAIL + 정확한 값 제시
 
-⚠️ 주의: 독립 검증은 반드시 에이전트가 직접 웹검색을 수행해야 합니다.
+⚠️ 주의: 독립 검증은 반드시 에이전트가 직접 조회(1차 출처 WebFetch 우선, 그다음 WebSearch)를 수행해야 합니다. 직접 조회가 도구 오류로 모두 실패하면 PASS로 쓰지 않고, 시도한 URL·오류를 적어 FAIL로 보고한다.
 다른 에이전트의 결과나 스킬 예시 데이터를 참조하면 동일한 오류가 반복됩니다.
 ```
 
@@ -176,9 +178,9 @@ Step 3: 일치 여부 판단
 │  └─ S&P 500 현재값 추출                                          │
 │  └─ KOSPI 현재값 추출                                            │
 │                                                                 │
-│  Step 2: 독립적으로 지수 검증 (웹검색 도구 직접 호출 필수!)           │
-│  └─ mcp_websearch_web_search_exa(query="S&P 500 price today")         │
-│  └─ mcp_websearch_web_search_exa(query="KOSPI index current")         │
+│  Step 2: 독립적으로 지수 검증 (직접 조회 필수!)                     │
+│  └─ web-search-verifier '1차 출처 직접 조회' 표의 S&P 500·KOSPI  │
+│     엔드포인트 세 곳을 WebFetch로 직접 열어 같은 기준일 값 확인    │
 │  └─ ⚠️ index-fetcher 결과를 그대로 신뢰하지 않음                   │
 │  └─ ⚠️ 최소 3개 독립 출처에서 값 확인                              │
 │                                                                 │
@@ -188,22 +190,16 @@ Step 3: 일치 여부 판단
 │  └─ 불일치 → CRITICAL_FAIL + 정확한 값 제시                       │
 │                                                                 │
 │  Step 4: Fed Funds Rate 독립 검증                                │
-│  └─ mcp_websearch_web_search_exa(query="Fed funds rate current 2026") │
+│  └─ 연준 FOMC 성명 + 뉴욕 연준 EFFR API(targetRateFrom/To) 직접 조회 │
 │  └─ rate-analyst 값과 비교                                       │
 │  └─ 불일치 → CRITICAL_FAIL                                       │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-#### 독립 검증 검색 쿼리 (필수 실행)
+#### 독립 검증 직접 조회 (필수 실행)
 
-| 지표 | 검색 쿼리 (직접 호출) | 출처 |
-|:-----|:---------------------|:-----|
-| S&P 500 | `"S&P 500 price today site:tradingeconomics.com"` | Trading Economics |
-| S&P 500 | `"SPX index quote site:investing.com"` | Investing.com |
-| KOSPI | `"KOSPI index current site:tradingeconomics.com"` | Trading Economics |
-| KOSPI | `"코스피 지수 현재"` | Investing.com, Yahoo Finance |
-| Fed Rate | `"federal funds rate current 2026"` | Federal Reserve, FRED |
+`/investments-portfolio:web-search-verifier`의 '1차 출처 직접 조회' 표에서 지표마다 호스트가 다른 엔드포인트 세 곳을 WebFetch로 직접 연다(S&P 500·KOSPI·Fed·BOK). 입력 파일의 출처를 그대로 다시 여는 것이 아니라 표에서 고른 엔드포인트로 같은 기준일 값을 다시 얻고 ±1%로 비교한다. 검색 결과 요약과 앱 셸 페이지(본문 없는 Reuters·AP 등)는 출처로 세지 않는다.
 
 #### 순환 의존성 방지 로직
 
@@ -577,7 +573,7 @@ IF bok_rate_verified == false:
 ## 행동 규칙
 
 ### 필수 규칙
-1. **독립 검증 시 직접 웹검색**: 기준금리 검증 시 `mcp_websearch_web_search_exa` 직접 호출 (v4.0 필수)
+1. **독립 검증 시 직접 웹검색**: 기준금리 검증 시 `WebSearch` 직접 호출 (v4.0 필수)
 2. **스킬 사용 검증**: 모든 에이전트의 skill_used 필드 확인
 3. **엄격한 검증**: 모든 항목 검증 필수
 4. **객관적 판정**: 규칙 기반 검증
@@ -603,7 +599,7 @@ changes:
   - "v5.1: index_independent_verification JSON 스키마 추가"
   - "v5.1: 순환 의존성 방지 로직 추가 (index-fetcher 결과 독립 검증)"
   - "v5.1: perspective-balance, devil-advocate 스킬 추가"
-  - "v5.1: mcp_websearch_web_search_exa 단일 도구로 통합"
+  - "v5.1: WebSearch 단일 도구로 통합"
   - "v5.0: analyst-common 스킬로 웹검색 공통 규칙 분리 (코드 중복 제거)"
   - "v5.0: 독립 검증 시 analyst-common 스킬의 웹검색 규칙 준수"
   - "v4.1: Executive Summary 현재값 검증 추가 (최우선 검증)"

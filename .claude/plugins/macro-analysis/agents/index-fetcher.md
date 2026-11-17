@@ -83,10 +83,11 @@ model: sonnet
 ## Workflow
 
 1. **지수 목록 수신**: 수집할 지수 목록 파싱
-2. **웹검색 직접 호출**: 각 지수마다 웹검색 도구 직접 호출
-   - `WebSearch(query="S&P 500 price today site:investing.com OR site:bloomberg.com")`
-   - `WebSearch(query="KOSPI 지수 site:tradingeconomics.com")`
-   - `WebSearch(query="USD/KRW exchange rate")`
+2. **1차 출처 직접 조회**: `/investments-portfolio:web-search-verifier`의 '1차 출처 직접 조회' 표에서 시리즈마다 호스트가 다른 엔드포인트 세 곳을 `WebFetch`(omo: `webfetch` 또는 eval js `fetch`)로 연다
+   - KOSPI·KOSDAQ: 한국은행 ECOS 802Y001 + 네이버 지수 API + Yahoo chart (KRX 정보데이터시스템은 로그인 필요라 쓰지 않는다)
+   - S&P 500·NASDAQ: Yahoo chart + 네이버 해외지수 API + CNBC(또는 Nasdaq API)
+   - 환율: 서울외국환중개 매매기준율 + 네이버 환율 API + Yahoo(또는 ECOS 731Y001)
+   - 세 곳을 못 채운 시리즈만 `WebSearch`로 출처를 더 찾는다(검색 요약·앱 셸은 출처로 세지 않는다)
 3. **원문 인용**: 검색 결과에서 숫자가 포함된 원문을 그대로 복사
 4. **교차 검증**: 각 지수에 대해 최소 3개 출처 값 비교
 5. **결과 포장**: JSON 스키마에 맞춰 반환 (모든 URL 포함)

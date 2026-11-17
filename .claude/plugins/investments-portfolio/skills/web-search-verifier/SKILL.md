@@ -1,7 +1,7 @@
 ---
 name: web-search-verifier
 description: "3개 출처 교차검증 웹검색 프로토콜. 환각 방지 첫 번째 방어선. 모든 거시경제 데이터 수집 시 필수 사용."
-tools: mcp_websearch_web_search_exa, WebFetch
+tools: WebSearch, WebFetch
 ---
 
 # 웹검색 교차검증 스킬
@@ -11,14 +11,14 @@ tools: mcp_websearch_web_search_exa, WebFetch
 > **이 스킬은 "함수"가 아닙니다. 지침 문서입니다.**
 > 
 > - ❌ `search_rate("fed_funds")` 같은 함수 호출은 **작동하지 않습니다**
-> - ✅ 에이전트가 `mcp_websearch_web_search_exa` 도구를 **직접 호출**해야 합니다
+> - ✅ 에이전트가 아래 '1차 출처 직접 조회' 엔드포인트를 `WebFetch`로, 모자라면 `WebSearch`를 **직접 호출**해야 합니다
 > - ✅ 이 스킬은 **검색 쿼리 패턴과 검증 절차**를 안내하는 문서입니다
 
 ### 올바른 사용 방법
 
 ```
 1. 이 스킬 문서를 읽고 검색 쿼리 패턴 파악
-2. mcp_websearch_web_search_exa 도구를 직접 호출
+2. 1차 출처 엔드포인트를 WebFetch로 직접 조회, 모자라면 WebSearch 직접 호출
 3. 검색 결과에서 데이터 추출
 4. 3개 출처 교차 검증 수행
 5. 출력 스키마에 맞춰 결과 포장
@@ -37,7 +37,25 @@ tools: mcp_websearch_web_search_exa, WebFetch
 ## Overview
 
 이 스킬은 거시경제 데이터(지수, 금리, 환율) 수집 시 **환각을 방지**하기 위한 표준 프로토콜입니다.
-모든 수치 데이터는 **에이전트가 직접 웹검색 도구를 호출**하여 **3개 이상의 독립 출처에서 교차 검증** 후에만 사용 가능합니다.
+모든 수치 데이터는 **에이전트가 직접 조회**(아래 1차 출처 엔드포인트를 먼저, 모자라면 웹검색)하여 **3개 이상의 독립 출처에서 교차 검증** 후에만 사용 가능합니다.
+
+## 1차 출처 직접 조회 (검색보다 먼저)
+
+검색 결과 요약이나 앱 셸 페이지(본문 없이 스크립트만 있는 Reuters·AP 등)는 원문을 읽을 수 없어 출처로 세지 않는다. 아래 엔드포인트는 값을 기계가 읽을 수 있게 돌려주므로 `WebFetch`(omo: `webfetch` 또는 eval js `fetch`)로 직접 열어 값·기준일·원문 조각을 기록한다. 호스트가 다르면 독립 출처로 본다. 세 곳의 **같은 기준일** 값이 ±1% 안이어야 `verified: true`다(규칙은 그대로).
+
+| 시리즈 | 1차·기계 판독 출처 (호스트가 다른 것끼리 세 곳 이상) | 읽을 필드 |
+|---|---|---|
+| KOSPI | 한국은행 ECOS `https://ecos.bok.or.kr/api/StatisticSearch/{KEY}/json/kr/1/20/802Y001/D/{YYYYMMDD}/{YYYYMMDD}/0001000` (KEY 없으면 `sample`, 10행 제한) · 네이버 `https://m.stock.naver.com/api/index/KOSPI/basic` · Yahoo `https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?range=5d&interval=1d` | ECOS `TIME`·`DATA_VALUE`, 네이버 `closePrice`·`localTradedAt`, Yahoo `indicators.quote[0].close`·`timestamp` |
+| KOSDAQ | ECOS 같은 표 항목 `0089000` · 네이버 `.../api/index/KOSDAQ/basic` · Yahoo `%5EKQ11` | 위와 같음 |
+| S&P 500 | Yahoo `%5EGSPC` · 네이버 `https://api.stock.naver.com/index/.INX/basic` · CNBC `https://quote.cnbc.com/quote-html-webservice/restQuote/symbolType/symbol?symbols=.SPX&requestMethod=itv&noform=1&partnerId=2&fund=1&exthrs=1&output=json` | 종가·거래일 |
+| NASDAQ | Yahoo `%5EIXIC` · 네이버 `.../index/.IXIC/basic` · Nasdaq `https://api.nasdaq.com/api/quote/COMP/info?assetclass=index` · CNBC `.IXIC` | 종가·거래일 |
+| USD/KRW, EUR/KRW, JPY/KRW(100엔) | 서울외국환중개 매매기준율 `http://www.smbs.biz/Flash/TodayExRate_flash.jsp?tr_date={YYYY-MM-DD}` · ECOS `731Y001`(원/달러 `0000001`) · 네이버 `https://m.stock.naver.com/front-api/marketIndex/productDetail?category=exchange&reutersCode=FX_USDKRW` · Yahoo `KRW=X`·`EURKRW=X`·`JPYKRW=X` | 기준율 종류(매매기준율/고시/시장)와 단위(엔은 100엔)를 함께 적는다 |
+| Fed 목표 범위 | 연준 FOMC 성명 `https://www.federalreserve.gov/newsevents/pressreleases/monetary{YYYYMMDD}a.htm`(최신 회의 날짜는 `https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm`) · 뉴욕 연준 `https://markets.newyorkfed.org/api/rates/unsecured/effr/last/1.json`(`targetRateFrom`·`targetRateTo`) · 독립 보도 1곳(본문을 읽을 수 있는 기사) | 결정일과 그 뒤 회의가 없었는지 |
+| 한국은행 기준금리 | ECOS `722Y001` 항목 `0101000` · 한국은행 기준금리 추이 `https://www.bok.or.kr/portal/singl/baseRate/list.do?dataSeCd=01&menuNo=200643` · 독립 보도 1곳 | 변경일과 최근 금통위 동결 여부 |
+
+- 2026. 11. 17. 이 저장소 운영 호스트 기준 접속 불가: FRED CSV(시간 초과), stooq(JS 확인 페이지), KRX 정보데이터시스템(`LOGOUT`, 로그인 필요). 열리면 쓸 수 있지만 위 표만으로 세 곳을 채울 수 있다.
+- 미국 지수는 미국 장 마감일(한국 날짜로는 다음 날) 종가를 쓴다. 세 출처의 기준일이 다르면 가장 최근의 공통 기준일로 맞춘다(Yahoo 일별 배열에서 그 날 값을 고른다).
+- `data_quality.skill_verified`는 **출력에 남은 모든 수치가** 이 3출처 규칙을 통과했을 때 true다. 통과 못 한 수치(예: 정량 전망)는 null과 사유로 두고 `failed_items`에 적는다. null로 둔 항목은 본문에서 숫자로 쓰지 않는다.
 
 ---
 
@@ -127,7 +145,7 @@ tools: mcp_websearch_web_search_exa, WebFetch
 **데이터 유형**: 지수 (Index)
 
 > ⚠️ 아래는 **검색 패턴 가이드**입니다. `search_index()`라는 함수는 **존재하지 않습니다**.
-> 반드시 `mcp_websearch_web_search_exa`를 **직접 호출**하세요.
+> 반드시 `WebSearch`를 **직접 호출**하세요.
 
 **지원 지수**:
 - S&P 500, NASDAQ, Dow Jones
@@ -187,7 +205,7 @@ tools: mcp_websearch_web_search_exa, WebFetch
 **데이터 유형**: 금리 (Interest Rate)
 
 > ⚠️ 아래는 **검색 패턴 가이드**입니다. `search_rate()`라는 함수는 **존재하지 않습니다**.
-> 반드시 `mcp_websearch_web_search_exa`를 **직접 호출**하세요.
+> 반드시 `WebSearch`를 **직접 호출**하세요.
 
 **지원 금리**:
 - fed_funds: 미국 기준금리
@@ -327,11 +345,11 @@ tools: mcp_websearch_web_search_exa, WebFetch
 
 1. web-search-verifier 스킬 로드 확인 (검색 패턴 가이드로 참조)
 2. S&P 500 수집:
-   - mcp_websearch_web_search_exa(query="S&P 500 price today") **직접 호출**
+   - WebSearch(query="S&P 500 price today") **직접 호출**
    - 검색 결과에서 original_text 추출
    - verified: true 확인
 3. KOSPI 수집:
-   - mcp_websearch_web_search_exa(query="KOSPI 지수 현재") **직접 호출**
+   - WebSearch(query="KOSPI 지수 현재") **직접 호출**
    - 검색 결과에서 original_text 추출
    - verified: true 확인
 
@@ -361,8 +379,8 @@ updated: "2026-01-12"
 author: "Claude"
 purpose: "환각 방지 웹검색 표준화"
 dependencies:
-  - mcp_websearch_web_search_exa
-  - mcp_websearch_web_search_exa
+  - WebSearch
+  - WebSearch
   - WebFetch
 consumers:
   - index-fetcher

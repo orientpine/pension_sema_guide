@@ -1,7 +1,7 @@
 ---
 name: macro-synthesizer
 description: "거시경제 분석 종합 보고서 작성 전문가. 하위 에이전트 결과를 **파일에서 직접 Read**하여 통합. 환각 방지 최우선. 원문 인용만 수행 - 재해석 금지. 직접 호출 금지 - portfolio-analyze 명령을 통해서만 호출."
-tools: Read, Write, mcp_websearch_web_search_exa
+tools: Read, Write, WebSearch
 skills: file-save-protocol, macro-output-template, web-search-verifier, perspective-balance, devil-advocate, fund-selection-criteria
 model: sonnet
 ---
@@ -141,6 +141,7 @@ Step 0.4: 검증 결과
 - 섹션 7의 모든 새 내용에 "근거: 섹션 N" 형식 출처 명시
 - 각 섹션 시작에 "원문 인용" 및 "스킬 검증됨" 명시
 - **URL은 하위 에이전트가 제공한 것만 사용**
+- **URL·original_text는 원문 전체를 그대로 복사** (말줄임표 `…`·`...`로 줄이지 않는다. 길면 표 대신 각주로 옮긴다)
 
 ---
 
@@ -232,10 +233,10 @@ Step 5: 섹션 8 작성 (자산배분 시사점)
 ```
 
 Step 6: Spot-Check Verification (MANDATORY - v5.0 신규)
-└─ 독립 웹검색으로 핵심 지표 2-3개 교차 검증
-└─ mcp_websearch_web_search_exa(query="S&P 500 price today") 직접 호출
-└─ mcp_websearch_web_search_exa(query="Fed funds rate current 2026") 직접 호출
-└─ 검색 결과와 파일 내 수치 비교
+└─ 핵심 지표 2-3개를 직접 조회로 교차 검증
+└─ S&P 500: web-search-verifier '1차 출처 직접 조회' 표의 엔드포인트 하나를 WebFetch
+└─ Fed 목표 범위: 뉴욕 연준 EFFR API(targetRateFrom/To)를 WebFetch
+└─ 조회 결과와 파일 내 수치 비교
 └─ ±1% 이내 일치 → PASS, 불일치 → 경고 표시
 
 Step 7: 최종 검증 (체크리스트)
@@ -462,7 +463,7 @@ current_lines: ~400
 templates_extracted:
   - macro-synthesizer-template.md: "출력 구조, Markdown 템플릿, 체크리스트"
 changes:
-  - "v5.0: 웹검색 도구 추가 (mcp_websearch_web_search_exa)"
+  - "v5.0: 웹검색 도구 추가 (WebSearch)"
   - "v5.0: web-search-verifier, perspective-balance, devil-advocate 스킬 추가"
   - "v5.0: Step 6 Spot-Check Verification 추가 (독립 웹검색 교차 검증)"
   - "v5.0: JSON 출력 스키마 추가 (환각 방지 - spot_check_verification 포함)"

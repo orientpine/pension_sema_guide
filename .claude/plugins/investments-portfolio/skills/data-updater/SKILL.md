@@ -1,7 +1,7 @@
 ---
 name: data-updater
 description: "CSV에서 펀드 데이터를 추출하여 fund_data.json, fund_fees.json, fund_classification.json을 생성/업데이트하는 스킬. 예금금리 데이터(deposit_rates.json) 업데이트도 지원한다. 펀드 데이터 업데이트가 필요하거나 CSV 파일을 JSON으로 변환하고 싶을 때 사용한다."
-tools: Bash, Read, Write, mcp_question
+tools: Bash, Read, Write, AskUserQuestion
 ---
 
 # Fund Data Updater
@@ -400,7 +400,7 @@ funds/
 - 사용자가 포털 화면 값을 주면 `_meta.ownerPortalCheck`에 대조 결과(`matches`, 값, 확인 시각)를 남긴다. 불일치면 갱신을 멈추고 사용자에게 알린다.
 - 페이지에 접근할 수 없을 때만 사용자에게 포털 값을 직접 묻는다 (아래 질문 예시).
 
-### 사용자 질문 예시 (페이지 접근 불가 시, mcp_question 사용)
+### 사용자 질문 예시 (페이지 접근 불가 시, AskUserQuestion 사용)
 
 ```
 과학기술인공제회 퇴직연금 원리금보장형 금리를 확인해주세요 (페이지 기준일 포함):

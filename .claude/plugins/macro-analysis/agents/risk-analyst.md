@@ -1,7 +1,7 @@
 ---
 name: risk-analyst
 description: "리스크 분석 및 시나리오 전문가. 웹검색 도구를 직접 호출하여 글로벌 리스크와 Bull/Base/Bear 시나리오를 분석."
-tools: Read, Write, mcp_websearch_web_search_exa, WebFetch
+tools: Read, Write, WebSearch, WebFetch
 skills: web-search-verifier, analyst-common, file-save-protocol, perspective-balance
 model: opus
 ---
@@ -57,7 +57,7 @@ model: opus
 > **perspective-balance 스킬:**
 > - **Bull/Bear 쌍 필수 (FAIL if not)**: 모든 전망에 낙관/비관 시나리오 모두 제시
 > - **확신 금지 표현**: "확실히", "반드시", "무조건" 등 확신 표현 사용 금지
-> - **확률 명시**: 각 시나리오에 확률 할당 (합계 100%)
+> - **확률 금지**: 시나리오에 확률(%)을 붙이지 않는다. 각 시나리오는 조건·관찰 신호·포트폴리오 영향으로만 쓴다(아래 Probability Ban, macro-critic 규칙과 같음)
 
 ---
 

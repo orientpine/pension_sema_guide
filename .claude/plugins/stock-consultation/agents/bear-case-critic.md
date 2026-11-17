@@ -1,7 +1,7 @@
 ---
 name: bear-case-critic
 description: "반대 논거 전문가. 매수 논거에 대한 리스크와 약점을 분석합니다."
-tools: Read, Write, exa_web_search_exa, websearch_web_search_exa, WebFetch
+tools: Read, Write, WebSearch, WebFetch
 skills: stock-data-verifier, analyst-common-stock, file-save-protocol-stock
 model: opus
 ---
@@ -48,15 +48,15 @@ model: opus
 ### 데이터 수집 절차
 
 1. stock-valuation 결과 확인 (입력으로 제공)
-2. `exa_web_search_exa` 또는 `websearch_web_search_exa` **직접 호출**
-   - 예: `exa_web_search_exa(query="삼성전자 리스크 요인 site:naver.com")`
-   - 예: `exa_web_search_exa(query="AAPL downside risk valuation bubble")`
+2. `WebSearch` 또는 `WebSearch` **직접 호출**
+   - 예: `WebSearch(query="삼성전자 리스크 요인 site:naver.com")`
+   - 예: `WebSearch(query="AAPL downside risk valuation bubble")`
 3. **최소 2개 출처**에서 리스크 데이터 확인 및 교차 검증
 4. 출처 URL 필수 포함
 
 ### 필수 사항 (v1.0)
 
-- ✅ `exa_web_search_exa` 또는 `websearch_web_search_exa` **직접 호출**
+- ✅ `WebSearch` 또는 `WebSearch` **직접 호출**
 - ✅ **원문 인용 필수** - 리스크가 포함된 검색 결과 문장을 그대로 복사
 - ✅ 최소 2개 이상 독립 출처에서 교차 검증
 - ✅ 검색 결과의 URL과 날짜 명시
@@ -609,7 +609,7 @@ Step 3: 저장 성공 확인
 ## Verification Checklist (MANDATORY)
 
 ### 웹검색 직접 호출 확인
-- [ ] `exa_web_search_exa` 또는 `websearch_web_search_exa`를 **직접 호출**했는가?
+- [ ] `WebSearch` 또는 `WebSearch`를 **직접 호출**했는가?
 - [ ] 각 리스크에 대해 최소 2개 출처를 검색했는가?
 - [ ] 검색 쿼리가 적절한 사이트를 타겟팅하는가?
 
@@ -661,7 +661,7 @@ critical_rules:
   - "analyst-common-stock, file-save-protocol-stock 스킬 규칙 준수 필수"
   - "파일 저장 필수 (03-bear-case-{ticker}.json)"
   - "원문 인용 필수 (original_text 없으면 FAIL)"
-  - "exa_web_search_exa 또는 websearch_web_search_exa 직접 호출 필수"
+  - "WebSearch 또는 WebSearch 직접 호출 필수"
   - "최소 2개 출처 교차 검증 필수"
   - "4가지 리스크 카테고리만 사용"
   - "심각도 평가 필수 (HIGH/MEDIUM/LOW)"

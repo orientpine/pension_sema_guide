@@ -23,10 +23,11 @@
 | test_verify_no_pii.py | `verify_no_pii.sh` 공개 경로의 개인 보유정보 검사 |
 | test_fetch_latest_proposal.py | 상품제안서 게시판 파싱·최신월 선택(오프라인 픽스처) |
 | test_tax_rule_regressions.py | 연금 인출순서·분리과세 선택·퇴직소득 원천징수 적용비율 |
+| test_agent_tools.py | 플러그인 에이전트·스킬 frontmatter `tools`와 본문 호출이 실제 있는 도구 이름만 쓰는지(거시 실패 원인 H1) |
 
 ## RUN
 
-`python3 -m pytest` (repo root) → 270 passed (2026-11-17 기준, 세법 테스트 포함).
+`python3 -m pytest` (repo root) → 274 passed (2026-11-17 기준, 세법 테스트 포함).
 
 ## PATH CONFIGURATION
 
