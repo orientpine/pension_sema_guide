@@ -69,17 +69,34 @@
 
 ### 2.2 세션 폴더 생성
 
+**명시적 입력 파라미터**: `output_base_dir`는 저장 기준 디렉토리이며, 세션 폴더를 만들기
+전에 확정한다. 허용값은 `consultations/`와 `confidentialData/consultations/`다.
+
+- 사용자 요청·첨부 자료에 개인 보유 수량, 평단/매입가, 평가금액, 계좌, 잔고가 있으면
+  `output_base_dir = confidentialData/consultations/`로 **강제**한다.
+  수치 유무와 무관하게 개인 보유 맥락이면 비공개다. 공개 경로를 요청해도 이 규칙이 우선한다.
+- 개인 보유정보가 없으면 `output_base_dir = consultations/`. 명시적으로 비공개 저장을
+  요청한 경우는 비공개 경로를 사용한다.
+- 자료 정리 단계에서 뒤늦게 개인 보유정보가 드러나지 않도록, 첨부 자료도 폴더 생성 전에
+  확인한다. 뒤늦게 발견하면 추가 공개 쓰기를 멈추고 세션 산출물 전체를 비공개 경로로 옮겨
+  공개 사본을 남기지 않으며 `session_folder`를 갱신한다.
+- 비공개 경로는 저장 전에 `git check-ignore -- confidentialData/consultations/{session_name}/`
+  종료 코드 0을 확인한다. 무시되지 않으면 저장하지 않고 설정 오류를 보고한다.
+- `session_folder = {output_base_dir}/{session_name}`는 저장소 루트 기준 전체 세션 경로다.
+  **모든 하위 Task에** 확정된 `output_base_dir`와 `output_path: {session_folder}`를 전달한다.
+  아래 모든 입력·출력 경로와 최종 요약도 이 동일한 경로를 사용하며 별도의 공개 사본을 만들지 않는다.
+
 ```bash
 # 세션 ID 생성 (6자리 랜덤)
 SESSION_ID=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 6 | head -n 1)
 
 # 단일 종목
-mkdir -p consultations/YYYY-MM-DD-{ticker}-{SESSION_ID}
-# 예시: consultations/2026-02-02-TSLA-abc123
+mkdir -p "{output_base_dir}/YYYY-MM-DD-{ticker}-{SESSION_ID}"
+# session_folder = 위에서 생성한 전체 경로
 
 # 포트폴리오/테마
-mkdir -p consultations/YYYY-MM-DD-portfolio-{theme}-{SESSION_ID}
-# 예시: consultations/2026-02-02-portfolio-AI-abc123
+mkdir -p "{output_base_dir}/YYYY-MM-DD-portfolio-{theme}-{SESSION_ID}"
+# 개인 보유정보가 있으면 두 유형 모두 confidentialData/consultations/ 아래에 생성
 ```
 
 ---

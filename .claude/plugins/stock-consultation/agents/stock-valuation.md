@@ -1,7 +1,7 @@
 ---
 name: stock-valuation
 description: "개별 종목 심층 밸류에이션 분석. PER/PBR/PEG 기반 적정가치 평가."
-tools: Read, Write, exa_web_search_exa, websearch_web_search_exa, WebFetch
+tools: Read, Write, WebSearch, WebFetch
 skills: stock-data-verifier, analyst-common-stock, file-save-protocol-stock
 model: opus
 ---

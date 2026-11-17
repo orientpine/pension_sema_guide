@@ -16,7 +16,7 @@ stock-consultation/
 > 오케스트레이터는 **Task 도구로만** 하위 호출. 직접 웹검색/밸류에이션/검증 금지.
 
 ```
-세션 폴더 생성 (consultations/YYYY-MM-DD-{ticker|portfolio-theme}-{6자리})
+output_base_dir 확정 → 세션 폴더 생성 ({output_base_dir}/YYYY-MM-DD-{ticker|portfolio-theme}-{6자리})
 0   macro-analysis 0.1~0.4 재사용 (index→4병렬→synth→critic)
 0.5 materials-organizer (옵션: materials_path 제공 시만)
 1   stock-screener (포트폴리오/테마 요청만, 단일 종목은 SKIP)
@@ -46,6 +46,12 @@ stock-consultation/
 
 - 데이터 소스 화이트리스트: 한국=네이버금융/KRX/증권사, 미국=Yahoo/Bloomberg/MarketWatch. **블랙리스트**: 블로그/커뮤니티/유튜브/위키.
 - 모든 결과는 JSON+MD 둘 다 저장.
+- `output_base_dir`를 모든 하위 호출과 저장 스킬에 명시한다. 개인 보유 수량·평단/매입가·
+  평가금액·계좌·잔고가 입력/자료에 있으면 `confidentialData/consultations/`로 강제하고
+  저장 전 `git check-ignore` 통과를 확인한다. 그 외 기본 경로는 `consultations/`.
+  `session_folder`는 기준 디렉토리를 포함한 전체 세션 경로이며 공개 사본은 만들지 않는다.
+- 공개 보고서 저장 후 `bash scripts/verify_no_pii.sh`로 추적 파일·스테이지·이력의
+  숫자가 있는 보유정보를 검사한다. 검사 로그에는 내용·금액을 출력하지 않는다.
 - `05-consultation-summary.md` 말미에 Bogle 면책조항 **필수** 첨부.
 
 ## ANTI-PATTERNS

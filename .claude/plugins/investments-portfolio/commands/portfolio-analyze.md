@@ -208,6 +208,10 @@ overallStatus = 모든 파일 중 가장 나쁜(worst-case) 상태
 
 > **BLOCKING**: 완료될 때까지 대기 필수
 
+**도구 사전 점검**: index-fetcher, stock-valuation, fund-portfolio의 표준 도구명은
+`WebSearch`/`WebFetch`다. 실행 환경에서 이 도구가 사용 가능한지 확인한다
+(omo 어댑터가 해당 도구로 매핑). 사용할 수 없으면 지수는 결측으로 기록하고 아래 모드 판정으로 진행한다.
+
 ```
 Task(
   subagent_type="macro-analysis:index-fetcher",
@@ -227,18 +231,45 @@ output_path: {session_folder}
 - JSON 파일로 저장: index-data.json
 - MD 파일로 저장: 99-index-data.md
 
-**FAIL 시**: 워크플로우 중단, 사용자에게 에스컬레이션
+**FAIL 시**: 성공한 시리즈도 보존하고, 실패 시리즈는 verified=false 및 사유를 포함하여 JSON 저장
 """
 )
 ```
 
-**FAIL 처리**: 최대 3회 재시도 후 워크플로우 중단
+**완료·FAIL 공통 처리**: 세션의 수집 결과만 다음 스크립트로 판정한다.
+
+```bash
+python3 .claude/plugins/macro-analysis/scripts/index_status.py \
+  "{session_folder}/index-data.json" > "{session_folder}/index-status.json"
+```
+
+- 입력 파일이 없거나 읽을 수 없는 경우는 수집 산출물 실패다. 원인을 기록하고 수치를
+  추가하지 않은 `{"indices": [], "status": "FAIL"}`을 세션 JSON으로 저장한 뒤 판정한다.
+  스크립트 자체 실행 오류는 정상 결과처럼 취급하지 않고 오류를 보고한다.
+- 출력의 `series`는 시리즈별 `verified` / `stale` / `missing`과 `age_days`를 제공한다.
+  7일 초과·미검증은 사용하지 않는다. `missing` 목록은 stale을 포함한 전체 사용 불가 목록이다.
+- `full`: Step 0.2~0.4 정상 실행.
+- `partial`: Step 0.2~0.4 실행. **모든 Task 프롬프트에** `index-status.json` 직접 Read,
+  `mode`, `usable`, `missing` 목록과 stale 경과일을 전달한다. 사용 가능한 시리즈만 인용한다.
+- `none`: Step 0.2~0.4를 건너뛰고 `00-macro-outlook.md`에
+  `거시 분석 생략 — 결측: {missing 전체 목록과 사유·경과일}`을 저장한다.
+  `macro-outlook.json`은 `{"status":"SKIPPED","index_status_file":"index-status.json","allocation_guidance":null}`로 저장한다.
+  거시 전망·비중을 생성하지 않는다.
+- 모든 모드의 종료 코드는 0이다. 지수 결측만으로 DC 배분을 중단하지 않는다.
+  partial/none이면 Step 0.5와 Step 1~4에 모드와 결측 목록을 함께 전달하고,
+  fund-portfolio는 `funds/*.json`과 사용자 조건으로 배분한다. 거시 결측을 자체 웹검색이나
+  루트의 과거 스냅샷으로 채우거나, 생략된 거시 검증을 PASS로 표시하지 않는다.
+- **필수 전달·표시**: partial의 Step 0.3 프롬프트와 모든 모드의 Step 4 조합 지시에
+  `00-macro-outlook.md`와 `04-portfolio-summary.md` 상단에
+  `거시 모드: {mode} / 결측: {missing 목록, 시리즈별 상태와 age_days}`를 그대로 표시하도록 전달한다.
+  결측 없음도 명시하고, 결측 수치·전망·자산배분 권고를 임의로 채우지 않는다.
 
 ---
 
 ### Step 0.2: 4개 분석 에이전트 (병렬 호출)
 
 > **PARALLEL**: 4개 에이전트를 동시에 호출
+> `none`이면 이 단계 생략. `partial`이면 위 공통 모드·결측 전달 규칙을 모든 호출에 적용.
 
 #### rate-analyst (금리/환율 전망)
 
@@ -350,6 +381,7 @@ output_path: {session_folder}
 ### Step 0.3: macro-synthesizer (거시경제 종합)
 
 > **BLOCKING**: Step 0.2 완료 후 호출
+> `none`이면 이 단계 생략. `partial`이면 index-status.json과 결측 목록을 직접 읽고 00 보고서에 표시.
 
 ```
 Task(
@@ -386,6 +418,7 @@ output_path: {session_folder}
 ### Step 0.4: macro-critic (거시경제 검증)
 
 > **BLOCKING**: Step 0.3 완료 후 호출
+> `none`이면 생략. `partial`에서는 명시된 결측 자체는 FAIL 사유가 아니며, 결측 수치를 생성하거나 인용하면 FAIL.
 
 ```
 Task(
@@ -416,7 +449,7 @@ Task(
 
 ### Step 0.5: 안전자산 선호 수집 (BLOCKING — 사용자 질문)
 
-> **BLOCKING**: Step 0.4 PASS 후, Step 1 호출 전에 반드시 수행
+> **BLOCKING**: Step 0.4 PASS 또는 `none`에 따른 거시 단계 생략 후, Step 1 호출 전에 반드시 수행
 
 fund-portfolio 호출 전에 사용자에게 안전자산 유형을 질문합니다.
 

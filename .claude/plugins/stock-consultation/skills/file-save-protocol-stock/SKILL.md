@@ -32,6 +32,10 @@ tools: Write
 
 - 모든 분석 결과는 `Write` 도구로 파일 저장
 - 저장 경로는 coordinator가 제공하는 `output_path` 사용
+- `output_base_dir`도 명시적으로 전달받아 검사: 개인 보유 수량·평단/매입가·평가금액·계좌·잔고가
+  입력 또는 결과에 포함되면 반드시 `confidentialData/consultations/`이며, 없으면 `consultations/`
+  (명시적인 비공개 요청은 허용). 개인 정보가 있는데 공개 경로가 전달되면 Write 전에 FAIL 반환
+- 비공개 경로의 gitignore 확인은 coordinator가 수행하며, 확인되지 않은 경로에는 저장하지 않음
 - 저장 성공 여부 확인 후 응답
 - 저장 실패 시 명시적 FAIL 응답
 
@@ -76,13 +80,14 @@ Step 3: 저장 성공 확인
 
 ### 저장 경로 컨벤션
 
-coordinator(stock-consultant)가 제공하는 `output_path`를 사용합니다:
+coordinator(stock-consultant)가 제공하는 `output_base_dir`와 전체 세션 경로 `output_path`를
+사용합니다. `output_path`에 consultations를 다시 붙이지 않습니다:
 
 ```
-consultations/{session_folder}/{filename}
+{output_path}/{filename}
 
 예시:
-consultations/2026-01-14-TSLA-abc123/
+{output_base_dir}/2026-01-14-TSLA-abc123/
 ├── index-data.json               # index-fetcher 출력
 ├── rate-analysis.json            # rate-analyst 출력
 ├── sector-analysis.json          # sector-analyst 출력
@@ -151,7 +156,7 @@ consultations/2026-01-14-TSLA-abc123/
 
 ```
 Write(
-  file_path="consultations/{session_folder}/02-valuation-{ticker}.json",
+  file_path="{output_path}/02-valuation-{ticker}.json",
   content="{\"status\": \"PASS\", \"ticker\": \"005930\", ...}"
 )
 ```
@@ -177,6 +182,7 @@ JSON.stringify(analysis_result, null, 2)
 
 ### 저장 전 확인
 - [ ] `output_path`가 coordinator로부터 전달되었는가?
+- [ ] `output_base_dir`가 명시되어 있고 개인 보유정보가 있으면 비공개 경로인가?
 - [ ] 저장할 데이터가 완전한가 (모든 필수 필드 포함)?
 - [ ] JSON 형식이 올바른가?
 
@@ -212,7 +218,7 @@ JSON.stringify(analysis_result, null, 2)
   "status": "FAIL",
   "error": "FILE_SAVE_FAILED",
   "detail": "02-valuation-{ticker}.json 저장 실패",
-  "attempted_path": "consultations/2026-01-14-TSLA-abc123/02-valuation-TSLA.json",
+  "attempted_path": "{output_path}/02-valuation-TSLA.json",
   "action": "재시도 필요"
 }
 ```
@@ -237,5 +243,5 @@ extracted_from:
   - "저장 실패 시 응답 형식"
 dependencies:
   - Write
-output_path_pattern: "consultations/{YYYY-MM-DD}-{ticker}-{session_id}/"
+output_path_pattern: "{output_base_dir}/{YYYY-MM-DD}-{ticker}-{session_id}/"
 ```

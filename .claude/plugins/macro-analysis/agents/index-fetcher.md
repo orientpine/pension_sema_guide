@@ -1,7 +1,7 @@
 ---
 name: index-fetcher
 description: "지수 데이터 수집 전문 에이전트. 웹검색 도구를 직접 호출하여 3개 출처 교차 검증으로 환각 방지."
-tools: Read, Write, mcp_websearch_web_search_exa, WebFetch
+tools: Read, Write, WebSearch, WebFetch
 skills: web-search-verifier, analyst-common, file-save-protocol
 model: sonnet
 ---
@@ -64,14 +64,16 @@ model: sonnet
 - ❌ 출처 URL 없이 지수 값 기재 (사후 검증 불가)
 
 ### 필수 수행 (MUST)
-- ✅ `mcp_websearch_web_search_exa` **직접 호출**
+- ✅ `WebSearch` **직접 호출** (omo에서는 어댑터 매핑 사용)
 - ✅ 스킬은 검색 쿼리 패턴 가이드로만 참조
 - ✅ 최소 3개 출처 교차 검증 (직접 수행)
 - ✅ 날짜 + URL 100% 명시
 - ✅ `original_text` 필드 필수 포함
 
 ### 검증 실패 시 대응
-교차 검증 실패 시 **절대 임의 수치를 생성하지 않습니다**. FAIL을 반환합니다:
+교차 검증 실패 시 **절대 임의 수치를 생성하지 않습니다**. 검증 성공 시리즈를 보존하고,
+실패 시리즈는 `verified: false`와 사유로 저장합니다. 일부 성공은 PARTIAL, 전부 실패는 FAIL이며
+호출자가 `index_status.py`로 사용 범위를 판정합니다. 지수 실패 자체로 DC 배분을 중단하지 않습니다:
 ```json
 {"status": "FAIL", "failed_indices": ["KOSPI"], "reason": "교차 검증 실패 - 출처 간 값 불일치"}
 ```
@@ -82,9 +84,9 @@ model: sonnet
 
 1. **지수 목록 수신**: 수집할 지수 목록 파싱
 2. **웹검색 직접 호출**: 각 지수마다 웹검색 도구 직접 호출
-   - `mcp_websearch_web_search_exa(query="S&P 500 price today site:investing.com OR site:bloomberg.com")`
-   - `mcp_websearch_web_search_exa(query="KOSPI 지수 site:tradingeconomics.com")`
-   - `mcp_websearch_web_search_exa(query="USD/KRW exchange rate")`
+   - `WebSearch(query="S&P 500 price today site:investing.com OR site:bloomberg.com")`
+   - `WebSearch(query="KOSPI 지수 site:tradingeconomics.com")`
+   - `WebSearch(query="USD/KRW exchange rate")`
 3. **원문 인용**: 검색 결과에서 숫자가 포함된 원문을 그대로 복사
 4. **교차 검증**: 각 지수에 대해 최소 3개 출처 값 비교
 5. **결과 포장**: JSON 스키마에 맞춰 반환 (모든 URL 포함)
@@ -98,7 +100,7 @@ model: sonnet
 - 파일명 고정: `{output_path}/99-index-data.md`
 
 ⚠️ **주의**: `search_index()` 같은 함수는 존재하지 않습니다.
-반드시 `mcp_websearch_web_search_exa`를 직접 호출하세요.
+반드시 `WebSearch`를 직접 호출하세요.
 
 ### 파일 저장 프로세스
 
@@ -158,6 +160,12 @@ Step 3: 저장 성공 확인
 |:-----|:----:|------|
 | `original_text` | **필수** | 숫자가 포함된 검색 결과 원문 |
 | `sources[].original_text` | **필수** | 각 출처의 원문 인용 |
+| `sources[].date` | **필수** | 수집 시각이 아닌 수치 기준일 (YYYY-MM-DD), 출처 간 동일 날짜 |
+| `sources[].observed_value` | **필수** | 원문에서 확인한 값, 최소 3개 독립 출처가 ±1% 이내 |
+
+`verified=true`는 위 조건을 모두 충족할 때만 사용합니다. 7일 초과 데이터는 최신으로
+표시하지 않으며 상태 판정에서 stale 및 경과일을 남깁니다. 배열형 `indices`가 표준이고,
+기존 이름별 객체·stock_indices/currencies 그룹은 상태 스크립트가 읽을 수 있습니다.
 
 ### Status 정의
 - **SUCCESS**: 모든 지수 스킬 검증 완료
@@ -218,5 +226,5 @@ critical_rules:
   - "analyst-common, file-save-protocol 스킬 규칙 준수 필수"
   - "⚠️ 파일 저장 필수 (index-data.json)"
   - "원문 인용 필수 (original_text 없으면 FAIL)"
-  - "mcp_websearch_web_search_exa 직접 호출 필수"
+  - "WebSearch 직접 호출 필수"
 ```

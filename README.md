@@ -530,7 +530,7 @@ pension_sema_guide/
 │   └── all/                        #   전체 펀드 (2169, *_all_*)
 ├── tests/                          # TDF enrichment pytest 스위트
 ├── portfolios/samples/             # 익명화된 공개 예시 (sample-aggressive)
-├── consultations/                  # 주식/ETF 상담 보고서 (비개인)
+├── consultations/                  # 주식/ETF 상담 보고서 (비개인 — 보유·금액·계좌가 들어가면 confidentialData/consultations/, verify_no_pii.sh가 검사)
 ├── resource/                       # SEMA 상품제안서 CSV/XLSX (원본)
 ├── docs/                           # 기술 문서
 ├── scripts/                        # verify_no_pii.sh, verify_plugin.sh
