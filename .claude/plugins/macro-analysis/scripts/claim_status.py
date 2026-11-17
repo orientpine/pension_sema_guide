@@ -12,6 +12,7 @@ decision_usable은 파일의 자기 신고값이 아니라 7개국 지도자·�
 
 import argparse
 import json
+import re
 import sys
 from datetime import date, datetime
 from pathlib import Path
@@ -57,7 +58,7 @@ def accessed_day(value: object) -> date | None:
 
 
 def norm(value: object) -> str:
-    return str(value).replace("%", "").replace(" ", "").replace("~", "-") if value is not None else ""
+    return str(value).replace("%", "").replace(" ", "").replace("~", "-").replace("–", "-") if value is not None else ""
 
 
 def quoted(source: dict) -> bool:
@@ -138,6 +139,10 @@ def evaluate(doc: dict, today: date) -> dict:
                 missing.append(f"{name}.{key}")
         if bank.get("current_rate") is not None and rate["status"] != "VERIFIED":
             issues.append(f"{name}.current_rate: 확정되지 않은 수치가 표시됨")
+        if rate["status"] == "VERIFIED":
+            shown = re.match(r"\s*(\d[\d.]*(?:\s*[-–~]\s*\d[\d.]*)?)", str(bank.get("current_rate") or ""))
+            if not shown or norm(shown.group(1)) != norm(bank["rate_claim"]["value"]):
+                issues.append(f"{name}.current_rate: 표시값이 검증된 rate_claim.value와 다름")
     issues += interpretation_issues(doc, rows)
     return {"as_of": today.isoformat(), "decision_usable": not missing and not issues,
             "missing": missing, "issues": issues, "countries": report}

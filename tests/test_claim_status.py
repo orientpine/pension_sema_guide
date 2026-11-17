@@ -158,3 +158,15 @@ def test_unreadable_input_is_nonzero(tmp_path: Path) -> None:
     done = subprocess.run([sys.executable, str(SCRIPT), str(path), "--as-of", AS_OF],
                           capture_output=True, text=True, check=False)
     assert done.returncode == 1
+
+
+@pytest.mark.parametrize("display,usable", [("99%", False), ("3.00% (1년 LPR)", True), (None, False)])
+def test_displayed_rate_must_match_verified_claim(tmp_path: Path, display: str | None, usable: bool) -> None:
+    rows = [country(name) for name in ISSUERS if name != "중국"]
+    china = country("중국", rate="3.00")
+    china["central_bank"]["current_rate"] = display
+    rows.append(china)
+    report = run(tmp_path, document(rows))
+    assert report["decision_usable"] is usable
+    if display == "99%":
+        assert "중국.current_rate: 표시값이 검증된 rate_claim.value와 다름" in report["issues"]

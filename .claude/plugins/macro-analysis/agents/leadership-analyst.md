@@ -463,7 +463,7 @@ Step 4: 정권 교체/선거가 진행 중인 경우
 |------|------|
 | `original_text` | **모든 분석 항목에 필수** - 웹검색 결과 원문 직접 복사 |
 | `leader.sources` | 현직 지도자는 **발표 기관 1차 출처 1곳 이상**(url·accessed_at·original_text). 열리지 않으면 원발행자가 다른 독립 3출처 |
-| `central_bank.current_rate` | `rate_claim`이 공식 사실 기준을 통과했을 때만 값, 아니면 null + `current_rate_null_reason` |
+| `central_bank.current_rate` | `rate_claim`이 공식 사실 기준을 통과했을 때만 값(앞의 숫자가 `rate_claim.value`와 같아야 함, `claim_status.py`가 대조), 아니면 null + `current_rate_null_reason` |
 | `policy_orientation`, `allocation_implications.regional[]` | `claim_type: "interpretation"`(지역은 `is_inference: true`도), 지역은 확대/유지/축소만, 수치 비중 금지 |
 | `decision_usable` | 이 에이전트가 true로 정하지 않는다. 호출자가 `claim_status.py`로 판정해 `leadership-status.json`에 저장한다 |
 | `stability.original_text` | 정치 상황은 **사실 기반만** - 추측/예측 금지 |
