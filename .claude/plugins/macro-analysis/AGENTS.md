@@ -29,12 +29,13 @@ index-fetcher (blocking)
 
 ## CONVENTIONS
 
-- 각 analyst는 `/investments-portfolio:web-search-verifier`의 '1차 출처 직접 조회' 표를 먼저 직접 조회(WebFetch)하고 모자라면 WebSearch + 3출처 교차검증 + 원문(`original_text`) 인용. 3출처를 못 채운 수치는 null + `failed_items`, `skill_verified`는 남은 수치 기준.
+- 각 analyst는 `/investments-portfolio:web-search-verifier`의 '1차 출처 직접 조회' 표를 먼저 직접 조회(WebFetch)하고 모자라면 WebSearch + 원문(`original_text`) 인용. 확정 기준은 **주장 종류별**: 공식 사실(기준금리·현직 인물·직함)은 발표 기관 1차 출처, 시장 숫자는 3출처 교차검증, 해석은 해석 표시·배분엔 방향만. 기준을 못 채운 것은 null + `failed_items`, `skill_verified`는 남은 수치 기준.
+- 판정 스크립트: `scripts/index_status.py`(지수·환율, 3출처) → `index-status.json`, `scripts/claim_status.py`(리더십 공식 사실·해석) → `leadership-status.json`. 호출자(portfolio-analyze)가 실행하고, synthesizer·critic은 이 판정 파일의 값만 쓴다.
 - `macro-synthesizer`는 prompt 본문 데이터가 아니라 **하위 JSON 파일에서만** 수치를 가져옴. 재해석/재계산 금지.
 - `macro-critic`은 synthesizer 결과를 신뢰하지 않고 S&P500/KOSPI/Fed/BOK를 1차 출처 엔드포인트로 **독립 재조회**해 ±1% 대조.
 
 ## ANTI-PATTERNS
 
 - macro-synthesizer가 수치를 생성/추정 — JSON에 없으면 비움.
-- analyst가 단일 출처로 수치 확정.
+- analyst가 발표 기관이 아닌 단일 출처로 사실·수치 확정(시장 숫자는 3출처, 공식 사실은 발표 기관 1차 출처).
 - 이 플러그인을 단독 진입점으로 호출 — command가 없으므로 항상 caller 워크플로우(0.x 단계)에서 호출됨.

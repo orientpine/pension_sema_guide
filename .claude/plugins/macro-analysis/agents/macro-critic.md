@@ -123,7 +123,7 @@ macro-synthesizer 출력의 **검증 전문가**입니다. 지수 데이터 정�
 │                                                                 │
 │  Step 2: data_quality.skill_verified 필드 확인                  │
 │  └─ 각 에이전트: skill_verified == true ?                        │
-│     (= 출력에 남은 모든 수치가 3출처 통과. 통과 못 한 수치는     │
+│     (= 출력에 남은 모든 수치·사실이 주장 종류별 출처 기준 통과.   │
 │      null+사유로 failed_items에 있고 본문에 숫자로 안 쓰였는지 확인) │
 │                                                                 │
 │  Step 3: 개별 데이터 포인트 verified 상태 확인                    │
@@ -154,7 +154,7 @@ Step 2: 독립적으로 기준금리 검증 (직접 조회 필수!)
 └─ web-search-verifier '1차 출처 직접 조회' 표의 한국은행 기준금리 엔드포인트(ECOS 722Y001, 한국은행 기준금리 추이)를 WebFetch로 직접 열고, 독립 보도 1곳은 WebSearch로 찾아 본문을 연다
 └─ 검색 결과 요약·앱 셸 페이지는 출처로 세지 않는다
 └─ ⚠️ 스킬을 통한 검색 금지 (동일 오류 방지)
-└─ ⚠️ 최소 3개 독립 출처에서 값 확인
+└─ ⚠️ 기준금리는 공식 사실: 발표 기관 엔드포인트(ECOS·한국은행)를 직접 열어 값을 확정하고, 독립 보도는 값 충돌 확인용(web-search-verifier 주장 종류별 출처 기준)
 
 Step 3: 일치 여부 판단
 └─ rate-analyst 값 == 독립 검증 값 → PASS
@@ -162,6 +162,23 @@ Step 3: 일치 여부 판단
 
 ⚠️ 주의: 독립 검증은 반드시 에이전트가 직접 조회(1차 출처 WebFetch 우선, 그다음 WebSearch)를 수행해야 합니다. 직접 조회가 도구 오류로 모두 실패하면 PASS로 쓰지 않고, 시도한 URL·오류를 적어 FAIL로 보고한다.
 다른 에이전트의 결과나 스킬 예시 데이터를 참조하면 동일한 오류가 반복됩니다.
+```
+
+### 3.4 리더십 판정과 해석 사용 검증 (주장 종류별 출처 기준)
+
+```
+Step 1: Read(file_path="{output_path}/leadership-status.json")  # claim_status.py 판정
+└─ decision_usable·missing·issues 확인. leadership-analysis.json의 자기 신고값은 판정에 쓰지 않는다
+
+Step 2: 발표 기관 1차 출처 표본 재조회 (직접 조회 필수)
+└─ 7개국 중 미국·한국을 제외한 2개국 이상의 central_bank.rate_claim 발표 기관 URL을 WebFetch로 직접 연다
+└─ 현재 값·결정일이 rate_claim.value·decision_date와 같으면 PASS, 다르면 CRITICAL_FAIL + 확인한 값
+└─ 열리지 않으면 시도한 URL·오류를 적고 그 나라는 미검증으로 보고(PASS로 쓰지 않는다)
+
+Step 3: 섹션 7·8 사용 검사
+└─ decision_usable == false 인데 섹션 8이 리더십 해석을 배분 근거로 씀 → CRITICAL_FAIL
+└─ 해석(정책 성향·확대/유지/축소)을 사실처럼 단정하거나 수치 비중으로 바꿈 → FAIL
+└─ 환노출/환헤지 비중을 '참고 목표(허용 오차)'가 아닌 절대 조건으로 씀 → FAIL
 ```
 
 ### 3.5 지수 독립 검증 (v5.1 신규 - CRITICAL)

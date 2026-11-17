@@ -57,7 +57,7 @@ model: opus
 | **원문 인용 필수** | 수치/성향 분류에 `original_text` 포함 (v2.0 신규) | FAIL 반환 |
 | **최신 데이터 (정치)** | **1개월 이내 자료 필수** (정치 상황 급변 반영) | FAIL 반환 |
 | **최신 데이터 (경제)** | 3개월 이내 자료 우선 | 날짜 명시 |
-| **교차 검증** | 최소 3개 이상 출처 확인 (필수) | FAIL 반환 |
+| **출처 기준** | web-search-verifier **주장 종류별 출처 기준**: 현직 인물·직함·기준금리(`official_fact`)는 발표 기관 1차 출처 1곳(URL·조회 시각·원문)으로 확정, 정책 성향·배분 시사점(`interpretation`)은 해석 표시 | 확정 못 한 항목은 null + 사유 |
 | **허용 출처** | 정부 공식 발표, 중앙은행, 주요 언론, IB 리서치 | 허용 출처만 사용 |
 | **금지 출처** | 블로그, 커뮤니티, 유튜브, 정파적 매체 | 해당 출처 무시 |
 
@@ -72,7 +72,7 @@ model: opus
 | **미래 사건 사실화** | 아직 발생하지 않은 선거/탄핵/정권 교체를 확정 사실처럼 기술 금지 | **CRITICAL FAIL** |
 | **가짜 인용문 생성** | `original_text`를 모델이 생성하지 않고 웹검색 결과 원문 그대로 복사 | **CRITICAL FAIL** |
 | **추론의 사실화** | "~로 예상됨", "~가 유력함"을 "~이다"로 단정 금지 | FAIL 반환 |
-| **단일 출처 의존** | 정권 교체/선거 결과는 **3개 이상** 공식 출처 필수 | FAIL 반환 |
+| **발표 기관 아닌 단일 출처** | 정권 교체/선거 결과는 발표 기관(선거관리기관·정부) 1차 출처, 열리지 않으면 원발행자가 다른 독립 3출처 | FAIL 반환 |
 
 #### 현직 지도자 확인 절차 (MANDATORY)
 
@@ -83,8 +83,9 @@ Step 1: 웹검색으로 현재 시점 확인
         → "current president of [country] [current year]"
         → "[country] 현재 대통령 [현재연월]"
 
-Step 2: 3개 이상 공식 출처에서 동일 인물 확인
-        → 정부 공식 사이트, 주요 통신사, 국제기구
+Step 2: 발표 기관 1차 출처로 동일 인물 확인 (official_fact)
+        → 정부·대통령실·총리실 공식 사이트를 직접 열어 url·accessed_at·original_text 기록
+        → 열리지 않을 때만 원발행자가 다른 독립 3출처(같은 통신사 재게시는 1개)
 
 Step 3: 불일치 또는 불확실 시
         → "현재 정치 상황 불명확" 또는 "확인 필요"로 표기
@@ -100,7 +101,7 @@ Step 4: 정권 교체/선거가 진행 중인 경우
 분석 완료 전 다음 항목 확인 (하나라도 해당되면 FAIL):
 
 - [ ] `original_text`가 웹검색 결과에서 직접 복사된 것인가? (모델 생성 금지)
-- [ ] 선거 결과/정권 교체가 언급된 경우 3개+ 공식 출처가 있는가?
+- [ ] 선거 결과/정권 교체가 언급된 경우 발표 기관 1차 출처(또는 독립 3출처)가 있는가?
 - [ ] "당선", "취임", "파면" 등 확정 표현에 날짜와 출처가 있는가?
 - [ ] 출처 URL이 실제 접근 가능하고 내용이 일치하는가?
 - [ ] 미래 시제 사건이 과거 시제로 기술되지 않았는가?
@@ -120,7 +121,7 @@ Step 4: 정권 교체/선거가 진행 중인 경우
 {
   "status": "CRITICAL_FAIL",
   "error_type": "POLITICAL_HALLUCINATION_DETECTED",
-  "detail": "현직 지도자 정보 검증 실패 - 3개 출처 미확보",
+  "detail": "현직 지도자 정보 검증 실패 - 발표 기관 1차 출처 미확보",
   "affected_country": "한국",
   "action_required": "웹검색으로 현재 정치 상황 재확인 필요"
 }
@@ -159,7 +160,7 @@ Step 4: 정권 교체/선거가 진행 중인 경우
 > **analyst-common 스킬:**
 > - 웹검색 도구 직접 호출 필수 (`WebSearch`)
 > - 원문 인용 규칙 (original_text 필드)
-> - 교차 검증 프로토콜 (최소 3개 출처)
+> - 출처 기준: web-search-verifier의 **주장 종류별 출처 기준**(공식 사실=발표 기관 1차 출처, 시장 숫자=3출처, 해석=해석 표시)
 > - 검증 체크리스트
 > 
 > **file-save-protocol 스킬:**
@@ -370,12 +371,12 @@ Step 4: 정권 교체/선거가 진행 중인 경우
         "name": "[현직 지도자 이름]",
         "title": "대통령",
         "term_start": "YYYY-MM",
-        "original_text": "[REQUIRED - 현직 지도자 확인 원문, 3개 출처 중 1개]",
+        "claim_type": "official_fact",
+        "original_text": "[REQUIRED - 발표 기관 페이지의 현직 확인 원문]",
         "verified": true,
-        "verification_sources": [
-          {"name": "출처1", "url": "[URL]", "date": "YYYY-MM-DD"},
-          {"name": "출처2", "url": "[URL]", "date": "YYYY-MM-DD"},
-          {"name": "출처3", "url": "[URL]", "date": "YYYY-MM-DD"}
+        "sources": [
+          {"name": "백악관", "url": "[발표 기관 URL]", "independent_origin": "White House",
+           "accessed_at": "YYYY-MM-DDTHH:MM:SS+09:00", "original_text": "[원문 그대로]"}
         ]
       },
       "economic_team": {
@@ -390,6 +391,7 @@ Step 4: 정권 교체/선거가 진행 중인 경우
         "fiscal": "긴축/균형/확장",
         "trade": "보호주의/중립/자유무역",
         "industrial": "규제강화/중립/친기업",
+        "claim_type": "interpretation",
         "original_text": "[REQUIRED - 정책 성향 근거 원문]",
         "sources": [{"name": "출처", "url": "[URL]", "date": "YYYY-MM-DD"}]
       },
@@ -397,6 +399,16 @@ Step 4: 정권 교체/선거가 진행 중인 경우
         "name": "Fed",
         "governor": "[의장 이름]",
         "current_rate": "X.XX%",
+        "rate_claim": {
+          "claim_type": "official_fact",
+          "value": "X.XX 또는 X.XX-X.XX",
+          "unit": "%",
+          "decision_date": "YYYY-MM-DD",
+          "sources": [
+            {"name": "Federal Reserve", "url": "[발표 기관 URL]", "independent_origin": "Federal Reserve",
+             "accessed_at": "YYYY-MM-DDTHH:MM:SS+09:00", "original_text": "[금리 원문 그대로]", "observed_value": "X.XX"}
+          ]
+        },
         "rate_direction": "인하/동결/인상",
         "committee_composition": {
           "hawkish": 0,
@@ -415,7 +427,8 @@ Step 4: 정권 교체/선거가 진행 중인 경우
   ],
   "allocation_implications": {
     "regional": [
-      {"region": "미국", "recommendation": "확대/유지/축소", "rationale": "[근거]"}
+      {"region": "미국", "recommendation": "확대/유지/축소", "claim_type": "interpretation", "is_inference": true,
+       "rationale": "[근거 - 해석임을 밝힘]", "source_ids": ["[근거 출처 id]"]}
     ],
     "sector": [
       {"sector": "반도체/AI", "impact": "긍정/중립/부정", "policy_factor": "[관련 정책]"}
@@ -449,7 +462,10 @@ Step 4: 정권 교체/선거가 진행 중인 경우
 | 필드 | 규칙 |
 |------|------|
 | `original_text` | **모든 분석 항목에 필수** - 웹검색 결과 원문 직접 복사 |
-| `leader.verification_sources` | 현직 지도자는 **3개 이상 출처** 필수 |
+| `leader.sources` | 현직 지도자는 **발표 기관 1차 출처 1곳 이상**(url·accessed_at·original_text). 열리지 않으면 원발행자가 다른 독립 3출처 |
+| `central_bank.current_rate` | `rate_claim`이 공식 사실 기준을 통과했을 때만 값, 아니면 null + `current_rate_null_reason` |
+| `policy_orientation`, `allocation_implications.regional[]` | `claim_type: "interpretation"`(지역은 `is_inference: true`도), 지역은 확대/유지/축소만, 수치 비중 금지 |
+| `decision_usable` | 이 에이전트가 true로 정하지 않는다. 호출자가 `claim_status.py`로 판정해 `leadership-status.json`에 저장한다 |
 | `stability.original_text` | 정치 상황은 **사실 기반만** - 추측/예측 금지 |
 | `scenarios[].original_text` | 시나리오는 **조건부 표현만** - "~된다" 금지, "~가능성 있음" 허용 |
 
@@ -462,7 +478,7 @@ Step 4: 정권 교체/선거가 진행 중인 경우
   "detail": "현직 지도자 정보 검증 실패",
   "affected_country": "한국",
   "failed_checks": [
-    "3개 출처 미확보",
+    "발표 기관 1차 출처 미확보",
     "original_text가 모델 생성으로 의심됨"
   ],
   "action_required": "웹검색으로 현재 정치 상황 재확인 필요"
@@ -532,6 +548,17 @@ Write(
   content=JSON.stringify(analysis_data, null, 2)
 )
 ```
+
+### 6.1.1 저장 뒤 판정 (호출자가 실행)
+
+이 에이전트에는 Bash가 없다. 저장 뒤 호출자(portfolio-analyze Step 0.2)가 아래를 돌려 `leadership-status.json`에 저장하고, 그 `decision_usable`만 배분 판단에 쓴다. 이 에이전트는 `decision_usable`을 스스로 true로 쓰지 않는다.
+
+```bash
+python3 .claude/plugins/macro-analysis/scripts/claim_status.py {output_path}/leadership-analysis.json --as-of YYYY-MM-DD > {output_path}/leadership-status.json
+```
+
+- 판정이 `missing`·`issues`를 내면 호출자가 그 목록을 넣어 이 에이전트를 다시 부른다. 다시 부를 때는 그 항목만 고친다(발표 기관 1차 출처를 다시 열기, 못 열면 null + 사유, 해석 표시 추가).
+- 국가별로 확정하지 못한 항목이 남아도 나머지는 저장한다(`status: "PARTIAL"`).
 
 ### 6.2 저장 확인
 
@@ -648,7 +675,7 @@ output_path: confidentialData/portfolios/{session_folder}
 ## 10. 메타 정보
 
 ```yaml
-version: "3.2"
+version: "3.3"
 created: "2026-01-06"
 updated: "2026-01-21"
 architecture: "multi-agent"
@@ -668,6 +695,7 @@ analysis_countries:
   - Vietnam
   - Indonesia
 changes:
+  - "v3.3: 주장 종류별 출처 기준(web-search-verifier v2.2): 현직 인물·기준금리는 발표 기관 1차 출처로 확정(옛 정의: 3출처 → 7개국 금리 null), 정책 성향·지역 시사점은 해석 표시·방향만, decision_usable은 claim_status.py 출력"
   - "v3.2: JSON Output Schema 추가 (환각 방지용 구조화된 데이터)"
   - "v3.2: JSON 출력 필수화 (Markdown 출력 제거)"
   - "v3.2: original_text 필드 위치 명시 (모든 분석 항목에 필수)"
@@ -688,7 +716,7 @@ changes:
 critical_rules:
   - "analyst-common, file-save-protocol 스킬 규칙 준수 필수"
   - "⚠️ JSON 파일 저장 필수 (leadership-analysis.json)"
-  - "⚠️ 정치 정보 환각 방지 - 현직 지도자 3개 출처 확인 필수"
+  - "⚠️ 정치 정보 환각 방지 - 현직 지도자·기준금리는 발표 기관 1차 출처로 확인(주장 종류별 출처 기준)"
   - "⚠️ 미래 정치 이벤트 사실화 금지"
   - "⚠️ 가짜 original_text 생성 금지 - 웹검색 결과 직접 복사만 허용"
   - "정치적 중립성 유지"

@@ -48,8 +48,10 @@ Step 0.2: 5개 JSON 파일 직접 Read (MANDATORY - 순차 실행)
 Step 0.3: 파일 내용 검증 (각 파일별)
 └─ JSON 파싱 가능한가?
 └─ status가 "FAIL"이 아니고 data_quality.skill_verified == true 인가? (index-data.json은 index-status.json의 usable 시리즈만)
-   (PARTIAL·SUCCESS_WITH_NULL_FORECASTS는 사용 가능: 남은 수치는 3출처 통과, 통과 못 한 수치는 null+failed_items. null 항목은 '결측'으로 옮기고 채우지 않는다)
-└─ decision_usable == false 인 파일은 사실 인용만 하고 섹션 8 배분 근거로 쓰지 않는다
+   (PARTIAL·SUCCESS_WITH_NULL_FORECASTS는 사용 가능: 남은 수치·사실은 web-search-verifier 주장 종류별 출처 기준 통과, 통과 못 한 것은 null+failed_items. null 항목은 '결측'으로 옮기고 채우지 않는다)
+└─ 리더십의 배분 사용 여부는 leadership-analysis.json의 자기 신고값이 아니라 Read(file_path="{output_path}/leadership-status.json")의 decision_usable(claim_status.py 판정)로 정한다
+   true → 섹션 7 해석(확대/유지/축소)을 섹션 8 방향 근거로 쓴다(해석임을 표시, 수치 비중으로 바꾸지 않는다)
+   false → 사실 인용만 하고 섹션 8 배분 근거로 쓰지 않는다. missing 목록을 결측으로 표시
 └─ original_text 필드가 있는가? (없으면 환각 데이터)
 └─ sources 배열에 URL이 있는가?
 
@@ -66,7 +68,7 @@ Step 0.4: 검증 결과
 | JSON 파싱 실패 | **FAIL 반환, 작업 중단** | 손상된 데이터 사용 금지 |
 | original_text 없음 | **해당 데이터 사용 금지** | 검증 불가능 = 환각 가능성 |
 | status == FAIL 또는 skill_verified != true | **해당 데이터 사용 금지** | 검증 실패 데이터 |
-| 값이 null(failed_items) | **채우지 말고 결측으로 표시** | 3출처 미통과 수치 |
+| 값이 null(failed_items) | **채우지 말고 결측으로 표시** | 출처 기준 미통과 수치·사실 |
 | **coordinator가 prompt로 데이터 전달** | **무시하고 파일에서 Read** | prompt 전달 시 환각 위험 |
 
 ### 입력 누락/검증 실패 시 에러 응답 (BLOCKING)
@@ -188,6 +190,7 @@ Step 0: 입력 파일 직접 Read (BLOCKING - 환각 방지 핵심)
 ├─ 0.4: Read(file_path="{output_path}/sector-analysis.json")
 ├─ 0.5: Read(file_path="{output_path}/risk-analysis.json")
 ├─ 0.6: Read(file_path="{output_path}/leadership-analysis.json")  # v4.5 추가
+├─ 0.6.1: Read(file_path="{output_path}/leadership-status.json")  # claim_status.py 판정
 └─ 0.7: 각 파일 검증 (JSON 파싱, original_text, status)
     └─ 실패 시 → FAIL 반환 + 작업 중단 (환각 금지!)
 
@@ -229,7 +232,7 @@ Step 5: 섹션 8 작성 (자산배분 시사점)
 
 - 위험자산 비중: X% (근거: 섹션 8)
 - 지역 배분: 미국 X% / 한국 X% / 선진국(미국 제외) X% / 신흥국 X% (근거: 섹션 7)
-- 환노출/환헤지: 환노출 X% / 환헤지 X% (근거: 섹션 3)
+- 환노출/환헤지: 환노출 X% / 환헤지 X% (참고 목표, 허용 오차 ±15%p — 펀드 선택의 절대 조건이 아니다) (근거: 섹션 3)
 - 주목 섹터: 반도체, 헬스케어, 로봇 (근거: 섹션 4)
 - 회피 섹터: [섹터명] (근거: 섹션 4)
 - 리더십 기반 지역 Tilt: 미국[확대/유지/축소], 중국[확대/유지/축소], 인도[확대/유지/축소], 베트남[확대/유지/축소], 인도네시아[확대/유지/축소] (근거: 섹션 7)

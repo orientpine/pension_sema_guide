@@ -382,6 +382,16 @@ output_path: {session_folder}
 )
 ```
 
+leadership-analyst가 끝나면 오케스트레이터가 주장 종류별 출처 기준(web-search-verifier)으로 판정한다(스크립트 실행은 직접 분석이 아니다):
+
+```bash
+python3 .claude/plugins/macro-analysis/scripts/claim_status.py \
+  "{session_folder}/leadership-analysis.json" --as-of {YYYY-MM-DD} > "{session_folder}/leadership-status.json"
+```
+
+- `decision_usable: true` → 리더십 해석(확대/유지/축소)을 섹션 8 방향 근거로 쓸 수 있다.
+- `false` → `missing`·`issues` 목록을 넣어 leadership-analyst를 다시 부른다(아래 재시도 횟수 안). 그래도 false면 리더십은 사실 인용만 하고 섹션 8 배분 근거에서 뺀다(00 보고서에 결측 목록 표시).
+
 **FAIL 처리**: 개별 에이전트 최대 3회 재시도
 
 ---
@@ -403,6 +413,7 @@ Task(
 - {session_folder}/sector-analysis.json
 - {session_folder}/risk-analysis.json
 - {session_folder}/leadership-analysis.json
+- {session_folder}/leadership-status.json (claim_status.py 판정)
 
 ### 출력 경로
 output_path: {session_folder}
