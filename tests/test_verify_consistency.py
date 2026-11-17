@@ -292,6 +292,168 @@ def test_freshness_fresh(tmp_repo: Path):
     assert "총 0개 위반 발견" in stdout
 
 
+@pytest.fixture
+def freshness_repo(tmp_path: Path) -> Path:
+    """공개 스키마만으로 전체 CLI를 실행하는 독립 픽스처."""
+    now = datetime.now(timezone.utc)
+    today = now.astimezone(timezone(timedelta(hours=9))).date()
+    files = {
+        ".claude/plugins/.claude-plugin/marketplace.json": {"plugins": []},
+        ".claude/settings.json": {"enabledPlugins": {}},
+        "funds/fund_data.json": {"_meta": {"version": today.isoformat()}},
+        "funds/fund_fees.json": {},
+        "funds/fund_classification.json": {},
+        "funds/tdf_data.json": {"_meta": {"version": today.isoformat()}},
+        "funds/deposit_rates.json": {
+            "_meta": {
+                "updatedAt": now.isoformat(),
+                "sourceBaseDate": today.isoformat(),
+                "freshnessThresholdDays": 30,
+            },
+            "rates": [{
+                "id": "synthetic",
+                "appliesFrom": (today - timedelta(days=1)).isoformat(),
+                "appliesTo": (today + timedelta(days=1)).isoformat(),
+                "bonusPeriod": {
+                    "from": (today - timedelta(days=1)).isoformat(),
+                    "to": (today + timedelta(days=1)).isoformat(),
+                },
+            }],
+        },
+        "funds/pension_tax_params.json": {
+            "_meta": {"updatedAt": now.isoformat(), "freshnessThresholdDays": 90},
+            "parameters": {
+                "synthetic": {
+                    "verificationStatus": "verified",
+                    "lastVerifiedAt": now.isoformat(),
+                },
+            },
+        },
+    }
+    for relative, data in files.items():
+        path = tmp_path / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(data), encoding="utf-8")
+    (tmp_path / "tests").mkdir()
+    return tmp_path
+
+
+@pytest.mark.parametrize(
+    ("filename", "pointer"),
+    [
+        ("fund_data.json", "_meta.version"),
+        ("tdf_data.json", "_meta.version"),
+        ("deposit_rates.json", "_meta.sourceBaseDate"),
+        ("deposit_rates.json", "rates.0.appliesTo"),
+        ("deposit_rates.json", "rates.0.bonusPeriod.to"),
+        ("pension_tax_params.json", "parameters.synthetic.lastVerifiedAt"),
+    ],
+)
+@pytest.mark.parametrize("surface", ["unit", "cli"])
+def test_freshness_source_regressions(freshness_repo: Path, filename: str,
+                                      pointer: str, surface: str):
+    """E4/E9: fresh updatedAt cannot hide stale source dates or periods."""
+    path = freshness_repo / "funds" / filename
+    data = json.loads(path.read_text(encoding="utf-8"))
+    target = data
+    parts = pointer.split(".")
+    for part in parts[:-1]:
+        target = target[int(part)] if isinstance(target, list) else target[part]
+    target[parts[-1]] = "2000-01-01"
+    path.write_text(json.dumps(data), encoding="utf-8")
+
+    if surface == "cli":
+        exit_code, _ = run_gate(freshness_repo)
+        assert exit_code == 1
+    else:
+        sys.path.insert(0, str(REPO / "scripts"))
+        gate = importlib.import_module("verify_consistency")
+        violations = gate.check_freshness(freshness_repo)
+        assert [v.ssot for v in violations] == [f"funds/{filename}#{pointer}"]
+
+
+@pytest.mark.parametrize(
+    ("filename", "pointer", "days", "expected"),
+    [
+        ("fund_data.json", "_meta.version", 45, 0),
+        ("fund_data.json", "_meta.version", 46, 1),
+        ("tdf_data.json", "_meta.version", 45, 0),
+        ("tdf_data.json", "_meta.version", 46, 1),
+        ("deposit_rates.json", "_meta.sourceBaseDate", 30, 0),
+        ("deposit_rates.json", "_meta.sourceBaseDate", 31, 1),
+        ("deposit_rates.json", "rates.0.appliesFrom", 0, 0),
+        ("deposit_rates.json", "rates.0.appliesFrom", -1, 1),
+        ("deposit_rates.json", "rates.0.appliesTo", 0, 0),
+        ("deposit_rates.json", "rates.0.appliesTo", 1, 1),
+        ("deposit_rates.json", "rates.0.bonusPeriod.from", 0, 0),
+        ("deposit_rates.json", "rates.0.bonusPeriod.from", -1, 1),
+        ("deposit_rates.json", "rates.0.bonusPeriod.to", 0, 0),
+        ("deposit_rates.json", "rates.0.bonusPeriod.to", 1, 1),
+        ("pension_tax_params.json", "parameters.synthetic.lastVerifiedAt", 90, 0),
+        ("pension_tax_params.json", "parameters.synthetic.lastVerifiedAt", 91, 1),
+    ],
+)
+def test_freshness_period_boundaries(freshness_repo: Path, monkeypatch,
+                                     filename: str, pointer: str,
+                                     days: int, expected: int):
+    sys.path.insert(0, str(REPO / "scripts"))
+    gate = importlib.import_module("verify_consistency")
+    fixed = datetime(2026, 11, 17, 0, 30, tzinfo=timezone(timedelta(hours=9)))
+
+    class Clock(datetime):
+        @classmethod
+        def now(cls, tz=None):
+            return fixed.astimezone(tz)
+
+    monkeypatch.setattr(gate, "datetime", Clock)
+    # Rebase all fixture dates on the fixed KST day, including the UTC previous day.
+    for path in (freshness_repo / "funds").glob("*.json"):
+        data = json.loads(path.read_text(encoding="utf-8"))
+        meta = data.get("_meta", {})
+        meta.update({"version": "2026-11-17", "updatedAt": fixed.isoformat(),
+                     "sourceBaseDate": "2026-11-17"})
+        if "rates" in data:
+            data["rates"][0].update({
+                "appliesFrom": "2026-11-16", "appliesTo": "2026-11-18",
+                "bonusPeriod": {"from": "2026-11-16", "to": "2026-11-18"},
+            })
+        if "parameters" in data:
+            data["parameters"]["synthetic"]["lastVerifiedAt"] = fixed.isoformat()
+        path.write_text(json.dumps(data), encoding="utf-8")
+    path = freshness_repo / "funds" / filename
+    data = json.loads(path.read_text(encoding="utf-8"))
+    target = data
+    parts = pointer.split(".")
+    for part in parts[:-1]:
+        target = target[int(part)] if isinstance(target, list) else target[part]
+    value = fixed - timedelta(days=days)
+    target[parts[-1]] = value.isoformat() if pointer.endswith("lastVerifiedAt") else value.date().isoformat()
+    path.write_text(json.dumps(data), encoding="utf-8")
+
+    assert len(gate.check_freshness(freshness_repo)) == expected
+
+
+@pytest.mark.parametrize("status", ["seed", "unverified"])
+@pytest.mark.parametrize("verified_at", [None, "2000-01-01"])
+def test_freshness_suspended_parameters_report_only(freshness_repo: Path,
+                                                   capsys, status: str,
+                                                   verified_at: str | None):
+    path = freshness_repo / "funds/pension_tax_params.json"
+    data = json.loads(path.read_text(encoding="utf-8"))
+    data["parameters"]["synthetic"].update({
+        "verificationStatus": status, "lastVerifiedAt": verified_at,
+    })
+    path.write_text(json.dumps(data), encoding="utf-8")
+    sys.path.insert(0, str(REPO / "scripts"))
+    gate = importlib.import_module("verify_consistency")
+
+    assert gate.check_freshness(freshness_repo) == []
+    report = json.loads(capsys.readouterr().err)
+    assert (report["parameter"], report["verificationStatus"], report["status"]) == (
+        "synthetic", status, "suspended",
+    )
+
+
 def _second_plugin_json(root: Path) -> Path:
     market = json.loads(
         (root / ".claude" / "plugins" / ".claude-plugin" / "marketplace.json").read_text(

@@ -51,6 +51,7 @@ tools: Bash, Read, Write, mcp_question
     +-- Step -1-1. 최신 xlsx 다운로드
     |   +-- fetch_latest_proposal.py 실행 (미래에셋 게시판 categoryId=1494)
     |   +-- 모든 DCIRP xlsx 첨부 중 파일명 YY년MM월 최신본 선택
+    |   +-- (2026-11 수정) urllib 기본 Connection: close 요청에서는 게시판 HTML 본문이 잘려 첨부가 0개로 보였다 → keep-alive로 받도록 고쳤다. 실패하면 종료 코드 1과 함께 멈추고 기존 데이터를 덮어쓰지 않는다
     |   +-- resource/{게시판 제공 파일명}.xlsx 저장
     |
     +-- Step -1-2. CSV 변환 (--convert)
@@ -137,7 +138,7 @@ tools: Bash, Read, Write, mcp_question
     +-- Step 5-0. 예금금리 업데이트 필요 여부 확인
     |   +-- deposit_rates.json 존재 확인
     |   +-- _meta.version 기준 경과일 계산
-    |   +-- 30일 이상 경과 시 업데이트 권장
+    |   +-- 30일 이상 경과 시 업데이트 권장 (정합성 게이트는 예금 기준일 30일과 적용기간·가산기간 만료도 위반으로 본다)
     |
     +-- Step 5-1. 공제회 공개 페이지 조회 (기준일 필수)
     |   +-- https://www.sema.or.kr/sema/annty/guidance/fundProduct.do?menuNo=200059

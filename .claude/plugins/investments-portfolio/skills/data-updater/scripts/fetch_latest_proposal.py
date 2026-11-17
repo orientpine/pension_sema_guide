@@ -16,6 +16,7 @@ import argparse
 import re
 import sys
 import urllib.request
+from http.client import HTTPSConnection
 from pathlib import Path
 
 LIST_URL = "https://securities.miraeasset.com/bbs/board/message/list.do?categoryId={cid}"
@@ -27,13 +28,30 @@ _ENTRY = re.compile(rb'attachmentId=(\d+)"[^>]*>([^<]*\(DCIRP\)\.xlsx)\(', re.S)
 _YYMM = re.compile(r"(\d{2})년(\d{2})월")
 
 
+class _KeepAliveHTTPSConnection(HTTPSConnection):
+    """게시판의 불완전한 close-delimited 응답 대신 청크 프레이밍을 요청한다."""
+
+    def putheader(self, header: str, *values: str | int) -> None:
+        # urllib.do_open은 Request의 Connection도 close로 덮어쓴다.
+        # 실제 송신 경계에서 바꿔야 한다. TLS 검증과 나머지 헤더는 유지한다.
+        if header.lower() == "connection":
+            super().putheader(header, "keep-alive")
+        else:
+            super().putheader(header, *values)
+
+
+class _ProposalHTTPSHandler(urllib.request.HTTPSHandler):
+    def https_open(self, req: urllib.request.Request):
+        return self.do_open(_KeepAliveHTTPSConnection, req, context=self._context)
+
+
 def _get(url, referer=None):
     headers = {"User-Agent": UA, "Accept-Encoding": "identity"}
     if referer:
         headers["Referer"] = referer
-    return urllib.request.urlopen(
-        urllib.request.Request(url, headers=headers), timeout=60
-    ).read()
+    opener = urllib.request.build_opener(_ProposalHTTPSHandler())
+    with opener.open(urllib.request.Request(url, headers=headers), timeout=60) as response:
+        return response.read()
 
 
 def find_latest(category_id):

@@ -2,9 +2,10 @@
 import argparse
 import json
 import re
+import sys
 from collections.abc import Callable
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import cast
 
@@ -424,6 +425,8 @@ def check_date_sync(root: Path) -> CheckResult:
 
 def check_freshness(root: Path) -> CheckResult:
     violations: CheckResult = []
+    now = datetime.now(timezone.utc)
+    today = now.astimezone(timezone(timedelta(hours=9))).date()
 
     for json_path in sorted((root / "funds").glob("*.json")):
         relative = json_path.relative_to(root).as_posix()
@@ -435,30 +438,76 @@ def check_freshness(root: Path) -> CheckResult:
         if not isinstance(raw, dict):
             continue
         meta = cast(dict[str, object], raw.get("_meta", {}))
-        if "freshnessThresholdDays" not in meta:
-            continue
 
-        updated_at_str = cast(str, meta.get("updatedAt", ""))
-        if not updated_at_str:
-            continue
+        def check_age(pointer: str, value: str, threshold: int) -> None:
+            """원천 날짜와 검증 시각은 생성 시각과 독립적으로 검사한다."""
+            try:
+                parsed = datetime.fromisoformat(value)
+            except ValueError:
+                violations.append(Violation(
+                    relative, 1, f"{relative}#{pointer}", "검사 기준일 누락/형식 오류",
+                ))
+                return
+            if parsed.tzinfo is None:
+                parsed = parsed.replace(tzinfo=timezone(timedelta(hours=9)))
+            # 날짜는 한국 달력일, 검증/생성 시각은 기존의 경과 일수 규약.
+            age = ((today - parsed.date()).days if len(value) == 10
+                   else (now - parsed).days)
+            if age > threshold or age < 0:
+                violations.append(Violation(
+                    relative, 1, f"{relative}#{pointer}",
+                    f"{relative} 신선도 만료: {age}일 경과 (임계: {threshold}일) — 갱신 필요",
+                ))
 
-        threshold = int(cast(int, meta["freshnessThresholdDays"]))
-        parsed = datetime.fromisoformat(updated_at_str)
-        if parsed.tzinfo is None:
-            parsed = parsed.replace(tzinfo=timezone.utc)
+        if "freshnessThresholdDays" in meta and meta.get("updatedAt"):
+            check_age("_meta.updatedAt", str(meta["updatedAt"]),
+                      int(cast(int, meta["freshnessThresholdDays"])))
 
-        now = datetime.now(timezone.utc)
-        age = (now - parsed).days
+        if json_path.name in ("fund_data.json", "tdf_data.json"):
+            # 월간 제안서는 전월 말 실적을 담는다. 최장 31일 주기에
+            # 다음 게시/수집 여유 14일을 더한 45일: 한 달 누락은 허용하지 않는다.
+            # date_sync는 날짜끼리의 일치만 담당하고 실제 경과일은 여기서 판정한다.
+            check_age("_meta.version", str(meta.get("version", "")), 45)
 
-        if age > threshold:
-            violations.append(
-                Violation(
-                    file=relative,
-                    line=1,
-                    ssot=f"{relative}#_meta.updatedAt",
-                    message_ko=f"{relative} 신선도 만료: {age}일 경과 (임계: {threshold}일) — 갱신 필요",
-                )
-            )
+        if json_path.name == "deposit_rates.json":
+            check_age("_meta.sourceBaseDate", str(meta.get("sourceBaseDate", "")),
+                      int(cast(int, meta["freshnessThresholdDays"])))
+            for index, rate in enumerate(raw.get("rates", [])):
+                periods = [
+                    (f"rates.{index}.appliesFrom", rate.get("appliesFrom"), True),
+                    (f"rates.{index}.appliesTo", rate.get("appliesTo"), False),
+                    (f"rates.{index}.bonusPeriod.from", rate.get("bonusPeriod", {}).get("from"), True),
+                    (f"rates.{index}.bonusPeriod.to", rate.get("bonusPeriod", {}).get("to"), False),
+                ]
+                for pointer, value, is_start in periods:
+                    if value is None:
+                        continue
+                    try:
+                        boundary = datetime.fromisoformat(value).date()
+                    except ValueError:
+                        violations.append(Violation(
+                            relative, 1, f"{relative}#{pointer}", "적용기간 형식 오류",
+                        ))
+                        continue
+                    if (is_start and today < boundary) or (not is_start and today > boundary):
+                        violations.append(Violation(
+                            relative, 1, f"{relative}#{pointer}",
+                            f"현재 적용기간 밖: {pointer}={value} (한국 기준일 {today})",
+                        ))
+
+        if json_path.name == "pension_tax_params.json":
+            for name, parameter in raw.get("parameters", {}).items():
+                if parameter.get("verificationStatus") in ("seed", "unverified"):
+                    # tax-calc-verifier는 이 값에 의존하는 확정 계산을 이미 보류한다.
+                    # 게이트는 보류를 보고하되 검증 완료로 취급하거나 전체를 실패시키지 않는다.
+                    print(json.dumps({
+                        "check": "freshness", "file": relative, "parameter": name,
+                        "verificationStatus": parameter["verificationStatus"],
+                        "status": "suspended", "lastVerifiedAt": parameter.get("lastVerifiedAt"),
+                    }, ensure_ascii=False), file=sys.stderr)
+                    continue
+                check_age(f"parameters.{name}.lastVerifiedAt",
+                          str(parameter.get("lastVerifiedAt") or ""), 90)
 
     return violations
 
