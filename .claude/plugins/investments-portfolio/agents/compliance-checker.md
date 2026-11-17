@@ -220,6 +220,7 @@ python3 .claude/plugins/investments-portfolio/skills/dc-pension-rules/scripts/dc
 - 종료 코드: 0 = PASS / PASS_PENDING_CONFIRMATION / MARKET_DRIFT_OVER_LIMIT, 1 = FAIL·ERROR, 2 = 모르는 펀드(`unknownFunds`).
 - 보유분 점검(시가 변동으로 넘었는지)은 `--mode holdings` — 감독규정 제13조② 시가 변동 초과는 위반 아님(통보 필요).
 - 보고서의 위험자산 비중·판정·펀드별 분류 표는 `dc-limits-check.json`의 `verdict`, `nonExemptRiskWeight`, `conservativeRiskWeight`, `confirmationFunds`, `funds[]`, `singleFundChecks[]`를 그대로 옮긴다. 원문 JSON 경로를 보고서에 적는다.
+- 펀드별 표 열은 `| 상품명 | weight | status | basis | hedge | needsConfirmation | tdfQualified | nonExempt | 단일 펀드 severity |`로 고정한다. `hedge`는 출력 값 그대로(`true`=환헤지 H, `false`=환노출 UH, `null`=표기 없음) 적는다.
 - 스크립트를 찾지 못하거나 실행이 실패하면 **직접 계산하지 말고** FAIL(`DC_LIMITS_SCRIPT_UNAVAILABLE`)로 보고한다.
 
 ### 3.2 경계 사례 (회귀 테스트로 고정)
