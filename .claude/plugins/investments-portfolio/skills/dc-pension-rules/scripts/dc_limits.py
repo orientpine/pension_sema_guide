@@ -71,6 +71,8 @@ class Fund:
     qualified: bool = False
     principal: bool = False
     region: str | None = None
+    asset_class: str | None = None
+    themes: tuple[str, ...] = ()
 
     @property
     def counted(self) -> bool:
@@ -110,6 +112,8 @@ class Catalog:
                     source.get("hedge", source.get("hedged")),
                     is_tdf and row.get("tdfQualified") is True,
                     region=source.get("region"),
+                    asset_class=source.get("assetClass"),
+                    themes=tuple(source.get("themes") or ()),
                 )
         for fund in self.by_code.values():
             self.by_name.setdefault(fund.name, []).append(fund)

@@ -1,0 +1,143 @@
+{
+  "_meta": {
+    "schemaVersion": 1,
+    "status": "sample",
+    "note": "공개 스키마 샘플. 결정 숫자는 모두 비어 있어 policy_alloc.py가 계산을 거부한다. 형 정책은 confidentialData 안에만 둔다.",
+    "approvedBy": null,
+    "approvedAt": null,
+    "approvalSource": null
+  },
+  "riskTargetPct": null,
+  "sleeves": [
+    {
+      "id": "kr_equity",
+      "label": "국내주식",
+      "risk": true,
+      "neutralPct": null,
+      "match": {
+        "region": [
+          "korea"
+        ],
+        "assetClass": [
+          "equity"
+        ]
+      },
+      "funds": []
+    },
+    {
+      "id": "us_equity",
+      "label": "미국주식",
+      "risk": true,
+      "neutralPct": null,
+      "match": {
+        "region": [
+          "us"
+        ],
+        "assetClass": [
+          "equity"
+        ]
+      },
+      "funds": []
+    },
+    {
+      "id": "safe",
+      "label": "원리금보장",
+      "risk": false,
+      "neutralPct": null,
+      "match": {
+        "principalGuaranteed": true
+      },
+      "funds": []
+    }
+  ],
+  "band": {
+    "sleevePct": null,
+    "nearLimitPct": null
+  },
+  "cadence": {
+    "collectEveryMonths": null,
+    "decideEveryMonths": null,
+    "holdThresholdPct": null,
+    "minVerifiedMonths": null
+  },
+  "indicators": [
+    {
+      "id": "us_valuation_percentile",
+      "label": "미국 주식 밸류에이션 자기 역사 백분위",
+      "sourceKind": "market",
+      "tolerance": null
+    },
+    {
+      "id": "kr_real_rate",
+      "label": "한국 실질 정책금리(기준금리-소비자물가 상승률)",
+      "sourceKind": "official",
+      "officialPublishers": [
+        "한국은행",
+        "통계청"
+      ],
+      "tolerance": null
+    }
+  ],
+  "alerts": {
+    "officialPublishers": [
+      "금융위원회",
+      "한국은행"
+    ]
+  },
+  "longTermMacro": {
+    "maxSleeveTiltPct": null,
+    "maxRiskShiftPct": null,
+    "rules": [
+      {
+        "indicator": "us_valuation_percentile",
+        "neutral": null,
+        "scale": null,
+        "effects": {
+          "sleeves": {
+            "us_equity": null,
+            "kr_equity": null
+          }
+        }
+      },
+      {
+        "indicator": "kr_real_rate",
+        "neutral": null,
+        "scale": null,
+        "effects": {
+          "riskTotal": null
+        }
+      }
+    ]
+  },
+  "shortTermTilt": {
+    "enabled": null,
+    "maxTiltPct": null,
+    "validation": {
+      "status": "pending",
+      "reportPath": null,
+      "reportSha256": null,
+      "nonInferiorityMarginPctPerMonth": null,
+      "minOutOfSampleMonths": null,
+      "bootstrapBlockMonths": null,
+      "bootstrapDraws": null,
+      "seed": null,
+      "alpha": null,
+      "switchCostPct": null
+    },
+    "rules": [
+      {
+        "id": "us-trend",
+        "indicator": "us_valuation_percentile",
+        "kind": "valuation_extreme",
+        "upper": null,
+        "lower": null,
+        "effects": {
+          "sleeves": {
+            "us_equity": null,
+            "kr_equity": null
+          }
+        }
+      }
+    ]
+  }
+}

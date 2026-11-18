@@ -1,0 +1,170 @@
+{
+  "_meta": {
+    "schemaVersion": 1,
+    "status": "draft-unapproved",
+    "note": "테스트용 가짜 정책(가짜 펀드 R1·R2·KR·EU·예금)"
+  },
+  "riskTargetPct": "70",
+  "sleeves": [
+    {
+      "id": "kr",
+      "label": "국내주식",
+      "risk": true,
+      "neutralPct": "20",
+      "match": {
+        "region": [
+          "korea"
+        ]
+      },
+      "funds": [
+        {
+          "fundCode": "KR",
+          "share": "1"
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "세계주식",
+      "risk": true,
+      "neutralPct": "30",
+      "match": {
+        "region": [
+          "global"
+        ]
+      },
+      "funds": [
+        {
+          "fundCode": "R1",
+          "share": "1"
+        },
+        {
+          "fundCode": "R2",
+          "share": "1"
+        }
+      ]
+    },
+    {
+      "id": "europe",
+      "label": "유럽주식",
+      "risk": true,
+      "neutralPct": "20",
+      "match": {
+        "region": [
+          "europe"
+        ]
+      },
+      "funds": [
+        {
+          "fundCode": "EU",
+          "share": "1"
+        }
+      ]
+    },
+    {
+      "id": "safe",
+      "label": "원리금보장",
+      "risk": false,
+      "neutralPct": "30",
+      "match": {
+        "principalGuaranteed": true
+      },
+      "funds": [
+        {
+          "kind": "principalGuaranteed",
+          "name": "예금",
+          "share": "1"
+        }
+      ]
+    }
+  ],
+  "band": {
+    "sleevePct": "5",
+    "nearLimitPct": "2"
+  },
+  "cadence": {
+    "collectEveryMonths": 1,
+    "decideEveryMonths": 6,
+    "holdThresholdPct": "2",
+    "minVerifiedMonths": 3
+  },
+  "indicators": [
+    {
+      "id": "europe_val_pct",
+      "sourceKind": "market",
+      "tolerance": "0"
+    },
+    {
+      "id": "real_rate",
+      "sourceKind": "official",
+      "officialPublishers": [
+        "가짜중앙은행"
+      ],
+      "tolerance": "0"
+    },
+    {
+      "id": "kr_signal",
+      "sourceKind": "market",
+      "tolerance": "0"
+    }
+  ],
+  "alerts": {
+    "officialPublishers": [
+      "가짜감독기관"
+    ]
+  },
+  "longTermMacro": {
+    "maxSleeveTiltPct": "5",
+    "maxRiskShiftPct": "5",
+    "rules": [
+      {
+        "indicator": "europe_val_pct",
+        "neutral": "50",
+        "scale": "50",
+        "effects": {
+          "sleeves": {
+            "europe": "-1",
+            "kr": "1"
+          }
+        }
+      },
+      {
+        "indicator": "real_rate",
+        "neutral": "1",
+        "scale": "2",
+        "effects": {
+          "riskTotal": "-1"
+        }
+      }
+    ]
+  },
+  "shortTermTilt": {
+    "enabled": false,
+    "maxTiltPct": "5",
+    "validation": {
+      "status": "pending",
+      "nonInferiorityMarginPctPerMonth": "-0.1",
+      "minOutOfSampleMonths": 120,
+      "bootstrapBlockMonths": 12,
+      "bootstrapDraws": 500,
+      "seed": 7,
+      "alpha": "0.05",
+      "switchCostPct": "0"
+    },
+    "rules": [
+      {
+        "id": "kr-signal",
+        "indicator": "kr_signal",
+        "kind": "valuation_extreme",
+        "upper": "0.5",
+        "lower": "-0.5",
+        "effects": {
+          "sleeves": {
+            "kr": "1",
+            "global": "-1"
+          }
+        }
+      }
+    ]
+  }
+}
