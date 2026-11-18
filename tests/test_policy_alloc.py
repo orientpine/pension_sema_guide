@@ -187,6 +187,16 @@ def test_decide_risk_shift_moves_only_principal_sleeve_not_exempt_tdf(tmp_path, 
     assert sum(base.values()) == 100
 
 
+def test_decide_and_allocate_work_with_exempt_tdf_and_zero_principal_sleeve(tmp_path):
+    policy = tdf_policy(sleeves__3__neutralPct="40", sleeves__4__neutralPct="0")
+    months = {m: [official("real_rate", "9")] for m in months_between("2026-06", 6)}
+    rc, result = decide(tmp_path, "2026-11", log_file(tmp_path, months), policy=policy)
+    assert (rc, result["riskTotalPct"]) == (0, "60")
+    assert {k: Decimal(v) for k, v in result["basePct"].items()} == {"kr": 15, "global": 25, "europe": 20, "tdf": 40, "safe": 0}
+    rc, allocation, _ = cli(tmp_path, "allocate", "--decision", str(write(tmp_path / "decision.json", result)), policy=policy)
+    assert (rc, allocation["verdict"], allocation["check"]["nonExemptRiskWeight"]) == (0, "PASS", "60")
+
+
 @pytest.mark.parametrize("changes,message", [
     ({"sleeves__3__funds": [{"fundCode": "S", "share": "1"}]}, "적격TDF만"),
     ({"sleeves__3__exempt": False}, "면제 묶음(exempt)에만"),

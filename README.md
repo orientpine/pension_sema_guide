@@ -527,7 +527,7 @@ python $SCRIPTS/update_tdf_data.py --input resource/tdf-raw.md --base-date YYYY-
 이름 정규화·펀드코드 해석·수수료 매칭·수익률 드리프트 경고·전체 enrichment·CLI·통합 테스트로 구성됩니다.
 
 ```bash
-python3 -m pytest          # 371 passed (GREEN, 2026-11-18)
+python3 -m pytest          # 372 passed (GREEN, 2026-11-18)
 ```
 
 ### 2. 정합성 게이트 (Consistency Gate)

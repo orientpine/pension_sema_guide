@@ -520,7 +520,7 @@ def compute_base(policy: Policy, signals: dict[str, Decimal], limit: Decimal) ->
     for s in policy.exempt:
         base[s.id] = s.neutral
     for s in policy.safe:
-        base[s.id] = s.neutral * (HUNDRED - exempt_total - risk_total) / safe_neutral
+        base[s.id] = s.neutral * (HUNDRED - exempt_total - risk_total) / safe_neutral if safe_neutral else ZERO
     return {s.id: base[s.id] for s in policy.sleeves}, risk_total
 
 
