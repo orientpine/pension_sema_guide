@@ -25,11 +25,12 @@
 | test_verify_no_pii.py | `verify_no_pii.sh` 공개 경로의 개인 보유정보 검사 |
 | test_fetch_latest_proposal.py | 상품제안서 게시판 파싱·최신월 선택(오프라인 픽스처) |
 | test_tax_rule_regressions.py | 연금 인출순서·분리과세 선택·퇴직소득 원천징수 적용비율 |
+| test_policy_alloc.py | `policy_alloc.py`·`tilt_validation.py`: 같은 입력 같은 바이트, 과거 수익률 무시, 위험 목표 한도 초과·단일 40% 초과는 오류(재시도 없음), 지표 출처 규칙(공식 1차 / 시장 독립 2곳 같은 기준일·같은 값 / 계산 지표는 구성 지표 둘 다), 결측은 지난 신호 유지, 6개월 주기·2%p 유지·경보, 기울기 상한·위험 합 불변, 단기 기울이기 기본 꺼짐과 검증 보고서·규칙·코드 해시 관문, 워크포워드가 같은 달 자료를 못 봄, 밴드 안 HOLD·밖 안전한 정수 매도만, 70% 근처 좁은 밴드, 정책 밖 펀드, 제안을 보유로 넣으면 거부 |
 | test_agent_tools.py | 플러그인 에이전트·스킬 frontmatter `tools`와 본문 호출이 실제 있는 도구 이름만 쓰는지(거시 실패 원인 H1) |
 
 ## RUN
 
-`python3 -m pytest` (repo root) → 305 passed (2026-11-17 기준, 세법 테스트 포함).
+`python3 -m pytest` (repo root) → 354 passed (2026-11-18 기준, 세법·정책 배분 테스트 포함).
 
 ## PATH CONFIGURATION
 
