@@ -2,7 +2,7 @@
 """단기 기울이기 규칙의 워크포워드 비열등 검증. 통과 보고서가 있어야 policy_alloc가 기울이기를 켠다.
 
 매달 t의 신호는 t-1-releaseLagMonths까지 공개된 값만 쓴다(규칙 매개변수는 검증 전에 정책 파일에 고정).
-기울인 안과 안 기울인 안은 같은 위험자산 비중이다(위험 묶음끼리 합 0). 월 차이(기울임-안 기울임, 전환 비용 차감)를
+기울인 안과 안 기울인 안은 같은 위험자산 비중이다(위험 묶음끼리 합 0). 어느 규칙이든 자료가 비는 달은 표본에서 뺀다. 월 차이(기울임-안 기울임, 전환 비용 차감)를
 원형 블록 부트스트랩(고정 시드)으로 재표집해 평균의 단측 하한을 구한다.
 PASS = 표본 밖 월수 ≥ minOutOfSampleMonths, 평균 차이 ≥ 0, 하한 ≥ 비열등 한계, 최대낙폭·월 변동성이 안 기울인 안보다 크지 않음.
 사후 수정된 자료(vintage=revised)를 쓰는 규칙이 있으면 INVALID_DATA.
@@ -106,17 +106,18 @@ def block_bootstrap_lower(diffs: list[Decimal], block: int, draws: int, seed: in
     return means[int(alpha * draws)]
 
 
-def validate(policy: pa.Policy, history: object) -> dict:
+def validate(policy: pa.Policy, history: object, base: dict[str, Decimal] | None = None) -> dict:
     p = parameters(policy)
     months, returns, indicators = load_history(history, policy)
-    base = {s.id: s.neutral for s in policy.sleeves}
-    risky = {s.id: s.neutral for s in policy.risky}
+    base = base or policy.neutral
+    risky = {s.id: base[s.id] for s in policy.risky}
+    undecided = sorted(r.id for r in policy.short_rules
+                       if r.kind == "valuation_extreme" and (r.upper is None or r.lower is None))
     diffs, tilted, untilted, turnovers = [], [], [], []
     previous = {k: ZERO for k in risky}
-    first = None
+    first, skipped = None, 0
     for t in range(len(months)):
-        signals = {}
-        ready = True
+        signals, complete, ready = {}, True, True
         for rule in policy.short_rules:
             data = indicators[rule.indicator]
             known = data["values"][: max(0, t - data["lag"])]
@@ -124,8 +125,12 @@ def validate(policy: pa.Policy, history: object) -> dict:
             if len(known) < need:
                 ready = False
                 break
-            signals[rule.id], _ = pa.short_signal(rule, known)
+            signals[rule.id], state = pa.short_signal(rule, known)
+            complete = complete and state == "반영"
         if not ready:
+            continue
+        if not complete:
+            skipped += 1
             continue
         first = months[t] if first is None else first
         tilt = pa.short_tilts(policy, risky, signals)
@@ -139,17 +144,22 @@ def validate(policy: pa.Policy, history: object) -> dict:
         diffs.append(moved - plain)
     revised = sorted(i for i, d in indicators.items() if d["vintage"] == "revised")
     result = {"_meta": {"kind": "tilt-validation", "policySha256": policy.sha},
-              "rulesSha256": pa.short_rules_sha(policy), "codeSha256": pa.code_sha(),
-              "dataSha256": pa.sha256(history), "parameters": p, "python": f"{sys.version_info[0]}.{sys.version_info[1]}",
-              "outOfSampleMonths": len(diffs), "firstMonth": first, "lastMonth": months[-1] if diffs else None,
+              "validatedInputsSha256": pa.validated_inputs_sha(policy, base), "basePct": base,
+              "codeSha256": pa.code_sha(), "dataSha256": pa.sha256(history), "parameters": p,
+              "python": f"{sys.version_info[0]}.{sys.version_info[1]}", "outOfSampleMonths": len(diffs),
+              "skippedMonthsMissingData": skipped, "firstMonth": first, "lastMonth": months[-1] if diffs else None,
               "reasons": []}
+    if not policy.short_rules or undecided:
+        result["verdict"] = "INVALID_RULES"
+        result["reasons"].append("검증할 규칙 없음" if not policy.short_rules else "문턱이 비어 있는 규칙: " + ", ".join(undecided))
+        return result
     if revised:
         result["verdict"] = "INVALID_DATA"
         result["reasons"].append("사후 수정 자료(vintage=revised): " + ", ".join(revised))
         return result
     if len(diffs) < p["minMonths"]:
         result["verdict"] = "INSUFFICIENT_DATA"
-        result["reasons"].append(f"표본 밖 {len(diffs)}개월 < {p['minMonths']}개월")
+        result["reasons"].append(f"모든 규칙의 자료가 있는 표본 밖 {len(diffs)}개월 < {p['minMonths']}개월(결측으로 뺀 달 {skipped})")
         return result
     mean = sum(diffs, ZERO) / len(diffs)
     lower = block_bootstrap_lower(diffs, p["block"], p["draws"], p["seed"], p["alpha"])
@@ -170,12 +180,19 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--policy", type=Path, required=True)
     parser.add_argument("--history", type=Path, required=True)
+    parser.add_argument("--decision", type=Path, help="decide 출력: 그 기본 비중에서 검증(없으면 정책 neutral). 켤 때 쓰는 기본 비중과 같아야 함")
     parser.add_argument("--out", type=Path, help="보고서 저장(정책 validation.reportPath·reportSha256에 넣을 파일)")
     args = parser.parse_args(argv)
     try:
         config = mapping(dc.load_json(Path(__file__).with_name("dc_limits_config.json")), "설정")
         policy = pa.parse_policy(dc.load_json(args.policy), config, args.policy.resolve().parent)
-        result = validate(policy, dc.load_json(args.history))
+        base = None
+        if args.decision:
+            decision, note = pa.load_decision(dc.load_json(args.decision), policy)
+            if decision is None:
+                raise InputError(note or "장기 결정 파일 오류")
+            base = {k: pa.signed(v, k) for k, v in decision["basePct"].items()}
+        result = validate(policy, dc.load_json(args.history), base)
     except InputError as exc:
         result = {"verdict": "ERROR", "messages": [str(exc)]}
     except (OSError, ValueError, KeyError, TypeError, InvalidOperation) as exc:

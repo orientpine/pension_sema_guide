@@ -100,6 +100,7 @@ class Indicator:
     publishers: tuple[str, ...]
     tolerance: Decimal
     minus: tuple[str, str] | None = None
+    max_age: int = 1
 
 
 @dataclass(frozen=True)
@@ -156,6 +157,11 @@ class Policy:
     @property
     def neutral(self) -> dict[str, Decimal]:
         return {s.id: s.neutral for s in self.sleeves}
+
+    @property
+    def long_term_sha(self) -> str:
+        return sha256({k: self.raw.get(k) for k in ("riskTargetPct", "indicators", "alerts", "longTermMacro", "cadence")}
+                      | {"sleeves": [{"id": s.id, "risk": s.risk, "neutralPct": s.neutral} for s in self.sleeves]})
 
     @property
     def label(self) -> str:
@@ -288,7 +294,8 @@ def parse_policy(raw: object, config: dict, base_dir: Path) -> Policy:
         publishers = tuple(item.get("officialPublishers") or ())
         if kind == "official" and not publishers:
             raise InputError(f"지표 {iid}: official은 발표 기관(officialPublishers) 필요")
-        indicators[iid] = Indicator(iid, kind, publishers, dc.number(item.get("tolerance", "0"), f"{iid}.tolerance"))
+        indicators[iid] = Indicator(iid, kind, publishers, dc.number(item.get("tolerance", "0"), f"{iid}.tolerance"),
+                                    max_age=whole(item.get("maxAgeMonths", 1), f"{iid}.maxAgeMonths", 0))
 
     long_term = mapping(raw["longTermMacro"], "longTermMacro")
     long_cap = dc.number(long_term["maxSleeveTiltPct"], "longTermMacro.maxSleeveTiltPct")
@@ -333,9 +340,15 @@ def parse_policy(raw: object, config: dict, base_dir: Path) -> Policy:
 
 
 
-def host(url: str) -> str:
-    netloc = urlsplit(url).netloc.lower()
-    return netloc[4:] if netloc.startswith("www.") else netloc
+GENERIC_SECOND_LEVEL = {"co", "or", "go", "ac", "ne", "re", "pe", "com", "net", "org", "gov", "edu", "mil"}
+
+
+def site(url: str) -> str:
+    """같은 기관의 다른 표기(포트·www·하위 도메인)를 한 출처로 센다: 등록 도메인(예: bok.or.kr, example.com)."""
+    labels = [label for label in (urlsplit(url).hostname or "").lower().rstrip(".").split(".") if label]
+    if len(labels) >= 3 and len(labels[-1]) == 2 and labels[-2] in GENERIC_SECOND_LEVEL:
+        return ".".join(labels[-3:])
+    return ".".join(labels[-2:])
 
 
 def verify(observation: object, indicator: Indicator | None) -> tuple[Decimal | None, str]:
@@ -369,11 +382,23 @@ def verify(observation: object, indicator: Indicator | None) -> tuple[Decimal | 
         if any(s["publisher"] in indicator.publishers for s in good):
             return value, "검증: 발표 기관 1차 출처"
         return None, "결측: 발표 기관 1차 출처(같은 기준일·같은 값·원문) 없음"
-    publishers = {s["publisher"] for s in good}
-    hosts = {host(s["url"]) for s in good}
+    publishers = {"".join(s["publisher"].split()).lower() for s in good}
+    hosts = {site(s["url"]) for s in good}
     if len(publishers) >= 2 and len(hosts) >= 2:
         return value, f"검증: 독립 출처 {min(len(publishers), len(hosts))}곳 같은 기준일·같은 값"
     return None, f"결측: 같은 기준일·같은 값의 독립 출처 {min(len(publishers), len(hosts))}곳(2곳 필요)"
+
+
+def fresh(value: Decimal, note: str, as_of: str, index: int, max_age: int) -> tuple[Decimal | None, str]:
+    try:
+        age = index - month_index(as_of[:7])
+    except InputError:
+        return None, "결측: 기준일 형식 오류(YYYY-MM으로 시작해야 함)"
+    if age < 0:
+        return None, "결측: 기준일이 기록한 달보다 뒤"
+    if age > max_age:
+        return None, f"결측: 기준일이 {age}개월 전(허용 {max_age}개월)"
+    return value, note
 
 
 def load_log(path: Path | None) -> dict[int, dict]:
@@ -405,6 +430,8 @@ def verified_series(policy: Policy, log: dict[int, dict], until: int) -> tuple[d
                 raise InputError(f"{month_name(index)}: 지표 {iid} 관측 중복")
             seen.add(iid)
             value, note = verify(observation, policy.indicators.get(iid))
+            if value is not None:
+                value, note = fresh(value, note, observation.get("asOf"), index, policy.indicators[iid].max_age)
             audit.append({"month": month_name(index), "indicator": iid, "value": observation.get("value"),
                           "asOf": observation.get("asOf"), "verified": value is not None, "note": note})
             if value is not None:
@@ -483,15 +510,20 @@ def load_decision(previous: object, policy: Policy) -> tuple[dict | None, str | 
     meta = mapping(data.get("_meta"), "이전 결정 _meta")
     if meta.get("kind") != "base-decision":
         raise InputError("이전 결정 파일의 _meta.kind는 base-decision이어야 함")
-    if meta.get("policySha256") != policy.sha:
-        return None, "정책 파일이 바뀌어 이전 결정을 쓰지 않고 neutral에서 다시 결정"
+    if meta.get("longTermPolicySha256") != policy.long_term_sha:
+        return None, "장기 결정에 쓰는 정책 값(위험 목표·묶음 neutral·지표·경보·장기 규칙·주기)이 바뀌어 이전 결정을 쓰지 않고 neutral에서 다시 결정"
     base = mapping(data.get("basePct"), "basePct")
     if set(base) != {s.id for s in policy.sleeves}:
         raise InputError("이전 결정의 묶음이 정책과 다름")
     return data, None
 
 
-def decide(policy: Policy, log: dict[int, dict], previous: object, month: str, config: dict) -> dict:
+def alert_key(alert: dict) -> tuple:
+    return (alert.get("month"), alert.get("type"), alert.get("summary"))
+
+
+def decide(policy: Policy, log: dict[int, dict], previous: object, month: str, config: dict,
+           acknowledge: str | None = None) -> dict:
     """매달 누적한 장기 지표로 decideEveryMonths마다 기본 비중을 정한다.
 
     창(최근 decideEveryMonths개월) 안 검증 관측이 minVerifiedMonths 이상인 지표만 평균을 새 신호로 쓴다.
@@ -529,6 +561,12 @@ def decide(policy: Policy, log: dict[int, dict], previous: object, month: str, c
                             "signal": signal, "state": state, "missingDecisions": months_missing})
     candidate, risk_total = compute_base(policy, signals, limit)
     alerts, rejected_alerts = verified_alerts(policy, log, prev_index if prev_index is not None else now - policy.decide_every, now)
+    acknowledged = list(rows(prev.get("acknowledgedAlerts", []), "acknowledgedAlerts")) if prev else []
+    seen = {alert_key(a) for a in acknowledged}
+    alerts = [a for a in alerts if alert_key(a) not in seen]
+    if acknowledge and alerts:
+        acknowledged += [{**a, "acknowledgedBy": acknowledge} for a in alerts]
+        alerts = []
     prev_base = {k: signed(v, k) for k, v in prev["basePct"].items()} if prev else None
     prev_risk = signed(prev["riskTotalPct"], "riskTotalPct") if prev else None
     change = max((abs(candidate[k] - prev_base[k]) for k in candidate), default=ZERO) if prev_base else None
@@ -561,20 +599,27 @@ def decide(policy: Policy, log: dict[int, dict], previous: object, month: str, c
     }[status])
     return {
         "_meta": {"kind": "base-decision", "month": month_name(adopted_month), "status": status,
-                  "policySha256": policy.sha, "policyStatus": policy.label, "evaluatedMonth": month},
+                  "longTermPolicySha256": policy.long_term_sha, "policySha256": policy.sha,
+                  "policyStatus": policy.label, "evaluatedMonth": month},
         "basePct": adopted, "riskTotalPct": adopted_risk, "candidatePct": candidate,
         "candidateRiskTotalPct": risk_total, "maxChangePct": change, "signals": kept,
         "indicatorSignals": signal_rows, "observations": audit, "alerts": alerts,
-        "rejectedAlerts": rejected_alerts, "messages": messages,
+        "rejectedAlerts": rejected_alerts, "acknowledgedAlerts": acknowledged, "messages": messages,
     }
 
 
 
-def short_rules_sha(policy: Policy) -> str:
+VALIDATION_META = {"status", "reportPath", "reportSha256", "note"}
+
+
+def validated_inputs_sha(policy: Policy, base: dict[str, Decimal]) -> str:
+    """검증 결과를 바꾸는 입력 전부: 규칙·상한·지표 정의·검증 매개변수(비용 포함)·묶음 구조·기울이기 전 기본 비중."""
     short = mapping(policy.raw["shortTermTilt"], "shortTermTilt")
     return sha256({"rules": short.get("rules", []), "maxTiltPct": short["maxTiltPct"],
-                   "indicators": [policy.raw.get("indicators", [])],
-                   "sleeves": [{"id": s.id, "risk": s.risk} for s in policy.sleeves]})
+                   "indicators": policy.raw.get("indicators", []),
+                   "validation": {k: v for k, v in policy.validation.items() if k not in VALIDATION_META},
+                   "sleeves": [{"id": s.id, "risk": s.risk} for s in policy.sleeves],
+                   "basePct": {k: base[k] for k in sorted(base)}})
 
 
 def code_sha() -> str:
@@ -611,8 +656,8 @@ def short_tilts(policy: Policy, base: dict[str, Decimal], signals: dict[str, Dec
     return apply_tilt({s.id: base[s.id] for s in policy.risky}, raw, policy.short_cap)
 
 
-def validation_gate(policy: Policy) -> None:
-    """켜려면: status=passed, 보고서 파일 sha256 일치, 보고서 PASS, 규칙·코드 해시가 지금 것과 같음."""
+def validation_gate(policy: Policy, base: dict[str, Decimal]) -> None:
+    """켜려면: status=passed, 보고서 파일 sha256 일치, 보고서 PASS, 검증 입력(기본 비중 포함)·코드 해시가 지금 것과 같음."""
     v = policy.validation
     problems = []
     if v.get("status") != "passed":
@@ -626,8 +671,8 @@ def validation_gate(policy: Policy) -> None:
         report = mapping(dc.load_json(path), "검증 보고서")
         if report.get("verdict") != "PASS":
             problems.append(f"보고서 verdict={report.get('verdict')!r}")
-        if report.get("rulesSha256") != short_rules_sha(policy):
-            problems.append("검증한 규칙과 지금 규칙이 다름")
+        if report.get("validatedInputsSha256") != validated_inputs_sha(policy, base):
+            problems.append("검증한 설정(규칙·지표·검증 매개변수·기본 비중)과 지금 설정이 다름: 지금 설정으로 다시 검증")
         if report.get("codeSha256") != code_sha():
             problems.append("검증한 계산 코드와 지금 코드가 다름")
     if problems:
@@ -661,7 +706,7 @@ def allocate(policy: Policy, catalog: dc.Catalog, config: dict, decision: object
     short_state: dict = {"enabled": policy.short_enabled, "validationStatus": policy.validation.get("status")}
     tilts = {s.id: ZERO for s in policy.risky}
     if policy.short_enabled:
-        validation_gate(policy)
+        validation_gate(policy, base)
         if log is None or month is None:
             raise InputError("단기 기울이기가 켜져 있으면 --log와 --month 필요")
         now = month_index(month)
@@ -863,6 +908,8 @@ def main(argv: list[str] | None = None) -> int:
     decide_cmd = commands.add_parser("decide", help="월 누적 장기 지표로 6개월 기본 비중 결정")
     decide_cmd.add_argument("--previous", type=Path, help="지난 decide 출력")
     decide_cmd.add_argument("--out", type=Path)
+    decide_cmd.add_argument("--acknowledge-alerts", metavar="OWNER_SOURCE",
+                            help="형이 경보를 확인했다는 원문 링크. 지금 경보를 확인됨으로 기록하고 정상 판정")
     rebalance_cmd = commands.add_parser("rebalance", help="보유 대비 밴드 판정과 포털 정수 거래안")
     rebalance_cmd.add_argument("--target", type=Path, required=True)
     rebalance_cmd.add_argument("--holdings", type=Path, required=True)
@@ -885,8 +932,9 @@ def main(argv: list[str] | None = None) -> int:
                 raise InputError("decide에는 --month 필요")
             log = load_log(args.log)
             previous = dc.load_json(args.previous) if args.previous else None
-            inputs.update(log={month_name(k): v for k, v in sorted(log.items())}, previous=previous, month=args.month)
-            result = decide(policy, log, previous, args.month, config)
+            inputs.update(log={month_name(k): v for k, v in sorted(log.items())}, previous=previous, month=args.month,
+                          acknowledge=args.acknowledge_alerts)
+            result = decide(policy, log, previous, args.month, config, args.acknowledge_alerts)
         else:
             catalog = dc.Catalog(args.funds_dir)
             if args.command == "allocate":

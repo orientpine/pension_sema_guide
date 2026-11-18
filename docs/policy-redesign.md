@@ -46,7 +46,7 @@ python3 $S/tilt_validation.py --policy <정책.json> --history <월별 원자료
 | `match` | 목록에 없는 보유 펀드를 묶음에 넣는 규칙(`region`·`assetClass`·`themes`·`principalGuaranteed`·`tdfQualified`·`riskStatus`) | 정책 순서대로 첫 일치. 아무 데도 안 맞으면 "정책 밖"(목표 0) |
 | `band` | `sleevePct`(묶음 밴드), `nearLimitPct`(위험 목표 + 묶음 밴드가 한도를 넘을 때 위험자산 합에 쓰는 좁은 밴드) | 0 < nearLimitPct ≤ sleevePct |
 | `cadence` | `collectEveryMonths`, `decideEveryMonths`, `holdThresholdPct`, `minVerifiedMonths` | 형 승인값 1·6·2. minVerifiedMonths(창 안 검증 월수 최소)는 제안값 3 |
-| `indicators[]` | 지표: `sourceKind` = `official`(발표 기관 `officialPublishers`) / `market` / `derived`(`minus: [a, b]` = a − b), `tolerance` | — |
+| `indicators[]` | 지표: `sourceKind` = `official`(발표 기관 `officialPublishers`) / `market` / `derived`(`minus: [a, b]` = a − b), `tolerance`, `maxAgeMonths`(기준일이 기록한 달보다 몇 달 전까지 받는지, 기본 1) | — |
 | `alerts.officialPublishers` | 체제 변화 경보로 인정할 발표 기관 | — |
 | `longTermMacro` | `maxSleeveTiltPct`, `maxRiskShiftPct`, `rules[{indicator, neutral, scale, effects{sleeves, riskTotal}}]` | 상한은 5 이하. neutral·scale이 null이면 "규칙 미정", 효과 0 |
 | `shortTermTilt` | `enabled`(기본 false), `maxTiltPct`(≤5), `validation`, `rules[{id, indicator, kind, window, upper, lower, effects}]` | 위험 총합은 못 움직임 |
@@ -56,8 +56,9 @@ python3 $S/tilt_validation.py --policy <정책.json> --history <월별 원자료
 **지표 검증(코드, `policy_alloc.verify`).** 관측마다 값·기준일(`asOf`)·출처 종류·출처 목록(`publisher`, `url`, `accessedAt`, `originalText`, 출처별 `value`·`asOf`)을 적는다.
 
 - `official`: 정책이 정한 발표 기관 출처가 1곳 이상, 같은 기준일·같은 값·원문이 있어야 검증.
-- `market`: 서로 다른 발행처 **그리고** 서로 다른 도메인이 2곳 이상, 같은 기준일, 값 차이가 `tolerance` 이하.
+- `market`: 서로 다른 발행처 **그리고** 서로 다른 등록 도메인(포트·www·하위 도메인은 같은 곳으로 셈, 예: `ecos.bok.or.kr`와 `www.bok.or.kr:443`은 한 곳)이 2곳 이상, 같은 기준일, 값 차이가 `tolerance` 이하.
 - `derived`: 직접 관측을 받지 않는다. 같은 달 두 구성 지표가 모두 검증됐을 때만 a − b로 계산한다(예: 실질금리 = 기준금리 − 소비자물가 상승률).
+- 기준일(`asOf`, YYYY-MM…)이 기록한 달보다 뒤이거나 `maxAgeMonths`보다 오래되면 결측이다(옛 값을 이번 달 값으로 쓰지 않게).
 - 위 조건을 못 맞추면 그 관측은 **결측**이고 비중 계산에 들어가지 않는다. 관측마다 판정 사유가 출력 `observations`에 남는다.
 
 **월 누적 형식(`macro-log.jsonl`).** 한 달에 한 줄: `{"month":"YYYY-MM","collectedAt":...,"observations":[...],"alerts":[...]}`. 같은 달 두 줄, 같은 달 같은 지표 두 번은 오류.
@@ -68,8 +69,8 @@ python3 $S/tilt_validation.py --policy <정책.json> --history <월별 원자료
 3. 평균이 없으면(결측) **지난 결정의 신호를 그대로 쓴다**. 자료를 못 구했다고 비중이 움직이지 않게 하기 위해서다(다른 family 반박 2). 지난 신호가 없으면 0. 결측이 이어진 결정 횟수는 `missingDecisions`로 센다.
 4. 위험 묶음 기울기 = `maxSleeveTiltPct` × clamp(Σ 계수·s, −1, 1), 묶음 비중 아래로는 0까지. 그다음 위험 묶음끼리 합이 0이 되게 큰 쪽을 비례로 줄인다. 그래서 장기 기울기는 위험자산 합을 바꾸지 않고, 모든 묶음이 같은 방향이면 0이다.
 5. 위험 총합 이동(`riskTotal` 계수, 예: 실질금리) = `maxRiskShiftPct` × clamp(Σ, −1, 1). 위로는 법정 한도에서 멈춘다. 안전 묶음이 neutral 비율대로 흡수한다.
-6. 판정: 처음이면 `INITIAL`. 지난 결정에서 `decideEveryMonths`가 안 지났으면 `NOT_DUE`(유지, 지표는 누적만). 지났으면 모든 묶음의 변화가 `holdThresholdPct` 미만일 때 `HOLD`(유지), 아니면 `CHANGE`. 지난 결정 뒤 **검증된** 체제 변화 경보(정책이 정한 발표 기관 출처)가 있으면 `ALERT`: 후보는 보여 주기만 하고 채택하지 않는다. 형이 정한다.
-7. 정책 파일이 바뀌면(해시가 다르면) 지난 결정을 쓰지 않고 다시 시작한다.
+6. 판정: 처음이면 `INITIAL`. 지난 결정에서 `decideEveryMonths`가 안 지났으면 `NOT_DUE`(유지, 지표는 누적만). 지났으면 모든 묶음의 변화가 `holdThresholdPct` 미만일 때 `HOLD`(유지), 아니면 `CHANGE`. 지난 결정 뒤 **검증된** 체제 변화 경보(정책이 정한 발표 기관 출처)가 있으면 `ALERT`: 후보는 보여 주기만 하고 채택하지 않는다. 형이 정한다. 형이 확인하면 `decide --acknowledge-alerts <형 원문 링크>`로 다시 돌린다. 지금 경보가 `acknowledgedAlerts`에 링크와 함께 기록되고 정상 판정(NOT_DUE·HOLD·CHANGE)으로 넘어가며, 다음 결정에서도 같은 경보로 다시 막히지 않는다.
+7. 장기 결정에 쓰는 정책 값(위험 목표·묶음 neutral·지표·경보·장기 규칙·주기)이 바뀌면 지난 결정을 쓰지 않고 다시 시작한다. 밴드·단기 기울이기 설정만 바뀌면 지난 결정을 그대로 쓴다(`longTermPolicySha256`).
 
 **기울기 상한과 근거.**
 
@@ -84,7 +85,7 @@ python3 $S/tilt_validation.py --policy <정책.json> --history <월별 원자료
 ## 4. 단기 기울이기 (기본 꺼짐)
 
 - 규칙 종류: `trend`(최근 값 − 창 평균의 부호), `rate_direction`(창 길이 전 대비 변화의 부호), `credit_spread`(최근 값 − 창 평균의 부호), `valuation_extreme`(`upper` 이상 +1, `lower` 이하 −1). 신호 −1/0/1 × 계수 → 묶음 기울기, 묶음당 `maxTiltPct`(≤5) 안, 위험 묶음끼리 합 0. 창 안에 빈 달이 있으면 결측(0).
-- **켜는 관문(`validation_gate`).** `enabled: true`이려면 `validation.status = "passed"`, `reportPath` 파일의 sha256 = `reportSha256`, 보고서 `verdict = PASS`, 보고서의 `rulesSha256` = 지금 규칙(규칙·상한·지표·묶음 구조)의 해시, 보고서의 `codeSha256` = 지금 `policy_alloc.py`+`tilt_validation.py`의 해시. 하나라도 틀리면 오류로 멈춘다(켜지 않음). 규칙의 방향만 바꿔도, 계산 코드를 고쳐도 다시 검증해야 한다(다른 family 반박 3).
+- **켜는 관문(`validation_gate`).** `enabled: true`이려면 `validation.status = "passed"`, `reportPath` 파일의 sha256 = `reportSha256`, 보고서 `verdict = PASS`, 보고서의 `validatedInputsSha256` = 지금 검증 입력(규칙·상한·지표 정의·검증 매개변수와 전환 비용·묶음 구조·**기울이기 전 기본 비중**)의 해시, 보고서의 `codeSha256` = 지금 `policy_alloc.py`+`tilt_validation.py`의 해시. 하나라도 틀리면 오류로 멈춘다(켜지 않음). 규칙의 방향, 비용, 검증 기준, 기본 비중 가운데 무엇을 바꿔도, 계산 코드를 고쳐도 다시 검증해야 한다(다른 family 반박 3, 게이트 리뷰 B1). 장기 결정이 CHANGE로 기본 비중을 바꾸면 그 결정 파일로 `tilt_validation.py --decision <결정.json>`을 다시 돌려야 켜진 상태를 유지한다(HOLD·NOT_DUE는 기본 비중이 그대로라 유지).
 
 **검증 절차(`tilt_validation.py`).**
 
@@ -92,8 +93,9 @@ python3 $S/tilt_validation.py --policy <정책.json> --history <월별 원자료
 2. 워크포워드: 달 t의 신호는 t − 1 − `releaseLagMonths`까지의 값만 쓴다. 규칙 매개변수는 검증 전에 정책 파일에 고정하고 자료에 맞춰 고르지 않는다(맞춰 고르면 그 자체가 표본 안 최적화다).
 3. 같은 위험자산 비중: 기울인 안과 안 기울인 안은 neutral 위에서 위험 묶음끼리만 옮긴다. 월 차이 = 기울인 안 − 안 기울인 안 − 전환 비용(회전율 × `switchCostPct`).
 4. 원형 블록 부트스트랩(블록 `bootstrapBlockMonths`, `bootstrapDraws`회, 고정 `seed`)으로 평균 차이의 단측 하한(`alpha`)을 낸다.
-5. **PASS** = 표본 밖 월수 ≥ `minOutOfSampleMonths` **그리고** 평균 차이 ≥ 0 **그리고** 하한 ≥ `nonInferiorityMarginPctPerMonth` **그리고** 최대낙폭·월 변동성이 안 기울인 안보다 크지 않음(sema-quant-research §7 단계 4). `revised` 자료를 쓰면 `INVALID_DATA`, 월수가 모자라면 `INSUFFICIENT_DATA`.
-6. 보고서를 형에게 보이고, 형이 승인하면 정책 `validation`에 `status=passed`·`reportPath`·`reportSha256`을 넣고 `enabled=true`로 바꾼다.
+5. 어느 규칙이든 창 안에 빈 값이 있는 달은 표본에서 뺀다(`skippedMonthsMissingData`). 자료가 없어 신호가 0인 달을 "기울여도 손해 없음"으로 세지 않기 위해서다(게이트 리뷰 B3). 문턱이 비어 있는 규칙이 있으면 `INVALID_RULES`.
+6. **PASS** = 표본 밖 월수 ≥ `minOutOfSampleMonths` **그리고** 평균 차이 ≥ 0 **그리고** 하한 ≥ `nonInferiorityMarginPctPerMonth` **그리고** 최대낙폭·월 변동성이 안 기울인 안보다 크지 않음(sema-quant-research §7 단계 4). `revised` 자료를 쓰면 `INVALID_DATA`, 월수가 모자라면 `INSUFFICIENT_DATA`.
+7. 보고서를 형에게 보이고, 형이 승인하면 정책 `validation`에 `status=passed`·`reportPath`·`reportSha256`을 넣고 `enabled=true`로 바꾼다.
 
 비열등 한계(−0.1%p/월)는 sema-quant-research의 제안값이고, 형이 승인해야 하는 손실 허용폭이다. "평균 차이 ≥ 0" 조건 때문에 매달 조금씩 지는 규칙은 하한이 한계 위에 있어도 통과하지 못한다(다른 family 반박 4).
 
@@ -158,6 +160,7 @@ Yahoo Finance처럼 약관이 자동 수집을 금지하는 출처는 쓰지 않
 
 ### 결과 본 뒤 바꾼 정의
 
+- 단기 검증의 "표본 밖 월수" 옛 정의(4f2d57d): 준비 기간 뒤 모든 달을 셈(자료가 빈 규칙은 신호 0). 게이트 리뷰가 지표가 전부 비어도 129개월 PASS가 나는 것을 보인 뒤 바꿨다. 새 정의: 모든 규칙의 자료가 있는 달만 셈. 옛 정의로는 그 합성 자료가 PASS, 새 정의로는 INSUFFICIENT_DATA(0개월).
 - arch Q4의 옛 정의: "밴드 밖: 종료 코드 0, `verdict`=PASS, `unsafeIntegerSell`가 빈 목록". 저장된 fixture 출력(`postTradeCheck` PASS, `unsafeIntegerSell=["floor"]`, ceil PASS, 전체 FAIL)을 다른 family 반박이 지적한 뒤 바꿨다. 새 정의: 고른 정수 매도 방식의 거래 뒤 검사가 통과하고, 목표·정확 시뮬레이션·부담금 검사가 모두 통과하면 `REBALANCE`. 옛 정의로는 같은 fixture가 "거래안 없음"이었고, 새 정의로는 "올림 정수로 입력, 내림은 제외"다.
 
 ## 7. 한계

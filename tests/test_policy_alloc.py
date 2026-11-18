@@ -68,9 +68,16 @@ def official(indicator, value, publisher="가짜중앙은행"):
             "sources": [source(publisher, "bank.example", value)]}
 
 
+def dated(observation: dict, month: str) -> dict:
+    if observation["asOf"] != "2026-10-31":
+        return observation
+    day = f"{month}-28"
+    return {**observation, "asOf": day, "sources": [{**s, "asOf": day} for s in observation["sources"]]}
+
+
 def log_file(tmp_path, months: dict[str, list[dict]], alerts: dict[str, list[dict]] | None = None) -> Path:
-    lines = [json.dumps({"month": m, "observations": obs, "alerts": (alerts or {}).get(m, [])}, ensure_ascii=False)
-             for m, obs in months.items()]
+    lines = [json.dumps({"month": m, "observations": [dated(o, m) for o in obs], "alerts": (alerts or {}).get(m, [])},
+                        ensure_ascii=False) for m, obs in months.items()]
     path = tmp_path / "macro-log.jsonl"
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
     return path
@@ -81,8 +88,8 @@ def months_between(first: str, count: int) -> list[str]:
     return [pa.month_name(start + i) for i in range(count)]
 
 
-def decide(tmp_path, month, log, previous=None, policy=None):
-    args = ["decide", "--month", month, "--log", str(log)]
+def decide(tmp_path, month, log, previous=None, policy=None, extra=()):
+    args = ["decide", "--month", month, "--log", str(log), *extra]
     if previous is not None:
         args += ["--previous", str(write(tmp_path / f"previous-{month}.json", previous))]
     command = [sys.executable, str(SCRIPT), *args, "--policy", str(write(tmp_path / "policy.json", policy or POLICY))]
@@ -180,6 +187,10 @@ INDICATORS = {"europe_val_pct": pa.Indicator("europe_val_pct", "market", (), Dec
     ({**market("europe_val_pct", 80), "sources": [{**source("가짜거래소", "exchange.example", 80), "originalText": ""},
                                                   source("가짜통계", "stats.example", 80)]}, False),
     ({**market("europe_val_pct", 80), "sourceKind": "official"}, False),
+    ({**market("europe_val_pct", 80), "sources": [source("가짜거래소", "same.example", 80),
+                                                  source("가짜거래소 영문", "same.example:443", 80)]}, False),
+    ({**market("europe_val_pct", 80), "sources": [source("가짜은행통계", "ecos.bank.or.kr", 80),
+                                                  source("가짜은행", "www.bank.or.kr", 80)]}, False),
     (official("real_rate", "1.5"), True),
     (official("real_rate", "1.5", publisher="가짜신문"), False),
 ])
@@ -271,9 +282,38 @@ def test_decide_verified_regime_alert_blocks_adoption(tmp_path, publisher, statu
     assert (result["_meta"]["status"], result["basePct"]["europe"]) == (status, "15" if status == "ALERT" else "25")
 
 
+def test_decide_stale_observation_is_missing(tmp_path):
+    months = {m: [market("europe_val_pct", 100, as_of="2025-12-31")] for m in months_between("2026-06", 6)}
+    rc, result = decide(tmp_path, "2026-11", log_file(tmp_path, months))
+    assert result["basePct"]["europe"] == "20"
+    assert {o["note"] for o in result["observations"]} == {"결측: 기준일이 6개월 전(허용 1개월)", "결측: 기준일이 7개월 전(허용 1개월)",
+                                                          "결측: 기준일이 8개월 전(허용 1개월)", "결측: 기준일이 9개월 전(허용 1개월)",
+                                                          "결측: 기준일이 10개월 전(허용 1개월)", "결측: 기준일이 11개월 전(허용 1개월)"}
+
+
+def test_decide_acknowledged_alert_stops_blocking_and_is_remembered(tmp_path):
+    previous = first_decision(tmp_path)
+    months = {m: [market("europe_val_pct", 0)] for m in months_between("2026-12", 6)}
+    alert = {"type": "금리 체계", "summary": "가짜 정책금리 체계 변경", "sources": [source("가짜감독기관", "regulator.example", 0)]}
+    log = log_file(tmp_path, months, {"2027-03": [alert]})
+    blocked = decide(tmp_path, "2027-04", log, previous)[1]
+    acknowledged = decide(tmp_path, "2027-04", log, previous, extra=("--acknowledge-alerts", "https://discord.example/형확인"))[1]
+    later = decide(tmp_path, "2027-05", log, acknowledged)[1]
+    assert (blocked["_meta"]["status"], acknowledged["_meta"]["status"], later["_meta"]["status"]) == ("ALERT", "NOT_DUE", "CHANGE")
+    assert later["acknowledgedAlerts"][0]["acknowledgedBy"] == "https://discord.example/형확인"
+
+
+def test_decide_previous_survives_unrelated_policy_change(tmp_path):
+    previous = first_decision(tmp_path)
+    months = {m: [] for m in months_between("2026-12", 6)}
+    policy = policy_with(band__sleevePct="4", shortTermTilt__enabled=False, shortTermTilt__maxTiltPct="4")
+    rc, result = decide(tmp_path, "2027-05", log_file(tmp_path, months), previous, policy=policy)
+    assert (result["_meta"]["status"], result["basePct"]["europe"]) == ("HOLD", "15")
+
+
 def test_decide_previous_from_other_policy_is_not_reused(tmp_path):
     previous = first_decision(tmp_path)
-    policy = policy_with(band__sleevePct="4")
+    policy = policy_with(longTermMacro__maxSleeveTiltPct="4")
     months = {m: [] for m in months_between("2026-12", 6)}
     rc, result = decide(tmp_path, "2027-05", log_file(tmp_path, months), previous, policy=policy)
     assert (result["_meta"]["status"], result["basePct"]["europe"]) == ("INITIAL", "20")
@@ -303,8 +343,8 @@ def history(signal_leads: bool, months=150, revised=False):
                                          "vintage": "revised" if revised else "revisionFree"}}}
 
 
-def validate(tmp_path, data, policy=None, out=None):
-    args = [sys.executable, str(VALIDATOR), "--history", str(write(tmp_path / "history.json", data)),
+def validate(tmp_path, data, policy=None, out=None, extra=()):
+    args = [sys.executable, str(VALIDATOR), *extra, "--history", str(write(tmp_path / "history.json", data)),
             "--policy", str(write(tmp_path / "policy.json", policy or POLICY))]
     if out:
         args += ["--out", str(out)]
@@ -329,6 +369,32 @@ def test_validation_does_not_see_same_month_data(tmp_path):
 ])
 def test_validation_refuses_short_or_revised_history(tmp_path, data, verdict):
     assert validate(tmp_path, data)[1]["verdict"] == verdict
+
+
+def test_validation_does_not_count_months_without_indicator_data(tmp_path):
+    data = history(signal_leads=True)
+    data["indicators"]["kr_signal"]["values"] = [None] * len(data["months"])
+    rc, report = validate(tmp_path, data)
+    assert (rc, report["verdict"], report["outOfSampleMonths"], report["skippedMonthsMissingData"]) == (
+        1, "INSUFFICIENT_DATA", 0, 149)
+
+
+def test_validation_refuses_rule_without_thresholds(tmp_path):
+    policy = copy.deepcopy(POLICY)
+    policy["shortTermTilt"]["rules"][0]["upper"] = None
+    assert validate(tmp_path, history(signal_leads=True), policy=policy)[1]["verdict"] == "INVALID_RULES"
+
+
+def test_short_tilt_needs_validation_at_the_decided_base(tmp_path):
+    decision = write(tmp_path / "decision.json", first_decision(tmp_path))
+    report = tmp_path / "report.json"
+    validate(tmp_path, history(signal_leads=True), out=report)
+    log = log_file(tmp_path, {"2026-11": [market("kr_signal", 1)]})
+    args = ("allocate", "--decision", str(decision), "--log", str(log), "--month", "2026-11")
+    refused = cli(tmp_path, *args, policy=enabled_policy(tmp_path, report))
+    validate(tmp_path, history(signal_leads=True), out=report, extra=("--decision", str(decision)))
+    accepted = cli(tmp_path, *args, policy=enabled_policy(tmp_path, report))
+    assert (refused[0], accepted[0], accepted[1]["shortTermTilt"]["state"]) == (1, 0, "켜짐(검증 통과)")
 
 
 def test_short_tilt_is_off_by_default(tmp_path):
@@ -363,15 +429,19 @@ def test_short_tilt_enabled_after_validation_stays_within_cap(tmp_path):
     assert result["check"]["nonExemptRiskWeight"] == "70"
 
 
-@pytest.mark.parametrize("tamper", ["report", "rules"])
+@pytest.mark.parametrize("tamper", ["report", "rules", "cost", "neutral"])
 def test_short_tilt_validation_is_bound_to_report_and_rules(tmp_path, tamper):
     report = tmp_path / "report.json"
     validate(tmp_path, history(signal_leads=True), out=report)
     policy = enabled_policy(tmp_path, report)
     if tamper == "report":
         report.write_text(report.read_text(encoding="utf-8").replace('"PASS"', '"PASS" '), encoding="utf-8")
-    else:
+    elif tamper == "rules":
         policy["shortTermTilt"]["rules"][0]["effects"]["sleeves"] = {"kr": "-1", "global": "1"}
+    elif tamper == "cost":
+        policy["shortTermTilt"]["validation"]["switchCostPct"] = "10"
+    else:
+        policy["sleeves"][0]["neutralPct"], policy["sleeves"][1]["neutralPct"] = "25", "25"
     log = log_file(tmp_path, {"2026-11": [market("kr_signal", 1)]})
     rc, result, _ = cli(tmp_path, "allocate", "--log", str(log), "--month", "2026-11", policy=policy)
     assert (rc, result["verdict"]) == (1, "ERROR")
