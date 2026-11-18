@@ -5,6 +5,9 @@
 → 묶음·펀드 정수 % → dc_limits 검사. rebalance는 보유를 묶음별로 모아 밴드 이탈을 판정하고, 밖이면
 dc_limits.portal로 거래안을 만든 뒤 한도를 지키는 정수 매도 방식만 낸다.
 
+묶음은 세 가지다: 위험(risk=true, 70% 산입), 면제(exempt=true, 적격TDF: 위험자산이지만 70% 분자에서 빠지고
+스스로 나이에 맞춰 조정되므로 neutral에 고정), 원리금보장(risk=false). 장기 위험 이동은 위험과 원리금보장 사이에서만 움직인다.
+
 외부 접속 없이 Decimal로 계산하고 같은 입력이면 같은 바이트를 낸다. 펀드 과거 수익률 필드는 읽지 않는다.
 """
 from __future__ import annotations
@@ -91,6 +94,7 @@ class Sleeve:
     neutral: Decimal
     match: dict
     funds: tuple[FundRef, ...]
+    exempt: bool = False
 
 
 @dataclass(frozen=True)
@@ -151,8 +155,12 @@ class Policy:
         return [s for s in self.sleeves if s.risk]
 
     @property
+    def exempt(self) -> list[Sleeve]:
+        return [s for s in self.sleeves if s.exempt]
+
+    @property
     def safe(self) -> list[Sleeve]:
-        return [s for s in self.sleeves if not s.risk]
+        return [s for s in self.sleeves if not s.risk and not s.exempt]
 
     @property
     def neutral(self) -> dict[str, Decimal]:
@@ -161,7 +169,8 @@ class Policy:
     @property
     def long_term_sha(self) -> str:
         return sha256({k: self.raw.get(k) for k in ("riskTargetPct", "indicators", "alerts", "longTermMacro", "cadence")}
-                      | {"sleeves": [{"id": s.id, "risk": s.risk, "neutralPct": s.neutral} for s in self.sleeves]})
+                      | {"sleeves": [{"id": s.id, "risk": s.risk, "exempt": s.exempt, "neutralPct": s.neutral}
+                                     for s in self.sleeves]})
 
     @property
     def label(self) -> str:
@@ -238,6 +247,11 @@ def parse_policy(raw: object, config: dict, base_dir: Path) -> Policy:
         risk = item.get("risk")
         if not isinstance(risk, bool):
             raise InputError(f"{sid}.risk는 boolean 필요")
+        exempt = item.get("exempt", False)
+        if not isinstance(exempt, bool):
+            raise InputError(f"{sid}.exempt는 boolean 필요")
+        if exempt and risk:
+            raise InputError(f"{sid}: exempt 묶음(적격TDF, 70% 한도 면제)은 risk=false(70% 비산입)여야 함")
         match = mapping(item.get("match", {}), f"{sid}.match")
         if set(match) - MATCH_KEYS:
             raise InputError(f"{sid}.match: 알 수 없는 키 {sorted(set(match) - MATCH_KEYS)}")
@@ -259,12 +273,15 @@ def parse_policy(raw: object, config: dict, base_dir: Path) -> Policy:
             seen_funds[key] = sid
             funds.append(FundRef(key, ref, share))
         sleeves.append(Sleeve(sid, str(item.get("label", sid)), risk,
-                              dc.number(item["neutralPct"], f"{sid}.neutralPct"), match, tuple(funds)))
+                              dc.number(item["neutralPct"], f"{sid}.neutralPct"), match, tuple(funds), exempt))
     risky_sum = sum((s.neutral for s in sleeves if s.risk), ZERO)
     if risky_sum != risk_target:
         raise InputError(f"위험 묶음 neutralPct 합 {risky_sum} ≠ riskTargetPct {risk_target}")
     if sum((s.neutral for s in sleeves), ZERO) != HUNDRED:
         raise InputError("묶음 neutralPct 합은 정확히 100이어야 함")
+    exempt_sum = sum((s.neutral for s in sleeves if s.exempt), ZERO)
+    if exempt_sum != exempt_sum.to_integral_value():
+        raise InputError(f"면제 묶음 neutralPct 합 {exempt_sum}: 정수 % 필요(면제 묶음은 neutral에 고정)")
     risky_ids = {s.id for s in sleeves if s.risk}
 
     band = mapping(raw["band"], "band")
@@ -491,15 +508,19 @@ def compute_base(policy: Policy, signals: dict[str, Decimal], limit: Decimal) ->
         for sid, coef in rule.sleeves:
             raw[sid] += coef * signal
         raw_risk += rule.risk * signal
-    safe_neutral = HUNDRED - policy.risk_target
+    exempt_total = sum((s.neutral for s in policy.exempt), ZERO)
+    safe_neutral = HUNDRED - policy.risk_target - exempt_total
     risk_total = policy.risk_target
     if policy.risk_target > 0 and safe_neutral > 0:
-        risk_total = clamp(policy.risk_target + policy.shift_cap * clamp(raw_risk, -ONE, ONE), ZERO, limit)
+        risk_total = clamp(policy.risk_target + policy.shift_cap * clamp(raw_risk, -ONE, ONE), ZERO,
+                           min(limit, HUNDRED - exempt_total))
     risky = {s.id: s.neutral * risk_total / policy.risk_target if policy.risk_target else ZERO for s in policy.risky}
     tilts = apply_tilt(risky, raw, policy.long_cap)
     base = {sid: risky[sid] + tilts[sid] for sid in risky}
+    for s in policy.exempt:
+        base[s.id] = s.neutral
     for s in policy.safe:
-        base[s.id] = s.neutral * (HUNDRED - risk_total) / safe_neutral
+        base[s.id] = s.neutral * (HUNDRED - exempt_total - risk_total) / safe_neutral
     return {s.id: base[s.id] for s in policy.sleeves}, risk_total
 
 
@@ -618,7 +639,7 @@ def validated_inputs_sha(policy: Policy, base: dict[str, Decimal]) -> str:
     return sha256({"rules": short.get("rules", []), "maxTiltPct": short["maxTiltPct"],
                    "indicators": policy.raw.get("indicators", []),
                    "validation": {k: v for k, v in policy.validation.items() if k not in VALIDATION_META},
-                   "sleeves": [{"id": s.id, "risk": s.risk} for s in policy.sleeves],
+                   "sleeves": [{"id": s.id, "risk": s.risk, "exempt": s.exempt} for s in policy.sleeves],
                    "basePct": {k: base[k] for k in sorted(base)}})
 
 
@@ -727,8 +748,10 @@ def allocate(policy: Policy, catalog: dc.Catalog, config: dict, decision: object
     risk_int = int(risk_total.quantize(ONE, rounding=ROUND_HALF_EVEN))
     if risk_int > limit:
         raise InputError("위험 총합이 한도를 넘음")
+    exempt_int = int(sum((s.neutral for s in policy.exempt), ZERO))
     sleeve_int: dict[str, int] = {}
-    for group, units in ((policy.risky, risk_int), (policy.safe, 100 - risk_int)):
+    for group, units in ((policy.risky, risk_int), (policy.exempt, exempt_int),
+                         (policy.safe, 100 - risk_int - exempt_int)):
         amounts = {s.id: final[s.id] for s in group if final[s.id] > 0}
         if units and not amounts:
             raise InputError("정수화할 묶음 비중이 없음")
@@ -741,6 +764,9 @@ def allocate(policy: Policy, catalog: dc.Catalog, config: dict, decision: object
             fund = catalog.resolve(ref.row)
             if fund.counted != s.risk:
                 raise InputError(f"{fund.name}: 70% 산입 여부({fund.counted})가 묶음 {s.id}의 risk({s.risk})와 다름")
+            if fund.qualified != s.exempt:
+                raise InputError(f"{fund.name}: 적격TDF는 면제 묶음(exempt)에만 넣을 수 있음(안전자산 아님)" if fund.qualified
+                                 else f"{fund.name}: 면제 묶음 {s.id}에는 적격TDF만 넣을 수 있음")
         units = sleeve_int.get(s.id, 0)
         split = dc.largest_remainder({r.key: r.share for r in s.funds}, units) if units else {}
         for ref in s.funds:
@@ -749,7 +775,7 @@ def allocate(policy: Policy, catalog: dc.Catalog, config: dict, decision: object
                 fund = catalog.resolve(ref.row)
                 values[fund] = values.get(fund, ZERO) + Decimal(weight)
                 allocation.append({**dc.ref(fund), "name": fund.name, "weight": str(weight), "sleeve": s.id})
-        sleeve_rows.append({"id": s.id, "label": s.label, "risk": s.risk, "neutralPct": s.neutral,
+        sleeve_rows.append({"id": s.id, "label": s.label, "risk": s.risk, "exempt": s.exempt, "neutralPct": s.neutral,
                             "basePct": base[s.id], "shortTiltPct": tilts.get(s.id, ZERO),
                             "finalPct": final[s.id], "integerPct": units})
     result = dc.check(values, config)
@@ -793,7 +819,7 @@ def sleeve_of(policy: Policy, fund: dc.Fund) -> str:
         if any(r.key == key for r in s.funds):
             return s.id
     for s in policy.sleeves:
-        if fund.counted == s.risk and matches(s.match, fund):
+        if fund.counted == s.risk and fund.qualified == s.exempt and matches(s.match, fund):
             return s.id
     return OUTSIDE
 

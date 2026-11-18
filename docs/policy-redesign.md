@@ -42,7 +42,7 @@ python3 $S/tilt_validation.py --policy <정책.json> --history <월별 원자료
 |---|---|---|
 | `_meta.status` | `sample` / `draft-unapproved` / `approved` | approved는 `approvedBy`·`approvedAt`·`approvalSource`(형 원문 링크) 필수. 미승인 정책 출력은 모두 "진단만(정책 미승인)" |
 | `riskTargetPct` | 비면제 위험자산 목표(정수) | 법정 한도(`dc_limits_config.json`, 70) 초과면 오류(재시도·자동 조정 없음) |
-| `sleeves[]` | 묶음: `id`, `label`, `risk`, `neutralPct`, `match`, `funds[{fundCode 또는 kind+name, share}]` | 위험 묶음 neutral 합 = riskTargetPct, 전체 100. 한 펀드는 한 묶음에만. 펀드의 70% 산입 여부가 묶음 `risk`와 다르면 오류. `share`는 묶음 안 상대 비율 |
+| `sleeves[]` | 묶음: `id`, `label`, `risk`, `exempt`(선택, 기본 false), `neutralPct`, `match`, `funds[{fundCode 또는 kind+name, share}]` | 위험 묶음 neutral 합 = riskTargetPct, 전체 100. 한 펀드는 한 묶음에만. 펀드의 70% 산입 여부가 묶음 `risk`와 다르면 오류. `share`는 묶음 안 상대 비율. `exempt: true`는 적격TDF 면제 묶음(`risk: false` 필수, 적격TDF만 넣을 수 있고 적격TDF는 면제 묶음에만, neutral 합은 정수): 위험 이동·기울이기에서 빠지고 neutral에 고정 |
 | `match` | 목록에 없는 보유 펀드를 묶음에 넣는 규칙(`region`·`assetClass`·`themes`·`principalGuaranteed`·`tdfQualified`·`riskStatus`) | 정책 순서대로 첫 일치. 아무 데도 안 맞으면 "정책 밖"(목표 0) |
 | `band` | `sleevePct`(묶음 밴드), `nearLimitPct`(위험 목표 + 묶음 밴드가 한도를 넘을 때 위험자산 합에 쓰는 좁은 밴드) | 0 < nearLimitPct ≤ sleevePct |
 | `cadence` | `collectEveryMonths`, `decideEveryMonths`, `holdThresholdPct`, `minVerifiedMonths` | 형 승인값 1·6·2. minVerifiedMonths(창 안 검증 월수 최소)는 제안값 3 |
@@ -68,7 +68,7 @@ python3 $S/tilt_validation.py --policy <정책.json> --history <월별 원자료
 2. 신호 s = clamp((평균 − neutral) / scale, −1, 1). 규칙의 neutral·scale이 비어 있으면 0.
 3. 평균이 없으면(결측) **지난 결정의 신호를 그대로 쓴다**. 자료를 못 구했다고 비중이 움직이지 않게 하기 위해서다(다른 family 반박 2). 지난 신호가 없으면 0. 결측이 이어진 결정 횟수는 `missingDecisions`로 센다.
 4. 위험 묶음 기울기 = `maxSleeveTiltPct` × clamp(Σ 계수·s, −1, 1), 묶음 비중 아래로는 0까지. 그다음 위험 묶음끼리 합이 0이 되게 큰 쪽을 비례로 줄인다. 그래서 장기 기울기는 위험자산 합을 바꾸지 않고, 모든 묶음이 같은 방향이면 0이다.
-5. 위험 총합 이동(`riskTotal` 계수, 예: 실질금리) = `maxRiskShiftPct` × clamp(Σ, −1, 1). 위로는 법정 한도에서 멈춘다. 안전 묶음이 neutral 비율대로 흡수한다.
+5. 위험 총합 이동(`riskTotal` 계수, 예: 실질금리) = `maxRiskShiftPct` × clamp(Σ, −1, 1). 위로는 법정 한도에서 멈춘다. 안전(원리금보장) 묶음이 neutral 비율대로 흡수한다. 면제(적격TDF) 묶음은 운용사가 나이에 맞춰 조정하므로 움직이지 않는다(TDF는 안전자산이 아니다).
 6. 판정: 처음이면 `INITIAL`. 지난 결정에서 `decideEveryMonths`가 안 지났으면 `NOT_DUE`(유지, 지표는 누적만). 지났으면 모든 묶음의 변화가 `holdThresholdPct` 미만일 때 `HOLD`(유지), 아니면 `CHANGE`. 지난 결정 뒤 **검증된** 체제 변화 경보(정책이 정한 발표 기관 출처)가 있으면 `ALERT`: 후보는 보여 주기만 하고 채택하지 않는다. 형이 정한다. 형이 확인하면 `decide --acknowledge-alerts <형 원문 링크>`로 다시 돌린다. 지금 경보가 `acknowledgedAlerts`에 링크와 함께 기록되고 정상 판정(NOT_DUE·HOLD·CHANGE)으로 넘어가며, 다음 결정에서도 같은 경보로 다시 막히지 않는다.
 7. 장기 결정에 쓰는 정책 값(위험 목표·묶음 neutral·지표·경보·장기 규칙·주기)이 바뀌면 지난 결정을 쓰지 않고 다시 시작한다. 밴드·단기 기울이기 설정만 바뀌면 지난 결정을 그대로 쓴다(`longTermPolicySha256`).
 

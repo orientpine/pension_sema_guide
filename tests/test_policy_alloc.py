@@ -155,6 +155,50 @@ def test_allocate_fractional_neutral_keeps_risk_total_exact(tmp_path):
         int(r["weight"]) for r in result["allocation"] if r["sleeve"] == "global") == 70
 
 
+def tdf_policy(**changes):
+    """위험 60(국내 15·세계 25·유럽 20) + 면제 적격TDF 10 + 원리금보장 30."""
+    policy = policy_with(riskTargetPct="60", sleeves__0__neutralPct="15", sleeves__1__neutralPct="25")
+    policy["sleeves"].insert(3, {"id": "tdf", "label": "적격TDF", "risk": False, "exempt": True, "neutralPct": "10",
+                                  "match": {"tdfQualified": True}, "funds": [{"fundCode": "Q", "share": "1"}]})
+    for path, value in changes.items():
+        target = policy
+        keys = path.split("__")
+        for key in keys[:-1]:
+            target = target[int(key)] if isinstance(target, list) else target[key]
+        target[keys[-1]] = value
+    return policy
+
+
+def test_allocate_exempt_tdf_sleeve_is_outside_the_70_numerator(tmp_path):
+    rc, result, _ = cli(tmp_path, "allocate", policy=tdf_policy())
+    assert (rc, result["verdict"], result["riskTotalPct"]) == (0, "PASS", 60)
+    assert {r["name"]: r["weight"] for r in result["allocation"]}["적격TDF"] == "10"
+    assert result["check"]["nonExemptRiskWeight"] == "60"
+    assert {s["id"]: (s["risk"], s["exempt"]) for s in result["sleeves"]}["tdf"] == (False, True)
+
+
+@pytest.mark.parametrize("real_rate,risk_total,safe", [("9", "55", "35"), ("-9", "65", "25")])
+def test_decide_risk_shift_moves_only_principal_sleeve_not_exempt_tdf(tmp_path, real_rate, risk_total, safe):
+    months = {m: [official("real_rate", real_rate)] for m in months_between("2026-06", 6)}
+    rc, result = decide(tmp_path, "2026-11", log_file(tmp_path, months), policy=tdf_policy())
+    base = {k: Decimal(v) for k, v in result["basePct"].items()}
+    assert rc == 0
+    assert (Decimal(result["riskTotalPct"]), base["tdf"], base["safe"]) == (Decimal(risk_total), 10, Decimal(safe))
+    assert sum(base.values()) == 100
+
+
+@pytest.mark.parametrize("changes,message", [
+    ({"sleeves__3__funds": [{"fundCode": "S", "share": "1"}]}, "적격TDF만"),
+    ({"sleeves__3__exempt": False}, "면제 묶음(exempt)에만"),
+    ({"sleeves__3__risk": True, "riskTargetPct": "70"}, "risk=false"),
+    ({"sleeves__3__neutralPct": "10.5", "sleeves__4__neutralPct": "29.5"}, "정수"),
+])
+def test_allocate_tdf_only_in_exempt_sleeve_and_exempt_sleeve_only_tdf(tmp_path, changes, message):
+    rc, result, _ = cli(tmp_path, "allocate", policy=tdf_policy(**changes))
+    assert (rc, result["verdict"]) == (1, "ERROR")
+    assert message in result["messages"][0]
+
+
 def test_public_sample_policy_has_no_numbers_and_is_refused(tmp_path):
     sample = json.loads((SKILL / "policy.sample.json").read_text(encoding="utf-8"))
 
