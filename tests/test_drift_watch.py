@@ -123,6 +123,16 @@ def test_same_breach_is_not_alerted_twice_and_comes_back_after_return(world, tmp
     assert again["decision"] == "SEND" and "band:global:+" in again["newKeys"]
 
 
+def test_long_alert_is_split_on_lines_within_discord_limit():
+    sys.path.insert(0, str(SCRIPT.parent))
+    import drift_watch
+
+    message = "\n".join(f"- 펀드{i} " + "가" * 150 for i in range(30)) + "\n" + "나" * 2500
+    parts = drift_watch.parts(message)
+    assert len(parts) > 1 and all(len(p) <= 1900 for p in parts)
+    assert "".join(parts).replace("\n", "") == message.replace("\n", "")
+
+
 def test_unsent_alert_is_sent_again_next_run(world, tmp_path):
     state = tmp_path / "state.json"
     grow(world, "R1", "200")

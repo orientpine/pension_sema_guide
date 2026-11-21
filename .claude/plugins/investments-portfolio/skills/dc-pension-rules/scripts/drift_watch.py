@@ -39,6 +39,7 @@ REGION_LIMIT, EM, EM_LIMIT = Decimal(50), {"china", "india", "vietnam", "brazil"
 REGION_NAMES = {"korea": "한국", "us": "미국", "europe": "유럽", "japan": "일본", "china": "중국", "india": "인도",
                 "asia": "아시아", "emerging": "신흥국", "vietnam": "베트남", "brazil": "브라질", "asean": "아세안"}
 KRX_BASE = "https://data-dbg.krx.co.kr/svc/apis/"
+PART_MAX = 1900
 SOURCES = {"krx_etf_nav": "etp/etf_bydd_trd", "krx_index": None}
 
 
@@ -340,6 +341,23 @@ def alert_text(result: dict) -> str:
     return "\n".join(lines)
 
 
+def parts(message: str) -> list[str]:
+    chunks, current = [], ""
+    for line in message.split("\n"):
+        while len(line) > PART_MAX:
+            if current:
+                chunks.append(current)
+                current = ""
+            chunks.append(line[:PART_MAX])
+            line = line[PART_MAX:]
+        candidate = f"{current}\n{line}" if current else line
+        if len(candidate) > PART_MAX:
+            chunks.append(current)
+            candidate = line
+        current = candidate
+    return chunks + ([current] if current else [])
+
+
 def check(args: argparse.Namespace) -> tuple[dict, int]:
     config = mapping(dc.load_json(Path(__file__).with_name("dc_limits_config.json")), "설정")
     limit = dc.number(config["riskLimitPct"], "riskLimitPct")
@@ -399,6 +417,7 @@ def check(args: argparse.Namespace) -> tuple[dict, int]:
     result["summary"] = summary_text(result)
     if decision == "SEND":
         result["message"] = alert_text(result)
+        result["messageParts"] = parts(result["message"])
     elif args.state:
         args.state.write_text(pa.dump(next_state) + "\n", encoding="utf-8")
     return result, 0

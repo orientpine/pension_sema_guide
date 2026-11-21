@@ -31,7 +31,7 @@
 
 ## RUN
 
-`python3 -m pytest` (repo root) → 385 passed (2026-11-21 기준, 세법·정책 배분·추정 비중 알림 테스트 포함).
+`python3 -m pytest` (repo root) → 386 passed (2026-11-21 기준, 세법·정책 배분·추정 비중 알림 테스트 포함).
 
 ## PATH CONFIGURATION
 
