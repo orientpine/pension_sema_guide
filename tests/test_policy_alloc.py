@@ -535,6 +535,16 @@ def test_rebalance_outside_band_uses_only_safe_integer_sell(tmp_path):
     assert result["portal"]["verdict"] == "FAIL"
 
 
+def test_rebalance_exact_sell_over_limit_still_gives_the_safe_integer_plan(tmp_path):
+    held = [{"fundCode": "KR", "evalAmount": 30000000}, {"fundCode": "R1", "evalAmount": 15000000},
+            {"fundCode": "R2", "evalAmount": 15000000}, {"fundCode": "EU", "evalAmount": 20000000},
+            {"kind": "principalGuaranteed", "name": "예금", "evalAmount": 30044384}]
+    rc, result, _ = rebalance(tmp_path, TARGET, held)
+    assert result["portal"]["postTradeCheck"]["verdict"] == "FAIL"
+    assert (rc, result["decision"], result["plan"]["integerSellVariant"], result["planVerdict"]) == (
+        0, "REBALANCE", "ceil", "PASS")
+
+
 @pytest.mark.parametrize("held,decision", [
     (holdings(19, 14, 14, 20, 33), "REBALANCE"),
     (holdings(20, 14.5, 14.5, 20, 31), "HOLD"),

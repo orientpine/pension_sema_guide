@@ -892,7 +892,9 @@ def rebalance(policy: Policy, target_rows: list[dict], holding_rows: list[dict],
     if not triggers:
         return {**result, "decision": "HOLD", "plan": None, "messages": ["밴드 안, 바꿀 것 없음"]}
     portal = dc.portal(holdings, target, contributions, catalog, config)
-    blocking = [("목표", portal["targetCheck"]), ("정확 매도 시뮬레이션", portal["postTradeCheck"])] + [
+    # 매도가 있으면 포털에 넣는 것은 정수 매도(floor·ceil)라 그 둘을 아래 safe에서 따로 본다. 정확 매도는 참고값이다.
+    exact = [] if portal["sells"] else [("정확 매도 시뮬레이션", portal["postTradeCheck"])]
+    blocking = [("목표", portal["targetCheck"])] + exact + [
         (f"부담금 {name} {key}", column[key]) for name, column in portal["contributions"].items()
         for key in ("inputCheck", "check")]
     failures = [name for name, check in blocking if dc.failed(check)]
