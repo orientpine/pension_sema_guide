@@ -101,7 +101,7 @@ python3 $S/tilt_validation.py --policy <정책.json> --history <월별 원자료
 
 ### 필요한 데이터 (지금 상태: 검증 대기)
 
-KRX Open API 키가 아직 없다(`~/.config/dori-secrets/krx`). 그래서 단기 규칙 검증을 돌리지 않았고, 정책의 `validation.status`는 `pending`이다. 필요한 것은 아래와 같다(출처별 약관 확인은 reviews/sema-redesign-review.md "데이터 출처" 표).
+KRX Open API 키는 2026-11-18에 들어왔다(`~/.config/dori-secrets/krx`, 지수·ETF 일별 NAV·채권지수·금시장 승인, 2026-11-21 호출 확인). 단기 규칙 검증은 아직 돌리지 않았고, 정책의 `validation.status`는 `pending`이다. 필요한 것은 아래와 같다(출처별 약관 확인은 reviews/sema-redesign-review.md "데이터 출처" 표).
 
 | 용도 | 자료 | 조건 |
 |---|---|---|
@@ -132,8 +132,20 @@ Yahoo Finance처럼 약관이 자동 수집을 금지하는 출처는 쓰지 않
 2. 묶음마다 |지금 − 목표| > `sleevePct`면 밴드 밖.
 3. 비면제 위험자산 합: 위험 목표 + `sleevePct`가 법정 한도를 넘으면(예: 목표 70) 밴드를 `nearLimitPct`로 좁힌다. 보유가 시가 변동으로 한도를 넘었으면(`MARKET_DRIFT_OVER_LIMIT`, 위반 아님) 항상 밖이다.
 4. 모두 안이면 `HOLD`, "밴드 안, 바꿀 것 없음", 거래 0.
-5. 밖이면 `dc_limits.portal`로 거래안을 만들고 이렇게 판정한다. 목표·정확 매도 시뮬레이션·부담금 3칸 검사 가운데 하나라도 FAIL이면 `NO_SAFE_PLAN`(거래안 없음, 종료 코드 1). 내림·올림 정수 매도 가운데 한도를 지키는 방식만 고르고, 둘 다 안전하면 반올림 오차 합이 작은 쪽(같으면 내림)을 고른다. 고른 방식의 거래 뒤 검사 결과가 `planVerdict`다.
+5. 밖이면 `dc_limits.portal`로 거래안을 만들고 이렇게 판정한다. 목표·부담금 3칸 검사 가운데 하나라도 FAIL이면 `NO_SAFE_PLAN`(거래안 없음, 종료 코드 1). 정확 매도 시뮬레이션은 매도가 없을 때만 막는다. 매도가 있으면 포털에 넣는 것은 정수 매도라 정확 매도는 참고값이고, 아래 정수 방식 검사가 판정한다. 내림·올림 정수 매도 가운데 한도를 지키는 방식만 고르고, 둘 다 안전하면 반올림 오차 합이 작은 쪽(같으면 내림)을 고른다. 고른 방식의 거래 뒤 검사 결과가 `planVerdict`다.
 6. 상태 파일은 `_meta.kind`로 구분한다(`proposal` 제안, `holdings` 보유, `executions` 실행, `target` allocate 출력). 제안을 보유로 넣으면 거부한다.
+
+## 5.1 매일·매주 점검: 추정 비중 규칙 알림 (`drift_watch.py`)
+
+형 말(2026-11-21): "세마 화면을 붙이는게 아니라 나는 네가 추천해준 포트폴리오 대로 갈거니까 그거 기준으로 하자." 화면 없이 추천안을 넣은 날의 비중에서 출발해 대리 시계열로 지금 비중을 추정하고, 위 `rebalance`와 `dc_limits`로 판정해 새로 걸린 규칙만 알린다.
+
+1. **실행 기준(비공개, `execution-baseline.json`).** `_meta.status`가 `unset`이면 "기준 미정": 추정·알림을 하지 않는다. `set`이면 `source`(형 원문 링크)·`plan`(A/B)·`policy`(정책 파일)·`executedOn`이 필요하다. 형이 예금 %를 바꿔 넣었으면 `positions`(실제 넣은 펀드별 정수 비중), 없으면 정책 `allocate` 결과가 목표이자 출발 비중이다. 납입 기록(`contributionsLog`, 한 줄 `{date, amount, allocation?, source}`)을 반영하려면 `totalEvalAmount`(실행일 총평가액)가 필요하고, 없으면 추정하지 않는다.
+2. **대리 대응표(비공개, `proxy-map.json`).** 펀드마다 시계열 하나와 `proxyKind`: `index`(같은 지수·같은 환헤지, 오차 작음) / `active`(액티브이거나 기준·환헤지가 달라 오차 큼, 출력에 따로 표시)와 `errorNote`. 원리금보장은 `deposit_rates.json`의 금리로 단리 일할 추정. 시계열은 KRX Open API(`etp/etf_bydd_trd` NAV, `idx/*_dd_trd` 종가)만 쓴다. FRED는 약관이 받은 자료의 저장·캐시를 금지하고, ECOS는 이용 지침 원문을 아직 확인하지 못해 쓰지 않는다(코드가 거부). `crossChecks`는 같은 펀드를 다른 대리로 다시 계산해 차이를 보인다(예: S&P 500 UH ETF 두 개).
+3. **추정.** 펀드 i의 지금 값 = 출발 금액 × (대리 점검일 값 / 대리 실행일 값) + Σ 납입 × (점검일 값 / 납입일 값). 날짜마다 그 날 이전 7일 안의 마지막 값을 쓴다. 대응표에 없는 펀드, 7일 안 값이 없는 대리, 금리 없는 예금이 하나라도 있으면 `NO_ESTIMATE`(알림 없음, 상태 그대로). 금액 기준이 없으면 명목 1억 원으로 비중만 계산한다.
+4. **규칙.** 추정 평가액을 보유로 `rebalance`에 넣는다: 묶음 밴드(`band:<묶음>:±`), 비면제 위험자산 합 밴드(70% 근처면 좁힘, `risk:±`). `dc_limits.check` 보유 모드로 70% 초과(`limit:over`, 시가 변동이라 위반 아님)와 한 펀드 40% 초과(`conc:fund:<펀드>`). 쏠림은 dc-pension-rules SKILL.md §4.2: 테마 하나 30%, Tech/AI(반도체·AI·로봇) 40%, 지역 하나 50%(global 제외), 신흥국·아시아 합계 30%(`conc:...`). gold 테마는 분류 오류(아래 한계) 때문에 빼다.
+5. **알림.** 지난번 알린 키(`alert-state.json`)에 없는 키가 생기면 `SEND`, 다 아는 키면 `QUIET`, 없으면 `IN_BAND`. SEND는 보낸 뒤 `mark-sent`가 상태를 쓰므로 보내기가 실패하면 다음 번에 다시 보낸다. 밴드 안으로 돌아오면 키가 지워져 다음 이탈은 다시 알린다. 글에는 비중·정수 매도 %·매수 비율만 있고 금액은 없다. 예금 매도가 들어 있으면 중도해지 이율을 알린다.
+6. **돌리기.** `~/.geumdori/bin/sema-alert.sh`(systemd `geumdori-sema-alert.timer`, 평일 18:30 KST): `fetch`(실행일·납입일·점검일의 KRX 값만 받아 비공개 `proxy-series.json`에) → `check` → SEND면 #geumdori에 한 번 → `mark-sent`. `--dry-run`은 보낼 글만 출력(상태·시계열 사본), `--report`는 주간 경제 보고서 "포트폴리오 점검" 절이 읽는 요약. 저널에는 판정 한 줄만 남는다.
+7. 대리 추정은 실제 포털 비중과 다르다(보수·배당·환헤지·기준가 시차, 액티브 펀드). 6개월 점검 때 포털 화면으로 실행 기준을 다시 맞춘다(새 `executedOn`·`positions`).
 
 ## 6. 보고서 권고 → 반영 대응표
 
@@ -162,6 +174,8 @@ Yahoo Finance처럼 약관이 자동 수집을 금지하는 출처는 쓰지 않
 
 - 단기 검증의 "표본 밖 월수" 옛 정의(4f2d57d): 준비 기간 뒤 모든 달을 셈(자료가 빈 규칙은 신호 0). 게이트 리뷰가 지표가 전부 비어도 129개월 PASS가 나는 것을 보인 뒤 바꿨다. 새 정의: 모든 규칙의 자료가 있는 달만 셈. 옛 정의로는 그 합성 자료가 PASS, 새 정의로는 INSUFFICIENT_DATA(0개월).
 - arch Q4의 옛 정의: "밴드 밖: 종료 코드 0, `verdict`=PASS, `unsafeIntegerSell`가 빈 목록". 저장된 fixture 출력(`postTradeCheck` PASS, `unsafeIntegerSell=["floor"]`, ceil PASS, 전체 FAIL)을 다른 family 반박이 지적한 뒤 바꿨다. 새 정의: 고른 정수 매도 방식의 거래 뒤 검사가 통과하고, 목표·정확 시뮬레이션·부담금 검사가 모두 통과하면 `REBALANCE`. 옛 정의로는 같은 fixture가 "거래안 없음"이었고, 새 정의로는 "올림 정수로 입력, 내림은 제외"다.
+
+- `rebalance`의 "정확 매도 시뮬레이션" 옛 정의(870c38d~5d067a5): FAIL이면 항상 `NO_SAFE_PLAN`. sema-rule-alerts에서 목표 70%(안 A처럼) 보유가 매수 비율 정수화 때문에 정확 매도 70.01%로 FAIL인데 실제 입력할 올림 정수 매도는 69.97% PASS인 경우를 본 뒤 바꿨다. 새 정의: 매도가 있으면 정확 매도는 참고값, 판정은 정수 방식 검사. 옛 정의로는 그 보유(테스트 `test_rebalance_exact_sell_over_limit_still_gives_the_safe_integer_plan`)가 "거래안 없음", 새 정의로는 "올림 정수로 입력, 거래 뒤 PASS"다.
 
 ## 7. 한계
 

@@ -67,6 +67,8 @@ investments-portfolio/
 
 `skills/dc-pension-rules/scripts/policy_alloc.py`(decide·allocate·rebalance)와 `tilt_validation.py`. 형 정책 파일 → 6개월 장기 거시 기본 비중(검증된 지표만, 묶음당 ±5%p) → 단기 기울이기(검증 보고서가 있어야 켬, 기본 꺼짐) → 묶음·펀드 정수 % → `dc_limits.check` → 보유 대비 밴드 판정 → `dc_limits.portal` 정수 거래안. 같은 입력이면 같은 바이트. 설계·검증 절차·필요한 데이터는 `docs/policy-redesign.md`, 공개 스키마 샘플은 `skills/dc-pension-rules/policy.sample.json`(숫자 없음). 기존 `/portfolio-analyze`와 그 에이전트·스킬 md는 바꾸지 않았다(그림자 비교용).
 
+`scripts/drift_watch.py`(같은 폴더): 형이 따르는 추천안의 실행 기준(비공개, 기준 미정이면 꺼짐)에서 KRX 지수·ETF NAV·공제회 예금 금리 대리로 지금 비중을 추정하고 `rebalance`·`dc_limits.check`·쏠림(SKILL §4.2)으로 판정해 새 이탈만 알린다. 출력에 금액 없음. 설계는 `docs/policy-redesign.md` §5.1.
+
 ## DATA PIPELINE — `skills/data-updater/scripts/`
 
 매월: `fetch_latest_proposal.py`(최신 xlsx 다운로드) → `xlsx_to_csv.py`(xlsx→resource CSV) → `update_fund_data.py`(CSV→JSON, 분류 자동) → `classify_funds.py`(분류 재생성).
