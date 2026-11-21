@@ -225,7 +225,7 @@ def concentration(values: dc.Positions, total: Decimal) -> list[dict]:
 
 
 def estimate(baseline: dict, base_dir: Path, proxies: Proxies, store: dict, catalog: dc.Catalog,
-             target: dc.Positions, as_of: date) -> tuple[dict[dc.Fund, Decimal] | None, list[str], dict]:
+             target: dc.Positions, as_of: date) -> tuple[dict[dc.Fund, Decimal] | None, list[str], dict, date]:
     start = day(baseline["executedOn"], "executedOn")
     if as_of < start:
         raise InputError(f"점검일 {as_of}이 실행일 {start}보다 앞")
@@ -233,43 +233,60 @@ def estimate(baseline: dict, base_dir: Path, proxies: Proxies, store: dict, cata
     missing: list[str] = []
     if contributions and baseline.get("totalEvalAmount") is None:
         missing.append("납입 기록을 반영하려면 실행 기준에 totalEvalAmount(실행일 총평가액)가 필요")
-        return None, missing, {}
+        return None, missing, {}, start
     total = dc.number(baseline["totalEvalAmount"], "totalEvalAmount") if baseline.get("totalEvalAmount") is not None else NOTIONAL
-    segments = [(start, target)] + [(when, dc.positions(after, catalog, "weight"))
-                                    for when, after in load_executions(baseline, base_dir, start, as_of)]
-    values: dict[dc.Fund, Decimal] = {}
-    seen_dates: dict[str, str] = {}
-    for k, (seg_start, weights) in enumerate(segments):
-        last = k == len(segments) - 1
-        seg_end = as_of if last else segments[k + 1][0]
-        if sum(weights.values(), ZERO) != HUNDRED:
-            raise InputError(f"{seg_start} 비중 합계는 100이어야 함")
-        flows: list[tuple[date, dc.Positions]] = [(seg_start, {f: total * w / HUNDRED for f, w in weights.items()})]
-        for entry in contributions:
-            if seg_start <= entry["_date"] and (entry["_date"] <= seg_end if last else entry["_date"] < seg_end):
-                split = dc.positions(entry["allocation"], catalog, "weight") if entry.get("allocation") else target
-                if sum(split.values(), ZERO) != HUNDRED:
-                    raise InputError(f"납입 {entry['_date']}: allocation 합계는 100이어야 함")
-                flows.append((entry["_date"], {f: entry["_amount"] * w / HUNDRED for f, w in split.items()}))
-        values = {}
-        for when, amounts in flows:
-            for fund, amount in amounts.items():
-                if amount == 0:
-                    continue
+    # 펀드마다 (입금·매수일, 그날 금액) 분할분을 둔다. 실행 기록 때 줄어든 펀드는 분할분을 같은 비율로 줄이고(입금일 유지),
+    # 늘어난 펀드만 그날 새 분할분을 더한다. 그래서 건드리지 않은 예금은 원래 입금일의 금리·만기를 그대로 쓴다.
+    tranches: dict[dc.Fund, list[tuple[date, Decimal]]] = {f: [(start, total * w / HUNDRED)] for f, w in target.items() if w}
+    executions = [(when, dc.positions(after, catalog, "weight"))
+                  for when, after in load_executions(baseline, base_dir, start, as_of)]
+    events = sorted([(e["_date"], 1, e) for e in contributions] + [(when, 0, after) for when, after in executions],
+                    key=lambda item: (item[0], item[1]))
+
+    def value_at(when: date, seen_dates: dict[str, str] | None) -> dict[dc.Fund, Decimal]:
+        values: dict[dc.Fund, Decimal] = {}
+        for fund, parts_ in tranches.items():
+            for since, base in parts_:
                 try:
-                    g, seen = proxies.growth(fund, store, when, seg_end)
+                    g, seen = proxies.growth(fund, store, since, when)
                 except Missing as exc:
                     if str(exc) not in missing:
                         missing.append(str(exc))
                     continue
-                values[fund] = values.get(fund, ZERO) + amount * g
-                if last:
+                values[fund] = values.get(fund, ZERO) + base * g
+                if seen_dates is not None:
                     entry = proxies.by_fund[fund]
                     seen_dates[entry.get("series", "deposit:" + entry.get("deposit", ""))] = seen.isoformat()
+        return values
+
+    for when, kind, payload in events:
+        if kind == 1:
+            split = dc.positions(payload["allocation"], catalog, "weight") if payload.get("allocation") else target
+            if sum(split.values(), ZERO) != HUNDRED:
+                raise InputError(f"납입 {when}: allocation 합계는 100이어야 함")
+            for fund, w in split.items():
+                if w:
+                    tranches.setdefault(fund, []).append((when, payload["_amount"] * w / HUNDRED))
+            continue
+        if sum(payload.values(), ZERO) != HUNDRED:
+            raise InputError(f"실행 기록 {when}: positionsAfter 합계는 100이어야 함")
+        before = value_at(when, None)
         if missing:
-            return None, missing, {}
-        total = sum(values.values(), ZERO)
-    return values, [], seen_dates
+            return None, missing, {}, start
+        whole_value = sum(before.values(), ZERO)
+        for fund in set(tranches) | set(payload):
+            held, wanted = before.get(fund, ZERO), whole_value * payload.get(fund, ZERO) / HUNDRED
+            if wanted == 0:
+                tranches.pop(fund, None)
+            elif wanted <= held:
+                tranches[fund] = [(since, base * wanted / held) for since, base in tranches[fund]]
+            else:
+                tranches.setdefault(fund, []).append((when, wanted - held))
+    seen_dates: dict[str, str] = {}
+    values = value_at(as_of, seen_dates)
+    if missing:
+        return None, missing, {}, start
+    return values, [], seen_dates, max([start] + [when for when, _ in executions])
 
 
 def cross_checks(proxies: Proxies, store: dict, start: date, end: date, catalog: dc.Catalog) -> list[dict]:
@@ -459,7 +476,7 @@ def check(args: argparse.Namespace) -> tuple[dict, int]:
     store = mapping(mapping(dc.load_json(args.store), "대리 시계열").get("series", {}), "대리 시계열 series")
     as_of = day(args.as_of, "--as-of")
     info = {"plan": baseline["plan"], "executedOn": baseline["executedOn"]}
-    values, missing, seen = estimate(baseline, base_dir, proxies, store, catalog, target, as_of)
+    values, missing, seen, rebased = estimate(baseline, base_dir, proxies, store, catalog, target, as_of)
     if values is None:
         # 알림 키는 그대로 두고, 결측이 시작된 날만 적는다. 처음 결측이면 opsNotice로 리드에게 한 번 알린다(침묵 = 이상 없음이 아니게).
         result = {"status": "NO_ESTIMATE", "decision": "NO_ESTIMATE", "baseline": info, "asOf": as_of.isoformat(),
@@ -495,8 +512,8 @@ def check(args: argparse.Namespace) -> tuple[dict, int]:
               "limitPct": limit,
               "estimate": {"dataDate": data_date, "seriesDates": dict(sorted(seen.items())), "funds": funds,
                            "activeProxies": [f["name"] for f in funds if f["proxyKind"] == "active"],
-                           "crossChecks": cross_checks(proxies, store, day(baseline["executedOn"], "executedOn"),
-                                                       as_of, catalog),
+                           "crossChecks": cross_checks(proxies, store, rebased, as_of, catalog),
+                           "rebasedOn": rebased.isoformat(),
                            "basis": "totalEvalAmount" if baseline.get("totalEvalAmount") is not None else "notional"},
               "rebalance": slim_rebalance(reb), "concentration": conc, "breaches": found, "breachKeys": keys,
               "newKeys": new_keys, "nextState": next_state, "inputSha256": fingerprint(args, baseline, base_dir)}

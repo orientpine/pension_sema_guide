@@ -262,3 +262,36 @@ def test_malformed_key_is_refused_without_printing_it(world, tmp_path):
                           env={**os.environ, "DORI_SECRETS_DIR": str(secrets)})
     assert done.returncode == 1 and json.loads(done.stdout)["status"] == "ERROR"
     assert "DUMMY-KEY-PART" not in done.stdout + done.stderr and "SECOND-PART" not in done.stdout + done.stderr
+
+
+def test_cross_check_after_an_execution_covers_the_window_the_estimate_uses(world, tmp_path):
+    middle = "2026-11-13"
+    for prices in world["prices"].values():
+        prices[middle] = "100"
+    world["map"]["series"]["s:alt"] = {"source": "krx_etf_nav", "code": "alt"}
+    world["map"]["crossChecks"] = [{"fundCode": "R1", "product": ["s:alt"], "tolerancePct": "1"}]
+    world["prices"]["s:alt"] = {START: "100", middle: "100", END: "100"}
+    world["prices"]["s:r1"].update({middle: "50", END: "100"})
+    log = write(tmp_path / "executions.json", {"_meta": {"kind": "executions"}, "entries": [
+        {"date": middle, "positionsAfter": TARGET, "source": "https://example.invalid/owner-done"}]})
+    world["baseline"]["executionsLog"] = str(log)
+    result = run(world)[1]
+    assert result["decision"] == "SEND"
+    assert (result["estimate"]["crossChecks"][0]["state"], result["planShown"]) == ("어긋남", False)
+
+
+def test_execution_that_leaves_the_deposit_alone_keeps_its_deposit_date(world, tmp_path):
+    rates = json.loads((world["funds"] / "deposit_rates.json").read_text(encoding="utf-8"))
+    rates["rates"][0].update(rate=0, termMonths=1)
+    write(world["funds"] / "deposit_rates.json", rates)
+    swap, end = "2026-11-25", "2026-12-03"
+    for prices in world["prices"].values():
+        prices.update({swap: "100", end: "100"})
+    assert run(world, as_of=end)[1]["status"] == "NO_ESTIMATE"
+    after = [dict(row) for row in TARGET]
+    after[0]["weight"], after[1]["weight"] = "25", "10"
+    log = write(tmp_path / "executions.json", {"_meta": {"kind": "executions"}, "entries": [
+        {"date": swap, "positionsAfter": after, "source": "https://example.invalid/owner-done"}]})
+    world["baseline"]["executionsLog"] = str(log)
+    result = run(world, as_of=end)[1]
+    assert result["status"] == "NO_ESTIMATE" and any("만기" in m for m in result["missing"])
