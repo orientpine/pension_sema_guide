@@ -47,7 +47,7 @@ def world(tmp_path):
             "prices": {sid: {START: "100", END: "100"} for sid in SERIES.values()}}
 
 
-def run(world, *extra, state: Path | None = None, as_of=END):
+def run(world, *extra, state: Path | None = None, as_of=END, env=None):
     d = world["dir"]
     args = [sys.executable, str(SCRIPT), "check", "--baseline", str(write(d / "baseline.json", world["baseline"])),
             "--map", str(write(d / "map.json", world["map"])),
@@ -55,7 +55,7 @@ def run(world, *extra, state: Path | None = None, as_of=END):
             "--funds-dir", str(world["funds"]), "--as-of", as_of, "--latest", str(d / "latest.json"), *extra]
     if state is not None:
         args += ["--state", str(state)]
-    done = subprocess.run(args, capture_output=True, text=True, check=False)
+    done = subprocess.run(args, capture_output=True, text=True, check=False, env=env)
     assert done.stdout, done.stderr
     return done.returncode, json.loads(done.stdout), done.stdout
 
@@ -295,3 +295,38 @@ def test_execution_that_leaves_the_deposit_alone_keeps_its_deposit_date(world, t
     world["baseline"]["executionsLog"] = str(log)
     result = run(world, as_of=end)[1]
     assert result["status"] == "NO_ESTIMATE" and any("만기" in m for m in result["missing"])
+
+
+def test_zero_base_total_values_only_what_was_paid_in(world, tmp_path):
+    rates = json.loads((world["funds"] / "deposit_rates.json").read_text(encoding="utf-8"))
+    rates["rates"][0]["appliesFrom"] = "2026-11-10"
+    write(world["funds"] / "deposit_rates.json", rates)
+    log = tmp_path / "contributions.jsonl"
+    log.write_text(json.dumps({"date": "2026-11-10", "amount": 25000,
+                               "allocation": [{"fundCode": "KR", "weight": "100"}]}) + "\n", encoding="utf-8")
+    world["baseline"].update(totalEvalAmount=0, contributionsLog=str(log))
+    world["prices"]["s:kr"]["2026-11-10"] = "100"
+    result = run(world)[1]
+    assert result["status"] == "ESTIMATED"
+    assert [(f.get("fundCode"), f["weightPct"]) for f in result["estimate"]["funds"]] == [("KR", "100")]
+
+
+def test_missing_reasons_do_not_depend_on_hash_order(world, tmp_path):
+    middle = "2026-11-10"
+    world["baseline"]["positions"] = [{**row, "weight": w} for row, w in zip(TARGET, ["35", "0", "0", "30", "35"])]
+    log = write(tmp_path / "executions.json", {"_meta": {"kind": "executions"}, "entries": [
+        {"date": middle, "positionsAfter": TARGET, "source": "https://example.invalid/owner-done"}]})
+    world["baseline"]["executionsLog"] = str(log)
+    for prices in world["prices"].values():
+        prices[middle] = "100"
+    del world["prices"]["s:r1"][END], world["prices"]["s:r2"][END]
+    world["prices"]["s:r1"]["2026-11-11"] = world["prices"]["s:r2"]["2026-11-11"] = "100"
+    outputs = {run(world, env={**os.environ, "PYTHONHASHSEED": seed})[2] for seed in ("1", "2", "3", "4")}
+    assert len(outputs) == 1 and json.loads(outputs.pop())["status"] == "NO_ESTIMATE"
+
+
+def test_baseline_weights_must_sum_to_100_even_when_a_proxy_is_stale(world):
+    world["baseline"]["positions"] = [{**row, "weight": "19"} if row.get("fundCode") == "KR" else row for row in TARGET]
+    del world["prices"]["s:r2"][END]
+    rc, result, _ = run(world)
+    assert (rc, result["status"]) == (1, "ERROR")

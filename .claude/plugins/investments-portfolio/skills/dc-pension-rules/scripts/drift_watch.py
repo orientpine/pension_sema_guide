@@ -227,6 +227,8 @@ def concentration(values: dc.Positions, total: Decimal) -> list[dict]:
 def estimate(baseline: dict, base_dir: Path, proxies: Proxies, store: dict, catalog: dc.Catalog,
              target: dc.Positions, as_of: date) -> tuple[dict[dc.Fund, Decimal] | None, list[str], dict, date]:
     start = day(baseline["executedOn"], "executedOn")
+    if sum(target.values(), ZERO) != HUNDRED:
+        raise InputError("실행 기준 positions 합계는 정확히 100이어야 함")
     if as_of < start:
         raise InputError(f"점검일 {as_of}이 실행일 {start}보다 앞")
     contributions = load_contributions(baseline, base_dir, start, as_of)
@@ -237,7 +239,8 @@ def estimate(baseline: dict, base_dir: Path, proxies: Proxies, store: dict, cata
     total = dc.number(baseline["totalEvalAmount"], "totalEvalAmount") if baseline.get("totalEvalAmount") is not None else NOTIONAL
     # 펀드마다 (입금·매수일, 그날 금액) 분할분을 둔다. 실행 기록 때 줄어든 펀드는 분할분을 같은 비율로 줄이고(입금일 유지),
     # 늘어난 펀드만 그날 새 분할분을 더한다. 그래서 건드리지 않은 예금은 원래 입금일의 금리·만기를 그대로 쓴다.
-    tranches: dict[dc.Fund, list[tuple[date, Decimal]]] = {f: [(start, total * w / HUNDRED)] for f, w in target.items() if w}
+    tranches: dict[dc.Fund, list[tuple[date, Decimal]]] = {f: [(start, total * w / HUNDRED)] for f, w in target.items()
+                                                            if total * w > 0}
     executions = [(when, dc.positions(after, catalog, "weight"))
                   for when, after in load_executions(baseline, base_dir, start, as_of)]
     events = sorted([(e["_date"], 1, e) for e in contributions] + [(when, 0, after) for when, after in executions],
@@ -245,7 +248,7 @@ def estimate(baseline: dict, base_dir: Path, proxies: Proxies, store: dict, cata
 
     def value_at(when: date, seen_dates: dict[str, str] | None) -> dict[dc.Fund, Decimal]:
         values: dict[dc.Fund, Decimal] = {}
-        for fund, parts_ in tranches.items():
+        for fund, parts_ in sorted(tranches.items(), key=lambda item: (item[0].name, item[0].key)):
             for since, base in parts_:
                 try:
                     g, seen = proxies.growth(fund, store, since, when)
@@ -265,7 +268,7 @@ def estimate(baseline: dict, base_dir: Path, proxies: Proxies, store: dict, cata
             if sum(split.values(), ZERO) != HUNDRED:
                 raise InputError(f"납입 {when}: allocation 합계는 100이어야 함")
             for fund, w in split.items():
-                if w:
+                if payload["_amount"] * w > 0:
                     tranches.setdefault(fund, []).append((when, payload["_amount"] * w / HUNDRED))
             continue
         if sum(payload.values(), ZERO) != HUNDRED:
@@ -274,9 +277,9 @@ def estimate(baseline: dict, base_dir: Path, proxies: Proxies, store: dict, cata
         if missing:
             return None, missing, {}, start
         whole_value = sum(before.values(), ZERO)
-        for fund in set(tranches) | set(payload):
+        for fund in sorted(set(tranches) | set(payload), key=lambda f: (f.name, f.key)):
             held, wanted = before.get(fund, ZERO), whole_value * payload.get(fund, ZERO) / HUNDRED
-            if wanted == 0:
+            if wanted <= 0:
                 tranches.pop(fund, None)
             elif wanted <= held:
                 tranches[fund] = [(since, base * wanted / held) for since, base in tranches[fund]]
