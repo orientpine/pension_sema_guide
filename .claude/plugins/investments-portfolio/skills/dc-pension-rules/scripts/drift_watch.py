@@ -13,10 +13,10 @@ FRED는 약관이 받은 자료의 저장·캐시를 금지하고, ECOS는 이�
 from __future__ import annotations
 
 import argparse
+import http.client
 import json
 import os
 import sys
-import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import date, timedelta
@@ -66,7 +66,24 @@ def price(store: dict, series: str, when: date) -> tuple[Decimal, date]:
     last = max(seen)
     if (when - date.fromisoformat(last)).days > STALE_DAYS:
         raise Missing(f"{series}: {when} 기준 {STALE_DAYS}일 안 값 없음(마지막 {last})")
-    return dc.number(values[last], f"{series}.{last}"), date.fromisoformat(last)
+    try:
+        value = dc.number(values[last], f"{series}.{last}")
+    except InputError as exc:
+        raise Missing(f"{series}.{last}: 쓸 수 없는 값({exc})") from None
+    if value <= 0:
+        raise Missing(f"{series}.{last}: 값이 0 이하라 가격 관측으로 쓰지 않음")
+    return value, date.fromisoformat(last)
+
+
+def add_months(when: date, months: int) -> date:
+    index = when.year * 12 + when.month - 1 + months
+    year, month = divmod(index, 12)
+    for day_of_month in range(when.day, 0, -1):
+        try:
+            return date(year, month + 1, day_of_month)
+        except ValueError:
+            continue
+    raise InputError(f"날짜 계산 오류: {when} + {months}개월")
 
 
 def load_baseline(path: Path) -> dict:
@@ -81,7 +98,27 @@ def load_baseline(path: Path) -> dict:
         text(data.get("plan"), "plan")
         text(data.get("policy"), "policy")
         day(data.get("executedOn"), "executedOn")
+        if not data.get("positions"):
+            raise InputError("실행 기준 positions 필요: 그날 포털에 넣은 펀드별 정수 비중을 고정해 둔다(정책을 고쳐도 과거가 바뀌지 않게)")
     return data
+
+
+def load_executions(baseline: dict, base_dir: Path, start: date, until: date) -> list[tuple[date, list[dict]]]:
+    """executions.json entries: 형이 포털에 넣어 맞춘 날과 그 뒤 비중. 그날부터 추정을 다시 시작한다."""
+    if not baseline.get("executionsLog"):
+        return []
+    data = mapping(dc.load_json(base_dir / baseline["executionsLog"]), "실행 기록")
+    if mapping(data.get("_meta"), "실행 기록 _meta").get("kind") != "executions":
+        raise InputError("실행 기록 _meta.kind는 executions여야 함")
+    result = []
+    for i, entry in enumerate(rows(data.get("entries", []), "entries")):
+        when = day(entry.get("date"), f"entries[{i}].date")
+        text(entry.get("source"), f"entries[{i}].source(형 원문 링크)")
+        if when <= start:
+            raise InputError(f"entries[{i}]: 실행일 {when}이 기준 실행일 {start} 이후가 아님")
+        if when <= until:
+            result.append((when, rows(entry.get("positionsAfter"), f"entries[{i}].positionsAfter")))
+    return sorted(result, key=lambda item: item[0])
 
 
 def load_contributions(baseline: dict, base_dir: Path, start: date, until: date) -> list[dict]:
@@ -102,7 +139,7 @@ def load_contributions(baseline: dict, base_dir: Path, start: date, until: date)
 
 
 class Proxies:
-    def __init__(self, proxy_map: dict, catalog: dc.Catalog, deposits: dict[str, Decimal]):
+    def __init__(self, proxy_map: dict, catalog: dc.Catalog, deposits: dict[str, dict]):
         self.series = mapping(proxy_map.get("series", {}), "대응표 series")
         for sid, spec in self.series.items():
             if mapping(spec, f"series {sid}").get("source") not in SOURCES:
@@ -129,19 +166,36 @@ class Proxies:
         if entry is None:
             raise Missing(f"{fund.name}: 대리 대응표에 없음")
         if "deposit" in entry:
-            rate = self.deposits.get(entry["deposit"])
-            if rate is None:
+            info = self.deposits.get(entry["deposit"])
+            if info is None:
                 raise Missing(f"{fund.name}: deposit_rates.json에 {entry['deposit']} 금리 없음")
-            return 1 + rate / HUNDRED * (end - start).days / 365, end
+            # 원리금보장은 입금 당시 고시 금리가 만기까지 간다: 그 금리의 적용 기간 안 입금분을 만기 전까지만 추정한다.
+            if info["from"] is None or info["term"] is None:
+                raise Missing(f"{fund.name}: {entry['deposit']} 금리의 적용 시작일·기간(termMonths)을 모름")
+            if start < info["from"] or (info["to"] is not None and start > info["to"]):
+                raise Missing(f"{fund.name}: {start} 입금분의 고시 금리를 모름(파일 금리는 {info['from']}~{info['to'] or ''} 입금분)")
+            if end > add_months(start, info["term"]):
+                raise Missing(f"{fund.name}: {start} 입금분이 만기({info['term']}개월)를 지나 재예치 금리를 모름")
+            return 1 + info["rate"] / HUNDRED * (end - start).days / 365, end
         first, _ = price(store, entry["series"], start)
         last, seen = price(store, entry["series"], end)
         return last / first, seen
 
 
-def deposit_rates(funds_dir: Path) -> dict[str, Decimal]:
+def deposit_rates(funds_dir: Path) -> dict[str, dict]:
     data = mapping(dc.load_json(funds_dir / "deposit_rates.json"), "deposit_rates.json")
-    return {str(r["id"]): dc.number(r["rate"], f"{r['id']}.rate")
-            for r in rows(data.get("rates"), "rates") if r.get("id") and r.get("rate") is not None}
+    result = {}
+    for r in rows(data.get("rates"), "rates"):
+        if not r.get("id") or r.get("rate") is None:
+            continue
+        period = r.get("bonusPeriod") if isinstance(r.get("bonusPeriod"), dict) else {}
+        start, stop = r.get("appliesFrom") or period.get("from"), r.get("appliesTo") or period.get("to")
+        result[str(r["id"])] = {"rate": dc.number(r["rate"], f"{r['id']}.rate"),
+                                 "from": day(start, f"{r['id']}.appliesFrom") if start else None,
+                                 "to": day(stop, f"{r['id']}.appliesTo") if stop else None,
+                                 "term": pa.whole(r["termMonths"], f"{r['id']}.termMonths", 0)
+                                 if r.get("termMonths") is not None else None}
+    return result
 
 
 def concentration(values: dc.Positions, total: Decimal) -> list[dict]:
@@ -179,30 +233,42 @@ def estimate(baseline: dict, base_dir: Path, proxies: Proxies, store: dict, cata
     missing: list[str] = []
     if contributions and baseline.get("totalEvalAmount") is None:
         missing.append("납입 기록을 반영하려면 실행 기준에 totalEvalAmount(실행일 총평가액)가 필요")
-    base_total = dc.number(baseline["totalEvalAmount"], "totalEvalAmount") if baseline.get("totalEvalAmount") is not None else NOTIONAL
-    flows: list[tuple[date, dc.Positions]] = [(start, {f: base_total * w / HUNDRED for f, w in target.items()})]
-    for entry in contributions:
-        weights = (dc.positions(entry["allocation"], catalog, "weight") if entry.get("allocation") else target)
-        if sum(weights.values(), ZERO) != HUNDRED:
-            raise InputError(f"납입 {entry['_date']}: allocation 합계는 100이어야 함")
-        flows.append((entry["_date"], {f: entry["_amount"] * w / HUNDRED for f, w in weights.items()}))
+        return None, missing, {}
+    total = dc.number(baseline["totalEvalAmount"], "totalEvalAmount") if baseline.get("totalEvalAmount") is not None else NOTIONAL
+    segments = [(start, target)] + [(when, dc.positions(after, catalog, "weight"))
+                                    for when, after in load_executions(baseline, base_dir, start, as_of)]
     values: dict[dc.Fund, Decimal] = {}
     seen_dates: dict[str, str] = {}
-    for when, amounts in flows:
-        for fund, amount in amounts.items():
-            if amount == 0:
-                continue
-            try:
-                g, seen = proxies.growth(fund, store, when, as_of)
-            except Missing as exc:
-                if str(exc) not in missing:
-                    missing.append(str(exc))
-                continue
-            values[fund] = values.get(fund, ZERO) + amount * g
-            entry = proxies.by_fund[fund]
-            seen_dates[entry.get("series", "deposit:" + entry.get("deposit", ""))] = seen.isoformat()
-    if missing:
-        return None, missing, {}
+    for k, (seg_start, weights) in enumerate(segments):
+        last = k == len(segments) - 1
+        seg_end = as_of if last else segments[k + 1][0]
+        if sum(weights.values(), ZERO) != HUNDRED:
+            raise InputError(f"{seg_start} 비중 합계는 100이어야 함")
+        flows: list[tuple[date, dc.Positions]] = [(seg_start, {f: total * w / HUNDRED for f, w in weights.items()})]
+        for entry in contributions:
+            if seg_start <= entry["_date"] and (entry["_date"] <= seg_end if last else entry["_date"] < seg_end):
+                split = dc.positions(entry["allocation"], catalog, "weight") if entry.get("allocation") else target
+                if sum(split.values(), ZERO) != HUNDRED:
+                    raise InputError(f"납입 {entry['_date']}: allocation 합계는 100이어야 함")
+                flows.append((entry["_date"], {f: entry["_amount"] * w / HUNDRED for f, w in split.items()}))
+        values = {}
+        for when, amounts in flows:
+            for fund, amount in amounts.items():
+                if amount == 0:
+                    continue
+                try:
+                    g, seen = proxies.growth(fund, store, when, seg_end)
+                except Missing as exc:
+                    if str(exc) not in missing:
+                        missing.append(str(exc))
+                    continue
+                values[fund] = values.get(fund, ZERO) + amount * g
+                if last:
+                    entry = proxies.by_fund[fund]
+                    seen_dates[entry.get("series", "deposit:" + entry.get("deposit", ""))] = seen.isoformat()
+        if missing:
+            return None, missing, {}
+        total = sum(values.values(), ZERO)
     return values, [], seen_dates
 
 
@@ -227,7 +293,7 @@ def cross_checks(proxies: Proxies, store: dict, start: date, end: date, catalog:
     return result
 
 
-def breaches(policy: pa.Policy, rebalance: dict, holdings_check: dict, conc: list[dict], limit: Decimal) -> list[dict]:
+def breaches(rebalance: dict, holdings_check: dict, conc: list[dict], limit: Decimal) -> list[dict]:
     found = []
     for band in rebalance["bands"]:
         if band["outOfBand"]:
@@ -244,7 +310,7 @@ def breaches(policy: pa.Policy, rebalance: dict, holdings_check: dict, conc: lis
     if Decimal(holdings_check["nonExemptRiskWeight"]) > limit:
         found.append({"key": "limit:over",
                       "text": f"비면제 위험자산 추정 {pct(Decimal(holdings_check['nonExemptRiskWeight']))}%가 한도 {limit}% "
-                              "초과(시가 변동이라 위반은 아님, 위험자산을 더 사기 전에 줄여야 해)"})
+                              "초과(추정치라 포털 화면으로 확인해. 위험자산을 더 사기 전에 줄여야 해)"})
     for row in holdings_check["singleFundChecks"]:
         if row["severity"] == "ERROR":
             found.append({"key": f"conc:fund:{row['name']}",
@@ -301,7 +367,8 @@ def summary_text(result: dict) -> str:
         return ("포트폴리오 점검: 기준 미정이라 추정·알림이 꺼져 있어. 형이 따른 안(A/B, 예금 %)과 넣은 날짜"
                 "(납입했으면 날짜·금액도)를 알려 주면 켜져.")
     if status == "NO_ESTIMATE":
-        return "포트폴리오 점검: 대리 자료가 모자라 이번엔 추정하지 않았어. 이유: " + "; ".join(result["missing"])
+        return (f"포트폴리오 점검: 대리 자료가 모자라 {result['noEstimateSince']}부터 추정하지 못하고 있어"
+                "(이 동안 규칙 알림도 멈춤). 이유: " + "; ".join(result["missing"]))
     if status == "ERROR":
         return "포트폴리오 점검: 계산 오류로 추정하지 못했어. " + "; ".join(result["messages"])
     reb, est = result["rebalance"], result["estimate"]
@@ -332,9 +399,12 @@ def alert_text(result: dict) -> str:
     rest = [b["text"] for b in result["breaches"] if b["key"] not in new]
     if rest:
         lines += ["이미 알린 것(계속 걸려 있음):"] + [f"- {t}" for t in rest]
-    lines += plan_lines(result["rebalance"], {f["name"] for f in result["estimate"]["funds"] if f["proxyKind"] == "deposit"})
-    lines += [f"대리 교차 확인 어긋남: {row['name']} 차이 {row['diffPct']:+.2f}%p(허용 ±{row['tolerancePct']}%p), 이번 추정을 더 조심해서 봐."
-              for row in result["estimate"]["crossChecks"] if row["state"] == "어긋남"]
+    if result["planShown"]:
+        lines += plan_lines(result["rebalance"], {f["name"] for f in result["estimate"]["funds"] if f["proxyKind"] == "deposit"})
+    else:
+        lines += [f"대리 교차 확인 어긋남: {row['name']} 차이 {row['diffPct']:+.2f}%p(허용 ±{row['tolerancePct']}%p)"
+                  for row in result["estimate"]["crossChecks"] if row["state"] == "어긋남"]
+        lines.append("대리 자료끼리 어긋남서 이번엔 포털 입력 %를 빼. 포털 화면 비중(%만)을 보내 주면 그걸로 다시 계산해 줄게.")
     if result["estimate"]["activeProxies"]:
         lines.append("대리 오차: " + ", ".join(result["estimate"]["activeProxies"]) + "는 액티브 펀드라 추정 오차가 클 수 있어.")
     lines.append("정해 둔 비중으로 되돌리는 규칙 알림이야. 가격 전망이나 최근 성적으로 사고팔라는 뜻은 아니야.")
@@ -358,21 +428,32 @@ def parts(message: str) -> list[str]:
     return chunks + ([current] if current else [])
 
 
+def fingerprint(args: argparse.Namespace, baseline: dict, base_dir: Path) -> str:
+    """결과를 바꾸는 입력 파일 전부(정책·납입·실행 기록·펀드 분류·예금 금리 포함)의 내용 해시."""
+    paths = {"baseline": args.baseline, "map": args.map, "store": args.store}
+    for key in ("policy", "contributionsLog", "executionsLog"):
+        if baseline.get(key):
+            paths[key] = base_dir / baseline[key]
+    for name in ("fund_data.json", "tdf_data.json", "fund_classification.json", "deposit_rates.json"):
+        paths[name] = args.funds_dir / name
+    return pa.sha256({"asOf": args.as_of, **{k: p.read_text(encoding="utf-8") if p.exists() else None
+                                             for k, p in sorted(paths.items())}})
+
+
 def check(args: argparse.Namespace) -> tuple[dict, int]:
     config = mapping(dc.load_json(Path(__file__).with_name("dc_limits_config.json")), "설정")
     limit = dc.number(config["riskLimitPct"], "riskLimitPct")
     baseline = load_baseline(args.baseline)
+    base_dir = args.baseline.resolve().parent
     state = mapping(dc.load_json(args.state), "알림 상태") if args.state and args.state.exists() else {"keys": {}}
     if baseline["_meta"]["status"] == "unset":
-        result = {"status": "UNSET", "decision": "UNSET"}
+        result = {"status": "UNSET", "decision": "UNSET", "inputSha256": fingerprint(args, baseline, base_dir)}
         result["summary"] = summary_text(result)
         return result, 0
-    base_dir = args.baseline.resolve().parent
     policy_path = base_dir / baseline["policy"]
     policy = pa.parse_policy(dc.load_json(policy_path), config, policy_path.parent)
     catalog = dc.Catalog(args.funds_dir)
-    target_rows = (rows(baseline["positions"], "positions") if baseline.get("positions")
-                   else pa.allocate(policy, catalog, config)["allocation"])
+    target_rows = rows(baseline["positions"], "positions")
     target = dc.positions(target_rows, catalog, "weight")
     proxies = Proxies(mapping(dc.load_json(args.map), "대리 대응표"), catalog, deposit_rates(args.funds_dir))
     store = mapping(mapping(dc.load_json(args.store), "대리 시계열").get("series", {}), "대리 시계열 series")
@@ -380,8 +461,13 @@ def check(args: argparse.Namespace) -> tuple[dict, int]:
     info = {"plan": baseline["plan"], "executedOn": baseline["executedOn"]}
     values, missing, seen = estimate(baseline, base_dir, proxies, store, catalog, target, as_of)
     if values is None:
+        # 알림 키는 그대로 두고, 결측이 시작된 날만 적는다. 처음 결측이면 opsNotice로 리드에게 한 번 알린다(침묵 = 이상 없음이 아니게).
         result = {"status": "NO_ESTIMATE", "decision": "NO_ESTIMATE", "baseline": info, "asOf": as_of.isoformat(),
-                  "missing": missing}
+                  "missing": missing, "opsNotice": "noEstimateSince" not in state,
+                  "noEstimateSince": state.get("noEstimateSince", as_of.isoformat()),
+                  "inputSha256": fingerprint(args, baseline, base_dir)}
+        if args.state:
+            args.state.write_text(pa.dump({**state, "noEstimateSince": result["noEstimateSince"]}) + "\n", encoding="utf-8")
         result["summary"] = summary_text(result)
         return result, 0
     holding_rows = [{**dc.ref(f), "evalAmount": int(v.quantize(Decimal(1), rounding=ROUND_HALF_EVEN))}
@@ -391,7 +477,7 @@ def check(args: argparse.Namespace) -> tuple[dict, int]:
     total = sum(held.values(), ZERO)
     holdings_check = dc.check(held, config, "holdings", denominator=total)
     conc = concentration(held, total)
-    found = breaches(policy, reb, holdings_check, conc, limit)
+    found = breaches(reb, holdings_check, conc, limit)
     keys = [b["key"] for b in found]
     previous = mapping(state.get("keys", {}), "알림 상태 keys")
     data_date = min(seen.values()) if seen else as_of.isoformat()
@@ -413,13 +499,16 @@ def check(args: argparse.Namespace) -> tuple[dict, int]:
                                                        as_of, catalog),
                            "basis": "totalEvalAmount" if baseline.get("totalEvalAmount") is not None else "notional"},
               "rebalance": slim_rebalance(reb), "concentration": conc, "breaches": found, "breachKeys": keys,
-              "newKeys": new_keys, "nextState": next_state}
+              "newKeys": new_keys, "nextState": next_state, "inputSha256": fingerprint(args, baseline, base_dir)}
+    result["planShown"] = not any(row["state"] == "어긋남" for row in result["estimate"]["crossChecks"])
     result["summary"] = summary_text(result)
     if decision == "SEND":
         result["message"] = alert_text(result)
         result["messageParts"] = parts(result["message"])
-    elif args.state:
-        args.state.write_text(pa.dump(next_state) + "\n", encoding="utf-8")
+    if args.state:
+        # SEND면 새 키는 보낸 뒤 mark-sent가 더하고, 해소된 키는 지금 뺀다(못 보낸 사이 해소돼도 다음 재발을 새로 알리게).
+        kept = {"keys": {k: v for k, v in next_state["keys"].items() if k in previous}} if decision == "SEND" else next_state
+        args.state.write_text(pa.dump(kept) + "\n", encoding="utf-8")
     return result, 0
 
 
@@ -427,7 +516,7 @@ def http_json(url: str, headers: dict[str, str], secrets: tuple[str, ...]) -> ob
     try:
         with urllib.request.urlopen(urllib.request.Request(url, headers=headers), timeout=30) as response:
             return json.loads(response.read().decode("utf-8"))
-    except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as exc:
+    except (OSError, ValueError, http.client.HTTPException) as exc:
         message = str(exc)
         for secret in secrets:
             message = message.replace(secret, "***")
@@ -445,13 +534,16 @@ def fetch(args: argparse.Namespace) -> tuple[dict, int]:
     fetched = {k: set(v) for k, v in mapping(store_data.get("fetched", {}), "fetched").items()}
     as_of = day(args.as_of, "--as-of")
     start = day(baseline["executedOn"], "executedOn")
-    anchors = sorted({start, as_of} | {e["_date"] for e in load_contributions(baseline, args.baseline.resolve().parent,
-                                                                                start, as_of)})
+    base_dir = args.baseline.resolve().parent
+    anchors = sorted({start, as_of} | {e["_date"] for e in load_contributions(baseline, base_dir, start, as_of)}
+                     | {when for when, _ in load_executions(baseline, base_dir, start, as_of)})
     problems: list[str] = []
     unknown = sorted(sid for sid, s in series.items() if s.get("source") not in SOURCES)
     if unknown:
         raise InputError(f"KRX가 아닌 대리 series {unknown}: FRED 저장 금지, ECOS 약관 미확인")
     key = (secrets_dir / "krx").read_text(encoding="utf-8").strip()
+    if not key or any(ch.isspace() for ch in key):
+        raise InputError("KRX 키 파일 형식 오류(비었거나 공백·줄바꿈 포함). 키 값은 출력하지 않음")
     endpoint_of = {sid: SOURCES[s["source"]] or text(s.get("endpoint"), f"{sid}.endpoint") for sid, s in series.items()}
     if series:
         for endpoint in sorted(set(endpoint_of.values())):
@@ -522,10 +614,6 @@ def main(argv: list[str] | None = None) -> int:
             print(mapping(dc.load_json(args.latest), "latest")["summary"])
             return 0
         result, code = check(args) if args.command == "check" else fetch(args)
-        if args.command == "check":
-            result["inputSha256"] = pa.sha256({"baseline": dc.load_json(args.baseline), "map": dc.load_json(args.map),
-                                               "store": dc.load_json(args.store), "asOf": args.as_of,
-                                               "funds": pa.snapshot(args.funds_dir)})
     except InputError as exc:
         result, code = {"status": "ERROR", "decision": "ERROR", "messages": [str(exc)]}, 1
         result["summary"] = summary_text(result)

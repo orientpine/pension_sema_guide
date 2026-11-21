@@ -74,7 +74,7 @@ pension_sema_guide/
 67#YT|| **Pension Tax Advisor** | `.claude/plugins/pension-tax-advisor/AGENTS.md` | tax-consult orchestration |
 
 | Data ETL scripts | `.claude/plugins/investments-portfolio/skills/data-updater/scripts/` | CSV→JSON, TDF enrichment |
-| Tests | `tests/AGENTS.md` | pytest suite (386 passed) |
+| Tests | `tests/AGENTS.md` | pytest suite (395 passed) |
 | 정책 파일 → 코드 배분(새 경로) | `docs/policy-redesign.md` | `policy_alloc.py`·`tilt_validation.py`, 기존 경로와 나란히 |
 | 추정 비중 규칙 알림(매일·매주) | `docs/policy-redesign.md` §5.1 | `drift_watch.py`: 실행 기준 + KRX 대리 → 추정 비중 → `rebalance` 밴드·70%·쏠림 → 새 이탈만 알림 |
 | Verification / CI | `scripts/AGENTS.md` | 정합성 게이트·PII 스캔·git hook·CI |
@@ -139,4 +139,4 @@ pension_sema_guide/
 - **Consistency Gate (NEW)**: `python3 scripts/verify_consistency.py` — dangling refs, date sync, freshness, dup tests, manifest 등 5개 항목 검증. 데이터 업데이트나 프롬프트 수정 후 필수 실행.
 - **Annotation Convention**: `docs/consistency/annotation-convention.md` 참고.
 - **SSOT Registry**: `docs/consistency/date-ssot-registry.md` 참고.
-- **Tests**: `pytest` 386 passed (GREEN, 2026-11-21). `tests/conftest.py` 경로 설정이 올바르게 되어 있어 모듈 로드 이슈 없음.
+- **Tests**: `pytest` 395 passed (GREEN, 2026-11-21). `tests/conftest.py` 경로 설정이 올바르게 되어 있어 모듈 로드 이슈 없음.

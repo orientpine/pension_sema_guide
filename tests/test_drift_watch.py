@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -16,6 +17,8 @@ FIXTURES = Path(__file__).parent / "fixtures"
 POLICY = json.loads((FIXTURES / "policy/policy.json").read_text(encoding="utf-8"))
 START, END = "2026-11-02", "2026-11-20"
 SERIES = {"KR": "s:kr", "R1": "s:r1", "R2": "s:r2", "EU": "s:eu"}
+TARGET = [{"fundCode": "KR", "weight": "20"}, {"fundCode": "R1", "weight": "15"}, {"fundCode": "R2", "weight": "15"},
+          {"fundCode": "EU", "weight": "20"}, {"kind": "principalGuaranteed", "name": "예금", "weight": "30"}]
 
 
 def write(path: Path, value) -> Path:
@@ -28,11 +31,11 @@ def world(tmp_path):
     funds = tmp_path / "funds"
     shutil.copytree(FIXTURES / "dc_limits", funds)
     deposits = json.loads((funds / "deposit_rates.json").read_text(encoding="utf-8"))
-    deposits["rates"][0]["rate"] = 3.0
+    deposits["rates"][0].update(rate=3.0, appliesFrom="2026-10-01", termMonths=12)
     write(funds / "deposit_rates.json", deposits)
     write(tmp_path / "policy.json", POLICY)
     baseline = {"_meta": {"kind": "execution-baseline", "status": "set", "source": "https://example.invalid/owner"},
-                "plan": "A", "policy": "policy.json", "executedOn": START}
+                "plan": "A", "policy": "policy.json", "executedOn": START, "positions": TARGET}
     proxy_map = {"_meta": {"kind": "proxy-map"},
                  "series": {sid: {"source": "krx_etf_nav", "code": sid[2:]} for sid in SERIES.values()},
                  "funds": [{"fundCode": "KR", "series": "s:kr", "proxyKind": "index"},
@@ -70,7 +73,7 @@ def grow(world, code: str, end_price: str):
 def test_same_input_gives_same_bytes(world):
     grow(world, "R1", "150")
     first, second = run(world)[2], run(world)[2]
-    assert first == second
+    assert first == second and json.loads(first)["status"] == "ESTIMATED"
 
 
 def test_estimated_weights_follow_proxy_growth_and_deposit_interest(world):
@@ -100,11 +103,12 @@ def test_missing_proxy_gives_no_estimate_and_no_alert(world, tmp_path, breakage)
         write(world["funds"] / "deposit_rates.json", deposits)
     else:
         world["prices"]["s:kr"] = {START: "100", "2026-11-10": "100"}
-    state = write(tmp_path / "state.json", {"keys": {}})
+    state = write(tmp_path / "state.json", {"keys": {"band:kr:+": {"since": START}}})
     rc, result, _ = run(world, state=state)
     assert (rc, result["status"], result["decision"]) == (0, "NO_ESTIMATE", "NO_ESTIMATE")
     assert result.get("estimate") is None and result.get("message") is None and result["missing"]
-    assert json.loads(state.read_text(encoding="utf-8")) == {"keys": {}}
+    assert result["opsNotice"] is True and json.loads(state.read_text(encoding="utf-8"))["keys"] == {"band:kr:+": {"since": START}}
+    assert run(world, state=state)[1]["opsNotice"] is False
 
 
 def test_same_breach_is_not_alerted_twice_and_comes_back_after_return(world, tmp_path):
@@ -173,4 +177,88 @@ def test_contribution_needs_base_total_and_moves_weights(world, tmp_path):
     world["baseline"]["totalEvalAmount"] = 100000000
     rc, result, _ = run(world)
     kr = next(b for b in result["rebalance"]["bands"] if b["id"] == "kr")
-    assert result["status"] == "ESTIMATED" and Decimal(kr["currentPct"]) > 27
+    deposit = Decimal(30000000) * (1 + Decimal("0.03") * 18 / 365)
+    expected = Decimal(30000000) * 100 / (Decimal(80000000) + deposit)
+    assert result["status"] == "ESTIMATED"
+    assert Decimal(kr["currentPct"]).quantize(Decimal("0.01")) == expected.quantize(Decimal("0.01"))
+
+
+def test_baseline_positions_are_frozen_against_policy_edits(world):
+    before = run(world)[1]
+    policy = json.loads(json.dumps(POLICY))
+    next(s for s in policy["sleeves"] if s["id"] == "global")["funds"][0]["share"] = "2"
+    write(world["dir"] / "policy.json", policy)
+    after = run(world)[1]
+    assert before["estimate"]["funds"] == after["estimate"]["funds"]
+    assert before["inputSha256"] != after["inputSha256"]
+    del world["baseline"]["positions"]
+    assert run(world)[1]["status"] == "ERROR"
+
+
+def test_recorded_execution_rebases_the_estimate(world, tmp_path):
+    world["prices"]["s:r1"].update({"2026-11-13": "200", END: "200"})
+    for sid in ("s:kr", "s:r2", "s:eu"):
+        world["prices"][sid]["2026-11-13"] = "100"
+    assert run(world)[1]["decision"] == "SEND"
+    log = write(tmp_path / "executions.json", {"_meta": {"kind": "executions"}, "entries": [
+        {"date": "2026-11-13", "positionsAfter": TARGET, "source": "https://example.invalid/owner-done"}]})
+    world["baseline"]["executionsLog"] = str(log)
+    result = run(world)[1]
+    assert (result["decision"], result["breachKeys"]) == ("IN_BAND", [])
+
+
+def test_cross_check_disagreement_withholds_the_trade_plan(world):
+    world["map"]["series"]["s:alt"] = {"source": "krx_etf_nav", "code": "alt"}
+    world["map"]["crossChecks"] = [{"fundCode": "R1", "product": ["s:alt"], "tolerancePct": "1"}]
+    world["prices"]["s:alt"] = {START: "100", END: "100"}
+    grow(world, "R1", "200")
+    result = run(world)[1]
+    assert result["decision"] == "SEND" and result["rebalance"]["plan"] is not None
+    assert (result["estimate"]["crossChecks"][0]["state"], result["planShown"]) == ("어긋남", False)
+    world["prices"]["s:alt"][END] = "200"
+    assert run(world)[1]["planShown"] is True
+
+
+@pytest.mark.parametrize("change", ["before_rate_window", "past_maturity"])
+def test_deposit_rate_is_used_only_for_deposits_it_applies_to(world, change):
+    rate = json.loads((world["funds"] / "deposit_rates.json").read_text(encoding="utf-8"))
+    if change == "before_rate_window":
+        rate["rates"][0]["appliesFrom"] = "2026-11-05"
+    else:
+        rate["rates"][0]["termMonths"] = 0
+    write(world["funds"] / "deposit_rates.json", rate)
+    result = run(world)[1]
+    assert result["status"] == "NO_ESTIMATE" and any("예금" in m for m in result["missing"])
+
+
+@pytest.mark.parametrize("day", [START, END])
+def test_non_positive_proxy_value_is_missing_not_a_total_loss(world, day):
+    world["prices"]["s:kr"][day] = "0"
+    rc, result, _ = run(world)
+    assert (rc, result["status"], result["decision"]) == (0, "NO_ESTIMATE", "NO_ESTIMATE")
+
+
+def test_breach_that_resolved_while_an_alert_was_unsent_is_alerted_again(world, tmp_path):
+    state = tmp_path / "state.json"
+    grow(world, "R1", "200")
+    assert run(world, state=state)[1]["decision"] == "SEND"
+    mark_sent(world, state)
+    grow(world, "R1", "50")
+    flipped = run(world, state=state)[1]
+    assert flipped["decision"] == "SEND" and "band:global:-" in flipped["newKeys"]
+    grow(world, "R1", "200")
+    again = run(world, state=state)[1]
+    assert again["decision"] == "SEND" and "band:global:+" in again["newKeys"]
+
+
+def test_malformed_key_is_refused_without_printing_it(world, tmp_path):
+    secrets = tmp_path / "secrets"
+    secrets.mkdir()
+    (secrets / "krx").write_text("DUMMY-KEY-PART\nSECOND-PART", encoding="utf-8")
+    d = world["dir"]
+    args = [sys.executable, str(SCRIPT), "fetch", "--baseline", str(write(d / "baseline.json", world["baseline"])),
+            "--map", str(write(d / "map.json", world["map"])), "--store", str(d / "fetched.json"), "--as-of", END]
+    done = subprocess.run(args, capture_output=True, text=True, check=False,
+                          env={**os.environ, "DORI_SECRETS_DIR": str(secrets)})
+    assert done.returncode == 1 and json.loads(done.stdout)["status"] == "ERROR"
+    assert "DUMMY-KEY-PART" not in done.stdout + done.stderr and "SECOND-PART" not in done.stdout + done.stderr
